@@ -1,0 +1,199 @@
+[
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Project Title",
+    "section": "",
+    "text": "Your report goes here.\n\nCode# a test code chunk",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Report</span>"
+    ]
+  },
+  {
+    "objectID": "eda/eda-member1.html",
+    "href": "eda/eda-member1.html",
+    "title": "Member 1 First Name & Last Name Initial",
+    "section": "",
+    "text": "Your exploratory data analysis of the team datasets go here.",
+    "crumbs": [
+      "EDA",
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Member 1 First Name & Last Name Initial</span>"
+    ]
+  },
+  {
+    "objectID": "eda/eda-member2.html",
+    "href": "eda/eda-member2.html",
+    "title": "Member 2 First Name & Last Name Initial",
+    "section": "",
+    "text": "Your exploratory data analysis of the team datasets go here.",
+    "crumbs": [
+      "EDA",
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Member 2 First Name & Last Name Initial</span>"
+    ]
+  },
+  {
+    "objectID": "eda/eda-member3.html",
+    "href": "eda/eda-member3.html",
+    "title": "Member 3 First Name & Last Name Initial",
+    "section": "",
+    "text": "Your exploratory data analysis of the team datasets go here.",
+    "crumbs": [
+      "EDA",
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Member 3 First Name & Last Name Initial</span>"
+    ]
+  },
+  {
+    "objectID": "appx/proposal.html",
+    "href": "appx/proposal.html",
+    "title": "Appendix A — Project Proposal",
+    "section": "",
+    "text": "Team Members",
+    "crumbs": [
+      "Appendices",
+      "<span class='chapter-number'>A</span>  <span class='chapter-title'>Project Proposal</span>"
+    ]
+  },
+  {
+    "objectID": "appx/proposal.html#team-members",
+    "href": "appx/proposal.html#team-members",
+    "title": "Appendix A — Project Proposal",
+    "section": "",
+    "text": "Nayla Trigueros Ortiz (Style Lead)\n\n\nPatricia Escobar Contreras (Point of Contact)\n\n\nWilliam Acosta Lora (Technical Lead)",
+    "crumbs": [
+      "Appendices",
+      "<span class='chapter-number'>A</span>  <span class='chapter-title'>Project Proposal</span>"
+    ]
+  },
+  {
+    "objectID": "appx/proposal.html#project-description",
+    "href": "appx/proposal.html#project-description",
+    "title": "Appendix A — Project Proposal",
+    "section": "Project Description",
+    "text": "Project Description\nWe are interested in exploring racial and gender disparities in access, treatment, and healthcare outcomes in the medical industry for patients. Specifically, we focus on hidden hypoxemia — a condition where pulse oximeters fail to accurately detect low blood oxygen levels in patients with darker skin tones — as a measurable, concrete case study of how medical device bias translates into unequal care and unequal economic burden for patients of color.\nOur project combines two datasets: the OpenOximetry dataset (UCSF Hypoxia Lab), which gives us paired pulse oximeter and blood gas measurements stratified by skin tone and race, and the NY SPARCS Inpatient Discharge dataset, which provides hospital-level economic outcomes (total charges, length of stay, costs, mortality) broken down by race, gender, and diagnosis. Together, they let us connect the clinical disparity to its downstream economic consequences.",
+    "crumbs": [
+      "Appendices",
+      "<span class='chapter-number'>A</span>  <span class='chapter-title'>Project Proposal</span>"
+    ]
+  },
+  {
+    "objectID": "appx/proposal.html#research-questions",
+    "href": "appx/proposal.html#research-questions",
+    "title": "Appendix A — Project Proposal",
+    "section": "Research Questions",
+    "text": "Research Questions\n\nHow does pulse oximetry accuracy vary across skin tone, race, and gender, and what is the magnitude of hidden hypoxemia disparities? Using the OpenOximetry dataset, we will quantify how much pulse oximeters overestimate blood oxygen saturation across Fitzpatrick and Monk skin tone groups and self-reported race and ethnicity, and whether gender interacts with these measurement disparities.\nWhat are the economic consequences of respiratory misdiagnosis and delayed treatment for patients of color in hospital settings? Using the NY SPARCS dataset filtered to respiratory diagnoses, we will compare total hospital charges, costs, length of stay, and discharge disposition across racial and ethnic groups, controlling for severity of illness and insurance type.\nDo race, gender, and insurance status intersect to compound economic disparities in respiratory care? We will explore whether the economic burden of poor respiratory care outcomes is compounded by the intersection of race, gender, and payer type — for example, whether Black women on Medicaid face systematically higher costs and longer stays than white men with private insurance for the same respiratory diagnosis severity.",
+    "crumbs": [
+      "Appendices",
+      "<span class='chapter-number'>A</span>  <span class='chapter-title'>Project Proposal</span>"
+    ]
+  },
+  {
+    "objectID": "appx/proposal.html#motivation-and-inspiration",
+    "href": "appx/proposal.html#motivation-and-inspiration",
+    "title": "Appendix A — Project Proposal",
+    "section": "Motivation and Inspiration",
+    "text": "Motivation and Inspiration\nAs international students and people of color, we are really interested in the differences between the medical care received for darker and lighter-skinned people. Regardless of coming from different countries across Latin America, we have all been able to discuss and realize some of the differences regarding the mistreatments that exist within a predominantly white country, and we want to explore the implications that this has in the medical sector.\nHidden hypoxemia through pulse oximeter bias is a particularly powerful entry point because it is not a question of patient behavior or lifestyle — it is a direct, measurable failure of medical technology. Research has documented that Black and Hispanic patients are significantly more likely to experience undetected hypoxemia, which has been linked to delayed eligibility for critical treatments and worse outcomes. The economic consequences of this — higher costs, longer stays, greater morbidity — fall disproportionately on communities of color, making this both a health equity and an economic justice issue.",
+    "crumbs": [
+      "Appendices",
+      "<span class='chapter-number'>A</span>  <span class='chapter-title'>Project Proposal</span>"
+    ]
+  },
+  {
+    "objectID": "appx/proposal.html#dataset",
+    "href": "appx/proposal.html#dataset",
+    "title": "Appendix A — Project Proposal",
+    "section": "Dataset",
+    "text": "Dataset\nWe use two complementary datasets that together let us measure both the clinical disparity (who gets misdiagnosed) and the economic consequences (who pays more and stays longer).\nPrimary Dataset: NY SPARCS Hospital Inpatient Discharges (2021)\nThe New York State Statewide Planning and Research Cooperative System (SPARCS) is a free, publicly available hospital discharge database from the NY Department of Health. The 2021 de-identified file contains over 2 million patient-level discharge records with race, ethnicity, gender, diagnosis, total charges, total costs, length of stay, insurance type, and severity of illness.\nThe dataset is downloaded directly from the NY Health Data open portal — no login or account needed. We load it locally and filter to respiratory diagnoses only using the ccsr_diagnosis_code column, which uses CCSR (Clinical Classifications Software Refined) codes. All respiratory diagnoses begin with \"RSP\".\n\nShow codelibrary(tidyverse)\n\n# Source: https://health.data.ny.gov/resource/tg3i-cinn.csv?$limit=10000\n# Downloaded from NY Health Data open portal \n\nsparcs_raw &lt;- read_csv(\"../data/tg3i-cinn.csv\", show_col_types = FALSE)\n\n# Filter to respiratory diagnoses only (all CCSR codes starting with RSP)\n# and clean numeric columns\nsparcs &lt;- sparcs_raw |&gt;\n  filter(str_starts(ccsr_diagnosis_code, \"RSP\")) |&gt;\n  mutate(\n    length_of_stay = as.numeric(length_of_stay),\n    total_charges  = as.numeric(total_charges),\n    total_costs    = as.numeric(total_costs)\n  )\n\nglimpse(sparcs)\n\nRows: 278\nColumns: 33\n$ hospital_service_area          &lt;chr&gt; \"New York City\", \"New York City\", \"New …\n$ hospital_county                &lt;chr&gt; \"Bronx\", \"Bronx\", \"Bronx\", \"Bronx\", \"Br…\n$ operating_certificate_number   &lt;dbl&gt; 7000006, 7000006, 7000008, 7000008, 700…\n$ permanent_facility_id          &lt;chr&gt; \"001168\", \"003058\", \"001172\", \"001172\",…\n$ facility_name                  &lt;chr&gt; \"Montefiore Medical Center-Wakefield Ho…\n$ age_group                      &lt;chr&gt; \"50 to 69\", \"70 or Older\", \"50 to 69\", …\n$ zip_code_3_digits              &lt;chr&gt; \"104\", \"104\", \"104\", \"104\", \"104\", \"104…\n$ gender                         &lt;chr&gt; \"F\", \"F\", \"M\", \"M\", \"F\", \"M\", \"M\", \"M\",…\n$ race                           &lt;chr&gt; \"Other Race\", \"Other Race\", \"Other Race…\n$ ethnicity                      &lt;chr&gt; \"Spanish/Hispanic\", \"Spanish/Hispanic\",…\n$ length_of_stay                 &lt;dbl&gt; 3, 11, 1, 2, 3, 1, 2, 1, 2, 1, 2, 3, 2,…\n$ type_of_admission              &lt;chr&gt; \"Emergency\", \"Emergency\", \"Emergency\", …\n$ patient_disposition            &lt;chr&gt; \"Short-term Hospital\", \"Hospice - Medic…\n$ discharge_year                 &lt;dbl&gt; 2021, 2021, 2021, 2021, 2021, 2021, 202…\n$ ccsr_diagnosis_code            &lt;chr&gt; \"RSP009\", \"RSP010\", \"RSP008\", \"RSP002\",…\n$ ccsr_diagnosis_description     &lt;chr&gt; \"Asthma\", \"Aspiration pneumonitis\", \"Ch…\n$ ccsr_procedure_code            &lt;chr&gt; \"ADM017\", \"ESA004\", \"ESA004\", NA, \"ESA0…\n$ ccsr_procedure_description     &lt;chr&gt; \"ADMINISTRATION OF NUTRITIONAL AND ELEC…\n$ apr_drg_code                   &lt;chr&gt; \"141\", \"137\", \"140\", \"139\", \"140\", \"139…\n$ apr_drg_description            &lt;chr&gt; \"ASTHMA\", \"MAJOR RESPIRATORY INFECTIONS…\n$ apr_mdc_code                   &lt;chr&gt; \"04\", \"04\", \"04\", \"04\", \"04\", \"04\", \"04…\n$ apr_mdc_description            &lt;chr&gt; \"DISEASES AND DISORDERS OF THE RESPIRAT…\n$ apr_severity_of_illness_code   &lt;dbl&gt; 3, 4, 3, 3, 3, 3, 1, 4, 2, 1, 3, 2, 1, …\n$ apr_severity_of_illness        &lt;chr&gt; \"Major\", \"Extreme\", \"Major\", \"Major\", \"…\n$ apr_risk_of_mortality          &lt;chr&gt; \"Major\", \"Extreme\", \"Major\", \"Moderate\"…\n$ apr_medical_surgical           &lt;chr&gt; \"Medical\", \"Medical\", \"Medical\", \"Medic…\n$ payment_typology_1             &lt;chr&gt; \"Medicare\", \"Medicare\", \"Medicaid\", \"Me…\n$ payment_typology_2             &lt;chr&gt; \"Medicaid\", \"Private Health Insurance\",…\n$ payment_typology_3             &lt;chr&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA,…\n$ birth_weight                   &lt;chr&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA,…\n$ emergency_department_indicator &lt;chr&gt; \"Y\", \"Y\", \"Y\", \"Y\", \"Y\", \"Y\", \"Y\", \"Y\",…\n$ total_charges                  &lt;dbl&gt; 77183.27, 219857.19, 19207.88, 15297.87…\n$ total_costs                    &lt;dbl&gt; 12057.91, 38291.05, 12276.24, 9777.25, …\n\n\n\nShow code# Respiratory diagnosis codes present in the data\nsparcs |&gt;\n  count(ccsr_diagnosis_code, ccsr_diagnosis_description) |&gt;\n  arrange(desc(n))\n\n# A tibble: 14 × 3\n   ccsr_diagnosis_code ccsr_diagnosis_description                              n\n   &lt;chr&gt;               &lt;chr&gt;                                               &lt;int&gt;\n 1 RSP008              Chronic obstructive pulmonary disease and bronchie…    57\n 2 RSP009              Asthma                                                 51\n 3 RSP002              Pneumonia (except that caused by tuberculosis)         49\n 4 RSP012              Respiratory failure; insufficiency; arrest             49\n 5 RSP010              Aspiration pneumonitis                                 20\n 6 RSP014              Pneumothorax                                           10\n 7 RSP006              Other specified upper respiratory infections            9\n 8 RSP011              Pleurisy, pleural effusion and pulmonary collapse       6\n 9 RSP016              Other specified and unspecified lower respiratory …     6\n10 RSP004              Acute and chronic tonsillitis                           5\n11 RSP005              Acute bronchitis                                        5\n12 RSP007              Other specified and unspecified upper respiratory …     5\n13 RSP017              Postprocedural or postoperative respiratory system…     4\n14 RSP015              Mediastinal disorders                                   2\n\n\n\nShow code# Racial and ethnic breakdown of respiratory patients\nsparcs |&gt;\n  count(race, ethnicity) |&gt;\n  arrange(desc(n))\n\n# A tibble: 12 × 3\n   race                   ethnicity             n\n   &lt;chr&gt;                  &lt;chr&gt;             &lt;int&gt;\n 1 Black/African American Not Span/Hispanic    77\n 2 White                  Not Span/Hispanic    71\n 3 Other Race             Spanish/Hispanic     67\n 4 Other Race             Not Span/Hispanic    18\n 5 Other Race             Unknown              17\n 6 Black/African American Unknown              11\n 7 Black/African American Spanish/Hispanic      4\n 8 Multi-racial           Not Span/Hispanic     4\n 9 White                  Unknown               4\n10 White                  Spanish/Hispanic      3\n11 Black/African American Multi-ethnic          1\n12 Multi-racial           Unknown               1\n\n\nKey variables:\n\n\n\n\n\n\nVariable\nDescription\n\n\n\n\nrace / ethnicity\n\nPatient self-reported race and Hispanic/Latino ethnicity\n\n\ngender\nPatient sex\n\n\nlength_of_stay\nDays hospitalized\n\n\ntotal_charges\nAmount billed by the hospital\n\n\ntotal_costs\nEstimated actual cost of care\n\n\npayment_typology_1\nInsurance type (Medicaid, Medicare, Private Health Insurance, Self-Pay)\n\n\napr_severity_of_illness_code\n1–4 scale of illness severity at admission\n\n\napr_severity_of_illness\nSeverity label: Minor, Moderate, Major, Extreme\n\n\napr_risk_of_mortality\nRisk label: Minor, Moderate, Major, Extreme\n\n\nccsr_diagnosis_code\nCCSR diagnosis code — RSP codes = respiratory diagnoses\n\n\nccsr_diagnosis_description\nPlain-text diagnosis name\n\n\npatient_disposition\nOutcome: home, expired, transferred, etc.\n\n\nhospital_county\nCounty of the treating hospital\n\n\nemergency_department_indicator\nWhether patient came through the ER\n\n\n\nSource: NY State Department of Health — Health Data NYDownload URL: https://health.data.ny.gov/resource/tg3i-cinn.csv?$limit=10000License: Public domain / open government data — no login required\nSecondary Dataset: OpenOximetry Dataset (UCSF Hypoxia Lab)\nThe OpenOximetry dataset is a prospective, open-access dataset from the University of California San Francisco Hypoxia Lab. It contains paired SpO₂ (pulse oximeter) and SaO₂ (arterial blood gas gold standard) measurements alongside objective skin tone measurements using the Fitzpatrick scale, Monk scale, and spectrophotometry. This dataset is stored locally as five relational CSVs.\n\nShow code# Load locally stored OpenOximetry tables (place CSVs in /data folder)\npatients          &lt;- read_csv(\"data/patient.csv\")\nencounter         &lt;- read_csv(\"data/encounter.csv\")\npulseoximeter     &lt;- read_csv(\"data/pulseoximeter.csv\")\nbloodgas          &lt;- read_csv(\"data/bloodgas.csv\")\nspectrophotometer &lt;- read_csv(\"data/spectrophotometer.csv\")\n\n# Merge tables and compute key outcome variables\noximetry &lt;- pulseoximeter |&gt;\n  inner_join(\n    bloodgas |&gt; select(encounter_id, sample, so2, ph, pco2, po2, thb),\n    by = c(\"encounter_id\", \"sample_number\" = \"sample\")\n  ) |&gt;\n  rename(SpO2 = saturation, SaO2 = so2) |&gt;\n  left_join(\n    encounter |&gt; select(\n      encounter_id, patient_id, age_at_encounter,\n      fitzpatrick, monk_forehead, monk_dorsal,\n      monk_palmar, monk_upper_arm\n    ),\n    by = \"encounter_id\"\n  ) |&gt;\n  left_join(\n    patients |&gt; select(patient_id, assigned_sex, race, ethnicity),\n    by = \"patient_id\"\n  ) |&gt;\n  mutate(\n    bias             = SpO2 - SaO2,\n    occult_hypoxemia = SpO2 &gt;= 88 & SaO2 &lt; 88,\n    skin_group       = cut(\n      fitzpatrick,\n      breaks         = c(0, 2, 4, 6),\n      labels         = c(\"Light\", \"Medium\", \"Dark\"),\n      include.lowest = TRUE\n    )\n  )\n\nglimpse(oximetry)\n\n\nKey variables: SpO2, SaO2, bias (SpO2 − SaO2), occult_hypoxemia, fitzpatrick scale (1–6), Monk scale scores by body location, race, ethnicity, assigned_sex\nSource: OpenOximetry Project, UCSF Hypoxia LabPaper: https://www.nature.com/articles/s41597-025-04870-8Access: Data Use Agreement required at the OpenOximetry portal",
+    "crumbs": [
+      "Appendices",
+      "<span class='chapter-number'>A</span>  <span class='chapter-title'>Project Proposal</span>"
+    ]
+  },
+  {
+    "objectID": "appx/proposal.html#communication-plan",
+    "href": "appx/proposal.html#communication-plan",
+    "title": "Appendix A — Project Proposal",
+    "section": "Communication Plan",
+    "text": "Communication Plan\n\n\nPrimary channels: WhatsApp and Google Chat\n\nExpected response time: Within 1 business day on weekdays\n\nStanding meeting: Thursdays, 3:00–4:30 PM (as needed throughout the project)",
+    "crumbs": [
+      "Appendices",
+      "<span class='chapter-number'>A</span>  <span class='chapter-title'>Project Proposal</span>"
+    ]
+  },
+  {
+    "objectID": "appx/proposal.html#roles",
+    "href": "appx/proposal.html#roles",
+    "title": "Appendix A — Project Proposal",
+    "section": "Roles",
+    "text": "Roles\n\n\n\n\n\n\nRole\nTeam Member\n\n\n\n\nPoint of Contact — emails instructor and preceptors\nPatricia Escobar Contreras\n\n\n\nTechnical Lead — oversees codebase and Quarto website\nWilliam Acosta Lora\n\n\n\nStyle Lead — enforces COMP/STAT 212 Code Styling Guide\nNayla Trigueros Ortiz\n\n\n\nAll three team members are expected to contribute equally to data analysis, visualization, and writing.",
+    "crumbs": [
+      "Appendices",
+      "<span class='chapter-number'>A</span>  <span class='chapter-title'>Project Proposal</span>"
+    ]
+  },
+  {
+    "objectID": "appx/proposal.html#conflict-resolution",
+    "href": "appx/proposal.html#conflict-resolution",
+    "title": "Appendix A — Project Proposal",
+    "section": "Conflict Resolution",
+    "text": "Conflict Resolution\nCommunication will be key. If any of the members will be late to a commitment or misses a deadline, they should feel comfortable communicating that to the team and we will redistribute the workload accordingly. If anyone has to take on more work for a deadline due to a re-adjustment, we will adjust back for the next deadline so that the responsibilities remain balanced.\nFor disagreements where the team is split, we will discuss openly during our Thursday meeting. Ties on project direction will be resolved by a short async team vote with a 24-hour window, deferring to the lead most relevant to the decision (e.g., technical disagreements go to the Technical Lead, formatting to the Style Lead).",
+    "crumbs": [
+      "Appendices",
+      "<span class='chapter-number'>A</span>  <span class='chapter-title'>Project Proposal</span>"
+    ]
+  },
+  {
+    "objectID": "appx/proposal.html#implementation-plan",
+    "href": "appx/proposal.html#implementation-plan",
+    "title": "Appendix A — Project Proposal",
+    "section": "Implementation Plan",
+    "text": "Implementation Plan\nThe following tasks will also be added as GitHub Issues in the project repository, with role and priority labels.\n\n\n\n\n\n\n\n\n#\nTask\nDue\nLead\n\n\n\n1\nSet up GitHub repo and Quarto project website skeleton\nWeek 1\nWilliam\n\n\n2\nSubmit this proposal\nWeek 2\nPatricia\n\n\n3\nEDA on SPARCS: charges, LOS, and mortality by race, gender, and insurance\nWeek 3\nPatricia + William\n\n\n4\nEDA on OpenOximetry: SpO₂ bias and occult hypoxemia rates by skin tone and race\nWeek 3\nWilliam + Nayla\n\n\n5\nLiterature review write-up: clinical and economic evidence for hidden hypoxemia disparities\nWeek 3–4\nNayla\n\n\n6\nVisualizations: cost and LOS disparities by race and gender from SPARCS\nWeek 4\nPatricia\n\n\n7\nVisualizations: bias distributions and occult hypoxemia rates by skin tone from OpenOximetry\nWeek 4\nWilliam\n\n\n8\nIntersectional analysis: race x gender x insurance interaction effects on costs\nWeek 5\nAll\n\n\n9\nDraft results and interpretation sections\nWeek 6\nAll\n\n\n10\nStyle pass: code review against COMP/STAT 212 Code Styling Guide\nWeek 7\nNayla\n\n\n11\nFinal write-up, website polish, and presentation prep\nWeek 8\nAll",
+    "crumbs": [
+      "Appendices",
+      "<span class='chapter-number'>A</span>  <span class='chapter-title'>Project Proposal</span>"
+    ]
+  },
+  {
+    "objectID": "appx/case-study.html",
+    "href": "appx/case-study.html",
+    "title": "Appendix B — Case Study",
+    "section": "",
+    "text": "Your case study go here.",
+    "crumbs": [
+      "Appendices",
+      "<span class='chapter-number'>B</span>  <span class='chapter-title'>Case Study</span>"
+    ]
+  },
+  {
+    "objectID": "wa/wa-member1.html",
+    "href": "wa/wa-member1.html",
+    "title": "Appendix C — Member 1 First Name & Last Name Initial",
+    "section": "",
+    "text": "Work area to try code",
+    "crumbs": [
+      "Appendices",
+      "<span class='chapter-number'>C</span>  <span class='chapter-title'>Member 1 First Name & Last Name Initial</span>"
+    ]
+  },
+  {
+    "objectID": "wa/wa-member2.html",
+    "href": "wa/wa-member2.html",
+    "title": "Appendix D — Member 2 First Name & Last Name Initial",
+    "section": "",
+    "text": "Work area to try code",
+    "crumbs": [
+      "Appendices",
+      "<span class='chapter-number'>D</span>  <span class='chapter-title'>Member 2 First Name & Last Name Initial</span>"
+    ]
+  },
+  {
+    "objectID": "wa/wa-member3.html",
+    "href": "wa/wa-member3.html",
+    "title": "Appendix E — Member 3 First Name & Last Name Initial",
+    "section": "",
+    "text": "Work area to try code",
+    "crumbs": [
+      "Appendices",
+      "<span class='chapter-number'>E</span>  <span class='chapter-title'>Member 3 First Name & Last Name Initial</span>"
+    ]
+  }
+]
