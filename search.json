@@ -155,12 +155,34 @@
   {
     "objectID": "appx/case-study.html",
     "href": "appx/case-study.html",
-    "title": "Appendix B — Case Study",
+    "title": "Appendix B — Case Study: Twin Cities Police Use Physical Force at Rates Well Above National Average",
     "section": "",
-    "text": "Your case study go here.",
+    "text": "Overview\nSource: Christopher Ingraham, Minnesota Reformer, August 28, 2024.\nURL: https://minnesotareformer.com/2024/08/28/twin-cities-police-use-physical-force-at-rates-well-above-national-average/\nThis piece by data journalist Christopher Ingraham is a compact but well-structured example of local data journalism. It uses a single external dataset, compiled by the nonprofit Mapping Police Violence via public records requests, to tell a story about policing patterns in Minneapolis and St. Paul. The report is worth studying for how efficiently it moves from data release to civic implication with minimal word count.",
     "crumbs": [
       "Appendices",
-      "<span class='chapter-number'>B</span>  <span class='chapter-title'>Case Study</span>"
+      "<span class='chapter-number'>B</span>  <span class='chapter-title'>Case Study: *Twin Cities Police Use Physical Force at Rates Well Above National Average*</span>"
+    ]
+  },
+  {
+    "objectID": "appx/case-study.html#story-structure",
+    "href": "appx/case-study.html#story-structure",
+    "title": "Appendix B — Case Study: Twin Cities Police Use Physical Force at Rates Well Above National Average",
+    "section": "Story Structure",
+    "text": "Story Structure\n\nLead with the headline number.\nThe piece opens by anchoring readers immediately in a concrete, surprising figure: MPD officers used physical force more than 1,000 times in 2022, placing Minneapolis among the highest per-capita rates in the nation. This is a classic data journalism hook — one number that earns the reader’s attention before any context is given.\nWiden the frame with comparison.\nThe story immediately zooms out to include St. Paul, showing that use-of-force roughly doubled there between 2018 and 2022. By the second paragraph, the reader understands this is not just a Minneapolis story. The national ranking (third and fourth among cities over 100,000 residents) gives a comparative anchor that makes the local numbers feel legible and significant.\nEstablish data provenance and limitations.\nBefore going further, Ingraham explains where the data came from (Mapping Police Violence, via public records), how “use of force” is defined, and importantly, what makes cross-department comparisons difficult. This transparency is a hallmark of responsible data journalism — it builds credibility and preempts the most obvious reader objections.\nContextualize with national scope.\nA brief national-scale figure (roughly 300,000 force incidents per year nationally) situates the Twin Cities data within a broader pattern. The report also incorporates a DOJ statistic about the share of incidents that produce injuries and the share involving unarmed suspects, which reframes the data from administrative record-keeping into a human rights story.\nLayer in institutional accountability.\nThe piece then introduces the 2023 DOJ civil rights report on MPD, which found that officers used excessive force, targeted people for petty or no crimes, and punished people for exercising legal rights. This section transitions the story from descriptive statistics to documented institutional failure, giving the numbers moral and legal weight.\nDrill into specific trends within the data.\nRather than leaving the data abstract, the story highlights specific weapon-use trends: baton incidents increased from 10 in 2019 to 78 in 2021; Taser use rose from 78 to 108 incidents. This granularity gives readers a more textured picture than a single summary statistic would.\nSurface the outlier.\nSt. Cloud’s use-of-force rate is mentioned as even higher than the Twin Cities on a per-capita basis (more than twice as often), but excluded from the main rankings due to population. This is a good structural move: it acknowledges a complicating data point without letting it derail the main narrative, and it demonstrates analytical honesty.\nClose with the racial disparity finding.\nThe final substantive paragraph reports that MPD used force against Black residents more than eight times as often as against white residents. Ending here is a deliberate editorial choice — it reframes the entire piece around equity and leaves the reader with the most politically and ethically charged finding.",
+    "crumbs": [
+      "Appendices",
+      "<span class='chapter-number'>B</span>  <span class='chapter-title'>Case Study: *Twin Cities Police Use Physical Force at Rates Well Above National Average*</span>"
+    ]
+  },
+  {
+    "objectID": "appx/case-study.html#key-takeaways-for-data-storytelling",
+    "href": "appx/case-study.html#key-takeaways-for-data-storytelling",
+    "title": "Appendix B — Case Study: Twin Cities Police Use Physical Force at Rates Well Above National Average",
+    "section": "Key Takeaways for Data Storytelling",
+    "text": "Key Takeaways for Data Storytelling\n\nLead with one specific, surprising number. The 1,000+ incidents figure immediately earns attention without requiring context first.\nUse rankings and comparisons to make local data feel significant. Third and fourth in the nation is more meaningful than a raw per-capita rate.\nAcknowledge methodological limits early. Ingraham addresses data comparability issues before the reader can use them to dismiss the findings.\nLayer context progressively. The story moves from local -&gt; national -&gt; institutional -&gt; granular -&gt; equity, each layer adding a different kind of meaning to the same dataset.\nLet the racial disparity land last. Structurally, saving the most consequential finding for the end gives the piece rhetorical weight and a clear moral conclusion.",
+    "crumbs": [
+      "Appendices",
+      "<span class='chapter-number'>B</span>  <span class='chapter-title'>Case Study: *Twin Cities Police Use Physical Force at Rates Well Above National Average*</span>"
     ]
   },
   {
