@@ -1,5 +1,251 @@
 ---
-title: "Proposal"
+title: "Project Proposal"
+subtitle: "Undetected and Undertreated: Racial and Gender Disparities in Hidden Hypoxemia and Their Economic Consequences"
+format:
+  html:
+    toc: true
+    toc-depth: 2
+    theme: cosmo
+    code-fold: true
+    code-summary: "Show code"
 ---
 
-Your proposal go here.
+## Team Members
+
+-   **Nayla Trigueros Ortiz** *(Style Lead)*
+-   **Patricia Escobar Contreras** *(Point of Contact)*
+-   **William Acosta Lora** *(Technical Lead)*
+
+------------------------------------------------------------------------
+
+## Project Description
+
+We are interested in exploring racial and gender disparities in access, treatment, and healthcare outcomes in the medical industry for patients. Specifically, we focus on hidden hypoxemia, a condition where pulse oximeters fail to accurately detect low blood oxygen levels in patients with darker skin tones. This makes it a measurable, concrete case study of medical device bias in action. We use it to examine how that bias translates into unequal care and unequal economic burden for patients of color.
+
+Hidden hypoxemia through pulse oximeter bias is a particularly powerful entry point because it is not a question of patient behavior or lifestyle — it is a direct, measurable failure of medical technology. Research has documented that Black and Hispanic patients are significantly more likely to experience undetected hypoxemia, which has been linked to delayed eligibility for critical treatments and worse outcomes. The economic consequences of this — higher costs, longer stays, greater morbidity — fall disproportionately on communities of color, making this both a health equity and an economic justice issue.
+
+------------------------------------------------------------------------
+
+## Research Questions
+
+To guide our analysis, we will answer the following research questions:
+
+How does pulse oximetry accuracy vary across skin tone, race, and gender, and what is the magnitude of hidden hypoxemia disparities?
+
+What are the economic consequences of respiratory misdiagnosis and delayed treatment for patients of color in hospital settings?
+
+Do race, gender, and insurance status intersect to compound economic disparities in respiratory care?
+
+------------------------------------------------------------------------
+
+## Motivation and Inspiration
+
+As international students and people of color from different countries across Latin America, we bring perspectives shaped by healthcare systems outside the United States. Having navigated both our home countries' medical institutions and the U.S. system, we have noticed firsthand how race and skin tone influence the quality of care patients receive, and how those dynamics shift depending on the country and context. Moving to a predominantly white country has made these disparities more visible to us, not less. The experience of being a patient, or watching family members be patients, in systems that were not designed with us in mind gives this project a personal dimension alongside its academic one. We want to use data to examine what we have observed anecdotally, and to measure the real consequences that medical device bias and systemic inequity have on patients of color in U.S. hospital settings.
+
+------------------------------------------------------------------------
+
+## Dataset
+
+Our project combines two datasets: the **OpenOximetry dataset** (UCSF Hypoxia Lab), which gives us paired pulse oximeter and blood gas measurements stratified by skin tone and race, and the **NY SPARCS Inpatient Discharge dataset**, which provides hospital-level economic outcomes (total charges, length of stay, costs, mortality) broken down by race, gender, and diagnosis. Together, they let us connect the clinical disparity to its downstream economic consequences.
+
+We use these two complementary datasets that together let us measure both the clinical disparity (who gets misdiagnosed) and the economic consequences (who pays more and stays longer).
+
+### Primary Dataset: NY SPARCS Hospital Inpatient Discharges (2021)
+
+The New York State Statewide Planning and Research Cooperative System (SPARCS) \[<https://health.data.ny.gov/resource/tg3i-cinn.csv?$limit=10000>\] is a free, publicly available hospital discharge database from the NY Department of Health. The 2021 de-identified file contains over 2 million patient-level discharge records with race, ethnicity, gender, diagnosis, total charges, total costs, length of stay, insurance type, and severity of illness. The dataset is downloaded directly from the NY Health Data open portal, no login or account needed. We load it locally and filter to respiratory diagnoses only using the ccsr_diagnosis_code column, which uses CCSR (Clinical Classifications Software Refined) codes. All respiratory diagnoses begin with "RSP".
+
+The following output shows the structure of the filtered respiratory dataset, including variable names, types, and a preview of values.
+
+```{r}
+#| label: load-sparcs
+#| message: false
+#| warning: false
+
+library(tidyverse)
+
+# Source: https://health.data.ny.gov/resource/tg3i-cinn.csv?$limit=10000
+# Downloaded from NY Health Data open portal 
+
+sparcs_raw <- read_csv("../data/tg3i-cinn.csv", show_col_types = FALSE)
+
+# Filter to respiratory diagnoses only (all CCSR codes starting with RSP)
+# and clean numeric columns
+sparcs <- sparcs_raw |>
+  filter(str_starts(ccsr_diagnosis_code, "RSP")) |>
+  mutate(
+    length_of_stay = as.numeric(length_of_stay),
+    total_charges  = as.numeric(total_charges),
+    total_costs    = as.numeric(total_costs)
+  )
+
+glimpse(sparcs)
+```
+
+The table below lists all respiratory diagnosis codes present in the data, sorted by how frequently each appears in the dataset
+```{r}
+#| label: sparcs-diagnosis-breakdown
+#| message: false
+#| warning: false
+
+# Respiratory diagnosis codes present in the data
+sparcs |>
+  count(ccsr_diagnosis_code, ccsr_diagnosis_description) |>
+  arrange(desc(n))
+```
+
+The table below shows the racial and ethnic breakdown of respiratory patients in the dataset, sorted by count.
+```{r}
+#| label: sparcs-race-breakdown
+#| message: false
+#| warning: false
+
+# Racial and ethnic breakdown of respiratory patients
+sparcs |>
+  count(race, ethnicity) |>
+  arrange(desc(n))
+```
+
+**Key variables:**
+
+| Variable | Description |
+|------------------------------------|------------------------------------|
+| `race` / `ethnicity` | Patient self-reported race and Hispanic/Latino ethnicity |
+| `gender` | Patient sex |
+| `length_of_stay` | Days hospitalized |
+| `total_charges` | Amount billed by the hospital |
+| `total_costs` | Estimated actual cost of care |
+| `payment_typology_1` | Insurance type (Medicaid, Medicare, Private Health Insurance, Self-Pay) |
+| `apr_severity_of_illness_code` | 1–4 scale of illness severity at admission |
+| `apr_severity_of_illness` | Severity label: Minor, Moderate, Major, Extreme |
+| `apr_risk_of_mortality` | Risk label: Minor, Moderate, Major, Extreme |
+| `ccsr_diagnosis_code` | CCSR diagnosis code — RSP codes = respiratory diagnoses |
+| `ccsr_diagnosis_description` | Plain-text diagnosis name |
+| `patient_disposition` | Outcome: home, expired, transferred, etc. |
+| `hospital_county` | County of the treating hospital |
+| `emergency_department_indicator` | Whether patient came through the ER |
+
+**Source:** NY State Department of Health — Health Data NY\
+**Download URL:** `https://health.data.ny.gov/resource/tg3i-cinn.csv?$limit=10000`\
+**License:** Public domain / open government data — no login required
+
+------------------------------------------------------------------------
+
+### Secondary Dataset: OpenOximetry Dataset (UCSF Hypoxia Lab)
+
+The **OpenOximetry dataset** [<https://physionet.org/content/openox-repo/1.1.1/>] is a prospective dataset from the University of California San Francisco Hypoxia Lab. It contains paired SpO₂ (pulse oximeter) and SaO₂ (arterial blood gas gold standard) measurements alongside objective skin tone measurements using the Fitzpatrick scale, Monk scale, and spectrophotometry. This dataset is stored locally as five relational CSVs.
+The following output shows the structure of the merged oximetry dataset after joining all five relational tables and computing key outcome variables.
+
+```{r}
+#| label: load-openoximetry
+#| message: false
+#| warning: false
+#| eval: false
+
+# Load locally stored OpenOximetry tables (place CSVs in /data folder)
+patients          <- read_csv("data/patient.csv")
+encounter         <- read_csv("data/encounter.csv")
+pulseoximeter     <- read_csv("data/pulseoximeter.csv")
+bloodgas          <- read_csv("data/bloodgas.csv")
+spectrophotometer <- read_csv("data/spectrophotometer.csv")
+
+# Merge tables and compute key outcome variables
+oximetry <- pulseoximeter |>
+  inner_join(
+    bloodgas |> select(encounter_id, sample, so2, ph, pco2, po2, thb),
+    by = c("encounter_id", "sample_number" = "sample")
+  ) |>
+  rename(SpO2 = saturation, SaO2 = so2) |>
+  left_join(
+    encounter |> select(
+      encounter_id, patient_id, age_at_encounter,
+      fitzpatrick, monk_forehead, monk_dorsal,
+      monk_palmar, monk_upper_arm
+    ),
+    by = "encounter_id"
+  ) |>
+  left_join(
+    patients |> select(patient_id, assigned_sex, race, ethnicity),
+    by = "patient_id"
+  ) |>
+  mutate(
+    bias             = SpO2 - SaO2,
+    occult_hypoxemia = SpO2 >= 88 & SaO2 < 88,
+    skin_group       = cut(
+      fitzpatrick,
+      breaks         = c(0, 2, 4, 6),
+      labels         = c("Light", "Medium", "Dark"),
+      include.lowest = TRUE
+    )
+  )
+
+glimpse(oximetry)
+```
+
+**Key variables:**
+
+| Variable | Description |
+|---|---|
+| `SpO2` | Blood oxygen saturation measured by pulse oximeter |
+| `SaO2` | True blood oxygen saturation from arterial blood gas |
+| `bias` | Difference between SpO2 and SaO2 (SpO2 minus SaO2) |
+| `occult_hypoxemia` | Whether SpO2 is at or above 88% while SaO2 is below 88% |
+| `fitzpatrick` | Fitzpatrick skin tone scale score (1 to 6) |
+| `monk_forehead` | Monk skin tone score at forehead |
+| `monk_dorsal` | Monk skin tone score at dorsal hand |
+| `monk_palmar` | Monk skin tone score at palm |
+| `monk_upper_arm` | Monk skin tone score at upper arm |
+| `race` | Patient self-reported race |
+| `ethnicity` | Patient self-reported ethnicity |
+| `assigned_sex` | Patient sex assigned at birth |
+| `age_at_encounter` | Patient age at time of measurement |
+
+**Source:** OpenOximetry Project, UCSF Hypoxia Lab\
+**Access:** Data Use Agreement required at the OpenOximetry portal
+
+------------------------------------------------------------------------
+
+## Communication Plan
+
+-   **Primary channels:** WhatsApp and Google Chat
+-   **Expected response time:** Within 1 business day on weekdays
+-   **Standing meeting:** Thursdays, 3:00–4:30 PM (as needed throughout the project)
+
+------------------------------------------------------------------------
+
+## Roles
+
+| Role | Team Member |
+|------------------------------------|------------------------------------|
+| **Point of Contact** — emails instructor and preceptors | Patricia Escobar Contreras |
+| **Technical Lead** — oversees codebase and Quarto website | William Acosta Lora |
+| **Style Lead** — enforces COMP/STAT 212 Code Styling Guide | Nayla Trigueros Ortiz |
+
+All three team members are expected to contribute equally to data analysis, visualization, and writing.
+
+------------------------------------------------------------------------
+
+## Conflict Resolution
+
+Communication will be key. If any of the members will be late to a commitment or misses a deadline, they should feel comfortable communicating that to the team and we will redistribute the workload accordingly. If anyone has to take on more work for a deadline due to a re-adjustment, we will adjust back for the next deadline so that the responsibilities remain balanced.
+
+For disagreements where the team is split, we will discuss openly during our Thursday meeting. Ties on project direction will be resolved by a short async team vote with a 24-hour window, deferring to the lead most relevant to the decision (e.g., technical disagreements go to the Technical Lead, formatting to the Style Lead).
+
+------------------------------------------------------------------------
+
+## Implementation Plan
+
+The following tasks will also be added as **GitHub Issues** in the project repository, with role and priority labels.
+
+| \# | Task | Due | Lead |
+|------------------|------------------|------------------|------------------|
+| 1 | Set up GitHub repo and Quarto project website skeleton | Week 1 | William |
+| 2 | Submit this proposal | Week 2 | Patricia |
+| 3 | EDA on SPARCS: charges, LOS, and mortality by race, gender, and insurance | Week 3 | Patricia + William |
+| 4 | EDA on OpenOximetry: SpO₂ bias and occult hypoxemia rates by skin tone and race | Week 3 | William + Nayla |
+| 5 | Literature review write-up: clinical and economic evidence for hidden hypoxemia disparities | Week 3–4 | Nayla |
+| 6 | Visualizations: cost and LOS disparities by race and gender from SPARCS | Week 4 | Patricia |
+| 7 | Visualizations: bias distributions and occult hypoxemia rates by skin tone from OpenOximetry | Week 4 | William |
+| 8 | Intersectional analysis: race x gender x insurance interaction effects on costs | Week 5 | All |
+| 9 | Draft results and interpretation sections | Week 6 | All |
+| 10 | Style pass: code review against COMP/STAT 212 Code Styling Guide | Week 7 | Nayla |
+| 11 | Final write-up, website polish, and presentation prep | Week 8 | All |
