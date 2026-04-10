@@ -1,13 +1,6 @@
 ---
 title: "Project Proposal"
 subtitle: "Undetected and Undertreated: Racial and Gender Disparities in Hidden Hypoxemia and Their Economic Consequences"
-format:
-  html:
-    toc: true
-    toc-depth: 2
-    theme: cosmo
-    code-fold: true
-    code-summary: "Show code"
 ---
 
 ## Team Members
@@ -51,7 +44,7 @@ Hidden hypoxemia through pulse oximeter bias is a particularly powerful entry po
 
 We use two complementary datasets that together let us measure both the clinical disparity (who gets misdiagnosed) and the economic consequences (who pays more and stays longer).
 
-### Primary Dataset: NY SPARCS Hospital Inpatient Discharges (2021)
+### NY SPARCS Hospital Inpatient Discharges (2021)
 
 The **New York State Statewide Planning and Research Cooperative System (SPARCS)** is a free, publicly available hospital discharge database from the NY Department of Health. The 2021 de-identified file contains over 2 million patient-level discharge records with race, ethnicity, gender, diagnosis, total charges, total costs, length of stay, insurance type, and severity of illness.
 
@@ -124,12 +117,12 @@ sparcs |>
 | `emergency_department_indicator` | Whether patient came through the ER |
 
 **Source:** NY State Department of Health — Health Data NY  
-**Download URL:** `https://health.data.ny.gov/resource/tg3i-cinn.csv?$limit=10000`  
+**Download URL:** <https://health.data.ny.gov/resource/tg3i-cinn.csv?$limit=10000>
 **License:** Public domain / open government data — no login required
 
 ---
 
-### Secondary Dataset: OpenOximetry Dataset (UCSF Hypoxia Lab)
+### OpenOximetry Dataset (UCSF Hypoxia Lab)
 
 The **OpenOximetry dataset** is a prospective, open-access dataset from the University of California San Francisco Hypoxia Lab. It contains paired SpO₂ (pulse oximeter) and SaO₂ (arterial blood gas gold standard) measurements alongside objective skin tone measurements using the Fitzpatrick scale, Monk scale, and spectrophotometry. This dataset is stored locally as five relational CSVs.
 
@@ -182,7 +175,7 @@ glimpse(oximetry)
 **Key variables:** `SpO2`, `SaO2`, `bias` (SpO2 − SaO2), `occult_hypoxemia`, `fitzpatrick` scale (1–6), Monk scale scores by body location, `race`, `ethnicity`, `assigned_sex`
 
 **Source:** OpenOximetry Project, UCSF Hypoxia Lab  
-**Paper:** [https://www.nature.com/articles/s41597-025-04870-8](https://www.nature.com/articles/s41597-025-04870-8)  
+**Paper:** <https://www.nature.com/articles/s41597-025-04870-8>
 **Access:** Data Use Agreement required at the OpenOximetry portal
 
 ---
