@@ -414,10 +414,10 @@ Hispanic patients, but the sex-based disparity is most pronounced among
 Black individuals, where females experience significantly higher
 overestimation than males. This technical error translates directly into
 clinical risk, as shown in the bottom panel, where the rate of occult
-hypoxemia peaks sharply for Black females. This means that for more than
-one in ten Black women, the device reports a "safe" oxygen level when
-they are actually experiencing dangerously low saturation. Collectively,
-the data suggests that while racial bias is a primary driver of device
-failure, being female often compounds this risk, particularly for Black
-and Asian patients, potentially leading to systemic delays in care for
-these specific groups.
+hypoxemia peaks sharply for Black females at 12.6%. This means that for
+more than one in ten Black women, the device reports a "safe" oxygen
+level when they are actually experiencing dangerously low saturation.
+Collectively, the data suggests that while racial bias is a primary
+driver of device failure, being female often compounds this risk,
+particularly for Black and Asian patients, potentially leading to
+systemic delays in care for these specific groups.
