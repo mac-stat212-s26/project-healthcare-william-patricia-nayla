@@ -276,11 +276,6 @@ through standard deviation and range, suggests that the device is
 erratic. This "jitter" is particularly risky in a clinical setting
 because it can lead to intermittent misdiagnosis, where a patient might
 appear stable during one check but be in respiratory distress the next.
-By breaking this down by skin tone and race, we can determine if the
-technology is not only less accurate for certain groups but also less
-reliable, helping us identify whether the inaccuracies are systematic
-flaws in the algorithm or a failure of the sensor to maintain a steady
-signal-to-noise ratio on darker skin.
 
 ```{r}
 within_patient <- oximetry_top |>
