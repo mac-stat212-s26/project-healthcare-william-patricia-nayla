@@ -1,5 +1,5 @@
 ---
-title: "Individual EDA: How does the "
+title: "Individual EDA: Evaluating Demographic Disparities in Pulse Oximetry Accuracy"
 subtitle: "OpenOximetry Discharge Data"
 author: "Patricia Escobar Contreras"
 date: today
@@ -20,9 +20,9 @@ editor:
 
 This EDA covers the **OpenOximetry** dataset:
 
--   **OpenOximetry** (UCSF Hypoxia Lab) - paired pulse oximeter (SpO₂)
-    and arterial blood gas (SaO₂) measurements with objective skin tone
-    scores. Used to measure who gets misdiagnosed and by how much.
+-   **OpenOximetry** (UCSF Hypoxia Lab) - Used to audit the clinical
+    reliability of pulse oximeters by comparing their digital readings
+    against the "gold standard" of direct blood oxygen measurements.
 
 ## Setup
 
@@ -117,12 +117,28 @@ theme_eda <- function() {
 
 ## OpenOximetry Dataset
 
+This group project focuses on analyzing the implications of inaccuracies
+in standard pulse oximeters. In this regard, through the analysis of
+relevant data, we have observed that oximeters, which function to detect
+blood oxygen levels, tend to exhibit wider margins of error for
+individuals with dark skin compared to those with light skin.
+Scientifically, this phenomenon is explained by the fact that dark skin
+contains a layer of melanin that impedes the unimpeded passage of the
+oximeter's light beams through the skin, unlike in individuals with
+light skin, who lack these elevated levels of melanin. However, as a
+group, we believe this issue carries broader implications, and we intend
+to analyze how this phenomenon manifests across various demographic
+groups. In my specific analysis, I will focus on examining the biases
+associated with oximeter models and skin tone, specifically, the biases
+that arise among patients of different skin tones, and the interplay of
+these factors with respect to sex and race.
+
 ## Analysis 1: Bias by device model and skin tone
 
 Given that we are examining potential biases related to skin tone, it is
-also crucial to consider the devices themselves. In this regard, my aim
-is to explore the variability in blood oxygen detection across
-individual devices, and to analyze whether there is a general pattern,
+crucial to consider the devices themselves. In this regard, my aim is to
+explore the variability in blood oxygen detection across individual
+devices, and to analyze whether there is a general pattern,
 specifically, if certain devices are less effective and thus skewing the
 overall data results across different skin colors, or if this is a
 generalized issue affecting all devices. This is a controlled within
@@ -212,9 +228,9 @@ device_skin_summary <- oximetry_top |>
 
 p_heatmap <- device_skin_summary |>
   ggplot(aes(x = skin_group, y = device_label, fill = mean_bias)) +
-  geom_tile(color = "white", linewidth = 1.2) +
-  geom_text(aes(label = sprintf("%+.2f", mean_bias), color = abs(mean_bias) > 2), size = 3.8, fontface = "bold", show.legend = FALSE) +
-  scale_color_manual(values = c("TRUE" = "white", "FALSE" = "grey20")) +
+  geom_tile(color = "white", linewidth = 1.6) +
+  geom_text(aes(label = sprintf("%+.2f", mean_bias), color = abs(mean_bias) > 2), size = 3.6, fontface = "bold", show.legend = FALSE) +
+  scale_color_manual(values = c("TRUE" = "white", "FALSE" = "black")) +
   scale_fill_gradient2(
     low      = "blue",
     mid      = "white",
@@ -222,13 +238,11 @@ p_heatmap <- device_skin_summary |>
     midpoint = 0,
     limits   = c(-5, 5),
     name     = "Mean bias\n(pp)",
-    guide    = guide_colorbar(
-      barwidth = 0.8, barheight = 6,
-      title.position = "top")) +
+    guide    = guide_colorbar( barwidth = 0.9, barheight = 10, title.position = "top")) +
   labs(title    = "Pulse oximeter bias by device model and skin tone",
        subtitle = "Mean (SpO2 − SaO2) in percentage points · Red = overestimates true oxygen level",
        x = "Fitzpatrick skin tone group", y = "Device model") +
-  theme_eda() 
+theme_eda() 
 
 p_heatmap
 ```
@@ -400,10 +414,10 @@ Hispanic patients, but the sex-based disparity is most pronounced among
 Black individuals, where females experience significantly higher
 overestimation than males. This technical error translates directly into
 clinical risk, as shown in the bottom panel, where the rate of occult
-hypoxemia peaks sharply for Black females at 12.6%. This means that for
-more than one in ten Black women, the device reports a "safe" oxygen
-level when they are actually experiencing dangerously low saturation.
-Collectively, the data suggests that while racial bias is a primary
-driver of device failure, being female often compounds this risk,
-particularly for Black and Asian patients, potentially leading to
-systemic delays in care for these specific groups.
+hypoxemia peaks sharply for Black females. This means that for more than
+one in ten Black women, the device reports a "safe" oxygen level when
+they are actually experiencing dangerously low saturation. Collectively,
+the data suggests that while racial bias is a primary driver of device
+failure, being female often compounds this risk, particularly for Black
+and Asian patients, potentially leading to systemic delays in care for
+these specific groups.
