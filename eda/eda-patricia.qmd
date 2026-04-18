@@ -281,7 +281,7 @@ appear stable during one check but be in respiratory distress the next.
 within_patient <- oximetry_top |>
   filter(between(bias, -20, 20)) |>
   group_by(patient_id, race_eth, skin_group, device_label) |>
-  summarise(n_readings = n(), mean_bias  = mean(bias, na.rm = TRUE), sd_bias = sd(bias,   na.rm = TRUE), .groups    = "drop") |>
+  summarise(n_readings = n(), mean_bias  = mean(bias, na.rm = TRUE), sd_bias = sd(bias, na.rm = TRUE), .groups = "drop") |>
   filter(n_readings >= 3, !is.na(sd_bias))
 ```
 
