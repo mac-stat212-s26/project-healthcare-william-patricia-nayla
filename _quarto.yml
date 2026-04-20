@@ -62,7 +62,7 @@ book:
     - part: "EDA"
       chapters:
         - eda/eda-william_acosta.qmd
-        - eda/eda-member2.qmd
+        - eda/eda-patricia.qmd
         - eda/eda-member3.qmd
 
   appendices:
