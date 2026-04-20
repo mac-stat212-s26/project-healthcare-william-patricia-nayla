@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NoSQL Slide — COMP/STAT 212</title>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html, body {
+    width: 100%;
+    min-height: 100vh;
+    background: #d0d0d0;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 24px;
+    font-family: 'Roboto', Arial, sans-serif;
+  }
+
+  /* ── SLIDE SHELL (16:9) ── */
+  .slide {
+    width: 1100px;
+    min-height: 618px;
+    background: #fff;
+    display: flex;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.25);
+    border: 1px solid #ccc;
+  }
+
+  /* ── LEFT SIDEBAR ── */
+  .sidebar {
+    width: 210px;
+    min-width: 210px;
+    background: #ebebeb;
+    padding: 22px 16px 22px 18px;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    border-right: 1px solid #d8d8d8;
+  }
+
+  .sidebar-section { margin-bottom: 18px; }
+  .sidebar-section:last-child { margin-top: auto; margin-bottom: 0; }
+
+  .label {
+    font-size: 8.5px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #b94030;
+    margin-bottom: 4px;
+  }
+
+  .sidebar-text {
+    font-size: 11.5px;
+    line-height: 1.55;
+    color: #1a1a1a;
+    font-weight: 400;
+  }
+
+  .sidebar-text strong {
+    font-weight: 700;
+  }
+
+  .ref-item {
+    font-size: 10px;
+    line-height: 1.7;
+    color: #1a1a1a;
+  }
+
+  .ref-item a {
+    color: #1155CC;
+    text-decoration: none;
+    font-size: 10px;
+  }
+
+  /* ── MAIN CONTENT ── */
+  .main {
+    flex: 1;
+    padding: 20px 24px 18px 24px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .findings-label {
+    font-size: 8.5px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #b94030;
+    margin-bottom: 8px;
+  }
+
+  /* ── BODY TEXT ── */
+  .body-text {
+    font-size: 10.5px;
+    line-height: 1.6;
+    color: #1a1a1a;
+    margin-bottom: 7px;
+  }
+
+  .body-text strong { font-weight: 700; }
+
+  .finding-item {
+    font-size: 10.5px;
+    line-height: 1.6;
+    color: #1a1a1a;
+    margin-bottom: 5px;
+    padding-left: 2px;
+  }
+  .finding-item strong { font-weight: 700; }
+
+  /* ── VISUALS ROW ── */
+  .visuals-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 10px;
+    margin-top: 10px;
+    flex: 1;
+  }
+
+  .viz-box {
+    border: 1px solid #d8d8d8;
+    border-radius: 3px;
+    padding: 8px 10px;
+    background: #fafafa;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .viz-label {
+    font-size: 8px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #b94030;
+    margin-bottom: 5px;
+  }
+
+  .viz-title {
+    font-size: 9.5px;
+    font-weight: 700;
+    color: #1a1a1a;
+    margin-bottom: 6px;
+    line-height: 1.3;
+  }
+
+  /* ── COMPARISON TABLE ── */
+  .cmp-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 8.5px;
+  }
+  .cmp-table th {
+    background: #b94030;
+    color: #fff;
+    font-weight: 700;
+    padding: 3px 5px;
+    text-align: left;
+    font-size: 8px;
+    letter-spacing: 0.04em;
+  }
+  .cmp-table td {
+    padding: 2.5px 5px;
+    border-bottom: 1px solid #e8e8e8;
+    color: #333;
+    vertical-align: top;
+    line-height: 1.4;
+  }
+  .cmp-table tr:nth-child(even) td { background: #f5f5f5; }
+  .cmp-table td:first-child { font-weight: 600; color: #111; font-size: 8px; }
+
+  /* ── CODE BLOCK ── */
+  .code-block {
+    background: #1e1e1e;
+    border-radius: 3px;
+    padding: 7px 8px;
+    font-family: 'Roboto Mono', monospace;
+    font-size: 8px;
+    line-height: 1.65;
+    color: #d4d4d4;
+    flex: 1;
+    overflow: hidden;
+  }
+  .kw  { color: #c586c0; }
+  .fn  { color: #dcdcaa; }
+  .st  { color: #ce9178; }
+  .co  { color: #6a9955; }
+  .nm  { color: #b5cea8; }
+  .op  { color: #9cdcfe; }
+
+  /* ── NOSQL TYPES ── */
+  .type-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4px;
+    flex: 1;
+  }
+  .type-item {
+    background: #fff;
+    border: 1px solid #e0e0e0;
+    border-left: 3px solid #b94030;
+    padding: 4px 6px;
+    border-radius: 2px;
+  }
+  .type-name { font-size: 8.5px; font-weight: 700; color: #1a1a1a; }
+  .type-eg   { font-size: 7.5px; color: #888; font-style: italic; }
+
+  /* ── VIZ FLOAT LABEL ── */
+  .fig-id {
+    font-size: 22px;
+    font-weight: 700;
+    color: #b94030;
+    opacity: 0.18;
+    text-align: right;
+    margin-top: auto;
+    line-height: 1;
+    padding-top: 4px;
+  }
+</style>
+</head>
+<body>
+<div class="slide">
+
+  <!-- ── LEFT SIDEBAR ── -->
+  <div class="sidebar">
+
+    <div class="sidebar-section">
+      <div class="label">Name</div>
+      <div class="sidebar-text"><strong>William Acosta Lora</strong></div>
+    </div>
+
+    <div class="sidebar-section">
+      <div class="label">Topic</div>
+      <div class="sidebar-text">
+        Non-Relational (NoSQL) Databases: How they differ from SQL and how to use MongoDB in R with <strong>mongolite</strong>
+      </div>
+    </div>
+
+    <div class="sidebar-section">
+      <div class="label">Motivation</div>
+      <div class="sidebar-text">
+        In class, we covered SQL databases in depth using <code style="font-size:10px;background:#ddd;padding:1px 3px;border-radius:2px">DBI</code> and <code style="font-size:10px;background:#ddd;padding:1px 3px;border-radius:2px">duckdb</code>. But SQL requires a fixed schema defined before inserting data — a constraint that breaks down for web-scraped data, API responses, and real-world data science workflows where fields vary per record. I wanted to understand what databases exist for these cases, how they differ structurally from SQL, and whether R has good tooling to work with them.
+      </div>
+    </div>
+
+    <div class="sidebar-section" style="margin-top:auto">
+      <div class="label">References</div>
+      <div class="ref-item">
+        Ooms, J. (2025). <em>mongolite</em> R package.<br>
+        <a href="https://jeroen.github.io/mongolite/">jeroen.github.io/mongolite</a>
+      </div>
+      <div class="ref-item">
+        MongoDB Inc. (2024). Data Analysis with MongoDB and R.<br>
+        <a href="https://www.mongodb.com/languages/mongodb-and-r-example">mongodb.com/languages/…</a>
+      </div>
+      <div class="ref-item">
+        Shu, Y. (2021). Tutorial on Using MongoDB with R. EDAV, Columbia.<br>
+        <a href="https://jtr13.github.io/cc21fall2/tutorial-on-using-mongodb-with-r.html">jtr13.github.io/cc21fall2</a>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ── MAIN CONTENT ── -->
+  <div class="main">
+
+    <div class="findings-label">Findings</div>
+
+    <p class="body-text">
+      The unclear concept I researched was <strong>non-relational (NoSQL) databases</strong> — what they are, how they differ from SQL, and how to use them from R with the <code style="font-size:9px;background:#eee;padding:1px 3px">mongolite</code> package. Unlike SQL, which enforces a fixed schema on every row, MongoDB stores data as flexible JSON documents where <strong>each record can have completely different fields</strong>. I demonstrated this using the <code style="font-size:9px;background:#eee;padding:1px 3px">ggplot2::diamonds</code> dataset inserted into a live local MongoDB instance via three operations: <code style="font-size:9px;background:#eee;padding:1px 3px">m$insert()</code> / <code style="font-size:9px;background:#eee;padding:1px 3px">m$find()</code>, <code style="font-size:9px;background:#eee;padding:1px 3px">m$aggregate()</code>, and <code style="font-size:9px;background:#eee;padding:1px 3px">m$update()</code> / <code style="font-size:9px;background:#eee;padding:1px 3px">m$remove()</code>.
+    </p>
+
+    <p class="finding-item">
+      <strong>1. insert + count + find (A.1):</strong> <code style="font-size:9px;background:#eee;padding:1px 3px">m$insert(diamonds)</code> loads all 53,940 rows into MongoDB in one call. <code style="font-size:9px;background:#eee;padding:1px 3px">m$find()</code> with a JSON query string filters records and returns a standard R data frame — no SQL required. The query <code style="font-size:9px;background:#eee;padding:1px 3px">{"cut":"Premium","price":{"$lt":1000}}</code> is equivalent to a SQL <code style="font-size:9px;background:#eee;padding:1px 3px">WHERE</code> clause, and adding <code style="font-size:9px;background:#eee;padding:1px 3px">sort + limit</code> mirrors <code style="font-size:9px;background:#eee;padding:1px 3px">ORDER BY ... LIMIT</code>.
+    </p>
+
+    <p class="finding-item">
+      <strong>2. aggregate pipeline (B.2):</strong> <code style="font-size:9px;background:#eee;padding:1px 3px">m$aggregate()</code> runs a computation pipeline <em>inside MongoDB itself</em> before returning results to R — equivalent to <code style="font-size:9px;background:#eee;padding:1px 3px">group_by(cut) |> summarize(avg_price = mean(price))</code> but executed on the server. This is a key advantage over SQL's <code style="font-size:9px;background:#eee;padding:1px 3px">GROUP BY</code>: large aggregations run where the data lives, reducing what gets sent back to R.
+    </p>
+
+    <p class="finding-item">
+      <strong>3. update + remove + requery (C.3):</strong> <code style="font-size:9px;background:#eee;padding:1px 3px">m$update()</code> uses <code style="font-size:9px;background:#eee;padding:1px 3px">$set</code> to add a new field (<code style="font-size:9px;background:#eee;padding:1px 3px">flagged: true</code>) to matching documents without touching other fields — something SQL's rigid schema makes cumbersome. <code style="font-size:9px;background:#eee;padding:1px 3px">m$remove()</code> deletes records matching a filter. A subsequent <code style="font-size:9px;background:#eee;padding:1px 3px">m$find()</code> shows the database state after both mutations, visualized as a boxplot.
+    </p>
+
+    <!-- VISUALS ROW -->
+    <div class="visuals-row">
+
+      <!-- A.1 — screenshot placeholder -->
+      <div class="viz-box" style="border: 1.5px dashed #b94030; background:#fff;">
+        <div class="viz-label">A.1 — m$insert() + m$count() + m$find()</div>
+        <div class="viz-title" style="color:#b94030">Console output: top 10 most expensive Premium diamonds</div>
+        <div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;padding:8px 0;">
+          <div style="font-size:22px;opacity:0.18">📋</div>
+          <div style="font-size:9px;color:#aaa;text-align:center;line-height:1.6;">
+            Paste R console screenshot here<br>
+            <span style="font-family:monospace;font-size:8px;color:#ccc">m$find(..., sort='{"price":-1}', limit=10)</span>
+          </div>
+        </div>
+        <div class="fig-id">A</div>
+      </div>
+
+      <!-- B.2 — screenshot placeholder -->
+      <div class="viz-box" style="border: 1.5px dashed #b94030; background:#fff;">
+        <div class="viz-label">B.2 — m$aggregate() pipeline</div>
+        <div class="viz-title" style="color:#b94030">Plot: avg price by cut, computed inside MongoDB</div>
+        <div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;padding:8px 0;">
+          <div style="font-size:22px;opacity:0.18">📊</div>
+          <div style="font-size:9px;color:#aaa;text-align:center;line-height:1.6;">
+            Paste Plots pane screenshot here<br>
+            <span style="font-family:monospace;font-size:8px;color:#ccc">m$aggregate('[{"$group":{"_id":"$cut","avg_price":{"$avg":"$price"}}}]')</span>
+          </div>
+        </div>
+        <div class="fig-id">B</div>
+      </div>
+
+      <!-- C.3 — screenshot placeholder -->
+      <div class="viz-box" style="border: 1.5px dashed #b94030; background:#fff;">
+        <div class="viz-label">C.3 — m$update() + m$remove() + requery</div>
+        <div class="viz-title" style="color:#b94030">Plot: flagged Fair-cut diamonds after live mutations</div>
+        <div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;padding:8px 0;">
+          <div style="font-size:22px;opacity:0.18">📊</div>
+          <div style="font-size:9px;color:#aaa;text-align:center;line-height:1.6;">
+            Paste Plots pane screenshot here<br>
+            <span style="font-family:monospace;font-size:8px;color:#ccc">m$update(...), m$remove(...), m$find('{"flagged":true}')</span>
+          </div>
+        </div>
+        <div class="fig-id">C</div>
+      </div>
+
+    </div>
+  </div>
+
+</div>
+</body>
+</html>
