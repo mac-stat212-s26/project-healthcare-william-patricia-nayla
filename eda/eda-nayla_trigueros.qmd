@@ -554,5 +554,3 @@ admission, the true disease burden may be understated by the coded
 severity score — meaning the observed disparities may actually
 underestimate the gap in illness progression before hospital arrival.
 :::
-
-Your exploratory data analysis of the team datasets go here.
