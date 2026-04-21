@@ -43,12 +43,14 @@ library(ggrepel)
 theme_set(theme_minimal(base_size = 13))
 ```
 
+
 ```{r}
 patients      <- read_csv("../data/raw/patient.csv")
 encounter     <- read_csv("../data/raw/encounter.csv")
 pulseoximeter <- read_csv("../data/raw/pulseoximeter.csv")
 bloodgas      <- read_csv("../data/raw/bloodgas.csv")
 ```
+
 
 ```{r}
 # Cleaned with William's support 
