@@ -1,0 +1,2221 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.9.37">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Nayla Trigueros Ortiz">
+<meta name="dcterms.date" content="2026-04-22">
+
+<title>Individual EDA: Looking at – Project Title</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../appx/proposal.html" rel="next">
+<link href="../eda/eda-patricia.html" rel="prev">
+<script src="../site_libs/cookie-consent/cookie-consent.js"></script>
+<link href="../site_libs/cookie-consent/cookie-consent.css" rel="stylesheet">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-7f8f88aac4f3542376d5c11b86a4c14d.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark-d0ae9245876894da5ac7e18953ecc5cc.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-7f8f88aac4f3542376d5c11b86a4c14d.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-aa768d0510026dbab67ce2f8e698749f.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-dark-ce494e159dae1eb1aeb2beb157b73888.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../site_libs/bootstrap/bootstrap-aa768d0510026dbab67ce2f8e698749f.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+<script type="text/javascript" charset="UTF-8">
+document.addEventListener('DOMContentLoaded', function () {
+cookieconsent.run({
+  "notice_banner_type":"simple",
+  "consent_type":"implied",
+  "palette":"light",
+  "language":"en",
+  "page_load_consent_levels":["strictly-necessary","functionality","tracking","targeting"],
+  "notice_banner_reject_button_hide":false,
+  "preferences_center_close_button_hide":false,
+  "website_name":""
+  ,
+"language":"en"
+  });
+});
+</script> 
+  
+<style>html{ scroll-behavior: smooth; }</style>
+
+
+<link rel="stylesheet" href="../style/custom.css">
+</head>
+
+<body class="nav-sidebar docked quarto-light"><script id="quarto-html-before-body" type="application/javascript">
+    const toggleBodyColorMode = (bsSheetEl) => {
+      const mode = bsSheetEl.getAttribute("data-mode");
+      const bodyEl = window.document.querySelector("body");
+      if (mode === "dark") {
+        bodyEl.classList.add("quarto-dark");
+        bodyEl.classList.remove("quarto-light");
+      } else {
+        bodyEl.classList.add("quarto-light");
+        bodyEl.classList.remove("quarto-dark");
+      }
+    }
+    const toggleBodyColorPrimary = () => {
+      const bsSheetEl = window.document.querySelector("link#quarto-bootstrap:not([rel=disabled-stylesheet])");
+      if (bsSheetEl) {
+        toggleBodyColorMode(bsSheetEl);
+      }
+    }
+    const setColorSchemeToggle = (alternate) => {
+      const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+      for (let i=0; i < toggles.length; i++) {
+        const toggle = toggles[i];
+        if (toggle) {
+          if (alternate) {
+            toggle.classList.add("alternate");
+          } else {
+            toggle.classList.remove("alternate");
+          }
+        }
+      }
+    };
+    const toggleColorMode = (alternate) => {
+      // Switch the stylesheets
+      const primaryStylesheets = window.document.querySelectorAll('link.quarto-color-scheme:not(.quarto-color-alternate)');
+      const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+      manageTransitions('#quarto-margin-sidebar .nav-link', false);
+      if (alternate) {
+        // note: dark is layered on light, we don't disable primary!
+        enableStylesheet(alternateStylesheets);
+        for (const sheetNode of alternateStylesheets) {
+          if (sheetNode.id === "quarto-bootstrap") {
+            toggleBodyColorMode(sheetNode);
+          }
+        }
+      } else {
+        disableStylesheet(alternateStylesheets);
+        enableStylesheet(primaryStylesheets)
+        toggleBodyColorPrimary();
+      }
+      manageTransitions('#quarto-margin-sidebar .nav-link', true);
+      // Switch the toggles
+      setColorSchemeToggle(alternate)
+      // Hack to workaround the fact that safari doesn't
+      // properly recolor the scrollbar when toggling (#1455)
+      if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+        manageTransitions("body", false);
+        window.scrollTo(0, 1);
+        setTimeout(() => {
+          window.scrollTo(0, 0);
+          manageTransitions("body", true);
+        }, 40);
+      }
+    }
+    const disableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        stylesheet.rel = 'disabled-stylesheet';
+      }
+    }
+    const enableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        if(stylesheet.rel !== 'stylesheet') { // for Chrome, which will still FOUC without this check
+          stylesheet.rel = 'stylesheet';
+        }
+      }
+    }
+    const manageTransitions = (selector, allowTransitions) => {
+      const els = window.document.querySelectorAll(selector);
+      for (let i=0; i < els.length; i++) {
+        const el = els[i];
+        if (allowTransitions) {
+          el.classList.remove('notransition');
+        } else {
+          el.classList.add('notransition');
+        }
+      }
+    }
+    const isFileUrl = () => {
+      return window.location.protocol === 'file:';
+    }
+    const hasAlternateSentinel = () => {
+      let styleSentinel = getColorSchemeSentinel();
+      if (styleSentinel !== null) {
+        return styleSentinel === "alternate";
+      } else {
+        return false;
+      }
+    }
+    const setStyleSentinel = (alternate) => {
+      const value = alternate ? "alternate" : "default";
+      if (!isFileUrl()) {
+        window.localStorage.setItem("quarto-color-scheme", value);
+      } else {
+        localAlternateSentinel = value;
+      }
+    }
+    const getColorSchemeSentinel = () => {
+      if (!isFileUrl()) {
+        const storageValue = window.localStorage.getItem("quarto-color-scheme");
+        return storageValue != null ? storageValue : localAlternateSentinel;
+      } else {
+        return localAlternateSentinel;
+      }
+    }
+    const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+      const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+      const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+      let newTheme = '';
+      if(authorPrefersDark) {
+        newTheme = isAlternate ? baseTheme : alternateTheme;
+      } else {
+        newTheme = isAlternate ? alternateTheme : baseTheme;
+      }
+      const changeGiscusTheme = () => {
+        // From: https://github.com/giscus/giscus/issues/336
+        const sendMessage = (message) => {
+          const iframe = document.querySelector('iframe.giscus-frame');
+          if (!iframe) return;
+          iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+        }
+        sendMessage({
+          setConfig: {
+            theme: newTheme
+          }
+        });
+      }
+      const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+      if (isGiscussLoaded) {
+        changeGiscusTheme();
+      }
+    };
+    const authorPrefersDark = false;
+    const darkModeDefault = authorPrefersDark;
+      document.querySelector('link#quarto-text-highlighting-styles.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+      document.querySelector('link#quarto-bootstrap.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+    let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+    // Dark / light mode switch
+    window.quartoToggleColorScheme = () => {
+      // Read the current dark / light value
+      let toAlternate = !hasAlternateSentinel();
+      toggleColorMode(toAlternate);
+      setStyleSentinel(toAlternate);
+      toggleGiscusIfUsed(toAlternate, darkModeDefault);
+      window.dispatchEvent(new Event('resize'));
+    };
+    // Switch to dark mode if need be
+    if (hasAlternateSentinel()) {
+      toggleColorMode(true);
+    } else {
+      toggleColorMode(false);
+    }
+  </script>
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../eda/eda-william_acosta.html">EDA</a></li><li class="breadcrumb-item"><a href="../eda/eda-nayla_trigueros.html"><span class="chapter-title">Individual EDA: Looking at</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header sidebar-header-stacked">
+      <a href="../index.html" class="sidebar-logo-link">
+      <img src="../assets/sidebar-logo.png" alt="Random negative space illustration" class="sidebar-logo light-content py-0 d-lg-inline d-none">
+      <img src="../assets/sidebar-logo.png" alt="Random negative space illustration" class="sidebar-logo dark-content py-0 d-lg-inline d-none">
+      </a>
+    <div class="sidebar-title mb-0 py-0">
+      <a href="../">Team Name</a> 
+        <div class="sidebar-tools-main">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+  <a href="" class="quarto-reader-toggle quarto-navigation-tool px-1" onclick="window.quartoToggleReader(); return false;" title="Toggle reader mode">
+  <div class="quarto-reader-toggle-btn">
+  <i class="bi"></i>
+  </div>
+</a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../index.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Report</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">EDA</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../eda/eda-william_acosta.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Individual EDA: Hidden Hypoxemia and Its Economic Consequences</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../eda/eda-patricia.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Individual EDA: Evaluating Demographic Disparities in Pulse Oximetry Accuracy</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../eda/eda-nayla_trigueros.html" class="sidebar-item-text sidebar-link active"><span class="chapter-title">Individual EDA: Looking at</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
+ <span class="menu-text">Appendices</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../appx/proposal.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Project Proposal</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../appx/case-study.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Case Study: <em>Twin Cities Police Use Physical Force at Rates Well Above National Average</em></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../wa/wa-member1.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Member 1 First Name &amp; Last Name Initial</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../wa/wa-member2.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Member 2 First Name &amp; Last Name Initial</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../wa/wa-member3.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Member 3 First Name &amp; Last Name Initial</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active" data-toc-expanded="99">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#overview" id="toc-overview" class="nav-link active" data-scroll-target="#overview">Overview</a></li>
+  <li><a href="#setup" id="toc-setup" class="nav-link" data-scroll-target="#setup">Setup</a></li>
+  <li><a href="#loadclean" id="toc-loadclean" class="nav-link" data-scroll-target="#loadclean">Load/Clean</a></li>
+  <li><a href="#structure-and-missingness" id="toc-structure-and-missingness" class="nav-link" data-scroll-target="#structure-and-missingness">Structure and Missingness</a></li>
+  <li><a href="#part-1-severity-of-illness" id="toc-part-1-severity-of-illness" class="nav-link" data-scroll-target="#part-1-severity-of-illness">Part 1 — Severity of Illness</a>
+  <ul class="collapse">
+  <li><a href="#overall-severity-distribution" id="toc-overall-severity-distribution" class="nav-link" data-scroll-target="#overall-severity-distribution">Overall Severity Distribution</a></li>
+  <li><a href="#risk-of-mortality-distribution" id="toc-risk-of-mortality-distribution" class="nav-link" data-scroll-target="#risk-of-mortality-distribution">Risk of Mortality Distribution</a></li>
+  </ul></li>
+  <li><a href="#part-2-clinical-outcomes" id="toc-part-2-clinical-outcomes" class="nav-link" data-scroll-target="#part-2-clinical-outcomes">Part 2 — Clinical Outcomes</a>
+  <ul class="collapse">
+  <li><a href="#in-hospital-mortality" id="toc-in-hospital-mortality" class="nav-link" data-scroll-target="#in-hospital-mortality">In-Hospital Mortality</a></li>
+  <li><a href="#length-of-stay-by-race" id="toc-length-of-stay-by-race" class="nav-link" data-scroll-target="#length-of-stay-by-race">Length of Stay by Race</a></li>
+  <li><a href="#length-of-stay-within-severity-level" id="toc-length-of-stay-within-severity-level" class="nav-link" data-scroll-target="#length-of-stay-within-severity-level">Length of Stay within Severity Level</a></li>
+  </ul></li>
+  <li><a href="#part-3-age-stratified-analysis" id="toc-part-3-age-stratified-analysis" class="nav-link" data-scroll-target="#part-3-age-stratified-analysis">Part 3 — Age-Stratified Analysis</a>
+  <ul class="collapse">
+  <li><a href="#severity-by-age-group-and-race" id="toc-severity-by-age-group-and-race" class="nav-link" data-scroll-target="#severity-by-age-group-and-race">Severity by Age Group and Race</a></li>
+  <li><a href="#mortality-rate-by-age-group-and-race" id="toc-mortality-rate-by-age-group-and-race" class="nav-link" data-scroll-target="#mortality-rate-by-age-group-and-race">Mortality Rate by Age Group and Race</a></li>
+  <li><a href="#major-or-extreme-by-age-group-and-race" id="toc-major-or-extreme-by-age-group-and-race" class="nav-link" data-scroll-target="#major-or-extreme-by-age-group-and-race">% Major or Extreme by Age Group and Race</a></li>
+  </ul></li>
+  <li><a href="#summary-of-key-findings" id="toc-summary-of-key-findings" class="nav-link" data-scroll-target="#summary-of-key-findings">Summary of Key Findings</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content column-body" id="quarto-document-content">
+
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../eda/eda-william_acosta.html">EDA</a></li><li class="breadcrumb-item"><a href="../eda/eda-nayla_trigueros.html"><span class="chapter-title">Individual EDA: Looking at</span></a></li></ol></nav>
+<div class="quarto-title">
+<div class="quarto-title-block"><div><h1 class="title"><span class="chapter-title">Individual EDA: Looking at</span></h1><button type="button" class="btn code-tools-button dropdown-toggle" id="quarto-code-tools-menu" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi"></i> Code</button><ul class="dropdown-menu dropdown-menu-end" aria-labelelledby="quarto-code-tools-menu"><li><a id="quarto-show-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Show All Code</a></li><li><a id="quarto-hide-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Hide All Code</a></li><li><hr class="dropdown-divider"></li><li><a id="quarto-view-source" class="dropdown-item" href="javascript:void(0)" role="button">View Source</a></li></ul></div></div>
+<p class="subtitle lead">NY SPARCS Inpatient Discharge Data</p>
+</div>
+
+
+
+<div class="quarto-title-meta column-body">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Nayla Trigueros Ortiz </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">April 22, 2026</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="overview" class="level2">
+<h2 class="anchored" data-anchor-id="overview">Overview</h2>
+<p>This EDA covers both project datasets and the bridge connecting them: - <strong>NY SPARCS Inpatient Discharge 2021</strong> — 103K respiratory discharge records from New York State hospitals with charges, costs, length of stay, insurance, and severity. Used to measure who pays more and arrives sicker.</p>
+<p>I will analyze clinical severity and outcomes across racial and ethnic groups using the <strong>NY SPARCS Inpatient Discharge 2021</strong> dataset, filtered to respiratory diagnoses. The central question is whether Black, White, and Hispanic/Latino patients arrive at New York State hospitals with different levels of illness severity, experience different lengths of stay, and face different in-hospital mortality rates — and whether those differences persist after controlling for age.</p>
+<p>The analysis is structured in three parts. First, I characterize the overall patient population and examine how severity of illness is distributed across racial groups. Second, I look at length of stay and in-hospital mortality as downstream clinical outcomes of that severity. Third, I stratify all findings by age group to remove the most important demographic confounder: White respiratory patients skew older, and older patients tend to arrive sicker regardless of race. And finally, ask whether the disparities hold within the same life stage.</p>
+</section>
+<section id="setup" class="level2">
+<h2 class="anchored" data-anchor-id="setup">Setup</h2>
+<div class="cell">
+<details class="code-fold">
+<summary>Show code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb1-2"><a href="#cb1-2"></a><span class="fu">library</span>(DataExplorer)</span>
+<span id="cb1-3"><a href="#cb1-3"></a><span class="fu">library</span>(scales)</span>
+<span id="cb1-4"><a href="#cb1-4"></a><span class="fu">library</span>(ggrepel)</span>
+<span id="cb1-5"><a href="#cb1-5"></a></span>
+<span id="cb1-6"><a href="#cb1-6"></a><span class="fu">theme_set</span>(<span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">13</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+</section>
+<section id="loadclean" class="level2">
+<h2 class="anchored" data-anchor-id="loadclean">Load/Clean</h2>
+<p>SPARCS is pulled directly from the NY Health Data API, filtered server-side to respiratory diagnoses (CCSR codes beginning with “RSP”). No file is saved to disk. Race and ethnicity are combined into a single <code>race_eth</code> variable using an ethnicity-first strategy: Hispanic patients are classified as Hispanic/Latino regardless of their reported race code, which is necessary because SPARCS frequently records Hispanic patients under multiple race categories.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Show code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a>sparcs_raw <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(</span>
+<span id="cb2-2"><a href="#cb2-2"></a>  <span class="st">"https://health.data.ny.gov/resource/tg3i-cinn.csv?$where=ccsr_diagnosis_code%20like%20%27RSP%25%27&amp;$limit=500000"</span>,</span>
+<span id="cb2-3"><a href="#cb2-3"></a>  <span class="at">show_col_types =</span> <span class="cn">FALSE</span></span>
+<span id="cb2-4"><a href="#cb2-4"></a>)</span>
+<span id="cb2-5"><a href="#cb2-5"></a></span>
+<span id="cb2-6"><a href="#cb2-6"></a>sparcs <span class="ot">&lt;-</span> sparcs_raw <span class="sc">|&gt;</span></span>
+<span id="cb2-7"><a href="#cb2-7"></a>  <span class="fu">filter</span>(<span class="fu">str_starts</span>(ccsr_diagnosis_code, <span class="st">"RSP"</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb2-8"><a href="#cb2-8"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb2-9"><a href="#cb2-9"></a>    <span class="at">length_of_stay =</span> <span class="fu">as.numeric</span>(length_of_stay),</span>
+<span id="cb2-10"><a href="#cb2-10"></a>    <span class="at">total_charges  =</span> <span class="fu">as.numeric</span>(total_charges),</span>
+<span id="cb2-11"><a href="#cb2-11"></a>    <span class="at">total_costs    =</span> <span class="fu">as.numeric</span>(total_costs),</span>
+<span id="cb2-12"><a href="#cb2-12"></a></span>
+<span id="cb2-13"><a href="#cb2-13"></a>    <span class="at">race_eth =</span> <span class="fu">case_when</span>(</span>
+<span id="cb2-14"><a href="#cb2-14"></a>      ethnicity <span class="sc">==</span> <span class="st">"Spanish/Hispanic"</span>                          <span class="sc">~</span> <span class="st">"Hispanic/Latino"</span>,</span>
+<span id="cb2-15"><a href="#cb2-15"></a>      race <span class="sc">==</span> <span class="st">"Black/African American"</span> <span class="sc">&amp;</span></span>
+<span id="cb2-16"><a href="#cb2-16"></a>        ethnicity <span class="sc">==</span> <span class="st">"Not Span/Hispanic"</span>                       <span class="sc">~</span> <span class="st">"Black"</span>,</span>
+<span id="cb2-17"><a href="#cb2-17"></a>      race <span class="sc">==</span> <span class="st">"White"</span> <span class="sc">&amp;</span></span>
+<span id="cb2-18"><a href="#cb2-18"></a>        ethnicity <span class="sc">==</span> <span class="st">"Not Span/Hispanic"</span>                       <span class="sc">~</span> <span class="st">"White"</span>,</span>
+<span id="cb2-19"><a href="#cb2-19"></a>      <span class="cn">TRUE</span>                                                     <span class="sc">~</span> <span class="cn">NA_character_</span></span>
+<span id="cb2-20"><a href="#cb2-20"></a>    ),</span>
+<span id="cb2-21"><a href="#cb2-21"></a></span>
+<span id="cb2-22"><a href="#cb2-22"></a>    <span class="at">age_group =</span> <span class="fu">case_when</span>(</span>
+<span id="cb2-23"><a href="#cb2-23"></a>      age_group <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"18 to 29"</span>, <span class="st">"30 to 49"</span>) <span class="sc">~</span> <span class="st">"18–49"</span>,</span>
+<span id="cb2-24"><a href="#cb2-24"></a>      age_group <span class="sc">==</span> <span class="st">"50 to 69"</span>                  <span class="sc">~</span> <span class="st">"50–69"</span>,</span>
+<span id="cb2-25"><a href="#cb2-25"></a>      age_group <span class="sc">==</span> <span class="st">"70 or Older"</span>               <span class="sc">~</span> <span class="st">"70+"</span>,</span>
+<span id="cb2-26"><a href="#cb2-26"></a>      <span class="cn">TRUE</span>                                     <span class="sc">~</span> <span class="cn">NA_character_</span></span>
+<span id="cb2-27"><a href="#cb2-27"></a>    ),</span>
+<span id="cb2-28"><a href="#cb2-28"></a></span>
+<span id="cb2-29"><a href="#cb2-29"></a>    <span class="at">insurance =</span> <span class="fu">case_when</span>(</span>
+<span id="cb2-30"><a href="#cb2-30"></a>      <span class="fu">str_detect</span>(payment_typology_1, <span class="fu">regex</span>(<span class="st">"medicaid"</span>, <span class="at">ignore_case =</span> <span class="cn">TRUE</span>)) <span class="sc">~</span> <span class="st">"Medicaid"</span>,</span>
+<span id="cb2-31"><a href="#cb2-31"></a>      <span class="fu">str_detect</span>(payment_typology_1, <span class="fu">regex</span>(<span class="st">"medicare"</span>, <span class="at">ignore_case =</span> <span class="cn">TRUE</span>)) <span class="sc">~</span> <span class="st">"Medicare"</span>,</span>
+<span id="cb2-32"><a href="#cb2-32"></a>      <span class="fu">str_detect</span>(payment_typology_1, <span class="fu">regex</span>(<span class="st">"private"</span>,  <span class="at">ignore_case =</span> <span class="cn">TRUE</span>)) <span class="sc">~</span> <span class="st">"Private"</span>,</span>
+<span id="cb2-33"><a href="#cb2-33"></a>      <span class="fu">str_detect</span>(payment_typology_1, <span class="fu">regex</span>(<span class="st">"self"</span>,     <span class="at">ignore_case =</span> <span class="cn">TRUE</span>)) <span class="sc">~</span> <span class="st">"Self-Pay"</span>,</span>
+<span id="cb2-34"><a href="#cb2-34"></a>      <span class="cn">TRUE</span>                                                                   <span class="sc">~</span> <span class="st">"Other"</span></span>
+<span id="cb2-35"><a href="#cb2-35"></a>    ),</span>
+<span id="cb2-36"><a href="#cb2-36"></a></span>
+<span id="cb2-37"><a href="#cb2-37"></a>    <span class="at">severity =</span> <span class="fu">factor</span>(</span>
+<span id="cb2-38"><a href="#cb2-38"></a>      apr_severity_of_illness,</span>
+<span id="cb2-39"><a href="#cb2-39"></a>      <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"Minor"</span>, <span class="st">"Moderate"</span>, <span class="st">"Major"</span>, <span class="st">"Extreme"</span>)</span>
+<span id="cb2-40"><a href="#cb2-40"></a>    ),</span>
+<span id="cb2-41"><a href="#cb2-41"></a></span>
+<span id="cb2-42"><a href="#cb2-42"></a>    <span class="at">severity_code =</span> apr_severity_of_illness_code,</span>
+<span id="cb2-43"><a href="#cb2-43"></a></span>
+<span id="cb2-44"><a href="#cb2-44"></a>    <span class="at">risk_of_mortality =</span> <span class="fu">factor</span>(</span>
+<span id="cb2-45"><a href="#cb2-45"></a>      apr_risk_of_mortality,</span>
+<span id="cb2-46"><a href="#cb2-46"></a>      <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"Minor"</span>, <span class="st">"Moderate"</span>, <span class="st">"Major"</span>, <span class="st">"Extreme"</span>)</span>
+<span id="cb2-47"><a href="#cb2-47"></a>    ),</span>
+<span id="cb2-48"><a href="#cb2-48"></a></span>
+<span id="cb2-49"><a href="#cb2-49"></a>    <span class="at">died =</span> <span class="fu">str_detect</span>(</span>
+<span id="cb2-50"><a href="#cb2-50"></a>      patient_disposition,</span>
+<span id="cb2-51"><a href="#cb2-51"></a>      <span class="fu">regex</span>(<span class="st">"expired|died"</span>, <span class="at">ignore_case =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb2-52"><a href="#cb2-52"></a>    )</span>
+<span id="cb2-53"><a href="#cb2-53"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb2-54"><a href="#cb2-54"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(race_eth))</span>
+<span id="cb2-55"><a href="#cb2-55"></a></span>
+<span id="cb2-56"><a href="#cb2-56"></a><span class="fu">glimpse</span>(sparcs)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>Rows: 87,175
+Columns: 39
+$ hospital_service_area          &lt;chr&gt; "New York City", "New York City", "New …
+$ hospital_county                &lt;chr&gt; "Bronx", "Queens", "Manhattan", "Bronx"…
+$ operating_certificate_number   &lt;chr&gt; "7000002", "7003000", "7002024", "70000…
+$ permanent_facility_id          &lt;chr&gt; "001165", "001626", "001456", "001169",…
+$ facility_name                  &lt;chr&gt; "Jacobi Medical Center", "Elmhurst Hosp…
+$ age_group                      &lt;chr&gt; "18–49", "18–49", "18–49", "18–49", "18…
+$ zip_code_3_digits              &lt;chr&gt; "104", "113", "100", "104", "109", "115…
+$ gender                         &lt;chr&gt; "F", "M", "M", "M", "F", "M", "F", "F",…
+$ race                           &lt;chr&gt; "Other Race", "Other Race", "Other Race…
+$ ethnicity                      &lt;chr&gt; "Spanish/Hispanic", "Spanish/Hispanic",…
+$ length_of_stay                 &lt;dbl&gt; 2, 3, 1, 2, 2, 1, 12, 2, 2, 3, 2, 18, 3…
+$ type_of_admission              &lt;chr&gt; "Emergency", "Emergency", "Elective", "…
+$ patient_disposition            &lt;chr&gt; "Home or Self Care", "Home or Self Care…
+$ discharge_year                 &lt;dbl&gt; 2021, 2021, 2021, 2021, 2021, 2021, 202…
+$ ccsr_diagnosis_code            &lt;chr&gt; "RSP001", "RSP001", "RSP001", "RSP001",…
+$ ccsr_diagnosis_description     &lt;chr&gt; "Sinusitis", "Sinusitis", "Sinusitis", …
+$ ccsr_procedure_code            &lt;chr&gt; NA, NA, "MST018", "ENT008", NA, "ENT017…
+$ ccsr_procedure_description     &lt;chr&gt; NA, NA, "BONE EXCISION", "NASAL AND SIN…
+$ apr_drg_code                   &lt;chr&gt; "113", "113", "089", "098", "113", "098…
+$ apr_drg_description            &lt;chr&gt; "INFECTIONS OF UPPER RESPIRATORY TRACT"…
+$ apr_mdc_code                   &lt;chr&gt; "03", "03", "03", "03", "03", "03", "03…
+$ apr_mdc_description            &lt;chr&gt; "DISEASES AND DISORDERS OF THE EAR, NOS…
+$ apr_severity_of_illness_code   &lt;dbl&gt; 2, 2, 2, 1, 1, 1, 3, 2, 2, 2, 2, 2, 2, …
+$ apr_severity_of_illness        &lt;chr&gt; "Moderate", "Moderate", "Moderate", "Mi…
+$ apr_risk_of_mortality          &lt;chr&gt; "Minor", "Minor", "Minor", "Minor", "Mi…
+$ apr_medical_surgical           &lt;chr&gt; "Medical", "Medical", "Surgical", "Surg…
+$ payment_typology_1             &lt;chr&gt; "Medicaid", "Medicaid", "Medicaid", "Pr…
+$ payment_typology_2             &lt;chr&gt; NA, NA, "Medicaid", NA, NA, "Self-Pay",…
+$ payment_typology_3             &lt;chr&gt; NA, NA, "Self-Pay", NA, NA, NA, "Self-P…
+$ birth_weight                   &lt;chr&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA,…
+$ emergency_department_indicator &lt;chr&gt; "Y", "Y", "N", "N", "Y", "N", "N", "N",…
+$ total_charges                  &lt;dbl&gt; 22932.90, 24601.68, 55654.06, 91238.45,…
+$ total_costs                    &lt;dbl&gt; 13611.55, 11434.76, 17104.89, 17290.36,…
+$ race_eth                       &lt;chr&gt; "Hispanic/Latino", "Hispanic/Latino", "…
+$ insurance                      &lt;chr&gt; "Medicaid", "Medicaid", "Medicaid", "Pr…
+$ severity                       &lt;fct&gt; Moderate, Moderate, Moderate, Minor, Mi…
+$ severity_code                  &lt;dbl&gt; 2, 2, 2, 1, 1, 1, 3, 2, 2, 2, 2, 2, 2, …
+$ risk_of_mortality              &lt;fct&gt; Minor, Minor, Minor, Minor, Minor, Mino…
+$ died                           &lt;lgl&gt; FALSE, FALSE, FALSE, FALSE, FALSE, FALS…</code></pre>
+</div>
+</div>
+<p>After filtering to respiratory diagnoses and the three focal racial groups, the dataset contains <strong>87,175 discharge records</strong> from New York State hospitals in 2021. Each row represents one inpatient discharge. The key clinical variables are <code>severity</code> (APR-DRG severity of illness, a four-level ordinal from Minor to Extreme), <code>risk_of_mortality</code> (the corresponding APR-DRG mortality risk score), <code>length_of_stay</code>, and <code>died</code> (whether the patient died during the admission).</p>
+</section>
+<section id="structure-and-missingness" class="level2">
+<h2 class="anchored" data-anchor-id="structure-and-missingness">Structure and Missingness</h2>
+<div class="cell">
+<details class="code-fold">
+<summary>Show code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a>sparcs <span class="sc">|&gt;</span></span>
+<span id="cb4-2"><a href="#cb4-2"></a>  <span class="fu">select</span>(race_eth, age_group, severity, risk_of_mortality,</span>
+<span id="cb4-3"><a href="#cb4-3"></a>         length_of_stay, total_charges, died) <span class="sc">|&gt;</span></span>
+<span id="cb4-4"><a href="#cb4-4"></a>  <span class="fu">plot_missing</span>(</span>
+<span id="cb4-5"><a href="#cb4-5"></a>    <span class="at">title   =</span> <span class="st">"Missingness in key SPARCS clinical variables"</span>,</span>
+<span id="cb4-6"><a href="#cb4-6"></a>    <span class="at">ggtheme =</span> <span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">12</span>)</span>
+<span id="cb4-7"><a href="#cb4-7"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="eda-nayla_trigueros_files/figure-html/sparcs-visdat-1.png" class="img-fluid figure-img" alt="Missingness bar chart for key SPARCS clinical variables" width="768"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Missingness is low across all key variables. <code>severity</code> and <code>risk_of_mortality</code> are coded at discharge from the patient record and are nearly complete. <code>length_of_stay</code> and <code>died</code> are administrative fields populated for every inpatient record. The analysis proceeds on the full dataset without imputation.</p>
+</section>
+<section id="part-1-severity-of-illness" class="level2">
+<h2 class="anchored" data-anchor-id="part-1-severity-of-illness">Part 1 — Severity of Illness</h2>
+<section id="overall-severity-distribution" class="level3">
+<h3 class="anchored" data-anchor-id="overall-severity-distribution">Overall Severity Distribution</h3>
+<div class="cell">
+<details class="code-fold">
+<summary>Show code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a>sparcs <span class="sc">|&gt;</span></span>
+<span id="cb5-2"><a href="#cb5-2"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(severity)) <span class="sc">|&gt;</span></span>
+<span id="cb5-3"><a href="#cb5-3"></a>  <span class="fu">count</span>(race_eth, severity) <span class="sc">|&gt;</span></span>
+<span id="cb5-4"><a href="#cb5-4"></a>  <span class="fu">group_by</span>(race_eth) <span class="sc">|&gt;</span></span>
+<span id="cb5-5"><a href="#cb5-5"></a>  <span class="fu">mutate</span>(<span class="at">pct =</span> n <span class="sc">/</span> <span class="fu">sum</span>(n)) <span class="sc">|&gt;</span></span>
+<span id="cb5-6"><a href="#cb5-6"></a>  <span class="fu">ungroup</span>() <span class="sc">|&gt;</span></span>
+<span id="cb5-7"><a href="#cb5-7"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> race_eth, <span class="at">y =</span> pct, <span class="at">fill =</span> severity)) <span class="sc">+</span></span>
+<span id="cb5-8"><a href="#cb5-8"></a>  <span class="fu">geom_col</span>(<span class="at">position =</span> <span class="st">"fill"</span>, <span class="at">alpha =</span> <span class="fl">0.85</span>) <span class="sc">+</span></span>
+<span id="cb5-9"><a href="#cb5-9"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">labels =</span> <span class="fu">percent_format</span>()) <span class="sc">+</span></span>
+<span id="cb5-10"><a href="#cb5-10"></a>  <span class="fu">scale_fill_brewer</span>(<span class="at">palette =</span> <span class="st">"YlOrRd"</span>, <span class="at">direction =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb5-11"><a href="#cb5-11"></a>  <span class="fu">labs</span>(</span>
+<span id="cb5-12"><a href="#cb5-12"></a>    <span class="at">title    =</span> <span class="st">"Severity of illness distribution by race / ethnicity"</span>,</span>
+<span id="cb5-13"><a href="#cb5-13"></a>    <span class="at">subtitle =</span> <span class="st">"Darker = more severe; share of Major and Extreme cases differs by group"</span>,</span>
+<span id="cb5-14"><a href="#cb5-14"></a>    <span class="at">x =</span> <span class="cn">NULL</span>, <span class="at">y =</span> <span class="st">"Proportion of discharges"</span>, <span class="at">fill =</span> <span class="st">"Severity"</span></span>
+<span id="cb5-15"><a href="#cb5-15"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="eda-nayla_trigueros_files/figure-html/severity-dist-stacked-1.png" class="img-fluid figure-img" alt="Proportional stacked bar chart of severity by race" width="768"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell">
+<details class="code-fold">
+<summary>Show code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a>sparcs <span class="sc">|&gt;</span></span>
+<span id="cb6-2"><a href="#cb6-2"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(severity_code)) <span class="sc">|&gt;</span></span>
+<span id="cb6-3"><a href="#cb6-3"></a>  <span class="fu">group_by</span>(race_eth) <span class="sc">|&gt;</span></span>
+<span id="cb6-4"><a href="#cb6-4"></a>  <span class="fu">summarise</span>(</span>
+<span id="cb6-5"><a href="#cb6-5"></a>    <span class="at">mean_sev =</span> <span class="fu">mean</span>(severity_code, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb6-6"><a href="#cb6-6"></a>    <span class="at">se       =</span> <span class="fu">sd</span>(severity_code,  <span class="at">na.rm =</span> <span class="cn">TRUE</span>) <span class="sc">/</span> <span class="fu">sqrt</span>(<span class="fu">n</span>()),</span>
+<span id="cb6-7"><a href="#cb6-7"></a>    <span class="at">n        =</span> <span class="fu">n</span>()</span>
+<span id="cb6-8"><a href="#cb6-8"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb6-9"><a href="#cb6-9"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb6-10"><a href="#cb6-10"></a>    <span class="at">lo       =</span> mean_sev <span class="sc">-</span> <span class="fl">1.96</span> <span class="sc">*</span> se,</span>
+<span id="cb6-11"><a href="#cb6-11"></a>    <span class="at">hi       =</span> mean_sev <span class="sc">+</span> <span class="fl">1.96</span> <span class="sc">*</span> se,</span>
+<span id="cb6-12"><a href="#cb6-12"></a>    <span class="at">race_eth =</span> <span class="fu">fct_reorder</span>(race_eth, mean_sev)</span>
+<span id="cb6-13"><a href="#cb6-13"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb6-14"><a href="#cb6-14"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> race_eth, <span class="at">y =</span> mean_sev, <span class="at">fill =</span> race_eth)) <span class="sc">+</span></span>
+<span id="cb6-15"><a href="#cb6-15"></a>  <span class="fu">geom_col</span>(<span class="at">alpha =</span> <span class="fl">0.85</span>, <span class="at">show.legend =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
+<span id="cb6-16"><a href="#cb6-16"></a>  <span class="fu">geom_errorbar</span>(<span class="fu">aes</span>(<span class="at">ymin =</span> lo, <span class="at">ymax =</span> hi), <span class="at">width =</span> <span class="fl">0.2</span>, <span class="at">linewidth =</span> <span class="fl">0.8</span>) <span class="sc">+</span></span>
+<span id="cb6-17"><a href="#cb6-17"></a>  <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">label =</span> <span class="fu">round</span>(mean_sev, <span class="dv">2</span>)), <span class="at">vjust =</span> <span class="sc">-</span><span class="fl">0.9</span>, <span class="at">size =</span> <span class="fl">4.2</span>) <span class="sc">+</span></span>
+<span id="cb6-18"><a href="#cb6-18"></a>  <span class="fu">scale_fill_brewer</span>(<span class="at">palette =</span> <span class="st">"Set1"</span>) <span class="sc">+</span></span>
+<span id="cb6-19"><a href="#cb6-19"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">expand =</span> <span class="fu">expansion</span>(<span class="at">mult =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="fl">0.15</span>))) <span class="sc">+</span></span>
+<span id="cb6-20"><a href="#cb6-20"></a>  <span class="fu">labs</span>(</span>
+<span id="cb6-21"><a href="#cb6-21"></a>    <span class="at">title    =</span> <span class="st">"Mean APR severity score by race / ethnicity"</span>,</span>
+<span id="cb6-22"><a href="#cb6-22"></a>    <span class="at">subtitle =</span> <span class="st">"Scale: 1 = Minor, 2 = Moderate, 3 = Major, 4 = Extreme; error bars = 95% CI"</span>,</span>
+<span id="cb6-23"><a href="#cb6-23"></a>    <span class="at">x =</span> <span class="cn">NULL</span>, <span class="at">y =</span> <span class="st">"Mean severity score"</span></span>
+<span id="cb6-24"><a href="#cb6-24"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="eda-nayla_trigueros_files/figure-html/severity-mean-bar-1.png" class="img-fluid figure-img" alt="Bar chart of mean APR severity score with 95% CI error bars by race" width="768"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>The severity distribution and mean score plots tell a consistent story: Black and Hispanic/Latino patients arrive at the hospital with higher recorded illness severity than White patients on average. The stacked bars show this as a shift in the composition of discharges — a larger share of Major and Extreme cases among Black patients, a larger share of Minor and Moderate cases among White patients. The mean score bar chart quantifies the gap, and the confidence intervals — tight given the large sample size — confirm it is not a sampling artifact.</p>
+<p>The key caveat is age. The severity score is assigned by administrative coders at discharge and reflects the full clinical picture at that point, but White patients skewing older means they have more years of accumulated comorbidities. The age-stratified analysis below tests whether the severity gap is an artifact of that demographic difference or whether it holds within the same age band.</p>
+</section>
+<section id="risk-of-mortality-distribution" class="level3">
+<h3 class="anchored" data-anchor-id="risk-of-mortality-distribution">Risk of Mortality Distribution</h3>
+<div class="cell">
+<details class="code-fold">
+<summary>Show code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a>sparcs <span class="sc">|&gt;</span></span>
+<span id="cb7-2"><a href="#cb7-2"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(risk_of_mortality)) <span class="sc">|&gt;</span></span>
+<span id="cb7-3"><a href="#cb7-3"></a>  <span class="fu">count</span>(race_eth, risk_of_mortality) <span class="sc">|&gt;</span></span>
+<span id="cb7-4"><a href="#cb7-4"></a>  <span class="fu">group_by</span>(race_eth) <span class="sc">|&gt;</span></span>
+<span id="cb7-5"><a href="#cb7-5"></a>  <span class="fu">mutate</span>(<span class="at">pct =</span> n <span class="sc">/</span> <span class="fu">sum</span>(n)) <span class="sc">|&gt;</span></span>
+<span id="cb7-6"><a href="#cb7-6"></a>  <span class="fu">ungroup</span>() <span class="sc">|&gt;</span></span>
+<span id="cb7-7"><a href="#cb7-7"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> race_eth, <span class="at">y =</span> pct, <span class="at">fill =</span> risk_of_mortality)) <span class="sc">+</span></span>
+<span id="cb7-8"><a href="#cb7-8"></a>  <span class="fu">geom_col</span>(<span class="at">position =</span> <span class="st">"fill"</span>, <span class="at">alpha =</span> <span class="fl">0.85</span>) <span class="sc">+</span></span>
+<span id="cb7-9"><a href="#cb7-9"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">labels =</span> <span class="fu">percent_format</span>()) <span class="sc">+</span></span>
+<span id="cb7-10"><a href="#cb7-10"></a>  <span class="fu">scale_fill_brewer</span>(<span class="at">palette =</span> <span class="st">"OrRd"</span>, <span class="at">direction =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb7-11"><a href="#cb7-11"></a>  <span class="fu">labs</span>(</span>
+<span id="cb7-12"><a href="#cb7-12"></a>    <span class="at">title    =</span> <span class="st">"APR risk of mortality distribution by race / ethnicity"</span>,</span>
+<span id="cb7-13"><a href="#cb7-13"></a>    <span class="at">subtitle =</span> <span class="st">"Share of Major and Extreme mortality-risk cases differs across groups"</span>,</span>
+<span id="cb7-14"><a href="#cb7-14"></a>    <span class="at">x =</span> <span class="cn">NULL</span>, <span class="at">y =</span> <span class="st">"Proportion of discharges"</span>, <span class="at">fill =</span> <span class="st">"Risk of Mortality"</span></span>
+<span id="cb7-15"><a href="#cb7-15"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="eda-nayla_trigueros_files/figure-html/risk-mortality-stacked-1.png" class="img-fluid figure-img" alt="Proportional stacked bar chart of APR risk of mortality by race" width="768"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>The APR risk of mortality score is a related but distinct variable from severity — it is calibrated specifically to predict in-hospital death rather than to summarize overall illness burden. The distribution mirrors the severity pattern: Black patients show a higher share of Major and Extreme mortality risk, White patients show a higher share of Minor risk. Hispanic/Latino patients again fall between the two. Because risk of mortality is a predictive score derived from diagnosis and procedure codes, a higher score means the clinical record at discharge codes as more life-threatening — not simply that the patient arrived older or sicker due to age.</p>
+</section>
+</section>
+<section id="part-2-clinical-outcomes" class="level2">
+<h2 class="anchored" data-anchor-id="part-2-clinical-outcomes">Part 2 — Clinical Outcomes</h2>
+<section id="in-hospital-mortality" class="level3">
+<h3 class="anchored" data-anchor-id="in-hospital-mortality">In-Hospital Mortality</h3>
+<div class="cell">
+<details class="code-fold">
+<summary>Show code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a>sparcs <span class="sc">|&gt;</span></span>
+<span id="cb8-2"><a href="#cb8-2"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(died)) <span class="sc">|&gt;</span></span>
+<span id="cb8-3"><a href="#cb8-3"></a>  <span class="fu">group_by</span>(race_eth) <span class="sc">|&gt;</span></span>
+<span id="cb8-4"><a href="#cb8-4"></a>  <span class="fu">summarise</span>(</span>
+<span id="cb8-5"><a href="#cb8-5"></a>    <span class="at">n              =</span> <span class="fu">n</span>(),</span>
+<span id="cb8-6"><a href="#cb8-6"></a>    <span class="at">n_died         =</span> <span class="fu">sum</span>(died, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb8-7"><a href="#cb8-7"></a>    <span class="at">mortality_rate =</span> n_died <span class="sc">/</span> n</span>
+<span id="cb8-8"><a href="#cb8-8"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb8-9"><a href="#cb8-9"></a>  <span class="fu">mutate</span>(<span class="at">race_eth =</span> <span class="fu">fct_reorder</span>(race_eth, mortality_rate)) <span class="sc">|&gt;</span></span>
+<span id="cb8-10"><a href="#cb8-10"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> race_eth, <span class="at">y =</span> mortality_rate, <span class="at">fill =</span> race_eth)) <span class="sc">+</span></span>
+<span id="cb8-11"><a href="#cb8-11"></a>  <span class="fu">geom_col</span>(<span class="at">alpha =</span> <span class="fl">0.85</span>, <span class="at">show.legend =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
+<span id="cb8-12"><a href="#cb8-12"></a>  <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">label =</span> <span class="fu">percent</span>(mortality_rate, <span class="at">accuracy =</span> <span class="fl">0.1</span>)),</span>
+<span id="cb8-13"><a href="#cb8-13"></a>            <span class="at">vjust =</span> <span class="sc">-</span><span class="fl">0.4</span>, <span class="at">size =</span> <span class="fl">4.2</span>) <span class="sc">+</span></span>
+<span id="cb8-14"><a href="#cb8-14"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">labels =</span> <span class="fu">percent_format</span>(),</span>
+<span id="cb8-15"><a href="#cb8-15"></a>                     <span class="at">expand  =</span> <span class="fu">expansion</span>(<span class="at">mult =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="fl">0.15</span>))) <span class="sc">+</span></span>
+<span id="cb8-16"><a href="#cb8-16"></a>  <span class="fu">scale_fill_brewer</span>(<span class="at">palette =</span> <span class="st">"Set1"</span>) <span class="sc">+</span></span>
+<span id="cb8-17"><a href="#cb8-17"></a>  <span class="fu">labs</span>(</span>
+<span id="cb8-18"><a href="#cb8-18"></a>    <span class="at">title    =</span> <span class="st">"In-hospital mortality rate by race / ethnicity"</span>,</span>
+<span id="cb8-19"><a href="#cb8-19"></a>    <span class="at">subtitle =</span> <span class="st">"Percentage of respiratory discharges that resulted in death"</span>,</span>
+<span id="cb8-20"><a href="#cb8-20"></a>    <span class="at">x =</span> <span class="cn">NULL</span>, <span class="at">y =</span> <span class="st">"Mortality rate"</span></span>
+<span id="cb8-21"><a href="#cb8-21"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="eda-nayla_trigueros_files/figure-html/mortality-bar-1.png" class="img-fluid figure-img" alt="Bar chart of in-hospital mortality rate by race" width="768"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>The raw in-hospital mortality rate follows the same racial ordering as severity: the group with the highest mean severity score has the highest mortality rate, and the group with the lowest has the lowest. This ordering is consistent with the severity findings but does not on its own establish that race is the driver — age and severity are mediating variables that must be controlled before any causal claim can be made. The next plot addresses this directly.</p>
+</section>
+<section id="length-of-stay-by-race" class="level3">
+<h3 class="anchored" data-anchor-id="length-of-stay-by-race">Length of Stay by Race</h3>
+<div class="cell">
+<details class="code-fold">
+<summary>Show code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a>sparcs <span class="sc">|&gt;</span></span>
+<span id="cb9-2"><a href="#cb9-2"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(length_of_stay)) <span class="sc">|&gt;</span></span>
+<span id="cb9-3"><a href="#cb9-3"></a>  <span class="fu">mutate</span>(<span class="at">race_eth =</span> <span class="fu">fct_reorder</span>(race_eth, length_of_stay, median)) <span class="sc">|&gt;</span></span>
+<span id="cb9-4"><a href="#cb9-4"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> race_eth, <span class="at">y =</span> length_of_stay, <span class="at">fill =</span> race_eth)) <span class="sc">+</span></span>
+<span id="cb9-5"><a href="#cb9-5"></a>  <span class="fu">geom_boxplot</span>(<span class="at">outlier.alpha =</span> <span class="fl">0.04</span>, <span class="at">alpha =</span> <span class="fl">0.8</span>) <span class="sc">+</span></span>
+<span id="cb9-6"><a href="#cb9-6"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">30</span>)) <span class="sc">+</span></span>
+<span id="cb9-7"><a href="#cb9-7"></a>  <span class="fu">scale_fill_brewer</span>(<span class="at">palette =</span> <span class="st">"Set1"</span>) <span class="sc">+</span></span>
+<span id="cb9-8"><a href="#cb9-8"></a>  <span class="fu">labs</span>(</span>
+<span id="cb9-9"><a href="#cb9-9"></a>    <span class="at">title    =</span> <span class="st">"Length of stay by race / ethnicity (capped at 30 days)"</span>,</span>
+<span id="cb9-10"><a href="#cb9-10"></a>    <span class="at">subtitle =</span> <span class="st">"Boxes show median and interquartile range; outliers beyond 30 days suppressed"</span>,</span>
+<span id="cb9-11"><a href="#cb9-11"></a>    <span class="at">x =</span> <span class="cn">NULL</span>, <span class="at">y =</span> <span class="st">"Days"</span></span>
+<span id="cb9-12"><a href="#cb9-12"></a>  ) <span class="sc">+</span></span>
+<span id="cb9-13"><a href="#cb9-13"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"none"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="eda-nayla_trigueros_files/figure-html/los-boxplot-1.png" class="img-fluid figure-img" alt="Boxplot of length of stay by race, capped at 30 days" width="768"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="length-of-stay-within-severity-level" class="level3">
+<h3 class="anchored" data-anchor-id="length-of-stay-within-severity-level">Length of Stay within Severity Level</h3>
+<div class="cell">
+<details class="code-fold">
+<summary>Show code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a>sparcs <span class="sc">|&gt;</span></span>
+<span id="cb10-2"><a href="#cb10-2"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(length_of_stay), <span class="sc">!</span><span class="fu">is.na</span>(severity)) <span class="sc">|&gt;</span></span>
+<span id="cb10-3"><a href="#cb10-3"></a>  <span class="fu">group_by</span>(race_eth, severity) <span class="sc">|&gt;</span></span>
+<span id="cb10-4"><a href="#cb10-4"></a>  <span class="fu">summarise</span>(<span class="at">median_los =</span> <span class="fu">median</span>(length_of_stay, <span class="at">na.rm =</span> <span class="cn">TRUE</span>), <span class="at">.groups =</span> <span class="st">"drop"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb10-5"><a href="#cb10-5"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> severity, <span class="at">y =</span> median_los, <span class="at">color =</span> race_eth, <span class="at">group =</span> race_eth)) <span class="sc">+</span></span>
+<span id="cb10-6"><a href="#cb10-6"></a>  <span class="fu">geom_line</span>(<span class="at">linewidth =</span> <span class="fl">1.1</span>) <span class="sc">+</span></span>
+<span id="cb10-7"><a href="#cb10-7"></a>  <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">3</span>) <span class="sc">+</span></span>
+<span id="cb10-8"><a href="#cb10-8"></a>  <span class="fu">geom_text_repel</span>(<span class="fu">aes</span>(<span class="at">label =</span> <span class="fu">round</span>(median_los, <span class="dv">1</span>)), <span class="at">size =</span> <span class="fl">3.2</span>, <span class="at">show.legend =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
+<span id="cb10-9"><a href="#cb10-9"></a>  <span class="fu">scale_color_brewer</span>(<span class="at">palette =</span> <span class="st">"Set1"</span>) <span class="sc">+</span></span>
+<span id="cb10-10"><a href="#cb10-10"></a>  <span class="fu">labs</span>(</span>
+<span id="cb10-11"><a href="#cb10-11"></a>    <span class="at">title    =</span> <span class="st">"Median length of stay by severity level and race / ethnicity"</span>,</span>
+<span id="cb10-12"><a href="#cb10-12"></a>    <span class="at">subtitle =</span> <span class="st">"Within-severity comparison removes illness burden as a confounder"</span>,</span>
+<span id="cb10-13"><a href="#cb10-13"></a>    <span class="at">x =</span> <span class="st">"Severity of illness"</span>, <span class="at">y =</span> <span class="st">"Median LOS (days)"</span>, <span class="at">color =</span> <span class="st">"Race / Ethnicity"</span></span>
+<span id="cb10-14"><a href="#cb10-14"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="eda-nayla_trigueros_files/figure-html/los-severity-line-1.png" class="img-fluid figure-img" alt="Line plot of median length of stay by severity and race" width="768"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>The within-severity comparison is the strongest single plot in this section. By holding severity constant, it removes the most obvious alternative explanation for the LOS gap — that Black and Hispanic/Latino patients simply arrive sicker. Within every severity category, Black and Hispanic/Latino patients spend as many or more days in the hospital as White patients at the same illness level. The gap is not driven by severity alone. This raises the question of what else might explain it: differences in treatment course, delays in response to treatment, comorbidity burden not fully captured by the APR severity score, or upstream clinical failures that caused the condition to progress further before the patient sought care. ### Severity Heatmap by Diagnosis and Race</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Show code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a>top_dx <span class="ot">&lt;-</span> sparcs <span class="sc">|&gt;</span></span>
+<span id="cb11-2"><a href="#cb11-2"></a>  <span class="fu">count</span>(ccsr_diagnosis_description) <span class="sc">|&gt;</span></span>
+<span id="cb11-3"><a href="#cb11-3"></a>  <span class="fu">slice_max</span>(n, <span class="at">n =</span> <span class="dv">10</span>) <span class="sc">|&gt;</span></span>
+<span id="cb11-4"><a href="#cb11-4"></a>  <span class="fu">pull</span>(ccsr_diagnosis_description)</span>
+<span id="cb11-5"><a href="#cb11-5"></a></span>
+<span id="cb11-6"><a href="#cb11-6"></a>sparcs <span class="sc">|&gt;</span></span>
+<span id="cb11-7"><a href="#cb11-7"></a>  <span class="fu">filter</span>(ccsr_diagnosis_description <span class="sc">%in%</span> top_dx, <span class="sc">!</span><span class="fu">is.na</span>(severity_code)) <span class="sc">|&gt;</span></span>
+<span id="cb11-8"><a href="#cb11-8"></a>  <span class="fu">group_by</span>(race_eth, ccsr_diagnosis_description) <span class="sc">|&gt;</span></span>
+<span id="cb11-9"><a href="#cb11-9"></a>  <span class="fu">summarise</span>(<span class="at">mean_sev =</span> <span class="fu">mean</span>(severity_code, <span class="at">na.rm =</span> <span class="cn">TRUE</span>), <span class="at">.groups =</span> <span class="st">"drop"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb11-10"><a href="#cb11-10"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> race_eth, <span class="at">y =</span> ccsr_diagnosis_description, <span class="at">fill =</span> mean_sev)) <span class="sc">+</span></span>
+<span id="cb11-11"><a href="#cb11-11"></a>  <span class="fu">geom_tile</span>(<span class="at">color =</span> <span class="st">"white"</span>) <span class="sc">+</span></span>
+<span id="cb11-12"><a href="#cb11-12"></a>  <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">label =</span> <span class="fu">round</span>(mean_sev, <span class="dv">2</span>)), <span class="at">size =</span> <span class="fl">3.2</span>) <span class="sc">+</span></span>
+<span id="cb11-13"><a href="#cb11-13"></a>  <span class="fu">scale_fill_distiller</span>(<span class="at">palette =</span> <span class="st">"YlOrRd"</span>, <span class="at">direction =</span> <span class="dv">1</span>,</span>
+<span id="cb11-14"><a href="#cb11-14"></a>                       <span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">4</span>)) <span class="sc">+</span></span>
+<span id="cb11-15"><a href="#cb11-15"></a>  <span class="fu">labs</span>(</span>
+<span id="cb11-16"><a href="#cb11-16"></a>    <span class="at">title    =</span> <span class="st">"Mean severity score by race and top 10 diagnoses"</span>,</span>
+<span id="cb11-17"><a href="#cb11-17"></a>    <span class="at">subtitle =</span> <span class="st">"Comparing same diagnosis across groups controls for case-mix differences"</span>,</span>
+<span id="cb11-18"><a href="#cb11-18"></a>    <span class="at">x =</span> <span class="cn">NULL</span>, <span class="at">y =</span> <span class="cn">NULL</span>, <span class="at">fill =</span> <span class="st">"Mean severity"</span></span>
+<span id="cb11-19"><a href="#cb11-19"></a>  ) <span class="sc">+</span></span>
+<span id="cb11-20"><a href="#cb11-20"></a>  <span class="fu">theme</span>(<span class="at">axis.text.y =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">9</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="eda-nayla_trigueros_files/figure-html/severity-heatmap-1.png" class="img-fluid figure-img" alt="Heatmap of mean severity score by top diagnosis and race" width="768"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>The heatmap is a diagnosis-controlled comparison: it asks whether, for the same respiratory condition, Black and Hispanic/Latino patients present at higher severity than White patients. Cells in the same row hold the diagnosis constant, so differences across columns reflect patient-level variation rather than diagnosis-mix. Where a racial group shows consistently darker cells across diagnoses — not just for one condition but for many — the severity gap is more likely to reflect something about the patient’s journey to the hospital (access to care, delays in treatment, or upstream clinical failures) than the type of condition they were admitted for.</p>
+</section>
+</section>
+<section id="part-3-age-stratified-analysis" class="level2">
+<h2 class="anchored" data-anchor-id="part-3-age-stratified-analysis">Part 3 — Age-Stratified Analysis</h2>
+<p>Age is the most important confounder in this dataset. White respiratory patients skew older, and older patients accumulate more comorbidities, generate higher severity scores, and are more likely to die during admission. Stratifying by age band tests whether the racial gradients in severity and outcomes hold within the same life stage — or whether they disappear once age is controlled.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Show code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a>sparcs_age <span class="ot">&lt;-</span> sparcs <span class="sc">|&gt;</span></span>
+<span id="cb12-2"><a href="#cb12-2"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(race_eth), <span class="sc">!</span><span class="fu">is.na</span>(age_group)) <span class="sc">|&gt;</span></span>
+<span id="cb12-3"><a href="#cb12-3"></a>  <span class="fu">group_by</span>(race_eth, age_group) <span class="sc">|&gt;</span></span>
+<span id="cb12-4"><a href="#cb12-4"></a>  <span class="fu">summarise</span>(</span>
+<span id="cb12-5"><a href="#cb12-5"></a>    <span class="at">n_discharges   =</span> <span class="fu">n</span>(),</span>
+<span id="cb12-6"><a href="#cb12-6"></a>    <span class="at">mean_severity  =</span> <span class="fu">mean</span>(severity_code,    <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb12-7"><a href="#cb12-7"></a>    <span class="at">median_los     =</span> <span class="fu">median</span>(length_of_stay, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb12-8"><a href="#cb12-8"></a>    <span class="at">mortality_rate =</span> <span class="fu">mean</span>(died,             <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb12-9"><a href="#cb12-9"></a>    <span class="at">pct_major_ext  =</span> <span class="fu">mean</span>(severity <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"Major"</span>, <span class="st">"Extreme"</span>), <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb12-10"><a href="#cb12-10"></a>    <span class="at">.groups =</span> <span class="st">"drop"</span></span>
+<span id="cb12-11"><a href="#cb12-11"></a>  )</span>
+<span id="cb12-12"><a href="#cb12-12"></a></span>
+<span id="cb12-13"><a href="#cb12-13"></a>sparcs_age <span class="sc">|&gt;</span></span>
+<span id="cb12-14"><a href="#cb12-14"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb12-15"><a href="#cb12-15"></a>    <span class="at">mean_severity  =</span> <span class="fu">round</span>(mean_severity, <span class="dv">2</span>),</span>
+<span id="cb12-16"><a href="#cb12-16"></a>    <span class="at">median_los     =</span> <span class="fu">round</span>(median_los, <span class="dv">1</span>),</span>
+<span id="cb12-17"><a href="#cb12-17"></a>    <span class="at">mortality_rate =</span> <span class="fu">percent</span>(mortality_rate, <span class="at">accuracy =</span> <span class="fl">0.1</span>),</span>
+<span id="cb12-18"><a href="#cb12-18"></a>    <span class="at">pct_major_ext  =</span> <span class="fu">percent</span>(pct_major_ext,  <span class="at">accuracy =</span> <span class="fl">0.1</span>)</span>
+<span id="cb12-19"><a href="#cb12-19"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb12-20"><a href="#cb12-20"></a>  <span class="fu">arrange</span>(age_group, race_eth) <span class="sc">|&gt;</span></span>
+<span id="cb12-21"><a href="#cb12-21"></a>  knitr<span class="sc">::</span><span class="fu">kable</span>(</span>
+<span id="cb12-22"><a href="#cb12-22"></a>    <span class="at">col.names =</span> <span class="fu">c</span>(<span class="st">"Race"</span>, <span class="st">"Age group"</span>, <span class="st">"N"</span>, <span class="st">"Mean severity"</span>,</span>
+<span id="cb12-23"><a href="#cb12-23"></a>                  <span class="st">"Median LOS"</span>, <span class="st">"Mortality rate"</span>, <span class="st">"% Major / Extreme"</span>),</span>
+<span id="cb12-24"><a href="#cb12-24"></a>    <span class="at">caption =</span> <span class="st">"**Table 2. Age-stratified clinical outcomes by race — SPARCS respiratory discharges**"</span></span>
+<span id="cb12-25"><a href="#cb12-25"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output-display">
+<table class="caption-top table table-sm table-striped small">
+<caption><strong>Table 2. Age-stratified clinical outcomes by race — SPARCS respiratory discharges</strong></caption>
+<colgroup>
+<col style="width: 17%">
+<col style="width: 11%">
+<col style="width: 6%">
+<col style="width: 15%">
+<col style="width: 12%">
+<col style="width: 16%">
+<col style="width: 20%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Race</th>
+<th style="text-align: left;">Age group</th>
+<th style="text-align: right;">N</th>
+<th style="text-align: right;">Mean severity</th>
+<th style="text-align: right;">Median LOS</th>
+<th style="text-align: left;">Mortality rate</th>
+<th style="text-align: left;">% Major / Extreme</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Black</td>
+<td style="text-align: left;">18–49</td>
+<td style="text-align: right;">3068</td>
+<td style="text-align: right;">2.32</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: left;">1.3%</td>
+<td style="text-align: left;">43.1%</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Hispanic/Latino</td>
+<td style="text-align: left;">18–49</td>
+<td style="text-align: right;">2603</td>
+<td style="text-align: right;">2.22</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: left;">0.8%</td>
+<td style="text-align: left;">39.4%</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">White</td>
+<td style="text-align: left;">18–49</td>
+<td style="text-align: right;">4503</td>
+<td style="text-align: right;">2.36</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: left;">1.5%</td>
+<td style="text-align: left;">45.3%</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Black</td>
+<td style="text-align: left;">50–69</td>
+<td style="text-align: right;">7263</td>
+<td style="text-align: right;">2.63</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: left;">3.0%</td>
+<td style="text-align: left;">55.2%</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Hispanic/Latino</td>
+<td style="text-align: left;">50–69</td>
+<td style="text-align: right;">4815</td>
+<td style="text-align: right;">2.56</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: left;">2.3%</td>
+<td style="text-align: left;">52.1%</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">White</td>
+<td style="text-align: left;">50–69</td>
+<td style="text-align: right;">17261</td>
+<td style="text-align: right;">2.68</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: left;">3.7%</td>
+<td style="text-align: left;">58.3%</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Black</td>
+<td style="text-align: left;">70+</td>
+<td style="text-align: right;">4222</td>
+<td style="text-align: right;">2.78</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: left;">6.6%</td>
+<td style="text-align: left;">62.3%</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Hispanic/Latino</td>
+<td style="text-align: left;">70+</td>
+<td style="text-align: right;">3997</td>
+<td style="text-align: right;">2.69</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: left;">6.3%</td>
+<td style="text-align: left;">57.4%</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">White</td>
+<td style="text-align: left;">70+</td>
+<td style="text-align: right;">26160</td>
+<td style="text-align: right;">2.79</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: left;">7.4%</td>
+<td style="text-align: left;">62.9%</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p>Cell counts range from several thousand to over twenty thousand per race × age combination, so all estimates are stable. The 18–49 band tests whether disparities appear before age-related comorbidities accumulate — this is the cleanest comparison because older patients have more accumulated health burden by definition. The 50–69 band captures patients with real respiratory disease burden but before the Medicare transition dominates. The 70+ band is where age-related confounding is strongest — making any residual gap in this group the hardest to explain away.</p>
+<section id="severity-by-age-group-and-race" class="level3">
+<h3 class="anchored" data-anchor-id="severity-by-age-group-and-race">Severity by Age Group and Race</h3>
+<div class="cell">
+<details class="code-fold">
+<summary>Show code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a>sparcs_age <span class="sc">|&gt;</span></span>
+<span id="cb13-2"><a href="#cb13-2"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> age_group, <span class="at">y =</span> mean_severity,</span>
+<span id="cb13-3"><a href="#cb13-3"></a>             <span class="at">color =</span> race_eth, <span class="at">group =</span> race_eth)) <span class="sc">+</span></span>
+<span id="cb13-4"><a href="#cb13-4"></a>  <span class="fu">geom_line</span>(<span class="at">linewidth =</span> <span class="fl">1.1</span>) <span class="sc">+</span></span>
+<span id="cb13-5"><a href="#cb13-5"></a>  <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">3</span>) <span class="sc">+</span></span>
+<span id="cb13-6"><a href="#cb13-6"></a>  <span class="fu">geom_text_repel</span>(<span class="fu">aes</span>(<span class="at">label =</span> <span class="fu">round</span>(mean_severity, <span class="dv">2</span>)),</span>
+<span id="cb13-7"><a href="#cb13-7"></a>                  <span class="at">size =</span> <span class="fl">3.2</span>, <span class="at">show.legend =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
+<span id="cb13-8"><a href="#cb13-8"></a>  <span class="fu">scale_color_brewer</span>(<span class="at">palette =</span> <span class="st">"Set1"</span>) <span class="sc">+</span></span>
+<span id="cb13-9"><a href="#cb13-9"></a>  <span class="fu">labs</span>(</span>
+<span id="cb13-10"><a href="#cb13-10"></a>    <span class="at">title    =</span> <span class="st">"Mean APR severity score by age group and race / ethnicity"</span>,</span>
+<span id="cb13-11"><a href="#cb13-11"></a>    <span class="at">subtitle =</span> <span class="st">"Age-controlled comparison: does the severity gap hold within the same life stage?"</span>,</span>
+<span id="cb13-12"><a href="#cb13-12"></a>    <span class="at">x =</span> <span class="st">"Age group"</span>, <span class="at">y =</span> <span class="st">"Mean severity score (1–4)"</span>, <span class="at">color =</span> <span class="st">"Race / Ethnicity"</span></span>
+<span id="cb13-13"><a href="#cb13-13"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="eda-nayla_trigueros_files/figure-html/severity-age-line-1.png" class="img-fluid figure-img" alt="Line plot of mean severity score by age group and race" width="768"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="mortality-rate-by-age-group-and-race" class="level3">
+<h3 class="anchored" data-anchor-id="mortality-rate-by-age-group-and-race">Mortality Rate by Age Group and Race</h3>
+<div class="cell">
+<details class="code-fold">
+<summary>Show code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1"></a>sparcs_age <span class="sc">|&gt;</span></span>
+<span id="cb14-2"><a href="#cb14-2"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> age_group, <span class="at">y =</span> mortality_rate,</span>
+<span id="cb14-3"><a href="#cb14-3"></a>             <span class="at">color =</span> race_eth, <span class="at">group =</span> race_eth)) <span class="sc">+</span></span>
+<span id="cb14-4"><a href="#cb14-4"></a>  <span class="fu">geom_line</span>(<span class="at">linewidth =</span> <span class="fl">1.1</span>) <span class="sc">+</span></span>
+<span id="cb14-5"><a href="#cb14-5"></a>  <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">3</span>) <span class="sc">+</span></span>
+<span id="cb14-6"><a href="#cb14-6"></a>  <span class="fu">geom_text_repel</span>(<span class="fu">aes</span>(<span class="at">label =</span> <span class="fu">percent</span>(mortality_rate, <span class="at">accuracy =</span> <span class="fl">0.1</span>)),</span>
+<span id="cb14-7"><a href="#cb14-7"></a>                  <span class="at">size =</span> <span class="fl">3.2</span>, <span class="at">show.legend =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
+<span id="cb14-8"><a href="#cb14-8"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">labels =</span> <span class="fu">percent_format</span>()) <span class="sc">+</span></span>
+<span id="cb14-9"><a href="#cb14-9"></a>  <span class="fu">scale_color_brewer</span>(<span class="at">palette =</span> <span class="st">"Set1"</span>) <span class="sc">+</span></span>
+<span id="cb14-10"><a href="#cb14-10"></a>  <span class="fu">labs</span>(</span>
+<span id="cb14-11"><a href="#cb14-11"></a>    <span class="at">title    =</span> <span class="st">"In-hospital mortality rate by age group and race / ethnicity"</span>,</span>
+<span id="cb14-12"><a href="#cb14-12"></a>    <span class="at">subtitle =</span> <span class="st">"Each band holds age constant; differences across lines reflect racial variation"</span>,</span>
+<span id="cb14-13"><a href="#cb14-13"></a>    <span class="at">x =</span> <span class="st">"Age group"</span>, <span class="at">y =</span> <span class="st">"Mortality rate"</span>, <span class="at">color =</span> <span class="st">"Race / Ethnicity"</span></span>
+<span id="cb14-14"><a href="#cb14-14"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="eda-nayla_trigueros_files/figure-html/mortality-age-line-1.png" class="img-fluid figure-img" alt="Line plot of in-hospital mortality rate by age group and race" width="768"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="major-or-extreme-by-age-group-and-race" class="level3">
+<h3 class="anchored" data-anchor-id="major-or-extreme-by-age-group-and-race">% Major or Extreme by Age Group and Race</h3>
+<div class="cell">
+<details class="code-fold">
+<summary>Show code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1"></a>sparcs_age <span class="sc">|&gt;</span></span>
+<span id="cb15-2"><a href="#cb15-2"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> age_group, <span class="at">y =</span> pct_major_ext,</span>
+<span id="cb15-3"><a href="#cb15-3"></a>             <span class="at">color =</span> race_eth, <span class="at">group =</span> race_eth)) <span class="sc">+</span></span>
+<span id="cb15-4"><a href="#cb15-4"></a>  <span class="fu">geom_line</span>(<span class="at">linewidth =</span> <span class="fl">1.1</span>) <span class="sc">+</span></span>
+<span id="cb15-5"><a href="#cb15-5"></a>  <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">3</span>) <span class="sc">+</span></span>
+<span id="cb15-6"><a href="#cb15-6"></a>  <span class="fu">geom_text_repel</span>(<span class="fu">aes</span>(<span class="at">label =</span> <span class="fu">percent</span>(pct_major_ext, <span class="at">accuracy =</span> <span class="dv">1</span>)),</span>
+<span id="cb15-7"><a href="#cb15-7"></a>                  <span class="at">size =</span> <span class="fl">3.2</span>, <span class="at">show.legend =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
+<span id="cb15-8"><a href="#cb15-8"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">labels =</span> <span class="fu">percent_format</span>()) <span class="sc">+</span></span>
+<span id="cb15-9"><a href="#cb15-9"></a>  <span class="fu">scale_color_brewer</span>(<span class="at">palette =</span> <span class="st">"Set1"</span>) <span class="sc">+</span></span>
+<span id="cb15-10"><a href="#cb15-10"></a>  <span class="fu">labs</span>(</span>
+<span id="cb15-11"><a href="#cb15-11"></a>    <span class="at">title    =</span> <span class="st">"Share of Major / Extreme severity discharges by age group and race"</span>,</span>
+<span id="cb15-12"><a href="#cb15-12"></a>    <span class="at">subtitle =</span> <span class="st">"Higher share = more patients arriving at the most severe illness levels"</span>,</span>
+<span id="cb15-13"><a href="#cb15-13"></a>    <span class="at">x =</span> <span class="st">"Age group"</span>, <span class="at">y =</span> <span class="st">"% Major or Extreme"</span>, <span class="at">color =</span> <span class="st">"Race / Ethnicity"</span></span>
+<span id="cb15-14"><a href="#cb15-14"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="eda-nayla_trigueros_files/figure-html/major-ext-age-line-1.png" class="img-fluid figure-img" alt="Line plot of share of Major or Extreme severity discharges by age group and race" width="768"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>The age-stratified plots are the core evidence of this section. Across all three age bands, the racial ordering on severity, mortality, and share of Major/Extreme cases is consistent: Black patients at or near the top, White patients at or near the bottom, Hispanic/Latino patients in between. The gaps narrow somewhat at 70+, where severity scores converge as all groups accumulate serious illness burden — but they do not disappear. At 18–49, the comparison is especially striking: these are working-age patients with fewer accumulated comorbidities, yet Black and Hispanic/Latino patients still arrive at higher severity levels and die at higher rates than White patients of the same age.</p>
+<p>The persistence of the severity and mortality gaps after controlling for age points to something happening before the patient reaches the hospital. One hypothesis — consistent with the broader group project — is that clinical tools used earlier in the care pathway are less accurate for darker-skinned patients, allowing conditions to deteriorate further before they are detected and treated. That upstream failure, whatever its source, would produce exactly the pattern seen here: higher severity at admission, longer stays, and higher mortality — not because these patients are intrinsically sicker, but because their illness was permitted to progress further before intervention.</p>
+</section>
+</section>
+<section id="summary-of-key-findings" class="level2">
+<h2 class="anchored" data-anchor-id="summary-of-key-findings">Summary of Key Findings</h2>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Finding</th>
+<th>Evidence</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Black patients arrive at higher severity</strong></td>
+<td>Higher mean APR severity score and larger share of Major/Extreme discharges than White or Hispanic/Latino patients in raw comparisons</td>
+</tr>
+<tr class="even">
+<td><strong>The severity gap is not fully explained by diagnosis mix</strong></td>
+<td>Heatmap shows higher mean severity for Black patients within the same respiratory diagnosis</td>
+</tr>
+<tr class="odd">
+<td><strong>LOS gap persists within severity level</strong></td>
+<td>At every severity category, Black and Hispanic/Latino patients have equal or longer median stays than White patients at the same illness level</td>
+</tr>
+<tr class="even">
+<td><strong>Racial ordering in mortality is consistent</strong></td>
+<td>In-hospital mortality rate follows the same ordering as severity: Black ≥ Hispanic/Latino ≥ White</td>
+</tr>
+<tr class="odd">
+<td><strong>Disparities hold after controlling for age</strong></td>
+<td>Age-stratified analysis shows the severity and mortality gap is present at 18–49, 50–69, and 70+, ruling out age as the primary explanation</td>
+</tr>
+<tr class="even">
+<td><strong>The 18–49 band is the sharpest evidence</strong></td>
+<td>Among working-age patients with the fewest accumulated comorbidities, racial gaps in severity and mortality are still present — pointing to a pre-admission mechanism</td>
+</tr>
+</tbody>
+</table>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>SPARCS is administrative data collected at discharge for billing and regulatory purposes. Severity scores are assigned by coders working from discharge records rather than by clinicians at the bedside. If earlier clinical failures cause a condition to deteriorate undetected before admission, the true disease burden may be understated by the coded severity score — meaning the observed disparities may actually underestimate the gap in illness progression before hospital arrival.</p>
+</div>
+</div>
+
+
+<!-- -->
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    // Ensure there is a toggle, if there isn't float one in the top right
+    if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+      const a = window.document.createElement('a');
+      a.classList.add('top-right');
+      a.classList.add('quarto-color-scheme-toggle');
+      a.href = "";
+      a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const i = window.document.createElement("i");
+      i.classList.add('bi');
+      a.appendChild(i);
+      window.document.body.appendChild(a);
+    }
+    setColorSchemeToggle(hasAlternateSentinel())
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+    const viewSource = window.document.getElementById('quarto-view-source') ||
+                       window.document.getElementById('quarto-code-tools-source');
+    if (viewSource) {
+      const sourceUrl = viewSource.getAttribute("data-quarto-source-url");
+      viewSource.addEventListener("click", function(e) {
+        if (sourceUrl) {
+          // rstudio viewer pane
+          if (/\bcapabilities=\b/.test(window.location)) {
+            window.open(sourceUrl);
+          } else {
+            window.location.href = sourceUrl;
+          }
+        } else {
+          const modal = new bootstrap.Modal(document.getElementById('quarto-embedded-source-code-modal'));
+          modal.show();
+        }
+        return false;
+      });
+    }
+    function toggleCodeHandler(show) {
+      return function(e) {
+        const detailsSrc = window.document.querySelectorAll(".cell > details > .sourceCode");
+        for (let i=0; i<detailsSrc.length; i++) {
+          const details = detailsSrc[i].parentElement;
+          if (show) {
+            details.open = true;
+          } else {
+            details.removeAttribute("open");
+          }
+        }
+        const cellCodeDivs = window.document.querySelectorAll(".cell > .sourceCode");
+        const fromCls = show ? "hidden" : "unhidden";
+        const toCls = show ? "unhidden" : "hidden";
+        for (let i=0; i<cellCodeDivs.length; i++) {
+          const codeDiv = cellCodeDivs[i];
+          if (codeDiv.classList.contains(fromCls)) {
+            codeDiv.classList.remove(fromCls);
+            codeDiv.classList.add(toCls);
+          } 
+        }
+        return false;
+      }
+    }
+    const hideAllCode = window.document.getElementById("quarto-hide-all-code");
+    if (hideAllCode) {
+      hideAllCode.addEventListener("click", toggleCodeHandler(false));
+    }
+    const showAllCode = window.document.getElementById("quarto-show-all-code");
+    if (showAllCode) {
+      showAllCode.addEventListener("click", toggleCodeHandler(true));
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+            // target, if specified
+            link.setAttribute("target", "_blank");
+            if (link.getAttribute("rel") === null) {
+              link.setAttribute("rel", "noopener");
+            }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation column-body">
+  <div class="nav-page nav-page-previous">
+      <a href="../eda/eda-patricia.html" class="pagination-link" aria-label="Individual EDA: Evaluating Demographic Disparities in Pulse Oximetry Accuracy">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-title">Individual EDA: Evaluating Demographic Disparities in Pulse Oximetry Accuracy</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="../appx/proposal.html" class="pagination-link" aria-label="Project Proposal">
+        <span class="nav-page-text"><span class="chapter-title">Project Proposal</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb16" data-shortcodes="false"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb16-1"><a href="#cb16-1"></a><span class="co">---</span></span>
+<span id="cb16-2"><a href="#cb16-2"></a><span class="an">title:</span><span class="co"> "Individual EDA: Looking at "</span></span>
+<span id="cb16-3"><a href="#cb16-3"></a><span class="an">subtitle:</span><span class="co"> "NY SPARCS Inpatient Discharge Data"</span></span>
+<span id="cb16-4"><a href="#cb16-4"></a><span class="an">author:</span><span class="co"> "Nayla Trigueros Ortiz"</span></span>
+<span id="cb16-5"><a href="#cb16-5"></a><span class="an">date:</span><span class="co"> today</span></span>
+<span id="cb16-6"><a href="#cb16-6"></a><span class="an">format:</span></span>
+<span id="cb16-7"><a href="#cb16-7"></a><span class="co">  html:</span></span>
+<span id="cb16-8"><a href="#cb16-8"></a><span class="co">    toc: true</span></span>
+<span id="cb16-9"><a href="#cb16-9"></a><span class="co">    toc-depth: 3</span></span>
+<span id="cb16-10"><a href="#cb16-10"></a><span class="co">    code-fold: true</span></span>
+<span id="cb16-11"><a href="#cb16-11"></a><span class="co">    code-summary: "Show code"</span></span>
+<span id="cb16-12"><a href="#cb16-12"></a><span class="co">    fig-width: 8</span></span>
+<span id="cb16-13"><a href="#cb16-13"></a><span class="co">    fig-height: 5</span></span>
+<span id="cb16-14"><a href="#cb16-14"></a><span class="an">editor:</span><span class="co"> </span></span>
+<span id="cb16-15"><a href="#cb16-15"></a><span class="co">  markdown: </span></span>
+<span id="cb16-16"><a href="#cb16-16"></a><span class="co">    wrap: 72</span></span>
+<span id="cb16-17"><a href="#cb16-17"></a><span class="co">---</span></span>
+<span id="cb16-18"><a href="#cb16-18"></a></span>
+<span id="cb16-19"><a href="#cb16-19"></a><span class="fu">## Overview</span></span>
+<span id="cb16-20"><a href="#cb16-20"></a></span>
+<span id="cb16-21"><a href="#cb16-21"></a>This EDA covers both project datasets and the bridge connecting them: -</span>
+<span id="cb16-22"><a href="#cb16-22"></a>**NY SPARCS Inpatient Discharge 2021** — 103K respiratory discharge</span>
+<span id="cb16-23"><a href="#cb16-23"></a>records from New York State hospitals with charges, costs, length of</span>
+<span id="cb16-24"><a href="#cb16-24"></a>stay, insurance, and severity. Used to measure who pays more and arrives</span>
+<span id="cb16-25"><a href="#cb16-25"></a>sicker.</span>
+<span id="cb16-26"><a href="#cb16-26"></a></span>
+<span id="cb16-27"><a href="#cb16-27"></a>I will analyze clinical severity and outcomes across racial and ethnic</span>
+<span id="cb16-28"><a href="#cb16-28"></a>groups using the **NY SPARCS Inpatient Discharge 2021** dataset,</span>
+<span id="cb16-29"><a href="#cb16-29"></a>filtered to respiratory diagnoses. The central question is whether</span>
+<span id="cb16-30"><a href="#cb16-30"></a>Black, White, and Hispanic/Latino patients arrive at New York State</span>
+<span id="cb16-31"><a href="#cb16-31"></a>hospitals with different levels of illness severity, experience</span>
+<span id="cb16-32"><a href="#cb16-32"></a>different lengths of stay, and face different in-hospital mortality</span>
+<span id="cb16-33"><a href="#cb16-33"></a>rates — and whether those differences persist after controlling for age.</span>
+<span id="cb16-34"><a href="#cb16-34"></a></span>
+<span id="cb16-35"><a href="#cb16-35"></a>The analysis is structured in three parts. First, I characterize the</span>
+<span id="cb16-36"><a href="#cb16-36"></a>overall patient population and examine how severity of illness is</span>
+<span id="cb16-37"><a href="#cb16-37"></a>distributed across racial groups. Second, I look at length of stay and</span>
+<span id="cb16-38"><a href="#cb16-38"></a>in-hospital mortality as downstream clinical outcomes of that severity.</span>
+<span id="cb16-39"><a href="#cb16-39"></a>Third, I stratify all findings by age group to remove the most important</span>
+<span id="cb16-40"><a href="#cb16-40"></a>demographic confounder: White respiratory patients skew older, and older</span>
+<span id="cb16-41"><a href="#cb16-41"></a>patients tend to arrive sicker regardless of race. And finally, ask</span>
+<span id="cb16-42"><a href="#cb16-42"></a>whether the disparities hold within the same life stage.</span>
+<span id="cb16-43"><a href="#cb16-43"></a></span>
+<span id="cb16-44"><a href="#cb16-44"></a><span class="fu">## Setup</span></span>
+<span id="cb16-45"><a href="#cb16-45"></a></span>
+<span id="cb16-48"><a href="#cb16-48"></a><span class="in">```{r}</span></span>
+<span id="cb16-49"><a href="#cb16-49"></a><span class="co">#| label: setup</span></span>
+<span id="cb16-50"><a href="#cb16-50"></a><span class="co">#| message: false</span></span>
+<span id="cb16-51"><a href="#cb16-51"></a><span class="co">#| warning: false</span></span>
+<span id="cb16-52"><a href="#cb16-52"></a></span>
+<span id="cb16-53"><a href="#cb16-53"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb16-54"><a href="#cb16-54"></a><span class="fu">library</span>(DataExplorer)</span>
+<span id="cb16-55"><a href="#cb16-55"></a><span class="fu">library</span>(scales)</span>
+<span id="cb16-56"><a href="#cb16-56"></a><span class="fu">library</span>(ggrepel)</span>
+<span id="cb16-57"><a href="#cb16-57"></a></span>
+<span id="cb16-58"><a href="#cb16-58"></a><span class="fu">theme_set</span>(<span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">13</span>))</span>
+<span id="cb16-59"><a href="#cb16-59"></a><span class="in">```</span></span>
+<span id="cb16-60"><a href="#cb16-60"></a></span>
+<span id="cb16-61"><a href="#cb16-61"></a><span class="fu">## Load/Clean</span></span>
+<span id="cb16-62"><a href="#cb16-62"></a></span>
+<span id="cb16-63"><a href="#cb16-63"></a>SPARCS is pulled directly from the NY Health Data API, filtered</span>
+<span id="cb16-64"><a href="#cb16-64"></a>server-side to respiratory diagnoses (CCSR codes beginning with "RSP").</span>
+<span id="cb16-65"><a href="#cb16-65"></a>No file is saved to disk. Race and ethnicity are combined into a single</span>
+<span id="cb16-66"><a href="#cb16-66"></a><span class="in">`race_eth`</span> variable using an ethnicity-first strategy: Hispanic patients</span>
+<span id="cb16-67"><a href="#cb16-67"></a>are classified as Hispanic/Latino regardless of their reported race</span>
+<span id="cb16-68"><a href="#cb16-68"></a>code, which is necessary because SPARCS frequently records Hispanic</span>
+<span id="cb16-69"><a href="#cb16-69"></a>patients under multiple race categories.</span>
+<span id="cb16-70"><a href="#cb16-70"></a></span>
+<span id="cb16-73"><a href="#cb16-73"></a><span class="in">```{r}</span></span>
+<span id="cb16-74"><a href="#cb16-74"></a><span class="co">#| label: load-sparcs</span></span>
+<span id="cb16-75"><a href="#cb16-75"></a><span class="co">#| message: false</span></span>
+<span id="cb16-76"><a href="#cb16-76"></a><span class="co">#| warning: false</span></span>
+<span id="cb16-77"><a href="#cb16-77"></a></span>
+<span id="cb16-78"><a href="#cb16-78"></a>sparcs_raw <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(</span>
+<span id="cb16-79"><a href="#cb16-79"></a>  <span class="st">"https://health.data.ny.gov/resource/tg3i-cinn.csv?$where=ccsr_diagnosis_code%20like%20%27RSP%25%27&amp;$limit=500000"</span>,</span>
+<span id="cb16-80"><a href="#cb16-80"></a>  <span class="at">show_col_types =</span> <span class="cn">FALSE</span></span>
+<span id="cb16-81"><a href="#cb16-81"></a>)</span>
+<span id="cb16-82"><a href="#cb16-82"></a></span>
+<span id="cb16-83"><a href="#cb16-83"></a>sparcs <span class="ot">&lt;-</span> sparcs_raw <span class="sc">|&gt;</span></span>
+<span id="cb16-84"><a href="#cb16-84"></a>  <span class="fu">filter</span>(<span class="fu">str_starts</span>(ccsr_diagnosis_code, <span class="st">"RSP"</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb16-85"><a href="#cb16-85"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb16-86"><a href="#cb16-86"></a>    <span class="at">length_of_stay =</span> <span class="fu">as.numeric</span>(length_of_stay),</span>
+<span id="cb16-87"><a href="#cb16-87"></a>    <span class="at">total_charges  =</span> <span class="fu">as.numeric</span>(total_charges),</span>
+<span id="cb16-88"><a href="#cb16-88"></a>    <span class="at">total_costs    =</span> <span class="fu">as.numeric</span>(total_costs),</span>
+<span id="cb16-89"><a href="#cb16-89"></a></span>
+<span id="cb16-90"><a href="#cb16-90"></a>    <span class="at">race_eth =</span> <span class="fu">case_when</span>(</span>
+<span id="cb16-91"><a href="#cb16-91"></a>      ethnicity <span class="sc">==</span> <span class="st">"Spanish/Hispanic"</span>                          <span class="sc">~</span> <span class="st">"Hispanic/Latino"</span>,</span>
+<span id="cb16-92"><a href="#cb16-92"></a>      race <span class="sc">==</span> <span class="st">"Black/African American"</span> <span class="sc">&amp;</span></span>
+<span id="cb16-93"><a href="#cb16-93"></a>        ethnicity <span class="sc">==</span> <span class="st">"Not Span/Hispanic"</span>                       <span class="sc">~</span> <span class="st">"Black"</span>,</span>
+<span id="cb16-94"><a href="#cb16-94"></a>      race <span class="sc">==</span> <span class="st">"White"</span> <span class="sc">&amp;</span></span>
+<span id="cb16-95"><a href="#cb16-95"></a>        ethnicity <span class="sc">==</span> <span class="st">"Not Span/Hispanic"</span>                       <span class="sc">~</span> <span class="st">"White"</span>,</span>
+<span id="cb16-96"><a href="#cb16-96"></a>      <span class="cn">TRUE</span>                                                     <span class="sc">~</span> <span class="cn">NA_character_</span></span>
+<span id="cb16-97"><a href="#cb16-97"></a>    ),</span>
+<span id="cb16-98"><a href="#cb16-98"></a></span>
+<span id="cb16-99"><a href="#cb16-99"></a>    <span class="at">age_group =</span> <span class="fu">case_when</span>(</span>
+<span id="cb16-100"><a href="#cb16-100"></a>      age_group <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"18 to 29"</span>, <span class="st">"30 to 49"</span>) <span class="sc">~</span> <span class="st">"18–49"</span>,</span>
+<span id="cb16-101"><a href="#cb16-101"></a>      age_group <span class="sc">==</span> <span class="st">"50 to 69"</span>                  <span class="sc">~</span> <span class="st">"50–69"</span>,</span>
+<span id="cb16-102"><a href="#cb16-102"></a>      age_group <span class="sc">==</span> <span class="st">"70 or Older"</span>               <span class="sc">~</span> <span class="st">"70+"</span>,</span>
+<span id="cb16-103"><a href="#cb16-103"></a>      <span class="cn">TRUE</span>                                     <span class="sc">~</span> <span class="cn">NA_character_</span></span>
+<span id="cb16-104"><a href="#cb16-104"></a>    ),</span>
+<span id="cb16-105"><a href="#cb16-105"></a></span>
+<span id="cb16-106"><a href="#cb16-106"></a>    <span class="at">insurance =</span> <span class="fu">case_when</span>(</span>
+<span id="cb16-107"><a href="#cb16-107"></a>      <span class="fu">str_detect</span>(payment_typology_1, <span class="fu">regex</span>(<span class="st">"medicaid"</span>, <span class="at">ignore_case =</span> <span class="cn">TRUE</span>)) <span class="sc">~</span> <span class="st">"Medicaid"</span>,</span>
+<span id="cb16-108"><a href="#cb16-108"></a>      <span class="fu">str_detect</span>(payment_typology_1, <span class="fu">regex</span>(<span class="st">"medicare"</span>, <span class="at">ignore_case =</span> <span class="cn">TRUE</span>)) <span class="sc">~</span> <span class="st">"Medicare"</span>,</span>
+<span id="cb16-109"><a href="#cb16-109"></a>      <span class="fu">str_detect</span>(payment_typology_1, <span class="fu">regex</span>(<span class="st">"private"</span>,  <span class="at">ignore_case =</span> <span class="cn">TRUE</span>)) <span class="sc">~</span> <span class="st">"Private"</span>,</span>
+<span id="cb16-110"><a href="#cb16-110"></a>      <span class="fu">str_detect</span>(payment_typology_1, <span class="fu">regex</span>(<span class="st">"self"</span>,     <span class="at">ignore_case =</span> <span class="cn">TRUE</span>)) <span class="sc">~</span> <span class="st">"Self-Pay"</span>,</span>
+<span id="cb16-111"><a href="#cb16-111"></a>      <span class="cn">TRUE</span>                                                                   <span class="sc">~</span> <span class="st">"Other"</span></span>
+<span id="cb16-112"><a href="#cb16-112"></a>    ),</span>
+<span id="cb16-113"><a href="#cb16-113"></a></span>
+<span id="cb16-114"><a href="#cb16-114"></a>    <span class="at">severity =</span> <span class="fu">factor</span>(</span>
+<span id="cb16-115"><a href="#cb16-115"></a>      apr_severity_of_illness,</span>
+<span id="cb16-116"><a href="#cb16-116"></a>      <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"Minor"</span>, <span class="st">"Moderate"</span>, <span class="st">"Major"</span>, <span class="st">"Extreme"</span>)</span>
+<span id="cb16-117"><a href="#cb16-117"></a>    ),</span>
+<span id="cb16-118"><a href="#cb16-118"></a></span>
+<span id="cb16-119"><a href="#cb16-119"></a>    <span class="at">severity_code =</span> apr_severity_of_illness_code,</span>
+<span id="cb16-120"><a href="#cb16-120"></a></span>
+<span id="cb16-121"><a href="#cb16-121"></a>    <span class="at">risk_of_mortality =</span> <span class="fu">factor</span>(</span>
+<span id="cb16-122"><a href="#cb16-122"></a>      apr_risk_of_mortality,</span>
+<span id="cb16-123"><a href="#cb16-123"></a>      <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"Minor"</span>, <span class="st">"Moderate"</span>, <span class="st">"Major"</span>, <span class="st">"Extreme"</span>)</span>
+<span id="cb16-124"><a href="#cb16-124"></a>    ),</span>
+<span id="cb16-125"><a href="#cb16-125"></a></span>
+<span id="cb16-126"><a href="#cb16-126"></a>    <span class="at">died =</span> <span class="fu">str_detect</span>(</span>
+<span id="cb16-127"><a href="#cb16-127"></a>      patient_disposition,</span>
+<span id="cb16-128"><a href="#cb16-128"></a>      <span class="fu">regex</span>(<span class="st">"expired|died"</span>, <span class="at">ignore_case =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb16-129"><a href="#cb16-129"></a>    )</span>
+<span id="cb16-130"><a href="#cb16-130"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb16-131"><a href="#cb16-131"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(race_eth))</span>
+<span id="cb16-132"><a href="#cb16-132"></a></span>
+<span id="cb16-133"><a href="#cb16-133"></a><span class="fu">glimpse</span>(sparcs)</span>
+<span id="cb16-134"><a href="#cb16-134"></a><span class="in">```</span></span>
+<span id="cb16-135"><a href="#cb16-135"></a></span>
+<span id="cb16-136"><a href="#cb16-136"></a>After filtering to respiratory diagnoses and the three focal racial</span>
+<span id="cb16-137"><a href="#cb16-137"></a>groups, the dataset contains **<span class="in">`r nrow(sparcs) |&gt; comma()`</span> discharge</span>
+<span id="cb16-138"><a href="#cb16-138"></a>records** from New York State hospitals in 2021. Each row represents one</span>
+<span id="cb16-139"><a href="#cb16-139"></a>inpatient discharge. The key clinical variables are <span class="in">`severity`</span> (APR-DRG</span>
+<span id="cb16-140"><a href="#cb16-140"></a>severity of illness, a four-level ordinal from Minor to Extreme),</span>
+<span id="cb16-141"><a href="#cb16-141"></a><span class="in">`risk_of_mortality`</span> (the corresponding APR-DRG mortality risk score),</span>
+<span id="cb16-142"><a href="#cb16-142"></a><span class="in">`length_of_stay`</span>, and <span class="in">`died`</span> (whether the patient died during the</span>
+<span id="cb16-143"><a href="#cb16-143"></a>admission).</span>
+<span id="cb16-144"><a href="#cb16-144"></a></span>
+<span id="cb16-145"><a href="#cb16-145"></a><span class="fu">## Structure and Missingness</span></span>
+<span id="cb16-146"><a href="#cb16-146"></a></span>
+<span id="cb16-149"><a href="#cb16-149"></a><span class="in">```{r}</span></span>
+<span id="cb16-150"><a href="#cb16-150"></a><span class="co">#| label: sparcs-visdat</span></span>
+<span id="cb16-151"><a href="#cb16-151"></a><span class="co">#| fig-alt: "Missingness bar chart for key SPARCS clinical variables"</span></span>
+<span id="cb16-152"><a href="#cb16-152"></a></span>
+<span id="cb16-153"><a href="#cb16-153"></a>sparcs <span class="sc">|&gt;</span></span>
+<span id="cb16-154"><a href="#cb16-154"></a>  <span class="fu">select</span>(race_eth, age_group, severity, risk_of_mortality,</span>
+<span id="cb16-155"><a href="#cb16-155"></a>         length_of_stay, total_charges, died) <span class="sc">|&gt;</span></span>
+<span id="cb16-156"><a href="#cb16-156"></a>  <span class="fu">plot_missing</span>(</span>
+<span id="cb16-157"><a href="#cb16-157"></a>    <span class="at">title   =</span> <span class="st">"Missingness in key SPARCS clinical variables"</span>,</span>
+<span id="cb16-158"><a href="#cb16-158"></a>    <span class="at">ggtheme =</span> <span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">12</span>)</span>
+<span id="cb16-159"><a href="#cb16-159"></a>  )</span>
+<span id="cb16-160"><a href="#cb16-160"></a><span class="in">```</span></span>
+<span id="cb16-161"><a href="#cb16-161"></a></span>
+<span id="cb16-162"><a href="#cb16-162"></a>Missingness is low across all key variables. <span class="in">`severity`</span> and</span>
+<span id="cb16-163"><a href="#cb16-163"></a><span class="in">`risk_of_mortality`</span> are coded at discharge from the patient record and</span>
+<span id="cb16-164"><a href="#cb16-164"></a>are nearly complete. <span class="in">`length_of_stay`</span> and <span class="in">`died`</span> are administrative</span>
+<span id="cb16-165"><a href="#cb16-165"></a>fields populated for every inpatient record. The analysis proceeds on</span>
+<span id="cb16-166"><a href="#cb16-166"></a>the full dataset without imputation.</span>
+<span id="cb16-167"><a href="#cb16-167"></a></span>
+<span id="cb16-168"><a href="#cb16-168"></a><span class="fu">## Part 1 — Severity of Illness</span></span>
+<span id="cb16-169"><a href="#cb16-169"></a></span>
+<span id="cb16-170"><a href="#cb16-170"></a><span class="fu">### Overall Severity Distribution</span></span>
+<span id="cb16-171"><a href="#cb16-171"></a></span>
+<span id="cb16-174"><a href="#cb16-174"></a><span class="in">```{r}</span></span>
+<span id="cb16-175"><a href="#cb16-175"></a><span class="co">#| label: severity-dist-stacked</span></span>
+<span id="cb16-176"><a href="#cb16-176"></a><span class="co">#| fig-alt: "Proportional stacked bar chart of severity by race"</span></span>
+<span id="cb16-177"><a href="#cb16-177"></a></span>
+<span id="cb16-178"><a href="#cb16-178"></a>sparcs <span class="sc">|&gt;</span></span>
+<span id="cb16-179"><a href="#cb16-179"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(severity)) <span class="sc">|&gt;</span></span>
+<span id="cb16-180"><a href="#cb16-180"></a>  <span class="fu">count</span>(race_eth, severity) <span class="sc">|&gt;</span></span>
+<span id="cb16-181"><a href="#cb16-181"></a>  <span class="fu">group_by</span>(race_eth) <span class="sc">|&gt;</span></span>
+<span id="cb16-182"><a href="#cb16-182"></a>  <span class="fu">mutate</span>(<span class="at">pct =</span> n <span class="sc">/</span> <span class="fu">sum</span>(n)) <span class="sc">|&gt;</span></span>
+<span id="cb16-183"><a href="#cb16-183"></a>  <span class="fu">ungroup</span>() <span class="sc">|&gt;</span></span>
+<span id="cb16-184"><a href="#cb16-184"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> race_eth, <span class="at">y =</span> pct, <span class="at">fill =</span> severity)) <span class="sc">+</span></span>
+<span id="cb16-185"><a href="#cb16-185"></a>  <span class="fu">geom_col</span>(<span class="at">position =</span> <span class="st">"fill"</span>, <span class="at">alpha =</span> <span class="fl">0.85</span>) <span class="sc">+</span></span>
+<span id="cb16-186"><a href="#cb16-186"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">labels =</span> <span class="fu">percent_format</span>()) <span class="sc">+</span></span>
+<span id="cb16-187"><a href="#cb16-187"></a>  <span class="fu">scale_fill_brewer</span>(<span class="at">palette =</span> <span class="st">"YlOrRd"</span>, <span class="at">direction =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb16-188"><a href="#cb16-188"></a>  <span class="fu">labs</span>(</span>
+<span id="cb16-189"><a href="#cb16-189"></a>    <span class="at">title    =</span> <span class="st">"Severity of illness distribution by race / ethnicity"</span>,</span>
+<span id="cb16-190"><a href="#cb16-190"></a>    <span class="at">subtitle =</span> <span class="st">"Darker = more severe; share of Major and Extreme cases differs by group"</span>,</span>
+<span id="cb16-191"><a href="#cb16-191"></a>    <span class="at">x =</span> <span class="cn">NULL</span>, <span class="at">y =</span> <span class="st">"Proportion of discharges"</span>, <span class="at">fill =</span> <span class="st">"Severity"</span></span>
+<span id="cb16-192"><a href="#cb16-192"></a>  )</span>
+<span id="cb16-193"><a href="#cb16-193"></a><span class="in">```</span></span>
+<span id="cb16-194"><a href="#cb16-194"></a></span>
+<span id="cb16-197"><a href="#cb16-197"></a><span class="in">```{r}</span></span>
+<span id="cb16-198"><a href="#cb16-198"></a><span class="co">#| label: severity-mean-bar</span></span>
+<span id="cb16-199"><a href="#cb16-199"></a><span class="co">#| fig-alt: "Bar chart of mean APR severity score with 95% CI error bars by race"</span></span>
+<span id="cb16-200"><a href="#cb16-200"></a></span>
+<span id="cb16-201"><a href="#cb16-201"></a>sparcs <span class="sc">|&gt;</span></span>
+<span id="cb16-202"><a href="#cb16-202"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(severity_code)) <span class="sc">|&gt;</span></span>
+<span id="cb16-203"><a href="#cb16-203"></a>  <span class="fu">group_by</span>(race_eth) <span class="sc">|&gt;</span></span>
+<span id="cb16-204"><a href="#cb16-204"></a>  <span class="fu">summarise</span>(</span>
+<span id="cb16-205"><a href="#cb16-205"></a>    <span class="at">mean_sev =</span> <span class="fu">mean</span>(severity_code, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb16-206"><a href="#cb16-206"></a>    <span class="at">se       =</span> <span class="fu">sd</span>(severity_code,  <span class="at">na.rm =</span> <span class="cn">TRUE</span>) <span class="sc">/</span> <span class="fu">sqrt</span>(<span class="fu">n</span>()),</span>
+<span id="cb16-207"><a href="#cb16-207"></a>    <span class="at">n        =</span> <span class="fu">n</span>()</span>
+<span id="cb16-208"><a href="#cb16-208"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb16-209"><a href="#cb16-209"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb16-210"><a href="#cb16-210"></a>    <span class="at">lo       =</span> mean_sev <span class="sc">-</span> <span class="fl">1.96</span> <span class="sc">*</span> se,</span>
+<span id="cb16-211"><a href="#cb16-211"></a>    <span class="at">hi       =</span> mean_sev <span class="sc">+</span> <span class="fl">1.96</span> <span class="sc">*</span> se,</span>
+<span id="cb16-212"><a href="#cb16-212"></a>    <span class="at">race_eth =</span> <span class="fu">fct_reorder</span>(race_eth, mean_sev)</span>
+<span id="cb16-213"><a href="#cb16-213"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb16-214"><a href="#cb16-214"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> race_eth, <span class="at">y =</span> mean_sev, <span class="at">fill =</span> race_eth)) <span class="sc">+</span></span>
+<span id="cb16-215"><a href="#cb16-215"></a>  <span class="fu">geom_col</span>(<span class="at">alpha =</span> <span class="fl">0.85</span>, <span class="at">show.legend =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
+<span id="cb16-216"><a href="#cb16-216"></a>  <span class="fu">geom_errorbar</span>(<span class="fu">aes</span>(<span class="at">ymin =</span> lo, <span class="at">ymax =</span> hi), <span class="at">width =</span> <span class="fl">0.2</span>, <span class="at">linewidth =</span> <span class="fl">0.8</span>) <span class="sc">+</span></span>
+<span id="cb16-217"><a href="#cb16-217"></a>  <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">label =</span> <span class="fu">round</span>(mean_sev, <span class="dv">2</span>)), <span class="at">vjust =</span> <span class="sc">-</span><span class="fl">0.9</span>, <span class="at">size =</span> <span class="fl">4.2</span>) <span class="sc">+</span></span>
+<span id="cb16-218"><a href="#cb16-218"></a>  <span class="fu">scale_fill_brewer</span>(<span class="at">palette =</span> <span class="st">"Set1"</span>) <span class="sc">+</span></span>
+<span id="cb16-219"><a href="#cb16-219"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">expand =</span> <span class="fu">expansion</span>(<span class="at">mult =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="fl">0.15</span>))) <span class="sc">+</span></span>
+<span id="cb16-220"><a href="#cb16-220"></a>  <span class="fu">labs</span>(</span>
+<span id="cb16-221"><a href="#cb16-221"></a>    <span class="at">title    =</span> <span class="st">"Mean APR severity score by race / ethnicity"</span>,</span>
+<span id="cb16-222"><a href="#cb16-222"></a>    <span class="at">subtitle =</span> <span class="st">"Scale: 1 = Minor, 2 = Moderate, 3 = Major, 4 = Extreme; error bars = 95% CI"</span>,</span>
+<span id="cb16-223"><a href="#cb16-223"></a>    <span class="at">x =</span> <span class="cn">NULL</span>, <span class="at">y =</span> <span class="st">"Mean severity score"</span></span>
+<span id="cb16-224"><a href="#cb16-224"></a>  )</span>
+<span id="cb16-225"><a href="#cb16-225"></a><span class="in">```</span></span>
+<span id="cb16-226"><a href="#cb16-226"></a></span>
+<span id="cb16-227"><a href="#cb16-227"></a>The severity distribution and mean score plots tell a consistent story:</span>
+<span id="cb16-228"><a href="#cb16-228"></a>Black and Hispanic/Latino patients arrive at the hospital with higher</span>
+<span id="cb16-229"><a href="#cb16-229"></a>recorded illness severity than White patients on average. The stacked</span>
+<span id="cb16-230"><a href="#cb16-230"></a>bars show this as a shift in the composition of discharges — a larger</span>
+<span id="cb16-231"><a href="#cb16-231"></a>share of Major and Extreme cases among Black patients, a larger share of</span>
+<span id="cb16-232"><a href="#cb16-232"></a>Minor and Moderate cases among White patients. The mean score bar chart</span>
+<span id="cb16-233"><a href="#cb16-233"></a>quantifies the gap, and the confidence intervals — tight given the large</span>
+<span id="cb16-234"><a href="#cb16-234"></a>sample size — confirm it is not a sampling artifact.</span>
+<span id="cb16-235"><a href="#cb16-235"></a></span>
+<span id="cb16-236"><a href="#cb16-236"></a>The key caveat is age. The severity score is assigned by administrative</span>
+<span id="cb16-237"><a href="#cb16-237"></a>coders at discharge and reflects the full clinical picture at that</span>
+<span id="cb16-238"><a href="#cb16-238"></a>point, but White patients skewing older means they have more years of</span>
+<span id="cb16-239"><a href="#cb16-239"></a>accumulated comorbidities. The age-stratified analysis below tests</span>
+<span id="cb16-240"><a href="#cb16-240"></a>whether the severity gap is an artifact of that demographic difference</span>
+<span id="cb16-241"><a href="#cb16-241"></a>or whether it holds within the same age band.</span>
+<span id="cb16-242"><a href="#cb16-242"></a></span>
+<span id="cb16-243"><a href="#cb16-243"></a><span class="fu">### Risk of Mortality Distribution</span></span>
+<span id="cb16-244"><a href="#cb16-244"></a></span>
+<span id="cb16-247"><a href="#cb16-247"></a><span class="in">```{r}</span></span>
+<span id="cb16-248"><a href="#cb16-248"></a><span class="co">#| label: risk-mortality-stacked</span></span>
+<span id="cb16-249"><a href="#cb16-249"></a><span class="co">#| fig-alt: "Proportional stacked bar chart of APR risk of mortality by race"</span></span>
+<span id="cb16-250"><a href="#cb16-250"></a></span>
+<span id="cb16-251"><a href="#cb16-251"></a>sparcs <span class="sc">|&gt;</span></span>
+<span id="cb16-252"><a href="#cb16-252"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(risk_of_mortality)) <span class="sc">|&gt;</span></span>
+<span id="cb16-253"><a href="#cb16-253"></a>  <span class="fu">count</span>(race_eth, risk_of_mortality) <span class="sc">|&gt;</span></span>
+<span id="cb16-254"><a href="#cb16-254"></a>  <span class="fu">group_by</span>(race_eth) <span class="sc">|&gt;</span></span>
+<span id="cb16-255"><a href="#cb16-255"></a>  <span class="fu">mutate</span>(<span class="at">pct =</span> n <span class="sc">/</span> <span class="fu">sum</span>(n)) <span class="sc">|&gt;</span></span>
+<span id="cb16-256"><a href="#cb16-256"></a>  <span class="fu">ungroup</span>() <span class="sc">|&gt;</span></span>
+<span id="cb16-257"><a href="#cb16-257"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> race_eth, <span class="at">y =</span> pct, <span class="at">fill =</span> risk_of_mortality)) <span class="sc">+</span></span>
+<span id="cb16-258"><a href="#cb16-258"></a>  <span class="fu">geom_col</span>(<span class="at">position =</span> <span class="st">"fill"</span>, <span class="at">alpha =</span> <span class="fl">0.85</span>) <span class="sc">+</span></span>
+<span id="cb16-259"><a href="#cb16-259"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">labels =</span> <span class="fu">percent_format</span>()) <span class="sc">+</span></span>
+<span id="cb16-260"><a href="#cb16-260"></a>  <span class="fu">scale_fill_brewer</span>(<span class="at">palette =</span> <span class="st">"OrRd"</span>, <span class="at">direction =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb16-261"><a href="#cb16-261"></a>  <span class="fu">labs</span>(</span>
+<span id="cb16-262"><a href="#cb16-262"></a>    <span class="at">title    =</span> <span class="st">"APR risk of mortality distribution by race / ethnicity"</span>,</span>
+<span id="cb16-263"><a href="#cb16-263"></a>    <span class="at">subtitle =</span> <span class="st">"Share of Major and Extreme mortality-risk cases differs across groups"</span>,</span>
+<span id="cb16-264"><a href="#cb16-264"></a>    <span class="at">x =</span> <span class="cn">NULL</span>, <span class="at">y =</span> <span class="st">"Proportion of discharges"</span>, <span class="at">fill =</span> <span class="st">"Risk of Mortality"</span></span>
+<span id="cb16-265"><a href="#cb16-265"></a>  )</span>
+<span id="cb16-266"><a href="#cb16-266"></a><span class="in">```</span></span>
+<span id="cb16-267"><a href="#cb16-267"></a></span>
+<span id="cb16-268"><a href="#cb16-268"></a>The APR risk of mortality score is a related but distinct variable from</span>
+<span id="cb16-269"><a href="#cb16-269"></a>severity — it is calibrated specifically to predict in-hospital death</span>
+<span id="cb16-270"><a href="#cb16-270"></a>rather than to summarize overall illness burden. The distribution</span>
+<span id="cb16-271"><a href="#cb16-271"></a>mirrors the severity pattern: Black patients show a higher share of</span>
+<span id="cb16-272"><a href="#cb16-272"></a>Major and Extreme mortality risk, White patients show a higher share of</span>
+<span id="cb16-273"><a href="#cb16-273"></a>Minor risk. Hispanic/Latino patients again fall between the two. Because</span>
+<span id="cb16-274"><a href="#cb16-274"></a>risk of mortality is a predictive score derived from diagnosis and</span>
+<span id="cb16-275"><a href="#cb16-275"></a>procedure codes, a higher score means the clinical record at discharge</span>
+<span id="cb16-276"><a href="#cb16-276"></a>codes as more life-threatening — not simply that the patient arrived</span>
+<span id="cb16-277"><a href="#cb16-277"></a>older or sicker due to age.</span>
+<span id="cb16-278"><a href="#cb16-278"></a></span>
+<span id="cb16-279"><a href="#cb16-279"></a></span>
+<span id="cb16-280"><a href="#cb16-280"></a><span class="fu">## Part 2 — Clinical Outcomes</span></span>
+<span id="cb16-281"><a href="#cb16-281"></a></span>
+<span id="cb16-282"><a href="#cb16-282"></a><span class="fu">### In-Hospital Mortality</span></span>
+<span id="cb16-283"><a href="#cb16-283"></a></span>
+<span id="cb16-286"><a href="#cb16-286"></a><span class="in">```{r}</span></span>
+<span id="cb16-287"><a href="#cb16-287"></a><span class="co">#| label: mortality-bar</span></span>
+<span id="cb16-288"><a href="#cb16-288"></a><span class="co">#| fig-alt: "Bar chart of in-hospital mortality rate by race"</span></span>
+<span id="cb16-289"><a href="#cb16-289"></a></span>
+<span id="cb16-290"><a href="#cb16-290"></a>sparcs <span class="sc">|&gt;</span></span>
+<span id="cb16-291"><a href="#cb16-291"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(died)) <span class="sc">|&gt;</span></span>
+<span id="cb16-292"><a href="#cb16-292"></a>  <span class="fu">group_by</span>(race_eth) <span class="sc">|&gt;</span></span>
+<span id="cb16-293"><a href="#cb16-293"></a>  <span class="fu">summarise</span>(</span>
+<span id="cb16-294"><a href="#cb16-294"></a>    <span class="at">n              =</span> <span class="fu">n</span>(),</span>
+<span id="cb16-295"><a href="#cb16-295"></a>    <span class="at">n_died         =</span> <span class="fu">sum</span>(died, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb16-296"><a href="#cb16-296"></a>    <span class="at">mortality_rate =</span> n_died <span class="sc">/</span> n</span>
+<span id="cb16-297"><a href="#cb16-297"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb16-298"><a href="#cb16-298"></a>  <span class="fu">mutate</span>(<span class="at">race_eth =</span> <span class="fu">fct_reorder</span>(race_eth, mortality_rate)) <span class="sc">|&gt;</span></span>
+<span id="cb16-299"><a href="#cb16-299"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> race_eth, <span class="at">y =</span> mortality_rate, <span class="at">fill =</span> race_eth)) <span class="sc">+</span></span>
+<span id="cb16-300"><a href="#cb16-300"></a>  <span class="fu">geom_col</span>(<span class="at">alpha =</span> <span class="fl">0.85</span>, <span class="at">show.legend =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
+<span id="cb16-301"><a href="#cb16-301"></a>  <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">label =</span> <span class="fu">percent</span>(mortality_rate, <span class="at">accuracy =</span> <span class="fl">0.1</span>)),</span>
+<span id="cb16-302"><a href="#cb16-302"></a>            <span class="at">vjust =</span> <span class="sc">-</span><span class="fl">0.4</span>, <span class="at">size =</span> <span class="fl">4.2</span>) <span class="sc">+</span></span>
+<span id="cb16-303"><a href="#cb16-303"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">labels =</span> <span class="fu">percent_format</span>(),</span>
+<span id="cb16-304"><a href="#cb16-304"></a>                     <span class="at">expand  =</span> <span class="fu">expansion</span>(<span class="at">mult =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="fl">0.15</span>))) <span class="sc">+</span></span>
+<span id="cb16-305"><a href="#cb16-305"></a>  <span class="fu">scale_fill_brewer</span>(<span class="at">palette =</span> <span class="st">"Set1"</span>) <span class="sc">+</span></span>
+<span id="cb16-306"><a href="#cb16-306"></a>  <span class="fu">labs</span>(</span>
+<span id="cb16-307"><a href="#cb16-307"></a>    <span class="at">title    =</span> <span class="st">"In-hospital mortality rate by race / ethnicity"</span>,</span>
+<span id="cb16-308"><a href="#cb16-308"></a>    <span class="at">subtitle =</span> <span class="st">"Percentage of respiratory discharges that resulted in death"</span>,</span>
+<span id="cb16-309"><a href="#cb16-309"></a>    <span class="at">x =</span> <span class="cn">NULL</span>, <span class="at">y =</span> <span class="st">"Mortality rate"</span></span>
+<span id="cb16-310"><a href="#cb16-310"></a>  )</span>
+<span id="cb16-311"><a href="#cb16-311"></a><span class="in">```</span></span>
+<span id="cb16-312"><a href="#cb16-312"></a></span>
+<span id="cb16-313"><a href="#cb16-313"></a>The raw in-hospital mortality rate follows the same racial ordering as</span>
+<span id="cb16-314"><a href="#cb16-314"></a>severity: the group with the highest mean severity score has the highest</span>
+<span id="cb16-315"><a href="#cb16-315"></a>mortality rate, and the group with the lowest has the lowest. This</span>
+<span id="cb16-316"><a href="#cb16-316"></a>ordering is consistent with the severity findings but does not on its</span>
+<span id="cb16-317"><a href="#cb16-317"></a>own establish that race is the driver — age and severity are mediating</span>
+<span id="cb16-318"><a href="#cb16-318"></a>variables that must be controlled before any causal claim can be made.</span>
+<span id="cb16-319"><a href="#cb16-319"></a>The next plot addresses this directly.</span>
+<span id="cb16-320"><a href="#cb16-320"></a></span>
+<span id="cb16-321"><a href="#cb16-321"></a><span class="fu">### Length of Stay by Race</span></span>
+<span id="cb16-322"><a href="#cb16-322"></a></span>
+<span id="cb16-325"><a href="#cb16-325"></a><span class="in">```{r}</span></span>
+<span id="cb16-326"><a href="#cb16-326"></a><span class="co">#| label: los-boxplot</span></span>
+<span id="cb16-327"><a href="#cb16-327"></a><span class="co">#| fig-alt: "Boxplot of length of stay by race, capped at 30 days"</span></span>
+<span id="cb16-328"><a href="#cb16-328"></a></span>
+<span id="cb16-329"><a href="#cb16-329"></a>sparcs <span class="sc">|&gt;</span></span>
+<span id="cb16-330"><a href="#cb16-330"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(length_of_stay)) <span class="sc">|&gt;</span></span>
+<span id="cb16-331"><a href="#cb16-331"></a>  <span class="fu">mutate</span>(<span class="at">race_eth =</span> <span class="fu">fct_reorder</span>(race_eth, length_of_stay, median)) <span class="sc">|&gt;</span></span>
+<span id="cb16-332"><a href="#cb16-332"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> race_eth, <span class="at">y =</span> length_of_stay, <span class="at">fill =</span> race_eth)) <span class="sc">+</span></span>
+<span id="cb16-333"><a href="#cb16-333"></a>  <span class="fu">geom_boxplot</span>(<span class="at">outlier.alpha =</span> <span class="fl">0.04</span>, <span class="at">alpha =</span> <span class="fl">0.8</span>) <span class="sc">+</span></span>
+<span id="cb16-334"><a href="#cb16-334"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">30</span>)) <span class="sc">+</span></span>
+<span id="cb16-335"><a href="#cb16-335"></a>  <span class="fu">scale_fill_brewer</span>(<span class="at">palette =</span> <span class="st">"Set1"</span>) <span class="sc">+</span></span>
+<span id="cb16-336"><a href="#cb16-336"></a>  <span class="fu">labs</span>(</span>
+<span id="cb16-337"><a href="#cb16-337"></a>    <span class="at">title    =</span> <span class="st">"Length of stay by race / ethnicity (capped at 30 days)"</span>,</span>
+<span id="cb16-338"><a href="#cb16-338"></a>    <span class="at">subtitle =</span> <span class="st">"Boxes show median and interquartile range; outliers beyond 30 days suppressed"</span>,</span>
+<span id="cb16-339"><a href="#cb16-339"></a>    <span class="at">x =</span> <span class="cn">NULL</span>, <span class="at">y =</span> <span class="st">"Days"</span></span>
+<span id="cb16-340"><a href="#cb16-340"></a>  ) <span class="sc">+</span></span>
+<span id="cb16-341"><a href="#cb16-341"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"none"</span>)</span>
+<span id="cb16-342"><a href="#cb16-342"></a><span class="in">```</span></span>
+<span id="cb16-343"><a href="#cb16-343"></a></span>
+<span id="cb16-344"><a href="#cb16-344"></a><span class="fu">### Length of Stay within Severity Level</span></span>
+<span id="cb16-345"><a href="#cb16-345"></a></span>
+<span id="cb16-348"><a href="#cb16-348"></a><span class="in">```{r}</span></span>
+<span id="cb16-349"><a href="#cb16-349"></a><span class="co">#| label: los-severity-line</span></span>
+<span id="cb16-350"><a href="#cb16-350"></a><span class="co">#| fig-alt: "Line plot of median length of stay by severity and race"</span></span>
+<span id="cb16-351"><a href="#cb16-351"></a></span>
+<span id="cb16-352"><a href="#cb16-352"></a>sparcs <span class="sc">|&gt;</span></span>
+<span id="cb16-353"><a href="#cb16-353"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(length_of_stay), <span class="sc">!</span><span class="fu">is.na</span>(severity)) <span class="sc">|&gt;</span></span>
+<span id="cb16-354"><a href="#cb16-354"></a>  <span class="fu">group_by</span>(race_eth, severity) <span class="sc">|&gt;</span></span>
+<span id="cb16-355"><a href="#cb16-355"></a>  <span class="fu">summarise</span>(<span class="at">median_los =</span> <span class="fu">median</span>(length_of_stay, <span class="at">na.rm =</span> <span class="cn">TRUE</span>), <span class="at">.groups =</span> <span class="st">"drop"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb16-356"><a href="#cb16-356"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> severity, <span class="at">y =</span> median_los, <span class="at">color =</span> race_eth, <span class="at">group =</span> race_eth)) <span class="sc">+</span></span>
+<span id="cb16-357"><a href="#cb16-357"></a>  <span class="fu">geom_line</span>(<span class="at">linewidth =</span> <span class="fl">1.1</span>) <span class="sc">+</span></span>
+<span id="cb16-358"><a href="#cb16-358"></a>  <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">3</span>) <span class="sc">+</span></span>
+<span id="cb16-359"><a href="#cb16-359"></a>  <span class="fu">geom_text_repel</span>(<span class="fu">aes</span>(<span class="at">label =</span> <span class="fu">round</span>(median_los, <span class="dv">1</span>)), <span class="at">size =</span> <span class="fl">3.2</span>, <span class="at">show.legend =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
+<span id="cb16-360"><a href="#cb16-360"></a>  <span class="fu">scale_color_brewer</span>(<span class="at">palette =</span> <span class="st">"Set1"</span>) <span class="sc">+</span></span>
+<span id="cb16-361"><a href="#cb16-361"></a>  <span class="fu">labs</span>(</span>
+<span id="cb16-362"><a href="#cb16-362"></a>    <span class="at">title    =</span> <span class="st">"Median length of stay by severity level and race / ethnicity"</span>,</span>
+<span id="cb16-363"><a href="#cb16-363"></a>    <span class="at">subtitle =</span> <span class="st">"Within-severity comparison removes illness burden as a confounder"</span>,</span>
+<span id="cb16-364"><a href="#cb16-364"></a>    <span class="at">x =</span> <span class="st">"Severity of illness"</span>, <span class="at">y =</span> <span class="st">"Median LOS (days)"</span>, <span class="at">color =</span> <span class="st">"Race / Ethnicity"</span></span>
+<span id="cb16-365"><a href="#cb16-365"></a>  )</span>
+<span id="cb16-366"><a href="#cb16-366"></a><span class="in">```</span></span>
+<span id="cb16-367"><a href="#cb16-367"></a></span>
+<span id="cb16-368"><a href="#cb16-368"></a>The within-severity comparison is the strongest single plot in this</span>
+<span id="cb16-369"><a href="#cb16-369"></a>section. By holding severity constant, it removes the most obvious</span>
+<span id="cb16-370"><a href="#cb16-370"></a>alternative explanation for the LOS gap — that Black and Hispanic/Latino</span>
+<span id="cb16-371"><a href="#cb16-371"></a>patients simply arrive sicker. Within every severity category, Black and</span>
+<span id="cb16-372"><a href="#cb16-372"></a>Hispanic/Latino patients spend as many or more days in the hospital as</span>
+<span id="cb16-373"><a href="#cb16-373"></a>White patients at the same illness level. The gap is not driven by</span>
+<span id="cb16-374"><a href="#cb16-374"></a>severity alone. This raises the question of what else might explain it:</span>
+<span id="cb16-375"><a href="#cb16-375"></a>differences in treatment course, delays in response to treatment,</span>
+<span id="cb16-376"><a href="#cb16-376"></a>comorbidity burden not fully captured by the APR severity score, or</span>
+<span id="cb16-377"><a href="#cb16-377"></a>upstream clinical failures that caused the condition to progress further</span>
+<span id="cb16-378"><a href="#cb16-378"></a>before the patient sought care.</span>
+<span id="cb16-379"><a href="#cb16-379"></a><span class="fu">### Severity Heatmap by Diagnosis and Race</span></span>
+<span id="cb16-380"><a href="#cb16-380"></a></span>
+<span id="cb16-383"><a href="#cb16-383"></a><span class="in">```{r}</span></span>
+<span id="cb16-384"><a href="#cb16-384"></a><span class="co">#| label: severity-heatmap</span></span>
+<span id="cb16-385"><a href="#cb16-385"></a><span class="co">#| fig-height: 6</span></span>
+<span id="cb16-386"><a href="#cb16-386"></a><span class="co">#| fig-alt: "Heatmap of mean severity score by top diagnosis and race"</span></span>
+<span id="cb16-387"><a href="#cb16-387"></a></span>
+<span id="cb16-388"><a href="#cb16-388"></a>top_dx <span class="ot">&lt;-</span> sparcs <span class="sc">|&gt;</span></span>
+<span id="cb16-389"><a href="#cb16-389"></a>  <span class="fu">count</span>(ccsr_diagnosis_description) <span class="sc">|&gt;</span></span>
+<span id="cb16-390"><a href="#cb16-390"></a>  <span class="fu">slice_max</span>(n, <span class="at">n =</span> <span class="dv">10</span>) <span class="sc">|&gt;</span></span>
+<span id="cb16-391"><a href="#cb16-391"></a>  <span class="fu">pull</span>(ccsr_diagnosis_description)</span>
+<span id="cb16-392"><a href="#cb16-392"></a></span>
+<span id="cb16-393"><a href="#cb16-393"></a>sparcs <span class="sc">|&gt;</span></span>
+<span id="cb16-394"><a href="#cb16-394"></a>  <span class="fu">filter</span>(ccsr_diagnosis_description <span class="sc">%in%</span> top_dx, <span class="sc">!</span><span class="fu">is.na</span>(severity_code)) <span class="sc">|&gt;</span></span>
+<span id="cb16-395"><a href="#cb16-395"></a>  <span class="fu">group_by</span>(race_eth, ccsr_diagnosis_description) <span class="sc">|&gt;</span></span>
+<span id="cb16-396"><a href="#cb16-396"></a>  <span class="fu">summarise</span>(<span class="at">mean_sev =</span> <span class="fu">mean</span>(severity_code, <span class="at">na.rm =</span> <span class="cn">TRUE</span>), <span class="at">.groups =</span> <span class="st">"drop"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb16-397"><a href="#cb16-397"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> race_eth, <span class="at">y =</span> ccsr_diagnosis_description, <span class="at">fill =</span> mean_sev)) <span class="sc">+</span></span>
+<span id="cb16-398"><a href="#cb16-398"></a>  <span class="fu">geom_tile</span>(<span class="at">color =</span> <span class="st">"white"</span>) <span class="sc">+</span></span>
+<span id="cb16-399"><a href="#cb16-399"></a>  <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">label =</span> <span class="fu">round</span>(mean_sev, <span class="dv">2</span>)), <span class="at">size =</span> <span class="fl">3.2</span>) <span class="sc">+</span></span>
+<span id="cb16-400"><a href="#cb16-400"></a>  <span class="fu">scale_fill_distiller</span>(<span class="at">palette =</span> <span class="st">"YlOrRd"</span>, <span class="at">direction =</span> <span class="dv">1</span>,</span>
+<span id="cb16-401"><a href="#cb16-401"></a>                       <span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">4</span>)) <span class="sc">+</span></span>
+<span id="cb16-402"><a href="#cb16-402"></a>  <span class="fu">labs</span>(</span>
+<span id="cb16-403"><a href="#cb16-403"></a>    <span class="at">title    =</span> <span class="st">"Mean severity score by race and top 10 diagnoses"</span>,</span>
+<span id="cb16-404"><a href="#cb16-404"></a>    <span class="at">subtitle =</span> <span class="st">"Comparing same diagnosis across groups controls for case-mix differences"</span>,</span>
+<span id="cb16-405"><a href="#cb16-405"></a>    <span class="at">x =</span> <span class="cn">NULL</span>, <span class="at">y =</span> <span class="cn">NULL</span>, <span class="at">fill =</span> <span class="st">"Mean severity"</span></span>
+<span id="cb16-406"><a href="#cb16-406"></a>  ) <span class="sc">+</span></span>
+<span id="cb16-407"><a href="#cb16-407"></a>  <span class="fu">theme</span>(<span class="at">axis.text.y =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">9</span>))</span>
+<span id="cb16-408"><a href="#cb16-408"></a><span class="in">```</span></span>
+<span id="cb16-409"><a href="#cb16-409"></a></span>
+<span id="cb16-410"><a href="#cb16-410"></a>The heatmap is a diagnosis-controlled comparison: it asks whether, for</span>
+<span id="cb16-411"><a href="#cb16-411"></a>the same respiratory condition, Black and Hispanic/Latino patients</span>
+<span id="cb16-412"><a href="#cb16-412"></a>present at higher severity than White patients. Cells in the same row</span>
+<span id="cb16-413"><a href="#cb16-413"></a>hold the diagnosis constant, so differences across columns reflect</span>
+<span id="cb16-414"><a href="#cb16-414"></a>patient-level variation rather than diagnosis-mix. Where a racial group</span>
+<span id="cb16-415"><a href="#cb16-415"></a>shows consistently darker cells across diagnoses — not just for one</span>
+<span id="cb16-416"><a href="#cb16-416"></a>condition but for many — the severity gap is more likely to reflect</span>
+<span id="cb16-417"><a href="#cb16-417"></a>something about the patient's journey to the hospital (access to care,</span>
+<span id="cb16-418"><a href="#cb16-418"></a>delays in treatment, or upstream clinical failures) than the type of</span>
+<span id="cb16-419"><a href="#cb16-419"></a>condition they were admitted for.</span>
+<span id="cb16-420"><a href="#cb16-420"></a></span>
+<span id="cb16-421"><a href="#cb16-421"></a><span class="fu">## Part 3 — Age-Stratified Analysis</span></span>
+<span id="cb16-422"><a href="#cb16-422"></a></span>
+<span id="cb16-423"><a href="#cb16-423"></a>Age is the most important confounder in this dataset. White respiratory</span>
+<span id="cb16-424"><a href="#cb16-424"></a>patients skew older, and older patients accumulate more comorbidities,</span>
+<span id="cb16-425"><a href="#cb16-425"></a>generate higher severity scores, and are more likely to die during</span>
+<span id="cb16-426"><a href="#cb16-426"></a>admission. Stratifying by age band tests whether the racial gradients in</span>
+<span id="cb16-427"><a href="#cb16-427"></a>severity and outcomes hold within the same life stage — or whether they</span>
+<span id="cb16-428"><a href="#cb16-428"></a>disappear once age is controlled.</span>
+<span id="cb16-429"><a href="#cb16-429"></a></span>
+<span id="cb16-432"><a href="#cb16-432"></a><span class="in">```{r}</span></span>
+<span id="cb16-433"><a href="#cb16-433"></a><span class="co">#| label: age-strat-summary</span></span>
+<span id="cb16-434"><a href="#cb16-434"></a></span>
+<span id="cb16-435"><a href="#cb16-435"></a>sparcs_age <span class="ot">&lt;-</span> sparcs <span class="sc">|&gt;</span></span>
+<span id="cb16-436"><a href="#cb16-436"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(race_eth), <span class="sc">!</span><span class="fu">is.na</span>(age_group)) <span class="sc">|&gt;</span></span>
+<span id="cb16-437"><a href="#cb16-437"></a>  <span class="fu">group_by</span>(race_eth, age_group) <span class="sc">|&gt;</span></span>
+<span id="cb16-438"><a href="#cb16-438"></a>  <span class="fu">summarise</span>(</span>
+<span id="cb16-439"><a href="#cb16-439"></a>    <span class="at">n_discharges   =</span> <span class="fu">n</span>(),</span>
+<span id="cb16-440"><a href="#cb16-440"></a>    <span class="at">mean_severity  =</span> <span class="fu">mean</span>(severity_code,    <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb16-441"><a href="#cb16-441"></a>    <span class="at">median_los     =</span> <span class="fu">median</span>(length_of_stay, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb16-442"><a href="#cb16-442"></a>    <span class="at">mortality_rate =</span> <span class="fu">mean</span>(died,             <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb16-443"><a href="#cb16-443"></a>    <span class="at">pct_major_ext  =</span> <span class="fu">mean</span>(severity <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"Major"</span>, <span class="st">"Extreme"</span>), <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb16-444"><a href="#cb16-444"></a>    <span class="at">.groups =</span> <span class="st">"drop"</span></span>
+<span id="cb16-445"><a href="#cb16-445"></a>  )</span>
+<span id="cb16-446"><a href="#cb16-446"></a></span>
+<span id="cb16-447"><a href="#cb16-447"></a>sparcs_age <span class="sc">|&gt;</span></span>
+<span id="cb16-448"><a href="#cb16-448"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb16-449"><a href="#cb16-449"></a>    <span class="at">mean_severity  =</span> <span class="fu">round</span>(mean_severity, <span class="dv">2</span>),</span>
+<span id="cb16-450"><a href="#cb16-450"></a>    <span class="at">median_los     =</span> <span class="fu">round</span>(median_los, <span class="dv">1</span>),</span>
+<span id="cb16-451"><a href="#cb16-451"></a>    <span class="at">mortality_rate =</span> <span class="fu">percent</span>(mortality_rate, <span class="at">accuracy =</span> <span class="fl">0.1</span>),</span>
+<span id="cb16-452"><a href="#cb16-452"></a>    <span class="at">pct_major_ext  =</span> <span class="fu">percent</span>(pct_major_ext,  <span class="at">accuracy =</span> <span class="fl">0.1</span>)</span>
+<span id="cb16-453"><a href="#cb16-453"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb16-454"><a href="#cb16-454"></a>  <span class="fu">arrange</span>(age_group, race_eth) <span class="sc">|&gt;</span></span>
+<span id="cb16-455"><a href="#cb16-455"></a>  knitr<span class="sc">::</span><span class="fu">kable</span>(</span>
+<span id="cb16-456"><a href="#cb16-456"></a>    <span class="at">col.names =</span> <span class="fu">c</span>(<span class="st">"Race"</span>, <span class="st">"Age group"</span>, <span class="st">"N"</span>, <span class="st">"Mean severity"</span>,</span>
+<span id="cb16-457"><a href="#cb16-457"></a>                  <span class="st">"Median LOS"</span>, <span class="st">"Mortality rate"</span>, <span class="st">"% Major / Extreme"</span>),</span>
+<span id="cb16-458"><a href="#cb16-458"></a>    <span class="at">caption =</span> <span class="st">"**Table 2. Age-stratified clinical outcomes by race — SPARCS respiratory discharges**"</span></span>
+<span id="cb16-459"><a href="#cb16-459"></a>  )</span>
+<span id="cb16-460"><a href="#cb16-460"></a><span class="in">```</span></span>
+<span id="cb16-461"><a href="#cb16-461"></a></span>
+<span id="cb16-462"><a href="#cb16-462"></a>Cell counts range from several thousand to over twenty thousand per race</span>
+<span id="cb16-463"><a href="#cb16-463"></a>× age combination, so all estimates are stable. The 18–49 band tests</span>
+<span id="cb16-464"><a href="#cb16-464"></a>whether disparities appear before age-related comorbidities accumulate —</span>
+<span id="cb16-465"><a href="#cb16-465"></a>this is the cleanest comparison because older patients have more</span>
+<span id="cb16-466"><a href="#cb16-466"></a>accumulated health burden by definition. The 50–69 band captures</span>
+<span id="cb16-467"><a href="#cb16-467"></a>patients with real respiratory disease burden but before the Medicare</span>
+<span id="cb16-468"><a href="#cb16-468"></a>transition dominates. The 70+ band is where age-related confounding is</span>
+<span id="cb16-469"><a href="#cb16-469"></a>strongest — making any residual gap in this group the hardest to explain</span>
+<span id="cb16-470"><a href="#cb16-470"></a>away.</span>
+<span id="cb16-471"><a href="#cb16-471"></a></span>
+<span id="cb16-472"><a href="#cb16-472"></a><span class="fu">### Severity by Age Group and Race</span></span>
+<span id="cb16-473"><a href="#cb16-473"></a></span>
+<span id="cb16-476"><a href="#cb16-476"></a><span class="in">```{r}</span></span>
+<span id="cb16-477"><a href="#cb16-477"></a><span class="co">#| label: severity-age-line</span></span>
+<span id="cb16-478"><a href="#cb16-478"></a><span class="co">#| fig-alt: "Line plot of mean severity score by age group and race"</span></span>
+<span id="cb16-479"><a href="#cb16-479"></a></span>
+<span id="cb16-480"><a href="#cb16-480"></a>sparcs_age <span class="sc">|&gt;</span></span>
+<span id="cb16-481"><a href="#cb16-481"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> age_group, <span class="at">y =</span> mean_severity,</span>
+<span id="cb16-482"><a href="#cb16-482"></a>             <span class="at">color =</span> race_eth, <span class="at">group =</span> race_eth)) <span class="sc">+</span></span>
+<span id="cb16-483"><a href="#cb16-483"></a>  <span class="fu">geom_line</span>(<span class="at">linewidth =</span> <span class="fl">1.1</span>) <span class="sc">+</span></span>
+<span id="cb16-484"><a href="#cb16-484"></a>  <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">3</span>) <span class="sc">+</span></span>
+<span id="cb16-485"><a href="#cb16-485"></a>  <span class="fu">geom_text_repel</span>(<span class="fu">aes</span>(<span class="at">label =</span> <span class="fu">round</span>(mean_severity, <span class="dv">2</span>)),</span>
+<span id="cb16-486"><a href="#cb16-486"></a>                  <span class="at">size =</span> <span class="fl">3.2</span>, <span class="at">show.legend =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
+<span id="cb16-487"><a href="#cb16-487"></a>  <span class="fu">scale_color_brewer</span>(<span class="at">palette =</span> <span class="st">"Set1"</span>) <span class="sc">+</span></span>
+<span id="cb16-488"><a href="#cb16-488"></a>  <span class="fu">labs</span>(</span>
+<span id="cb16-489"><a href="#cb16-489"></a>    <span class="at">title    =</span> <span class="st">"Mean APR severity score by age group and race / ethnicity"</span>,</span>
+<span id="cb16-490"><a href="#cb16-490"></a>    <span class="at">subtitle =</span> <span class="st">"Age-controlled comparison: does the severity gap hold within the same life stage?"</span>,</span>
+<span id="cb16-491"><a href="#cb16-491"></a>    <span class="at">x =</span> <span class="st">"Age group"</span>, <span class="at">y =</span> <span class="st">"Mean severity score (1–4)"</span>, <span class="at">color =</span> <span class="st">"Race / Ethnicity"</span></span>
+<span id="cb16-492"><a href="#cb16-492"></a>  )</span>
+<span id="cb16-493"><a href="#cb16-493"></a><span class="in">```</span></span>
+<span id="cb16-494"><a href="#cb16-494"></a></span>
+<span id="cb16-495"><a href="#cb16-495"></a><span class="fu">### Mortality Rate by Age Group and Race</span></span>
+<span id="cb16-496"><a href="#cb16-496"></a></span>
+<span id="cb16-499"><a href="#cb16-499"></a><span class="in">```{r}</span></span>
+<span id="cb16-500"><a href="#cb16-500"></a><span class="co">#| label: mortality-age-line</span></span>
+<span id="cb16-501"><a href="#cb16-501"></a><span class="co">#| fig-alt: "Line plot of in-hospital mortality rate by age group and race"</span></span>
+<span id="cb16-502"><a href="#cb16-502"></a></span>
+<span id="cb16-503"><a href="#cb16-503"></a>sparcs_age <span class="sc">|&gt;</span></span>
+<span id="cb16-504"><a href="#cb16-504"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> age_group, <span class="at">y =</span> mortality_rate,</span>
+<span id="cb16-505"><a href="#cb16-505"></a>             <span class="at">color =</span> race_eth, <span class="at">group =</span> race_eth)) <span class="sc">+</span></span>
+<span id="cb16-506"><a href="#cb16-506"></a>  <span class="fu">geom_line</span>(<span class="at">linewidth =</span> <span class="fl">1.1</span>) <span class="sc">+</span></span>
+<span id="cb16-507"><a href="#cb16-507"></a>  <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">3</span>) <span class="sc">+</span></span>
+<span id="cb16-508"><a href="#cb16-508"></a>  <span class="fu">geom_text_repel</span>(<span class="fu">aes</span>(<span class="at">label =</span> <span class="fu">percent</span>(mortality_rate, <span class="at">accuracy =</span> <span class="fl">0.1</span>)),</span>
+<span id="cb16-509"><a href="#cb16-509"></a>                  <span class="at">size =</span> <span class="fl">3.2</span>, <span class="at">show.legend =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
+<span id="cb16-510"><a href="#cb16-510"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">labels =</span> <span class="fu">percent_format</span>()) <span class="sc">+</span></span>
+<span id="cb16-511"><a href="#cb16-511"></a>  <span class="fu">scale_color_brewer</span>(<span class="at">palette =</span> <span class="st">"Set1"</span>) <span class="sc">+</span></span>
+<span id="cb16-512"><a href="#cb16-512"></a>  <span class="fu">labs</span>(</span>
+<span id="cb16-513"><a href="#cb16-513"></a>    <span class="at">title    =</span> <span class="st">"In-hospital mortality rate by age group and race / ethnicity"</span>,</span>
+<span id="cb16-514"><a href="#cb16-514"></a>    <span class="at">subtitle =</span> <span class="st">"Each band holds age constant; differences across lines reflect racial variation"</span>,</span>
+<span id="cb16-515"><a href="#cb16-515"></a>    <span class="at">x =</span> <span class="st">"Age group"</span>, <span class="at">y =</span> <span class="st">"Mortality rate"</span>, <span class="at">color =</span> <span class="st">"Race / Ethnicity"</span></span>
+<span id="cb16-516"><a href="#cb16-516"></a>  )</span>
+<span id="cb16-517"><a href="#cb16-517"></a><span class="in">```</span></span>
+<span id="cb16-518"><a href="#cb16-518"></a></span>
+<span id="cb16-519"><a href="#cb16-519"></a><span class="fu">### % Major or Extreme by Age Group and Race</span></span>
+<span id="cb16-520"><a href="#cb16-520"></a></span>
+<span id="cb16-523"><a href="#cb16-523"></a><span class="in">```{r}</span></span>
+<span id="cb16-524"><a href="#cb16-524"></a><span class="co">#| label: major-ext-age-line</span></span>
+<span id="cb16-525"><a href="#cb16-525"></a><span class="co">#| fig-alt: "Line plot of share of Major or Extreme severity discharges by age group and race"</span></span>
+<span id="cb16-526"><a href="#cb16-526"></a></span>
+<span id="cb16-527"><a href="#cb16-527"></a>sparcs_age <span class="sc">|&gt;</span></span>
+<span id="cb16-528"><a href="#cb16-528"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> age_group, <span class="at">y =</span> pct_major_ext,</span>
+<span id="cb16-529"><a href="#cb16-529"></a>             <span class="at">color =</span> race_eth, <span class="at">group =</span> race_eth)) <span class="sc">+</span></span>
+<span id="cb16-530"><a href="#cb16-530"></a>  <span class="fu">geom_line</span>(<span class="at">linewidth =</span> <span class="fl">1.1</span>) <span class="sc">+</span></span>
+<span id="cb16-531"><a href="#cb16-531"></a>  <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">3</span>) <span class="sc">+</span></span>
+<span id="cb16-532"><a href="#cb16-532"></a>  <span class="fu">geom_text_repel</span>(<span class="fu">aes</span>(<span class="at">label =</span> <span class="fu">percent</span>(pct_major_ext, <span class="at">accuracy =</span> <span class="dv">1</span>)),</span>
+<span id="cb16-533"><a href="#cb16-533"></a>                  <span class="at">size =</span> <span class="fl">3.2</span>, <span class="at">show.legend =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
+<span id="cb16-534"><a href="#cb16-534"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">labels =</span> <span class="fu">percent_format</span>()) <span class="sc">+</span></span>
+<span id="cb16-535"><a href="#cb16-535"></a>  <span class="fu">scale_color_brewer</span>(<span class="at">palette =</span> <span class="st">"Set1"</span>) <span class="sc">+</span></span>
+<span id="cb16-536"><a href="#cb16-536"></a>  <span class="fu">labs</span>(</span>
+<span id="cb16-537"><a href="#cb16-537"></a>    <span class="at">title    =</span> <span class="st">"Share of Major / Extreme severity discharges by age group and race"</span>,</span>
+<span id="cb16-538"><a href="#cb16-538"></a>    <span class="at">subtitle =</span> <span class="st">"Higher share = more patients arriving at the most severe illness levels"</span>,</span>
+<span id="cb16-539"><a href="#cb16-539"></a>    <span class="at">x =</span> <span class="st">"Age group"</span>, <span class="at">y =</span> <span class="st">"% Major or Extreme"</span>, <span class="at">color =</span> <span class="st">"Race / Ethnicity"</span></span>
+<span id="cb16-540"><a href="#cb16-540"></a>  )</span>
+<span id="cb16-541"><a href="#cb16-541"></a><span class="in">```</span></span>
+<span id="cb16-542"><a href="#cb16-542"></a></span>
+<span id="cb16-543"><a href="#cb16-543"></a>The age-stratified plots are the core evidence of this section. Across</span>
+<span id="cb16-544"><a href="#cb16-544"></a>all three age bands, the racial ordering on severity, mortality, and</span>
+<span id="cb16-545"><a href="#cb16-545"></a>share of Major/Extreme cases is consistent: Black patients at or near</span>
+<span id="cb16-546"><a href="#cb16-546"></a>the top, White patients at or near the bottom, Hispanic/Latino patients</span>
+<span id="cb16-547"><a href="#cb16-547"></a>in between. The gaps narrow somewhat at 70+, where severity scores</span>
+<span id="cb16-548"><a href="#cb16-548"></a>converge as all groups accumulate serious illness burden — but they do</span>
+<span id="cb16-549"><a href="#cb16-549"></a>not disappear. At 18–49, the comparison is especially striking: these</span>
+<span id="cb16-550"><a href="#cb16-550"></a>are working-age patients with fewer accumulated comorbidities, yet Black</span>
+<span id="cb16-551"><a href="#cb16-551"></a>and Hispanic/Latino patients still arrive at higher severity levels and</span>
+<span id="cb16-552"><a href="#cb16-552"></a>die at higher rates than White patients of the same age.</span>
+<span id="cb16-553"><a href="#cb16-553"></a></span>
+<span id="cb16-554"><a href="#cb16-554"></a>The persistence of the severity and mortality gaps after controlling for</span>
+<span id="cb16-555"><a href="#cb16-555"></a>age points to something happening before the patient reaches the</span>
+<span id="cb16-556"><a href="#cb16-556"></a>hospital. One hypothesis — consistent with the broader group project —</span>
+<span id="cb16-557"><a href="#cb16-557"></a>is that clinical tools used earlier in the care pathway are less</span>
+<span id="cb16-558"><a href="#cb16-558"></a>accurate for darker-skinned patients, allowing conditions to deteriorate</span>
+<span id="cb16-559"><a href="#cb16-559"></a>further before they are detected and treated. That upstream failure,</span>
+<span id="cb16-560"><a href="#cb16-560"></a>whatever its source, would produce exactly the pattern seen here: higher</span>
+<span id="cb16-561"><a href="#cb16-561"></a>severity at admission, longer stays, and higher mortality — not because</span>
+<span id="cb16-562"><a href="#cb16-562"></a>these patients are intrinsically sicker, but because their illness was</span>
+<span id="cb16-563"><a href="#cb16-563"></a>permitted to progress further before intervention.</span>
+<span id="cb16-564"><a href="#cb16-564"></a></span>
+<span id="cb16-565"><a href="#cb16-565"></a><span class="fu">## Summary of Key Findings</span></span>
+<span id="cb16-566"><a href="#cb16-566"></a></span>
+<span id="cb16-567"><a href="#cb16-567"></a><span class="pp">|</span> Finding <span class="pp">|</span> Evidence <span class="pp">|</span></span>
+<span id="cb16-568"><a href="#cb16-568"></a><span class="pp">|------------------------------------|------------------------------------|</span></span>
+<span id="cb16-569"><a href="#cb16-569"></a><span class="pp">|</span> **Black patients arrive at higher severity** <span class="pp">|</span> Higher mean APR severity score and larger share of Major/Extreme discharges than White or Hispanic/Latino patients in raw comparisons <span class="pp">|</span></span>
+<span id="cb16-570"><a href="#cb16-570"></a><span class="pp">|</span> **The severity gap is not fully explained by diagnosis mix** <span class="pp">|</span> Heatmap shows higher mean severity for Black patients within the same respiratory diagnosis <span class="pp">|</span></span>
+<span id="cb16-571"><a href="#cb16-571"></a><span class="pp">|</span> **LOS gap persists within severity level** <span class="pp">|</span> At every severity category, Black and Hispanic/Latino patients have equal or longer median stays than White patients at the same illness level <span class="pp">|</span></span>
+<span id="cb16-572"><a href="#cb16-572"></a><span class="pp">|</span> **Racial ordering in mortality is consistent** <span class="pp">|</span> In-hospital mortality rate follows the same ordering as severity: Black ≥ Hispanic/Latino ≥ White <span class="pp">|</span></span>
+<span id="cb16-573"><a href="#cb16-573"></a><span class="pp">|</span> **Disparities hold after controlling for age** <span class="pp">|</span> Age-stratified analysis shows the severity and mortality gap is present at 18–49, 50–69, and 70+, ruling out age as the primary explanation <span class="pp">|</span></span>
+<span id="cb16-574"><a href="#cb16-574"></a><span class="pp">|</span> **The 18–49 band is the sharpest evidence** <span class="pp">|</span> Among working-age patients with the fewest accumulated comorbidities, racial gaps in severity and mortality are still present — pointing to a pre-admission mechanism <span class="pp">|</span></span>
+<span id="cb16-575"><a href="#cb16-575"></a></span>
+<span id="cb16-576"><a href="#cb16-576"></a>::: callout-note</span>
+<span id="cb16-577"><a href="#cb16-577"></a>SPARCS is administrative data collected at discharge for billing and</span>
+<span id="cb16-578"><a href="#cb16-578"></a>regulatory purposes. Severity scores are assigned by coders working from</span>
+<span id="cb16-579"><a href="#cb16-579"></a>discharge records rather than by clinicians at the bedside. If earlier</span>
+<span id="cb16-580"><a href="#cb16-580"></a>clinical failures cause a condition to deteriorate undetected before</span>
+<span id="cb16-581"><a href="#cb16-581"></a>admission, the true disease burden may be understated by the coded</span>
+<span id="cb16-582"><a href="#cb16-582"></a>severity score — meaning the observed disparities may actually</span>
+<span id="cb16-583"><a href="#cb16-583"></a>underestimate the gap in illness progression before hospital arrival.</span>
+<span id="cb16-584"><a href="#cb16-584"></a>:::</span>
+</code></pre></div><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
+</div></div></div></div></div>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+      &nbsp;
+    </div>   
+    <div class="nav-footer-center">
+
+<div class="cookie-consent-footer"><a href="#" id="open_preferences_center">Cookie Preferences</a></div></div>
+    <div class="nav-footer-right">
+      &nbsp;
+    </div>
+  </div>
+</footer>
+
+
+
+
+<script src="../site_libs/quarto-html/zenscroll-min.js"></script>
+</body></html>
