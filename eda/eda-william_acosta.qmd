@@ -78,10 +78,10 @@ taking priority over race to correctly classify Hispanic patients.
 #| message: false
 #| warning: false
 
-patients      <- read_csv("../data/patient.csv")
-encounter     <- read_csv("../data/encounter.csv")
-pulseoximeter <- read_csv("../data/pulseoximeter.csv")
-bloodgas      <- read_csv("../data/bloodgas.csv")
+patients      <- read_csv("../data/raw/patient.csv")
+encounter     <- read_csv("../data/raw/encounter.csv")
+pulseoximeter <- read_csv("../data/raw/pulseoximeter.csv")
+bloodgas      <- read_csv("../data/raw/bloodgas.csv")
 
 oximetry <- pulseoximeter |>
   inner_join(
