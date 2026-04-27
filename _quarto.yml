@@ -45,7 +45,7 @@ book:
       # footer text
 
   sidebar:
-    title: "Team Name"
+    title: "Oxymeter Equity"
     logo: assets/sidebar-logo.png
     logo-alt: "Random negative space illustration"
     collapse-level: 2
