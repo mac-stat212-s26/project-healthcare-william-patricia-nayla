@@ -1,0 +1,1744 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.9.37">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Patricia Escobar Contreras">
+<meta name="dcterms.date" content="2026-04-20">
+
+<title>Individual EDA: Evaluating Demographic Disparities in Pulse Oximetry Accuracy – Project Title</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../eda/eda-member3.html" rel="next">
+<link href="../eda/eda-william_acosta.html" rel="prev">
+<script src="../site_libs/cookie-consent/cookie-consent.js"></script>
+<link href="../site_libs/cookie-consent/cookie-consent.css" rel="stylesheet">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-7f8f88aac4f3542376d5c11b86a4c14d.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark-d0ae9245876894da5ac7e18953ecc5cc.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-7f8f88aac4f3542376d5c11b86a4c14d.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-aa768d0510026dbab67ce2f8e698749f.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-dark-ce494e159dae1eb1aeb2beb157b73888.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../site_libs/bootstrap/bootstrap-aa768d0510026dbab67ce2f8e698749f.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+<script type="text/javascript" charset="UTF-8">
+document.addEventListener('DOMContentLoaded', function () {
+cookieconsent.run({
+  "notice_banner_type":"simple",
+  "consent_type":"implied",
+  "palette":"light",
+  "language":"en",
+  "page_load_consent_levels":["strictly-necessary","functionality","tracking","targeting"],
+  "notice_banner_reject_button_hide":false,
+  "preferences_center_close_button_hide":false,
+  "website_name":""
+  ,
+"language":"en"
+  });
+});
+</script> 
+  
+<style>html{ scroll-behavior: smooth; }</style>
+
+
+<link rel="stylesheet" href="../style/custom.css">
+</head>
+
+<body class="nav-sidebar docked quarto-light"><script id="quarto-html-before-body" type="application/javascript">
+    const toggleBodyColorMode = (bsSheetEl) => {
+      const mode = bsSheetEl.getAttribute("data-mode");
+      const bodyEl = window.document.querySelector("body");
+      if (mode === "dark") {
+        bodyEl.classList.add("quarto-dark");
+        bodyEl.classList.remove("quarto-light");
+      } else {
+        bodyEl.classList.add("quarto-light");
+        bodyEl.classList.remove("quarto-dark");
+      }
+    }
+    const toggleBodyColorPrimary = () => {
+      const bsSheetEl = window.document.querySelector("link#quarto-bootstrap:not([rel=disabled-stylesheet])");
+      if (bsSheetEl) {
+        toggleBodyColorMode(bsSheetEl);
+      }
+    }
+    const setColorSchemeToggle = (alternate) => {
+      const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+      for (let i=0; i < toggles.length; i++) {
+        const toggle = toggles[i];
+        if (toggle) {
+          if (alternate) {
+            toggle.classList.add("alternate");
+          } else {
+            toggle.classList.remove("alternate");
+          }
+        }
+      }
+    };
+    const toggleColorMode = (alternate) => {
+      // Switch the stylesheets
+      const primaryStylesheets = window.document.querySelectorAll('link.quarto-color-scheme:not(.quarto-color-alternate)');
+      const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+      manageTransitions('#quarto-margin-sidebar .nav-link', false);
+      if (alternate) {
+        // note: dark is layered on light, we don't disable primary!
+        enableStylesheet(alternateStylesheets);
+        for (const sheetNode of alternateStylesheets) {
+          if (sheetNode.id === "quarto-bootstrap") {
+            toggleBodyColorMode(sheetNode);
+          }
+        }
+      } else {
+        disableStylesheet(alternateStylesheets);
+        enableStylesheet(primaryStylesheets)
+        toggleBodyColorPrimary();
+      }
+      manageTransitions('#quarto-margin-sidebar .nav-link', true);
+      // Switch the toggles
+      setColorSchemeToggle(alternate)
+      // Hack to workaround the fact that safari doesn't
+      // properly recolor the scrollbar when toggling (#1455)
+      if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+        manageTransitions("body", false);
+        window.scrollTo(0, 1);
+        setTimeout(() => {
+          window.scrollTo(0, 0);
+          manageTransitions("body", true);
+        }, 40);
+      }
+    }
+    const disableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        stylesheet.rel = 'disabled-stylesheet';
+      }
+    }
+    const enableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        if(stylesheet.rel !== 'stylesheet') { // for Chrome, which will still FOUC without this check
+          stylesheet.rel = 'stylesheet';
+        }
+      }
+    }
+    const manageTransitions = (selector, allowTransitions) => {
+      const els = window.document.querySelectorAll(selector);
+      for (let i=0; i < els.length; i++) {
+        const el = els[i];
+        if (allowTransitions) {
+          el.classList.remove('notransition');
+        } else {
+          el.classList.add('notransition');
+        }
+      }
+    }
+    const isFileUrl = () => {
+      return window.location.protocol === 'file:';
+    }
+    const hasAlternateSentinel = () => {
+      let styleSentinel = getColorSchemeSentinel();
+      if (styleSentinel !== null) {
+        return styleSentinel === "alternate";
+      } else {
+        return false;
+      }
+    }
+    const setStyleSentinel = (alternate) => {
+      const value = alternate ? "alternate" : "default";
+      if (!isFileUrl()) {
+        window.localStorage.setItem("quarto-color-scheme", value);
+      } else {
+        localAlternateSentinel = value;
+      }
+    }
+    const getColorSchemeSentinel = () => {
+      if (!isFileUrl()) {
+        const storageValue = window.localStorage.getItem("quarto-color-scheme");
+        return storageValue != null ? storageValue : localAlternateSentinel;
+      } else {
+        return localAlternateSentinel;
+      }
+    }
+    const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+      const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+      const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+      let newTheme = '';
+      if(authorPrefersDark) {
+        newTheme = isAlternate ? baseTheme : alternateTheme;
+      } else {
+        newTheme = isAlternate ? alternateTheme : baseTheme;
+      }
+      const changeGiscusTheme = () => {
+        // From: https://github.com/giscus/giscus/issues/336
+        const sendMessage = (message) => {
+          const iframe = document.querySelector('iframe.giscus-frame');
+          if (!iframe) return;
+          iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+        }
+        sendMessage({
+          setConfig: {
+            theme: newTheme
+          }
+        });
+      }
+      const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+      if (isGiscussLoaded) {
+        changeGiscusTheme();
+      }
+    };
+    const authorPrefersDark = false;
+    const darkModeDefault = authorPrefersDark;
+      document.querySelector('link#quarto-text-highlighting-styles.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+      document.querySelector('link#quarto-bootstrap.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+    let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+    // Dark / light mode switch
+    window.quartoToggleColorScheme = () => {
+      // Read the current dark / light value
+      let toAlternate = !hasAlternateSentinel();
+      toggleColorMode(toAlternate);
+      setStyleSentinel(toAlternate);
+      toggleGiscusIfUsed(toAlternate, darkModeDefault);
+      window.dispatchEvent(new Event('resize'));
+    };
+    // Switch to dark mode if need be
+    if (hasAlternateSentinel()) {
+      toggleColorMode(true);
+    } else {
+      toggleColorMode(false);
+    }
+  </script>
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../eda/eda-william_acosta.html">EDA</a></li><li class="breadcrumb-item"><a href="../eda/eda-patricia.html"><span class="chapter-title">Individual EDA: Evaluating Demographic Disparities in Pulse Oximetry Accuracy</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header sidebar-header-stacked">
+      <a href="../index.html" class="sidebar-logo-link">
+      <img src="../assets/sidebar-logo.png" alt="Random negative space illustration" class="sidebar-logo light-content py-0 d-lg-inline d-none">
+      <img src="../assets/sidebar-logo.png" alt="Random negative space illustration" class="sidebar-logo dark-content py-0 d-lg-inline d-none">
+      </a>
+    <div class="sidebar-title mb-0 py-0">
+      <a href="../">Team Name</a> 
+        <div class="sidebar-tools-main">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+  <a href="" class="quarto-reader-toggle quarto-navigation-tool px-1" onclick="window.quartoToggleReader(); return false;" title="Toggle reader mode">
+  <div class="quarto-reader-toggle-btn">
+  <i class="bi"></i>
+  </div>
+</a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../index.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Report</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">EDA</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../eda/eda-william_acosta.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Individual EDA: Hidden Hypoxemia and Its Economic Consequences</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../eda/eda-patricia.html" class="sidebar-item-text sidebar-link active"><span class="chapter-title">Individual EDA: Evaluating Demographic Disparities in Pulse Oximetry Accuracy</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../eda/eda-member3.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Member 3 First Name &amp; Last Name Initial</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
+ <span class="menu-text">Appendices</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../appx/proposal.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Project Proposal</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../appx/case-study.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Case Study: <em>Twin Cities Police Use Physical Force at Rates Well Above National Average</em></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../wa/wa-member1.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Member 1 First Name &amp; Last Name Initial</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../wa/wa-member2.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Member 2 First Name &amp; Last Name Initial</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../wa/wa-member3.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Member 3 First Name &amp; Last Name Initial</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active" data-toc-expanded="99">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#overview" id="toc-overview" class="nav-link active" data-scroll-target="#overview">Overview</a></li>
+  <li><a href="#setup" id="toc-setup" class="nav-link" data-scroll-target="#setup">Setup</a></li>
+  <li><a href="#openoximetry-dataset" id="toc-openoximetry-dataset" class="nav-link" data-scroll-target="#openoximetry-dataset">OpenOximetry Dataset</a></li>
+  <li><a href="#analysis-1-bias-by-device-model-and-skin-tone" id="toc-analysis-1-bias-by-device-model-and-skin-tone" class="nav-link" data-scroll-target="#analysis-1-bias-by-device-model-and-skin-tone">Analysis 1: Bias by device model and skin tone</a></li>
+  <li><a href="#analysis-2-within-patient-bias-stability-across-samples" id="toc-analysis-2-within-patient-bias-stability-across-samples" class="nav-link" data-scroll-target="#analysis-2-within-patient-bias-stability-across-samples">Analysis 2: Within patient bias stability across samples</a></li>
+  <li><a href="#analysis-3-sex-and-race-interactions-between-patients" id="toc-analysis-3-sex-and-race-interactions-between-patients" class="nav-link" data-scroll-target="#analysis-3-sex-and-race-interactions-between-patients">Analysis 3: Sex and Race Interactions Between Patients</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content column-body" id="quarto-document-content">
+
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../eda/eda-william_acosta.html">EDA</a></li><li class="breadcrumb-item"><a href="../eda/eda-patricia.html"><span class="chapter-title">Individual EDA: Evaluating Demographic Disparities in Pulse Oximetry Accuracy</span></a></li></ol></nav>
+<div class="quarto-title">
+<div class="quarto-title-block"><div><h1 class="title"><span class="chapter-title">Individual EDA: Evaluating Demographic Disparities in Pulse Oximetry Accuracy</span></h1><button type="button" class="btn code-tools-button dropdown-toggle" id="quarto-code-tools-menu" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi"></i> Code</button><ul class="dropdown-menu dropdown-menu-end" aria-labelelledby="quarto-code-tools-menu"><li><a id="quarto-show-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Show All Code</a></li><li><a id="quarto-hide-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Hide All Code</a></li><li><hr class="dropdown-divider"></li><li><a id="quarto-view-source" class="dropdown-item" href="javascript:void(0)" role="button">View Source</a></li></ul></div></div>
+<p class="subtitle lead">OpenOximetry Discharge Data</p>
+</div>
+
+
+
+<div class="quarto-title-meta column-body">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Patricia Escobar Contreras </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">April 20, 2026</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="overview" class="level2">
+<h2 class="anchored" data-anchor-id="overview">Overview</h2>
+<p>This EDA covers the <strong>OpenOximetry</strong> dataset:</p>
+<ul>
+<li><strong>OpenOximetry</strong> (UCSF Hypoxia Lab) - Used to audit the clinical reliability of pulse oximeters by comparing their digital readings against the “gold standard” of direct blood oxygen measurements.</li>
+</ul>
+</section>
+<section id="setup" class="level2">
+<h2 class="anchored" data-anchor-id="setup">Setup</h2>
+<div class="cell">
+<details class="code-fold">
+<summary>Show code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb1-2"><a href="#cb1-2"></a><span class="fu">library</span>(visdat)</span>
+<span id="cb1-3"><a href="#cb1-3"></a><span class="fu">library</span>(DataExplorer)</span>
+<span id="cb1-4"><a href="#cb1-4"></a><span class="fu">library</span>(gtsummary)</span>
+<span id="cb1-5"><a href="#cb1-5"></a><span class="fu">library</span>(janitor)</span>
+<span id="cb1-6"><a href="#cb1-6"></a><span class="fu">library</span>(scales)</span>
+<span id="cb1-7"><a href="#cb1-7"></a><span class="fu">library</span>(patchwork)</span>
+<span id="cb1-8"><a href="#cb1-8"></a><span class="fu">library</span>(ggrepel)</span>
+<span id="cb1-9"><a href="#cb1-9"></a></span>
+<span id="cb1-10"><a href="#cb1-10"></a><span class="fu">theme_set</span>(<span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">13</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+<div class="cell">
+<details class="code-fold">
+<summary>Show code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a>patients      <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"../data/raw/patient.csv"</span>)</span>
+<span id="cb2-2"><a href="#cb2-2"></a>encounter     <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"../data/raw/encounter.csv"</span>)</span>
+<span id="cb2-3"><a href="#cb2-3"></a>pulseoximeter <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"../data/raw/pulseoximeter.csv"</span>)</span>
+<span id="cb2-4"><a href="#cb2-4"></a>bloodgas      <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"../data/raw/bloodgas.csv"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+<div class="cell">
+<details class="code-fold">
+<summary>Show code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a><span class="co"># Cleaned with William's support </span></span>
+<span id="cb3-2"><a href="#cb3-2"></a>oximetry <span class="ot">&lt;-</span> pulseoximeter <span class="sc">|&gt;</span></span>
+<span id="cb3-3"><a href="#cb3-3"></a>  <span class="fu">inner_join</span>(</span>
+<span id="cb3-4"><a href="#cb3-4"></a>    bloodgas <span class="sc">|&gt;</span> <span class="fu">select</span>(encounter_id, sample, so2),</span>
+<span id="cb3-5"><a href="#cb3-5"></a>    <span class="at">by =</span> <span class="fu">c</span>(<span class="st">"encounter_id"</span>, <span class="st">"sample_number"</span> <span class="ot">=</span> <span class="st">"sample"</span>)</span>
+<span id="cb3-6"><a href="#cb3-6"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb3-7"><a href="#cb3-7"></a>  <span class="fu">rename</span>(<span class="at">SpO2 =</span> saturation, <span class="at">SaO2 =</span> so2) <span class="sc">|&gt;</span></span>
+<span id="cb3-8"><a href="#cb3-8"></a>  <span class="fu">left_join</span>(</span>
+<span id="cb3-9"><a href="#cb3-9"></a>    encounter <span class="sc">|&gt;</span> <span class="fu">select</span>(</span>
+<span id="cb3-10"><a href="#cb3-10"></a>      encounter_id, patient_id, fitzpatrick, age_at_encounter</span>
+<span id="cb3-11"><a href="#cb3-11"></a>    ),</span>
+<span id="cb3-12"><a href="#cb3-12"></a>    <span class="at">by =</span> <span class="st">"encounter_id"</span></span>
+<span id="cb3-13"><a href="#cb3-13"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb3-14"><a href="#cb3-14"></a>  <span class="fu">left_join</span>(</span>
+<span id="cb3-15"><a href="#cb3-15"></a>    patients <span class="sc">|&gt;</span> <span class="fu">select</span>(patient_id, race, ethnicity),</span>
+<span id="cb3-16"><a href="#cb3-16"></a>    <span class="at">by =</span> <span class="st">"patient_id"</span></span>
+<span id="cb3-17"><a href="#cb3-17"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb3-18"><a href="#cb3-18"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb3-19"><a href="#cb3-19"></a>    <span class="at">bias             =</span> SpO2 <span class="sc">-</span> SaO2,</span>
+<span id="cb3-20"><a href="#cb3-20"></a>    <span class="at">occult_hypoxemia =</span> SpO2 <span class="sc">&gt;=</span> <span class="dv">88</span> <span class="sc">&amp;</span> SaO2 <span class="sc">&lt;</span> <span class="dv">88</span>,</span>
+<span id="cb3-21"><a href="#cb3-21"></a></span>
+<span id="cb3-22"><a href="#cb3-22"></a>    <span class="at">skin_group =</span> <span class="fu">cut</span>(</span>
+<span id="cb3-23"><a href="#cb3-23"></a>      fitzpatrick,</span>
+<span id="cb3-24"><a href="#cb3-24"></a>      <span class="at">breaks         =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">2</span>, <span class="dv">4</span>, <span class="dv">6</span>),</span>
+<span id="cb3-25"><a href="#cb3-25"></a>      <span class="at">labels         =</span> <span class="fu">c</span>(<span class="st">"Light (I–II)"</span>, <span class="st">"Medium (III–IV)"</span>, <span class="st">"Dark (V–VI)"</span>),</span>
+<span id="cb3-26"><a href="#cb3-26"></a>      <span class="at">include.lowest =</span> <span class="cn">TRUE</span></span>
+<span id="cb3-27"><a href="#cb3-27"></a>    ),</span>
+<span id="cb3-28"><a href="#cb3-28"></a></span>
+<span id="cb3-29"><a href="#cb3-29"></a>    <span class="at">race_eth =</span> <span class="fu">case_when</span>(</span>
+<span id="cb3-30"><a href="#cb3-30"></a>      ethnicity <span class="sc">==</span> <span class="st">"Hispanic"</span>                            <span class="sc">~</span> <span class="st">"Hispanic/Latino"</span>,</span>
+<span id="cb3-31"><a href="#cb3-31"></a>      <span class="fu">str_detect</span>(race, <span class="st">"African American"</span>) <span class="sc">&amp;</span></span>
+<span id="cb3-32"><a href="#cb3-32"></a>        ethnicity <span class="sc">==</span> <span class="st">"Not Hispanic"</span>                      <span class="sc">~</span> <span class="st">"Black"</span>,</span>
+<span id="cb3-33"><a href="#cb3-33"></a>      race <span class="sc">==</span> <span class="st">"Caucasian"</span> <span class="sc">&amp;</span></span>
+<span id="cb3-34"><a href="#cb3-34"></a>        ethnicity <span class="sc">==</span> <span class="st">"Not Hispanic"</span>                      <span class="sc">~</span> <span class="st">"White"</span>,</span>
+<span id="cb3-35"><a href="#cb3-35"></a>      <span class="fu">str_detect</span>(race, <span class="st">"^Asian"</span>) <span class="sc">&amp;</span></span>
+<span id="cb3-36"><a href="#cb3-36"></a>        ethnicity <span class="sc">==</span> <span class="st">"Not Hispanic"</span>                      <span class="sc">~</span> <span class="st">"Asian"</span>,</span>
+<span id="cb3-37"><a href="#cb3-37"></a>      <span class="cn">TRUE</span>                                               <span class="sc">~</span> <span class="cn">NA_character_</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb3-38"><a href="#cb3-38"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(race_eth))</span>
+<span id="cb3-39"><a href="#cb3-39"></a></span>
+<span id="cb3-40"><a href="#cb3-40"></a><span class="co"># Remove non-finite bias values caused by bad join rows</span></span>
+<span id="cb3-41"><a href="#cb3-41"></a>oximetry <span class="ot">&lt;-</span> oximetry <span class="sc">|&gt;</span></span>
+<span id="cb3-42"><a href="#cb3-42"></a>  <span class="fu">filter</span>(<span class="fu">is.finite</span>(bias), <span class="fu">is.finite</span>(SpO2), <span class="fu">is.finite</span>(SaO2))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+<div class="cell">
+<details class="code-fold">
+<summary>Show code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a><span class="co">#Aestethics purposes </span></span>
+<span id="cb4-2"><a href="#cb4-2"></a>skin_pal <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
+<span id="cb4-3"><a href="#cb4-3"></a>  <span class="st">"Light (I–II)"</span>    <span class="ot">=</span> <span class="st">"#E8C97A"</span>,</span>
+<span id="cb4-4"><a href="#cb4-4"></a>  <span class="st">"Medium (III–IV)"</span> <span class="ot">=</span> <span class="st">"#B06840"</span>,</span>
+<span id="cb4-5"><a href="#cb4-5"></a>  <span class="st">"Dark (V–VI)"</span>     <span class="ot">=</span> <span class="st">"#4A1E0E"</span>)</span>
+<span id="cb4-6"><a href="#cb4-6"></a></span>
+<span id="cb4-7"><a href="#cb4-7"></a><span class="co"># Base theme applied to every plot</span></span>
+<span id="cb4-8"><a href="#cb4-8"></a>theme_eda <span class="ot">&lt;-</span> <span class="cf">function</span>() {</span>
+<span id="cb4-9"><a href="#cb4-9"></a>  <span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">13</span>) <span class="sc">+</span></span>
+<span id="cb4-10"><a href="#cb4-10"></a>  <span class="fu">theme</span>(<span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">14</span>, <span class="at">face =</span> <span class="st">"bold"</span>, <span class="at">margin =</span> <span class="fu">margin</span>(<span class="at">b =</span> <span class="dv">4</span>)), </span>
+<span id="cb4-11"><a href="#cb4-11"></a>        <span class="at">plot.subtitle =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">11</span>, <span class="at">color =</span> <span class="st">"gray"</span>),</span>
+<span id="cb4-12"><a href="#cb4-12"></a>        <span class="at">plot.caption =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">9</span>,  <span class="at">color =</span> <span class="st">"darkgray"</span>),</span>
+<span id="cb4-13"><a href="#cb4-13"></a>        <span class="at">axis.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">11</span>, <span class="at">color =</span> <span class="st">"darkgray"</span>),</span>
+<span id="cb4-14"><a href="#cb4-14"></a>        <span class="at">axis.text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">10</span>, <span class="at">color =</span> <span class="st">"darkgray"</span>),</span>
+<span id="cb4-15"><a href="#cb4-15"></a>        <span class="at">panel.grid.major.x  =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb4-16"><a href="#cb4-16"></a>        <span class="at">panel.grid.minor =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb4-17"><a href="#cb4-17"></a>        <span class="at">strip.text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">11</span>, <span class="at">face =</span> <span class="st">"bold"</span>, <span class="at">color =</span> <span class="st">"darkgray"</span>))}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+</section>
+<section id="openoximetry-dataset" class="level2">
+<h2 class="anchored" data-anchor-id="openoximetry-dataset">OpenOximetry Dataset</h2>
+<p>This group project focuses on analyzing the implications of inaccuracies in standard pulse oximeters. In this regard, through the analysis of relevant data, we have observed that oximeters, which function to detect blood oxygen levels, tend to exhibit wider margins of error for individuals with dark skin compared to those with light skin. Scientifically, this phenomenon is explained by the fact that dark skin contains a layer of melanin that impedes the unimpeded passage of the oximeter’s light beams through the skin, unlike in individuals with light skin, who lack these elevated levels of melanin. However, as a group, we believe this issue carries broader implications, and we intend to analyze how this phenomenon manifests across various demographic groups. In my specific analysis, I will focus on examining the biases associated with oximeter models and skin tone, specifically, the biases that arise among patients of different skin tones, and the interplay of these factors with respect to sex and race.</p>
+</section>
+<section id="analysis-1-bias-by-device-model-and-skin-tone" class="level2">
+<h2 class="anchored" data-anchor-id="analysis-1-bias-by-device-model-and-skin-tone">Analysis 1: Bias by device model and skin tone</h2>
+<p>Given that we are examining potential biases related to skin tone, it is crucial to consider the devices themselves. In this regard, my aim is to explore the variability in blood oxygen detection across individual devices, and to analyze whether there is a general pattern, specifically, if certain devices are less effective and thus skewing the overall data results across different skin colors, or if this is a generalized issue affecting all devices. This is a controlled within encounter comparison: same patient, only the device differs. Any bias difference between devices on the same sample is purely a device effect, not a patient effect.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Show code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a>oximetry <span class="ot">&lt;-</span> oximetry <span class="sc">|&gt;</span></span>
+<span id="cb5-2"><a href="#cb5-2"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb5-3"><a href="#cb5-3"></a>    <span class="at">device_brand =</span> <span class="fu">as.integer</span>(<span class="fu">floor</span>(device)),</span>
+<span id="cb5-4"><a href="#cb5-4"></a>    <span class="at">device_label =</span> <span class="fu">paste0</span>(<span class="st">"Model "</span>, <span class="fu">as.integer</span>(<span class="fu">floor</span>(device))))</span>
+<span id="cb5-5"><a href="#cb5-5"></a></span>
+<span id="cb5-6"><a href="#cb5-6"></a><span class="co"># Check: how many distinct brands?</span></span>
+<span id="cb5-7"><a href="#cb5-7"></a>oximetry <span class="sc">|&gt;</span> <span class="fu">count</span>(device_brand, <span class="at">sort =</span> <span class="cn">TRUE</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 41 × 2
+   device_brand     n
+          &lt;int&gt; &lt;int&gt;
+ 1           59 25795
+ 2           60 24912
+ 3           73  6889
+ 4           55  5276
+ 5           71  5241
+ 6           64  4679
+ 7           70  3352
+ 8           14  2521
+ 9           41  2448
+10           21  2391
+# ℹ 31 more rows</code></pre>
+</div>
+<details class="code-fold">
+<summary>Show code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a>top_brands <span class="ot">&lt;-</span> oximetry <span class="sc">|&gt;</span></span>
+<span id="cb7-2"><a href="#cb7-2"></a>  <span class="fu">count</span>(device_brand) <span class="sc">|&gt;</span></span>
+<span id="cb7-3"><a href="#cb7-3"></a>  <span class="fu">filter</span>(n <span class="sc">&gt;=</span> <span class="dv">500</span>) <span class="sc">|&gt;</span></span>
+<span id="cb7-4"><a href="#cb7-4"></a>  <span class="fu">pull</span>(device_brand)</span>
+<span id="cb7-5"><a href="#cb7-5"></a></span>
+<span id="cb7-6"><a href="#cb7-6"></a>oximetry_top <span class="ot">&lt;-</span> oximetry <span class="sc">|&gt;</span></span>
+<span id="cb7-7"><a href="#cb7-7"></a>  <span class="fu">filter</span>(device_brand <span class="sc">%in%</span> top_brands) <span class="sc">|&gt;</span></span>
+<span id="cb7-8"><a href="#cb7-8"></a>  <span class="fu">mutate</span>(<span class="at">device_label =</span> <span class="fu">paste0</span>(<span class="st">"Model "</span>, device_brand), <span class="at">device_label =</span> <span class="fu">fct_reorder</span>(device_label, device_brand))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+<p>This is the total amount of all the devices that exist in this dataset, under the colum “device_brand”, togther with the number of dispositives for each one of the models, as seen, the most common model is the “59”, while the least common model is the “21”. As now, this does not tells us anything directly about the data, but is information that will become relevant while analyzing all the other devices and the the different skin colors.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Show code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a><span class="co"># Same device disagreen within different samples </span></span>
+<span id="cb8-2"><a href="#cb8-2"></a>device_spread <span class="ot">&lt;-</span> oximetry_top <span class="sc">|&gt;</span></span>
+<span id="cb8-3"><a href="#cb8-3"></a>  <span class="fu">filter</span>(<span class="fu">between</span>(bias, <span class="sc">-</span><span class="dv">20</span>, <span class="dv">20</span>), <span class="sc">!</span><span class="fu">is.na</span>(skin_group)) <span class="sc">|&gt;</span></span>
+<span id="cb8-4"><a href="#cb8-4"></a>  <span class="fu">group_by</span>(encounter_id, sample_number, skin_group) <span class="sc">|&gt;</span></span>
+<span id="cb8-5"><a href="#cb8-5"></a>  <span class="fu">summarise</span>(</span>
+<span id="cb8-6"><a href="#cb8-6"></a>    <span class="at">bias_range =</span> <span class="fu">max</span>(bias) <span class="sc">-</span> <span class="fu">min</span>(bias),</span>
+<span id="cb8-7"><a href="#cb8-7"></a>    <span class="at">n_devices  =</span> <span class="fu">n_distinct</span>(device_brand),</span>
+<span id="cb8-8"><a href="#cb8-8"></a>    <span class="at">.groups    =</span> <span class="st">"drop"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb8-9"><a href="#cb8-9"></a>  <span class="fu">filter</span>(n_devices <span class="sc">&gt;=</span> <span class="dv">2</span>)</span>
+<span id="cb8-10"><a href="#cb8-10"></a></span>
+<span id="cb8-11"><a href="#cb8-11"></a>p_spread <span class="ot">&lt;-</span> device_spread <span class="sc">|&gt;</span></span>
+<span id="cb8-12"><a href="#cb8-12"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> skin_group, <span class="at">y =</span> bias_range, <span class="at">fill =</span> skin_group)) <span class="sc">+</span></span>
+<span id="cb8-13"><a href="#cb8-13"></a>  <span class="fu">geom_violin</span>(<span class="at">alpha =</span> <span class="fl">0.45</span>, <span class="at">trim =</span> <span class="cn">TRUE</span>, <span class="at">linewidth =</span> <span class="fl">0.3</span>) <span class="sc">+</span></span>
+<span id="cb8-14"><a href="#cb8-14"></a>  <span class="fu">geom_boxplot</span>(<span class="at">width =</span> <span class="fl">0.18</span>, <span class="at">outlier.shape =</span> <span class="cn">NA</span>, <span class="at">alpha =</span> <span class="fl">0.85</span>, <span class="at">linewidth =</span> <span class="fl">0.4</span>) <span class="sc">+</span></span>
+<span id="cb8-15"><a href="#cb8-15"></a>  <span class="fu">stat_summary</span>(</span>
+<span id="cb8-16"><a href="#cb8-16"></a>    <span class="at">fun =</span> median, <span class="at">geom =</span> <span class="st">"text"</span>,</span>
+<span id="cb8-17"><a href="#cb8-17"></a>    <span class="fu">aes</span>(<span class="at">label =</span> <span class="fu">sprintf</span>(<span class="st">"%.1f pp"</span>, <span class="fu">after_stat</span>(y))),</span>
+<span id="cb8-18"><a href="#cb8-18"></a>    <span class="at">vjust =</span> <span class="sc">-</span><span class="fl">0.5</span>, <span class="at">size =</span> <span class="fl">3.2</span>, <span class="at">color =</span> <span class="st">"black"</span>) <span class="sc">+</span></span>
+<span id="cb8-19"><a href="#cb8-19"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> skin_pal) <span class="sc">+</span></span>
+<span id="cb8-20"><a href="#cb8-20"></a>  <span class="fu">scale_y_continuous</span>(</span>
+<span id="cb8-21"><a href="#cb8-21"></a>    <span class="at">labels =</span> <span class="cf">function</span>(x) <span class="fu">sprintf</span>(<span class="st">"%+.0f pp"</span>, x),</span>
+<span id="cb8-22"><a href="#cb8-22"></a>    <span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="cn">NA</span>)) <span class="sc">+</span> </span>
+<span id="cb8-23"><a href="#cb8-23"></a>  <span class="fu">labs</span>(</span>
+<span id="cb8-24"><a href="#cb8-24"></a>    <span class="at">title    =</span> <span class="st">"Device disagreement at identical sample moments"</span>,</span>
+<span id="cb8-25"><a href="#cb8-25"></a>    <span class="at">subtitle =</span> <span class="st">"Range of bias readings across devices on the same blood draw"</span>,</span>
+<span id="cb8-26"><a href="#cb8-26"></a>    <span class="at">x =</span> <span class="cn">NULL</span>, <span class="at">y =</span> <span class="st">"Bias range across devices (pp)"</span>,</span>
+<span id="cb8-27"><a href="#cb8-27"></a>    <span class="at">caption  =</span> <span class="st">"Only samples where ≥ 2 devices present"</span>) <span class="sc">+</span></span>
+<span id="cb8-28"><a href="#cb8-28"></a>  <span class="fu">theme_eda</span>() </span>
+<span id="cb8-29"><a href="#cb8-29"></a></span>
+<span id="cb8-30"><a href="#cb8-30"></a>p_spread</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="eda-patricia_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid figure-img" width="768"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>This visualization highlights a troubling lack of consistency in medical device readings when used on patients with darker skin tones. As we can see, there is a range of disagreement between two or more devices measuring the exact same blood sample at the same moment. While all groups show some level of discrepancy, the “Dark” skin tone category (V–VI) has a noticeably higher median disagreement of 4.1 pp compared to just 3.0 pp for light skin and 2.1 pp for medium skin. More importantly, the “tail” of the dark skin plot stretches significantly higher, reaching extremes of over +30 pp in bias range. This means that for patients with the darkest skin, two different sensors are far more likely to give wildly conflicting results, creating a dangerous level of clinical uncertainty that isn’t as prevalent for lighter-skinned patients.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Show code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a><span class="co"># Looking at each individual oxymeter</span></span>
+<span id="cb9-2"><a href="#cb9-2"></a>device_skin_summary <span class="ot">&lt;-</span> oximetry_top <span class="sc">|&gt;</span></span>
+<span id="cb9-3"><a href="#cb9-3"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(skin_group), <span class="fu">between</span>(bias, <span class="sc">-</span><span class="dv">20</span>, <span class="dv">20</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb9-4"><a href="#cb9-4"></a>  <span class="fu">group_by</span>(device_label, skin_group) <span class="sc">|&gt;</span></span>
+<span id="cb9-5"><a href="#cb9-5"></a>  <span class="fu">summarise</span>(<span class="at">mean_bias =</span> <span class="fu">mean</span>(bias, <span class="at">na.rm =</span> <span class="cn">TRUE</span>), <span class="at">n =</span> <span class="fu">n</span>(), <span class="at">.groups =</span> <span class="st">"drop"</span>)</span>
+<span id="cb9-6"><a href="#cb9-6"></a></span>
+<span id="cb9-7"><a href="#cb9-7"></a>p_heatmap <span class="ot">&lt;-</span> device_skin_summary <span class="sc">|&gt;</span></span>
+<span id="cb9-8"><a href="#cb9-8"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> skin_group, <span class="at">y =</span> device_label, <span class="at">fill =</span> mean_bias)) <span class="sc">+</span></span>
+<span id="cb9-9"><a href="#cb9-9"></a>  <span class="fu">geom_tile</span>(<span class="at">color =</span> <span class="st">"white"</span>, <span class="at">linewidth =</span> <span class="fl">1.6</span>) <span class="sc">+</span></span>
+<span id="cb9-10"><a href="#cb9-10"></a>  <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">label =</span> <span class="fu">sprintf</span>(<span class="st">"%+.2f"</span>, mean_bias), <span class="at">color =</span> <span class="fu">abs</span>(mean_bias) <span class="sc">&gt;</span> <span class="dv">2</span>), <span class="at">size =</span> <span class="fl">3.6</span>, <span class="at">fontface =</span> <span class="st">"bold"</span>, <span class="at">show.legend =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
+<span id="cb9-11"><a href="#cb9-11"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"TRUE"</span> <span class="ot">=</span> <span class="st">"white"</span>, <span class="st">"FALSE"</span> <span class="ot">=</span> <span class="st">"black"</span>)) <span class="sc">+</span></span>
+<span id="cb9-12"><a href="#cb9-12"></a>  <span class="fu">scale_fill_gradient2</span>(</span>
+<span id="cb9-13"><a href="#cb9-13"></a>    <span class="at">low      =</span> <span class="st">"blue"</span>,</span>
+<span id="cb9-14"><a href="#cb9-14"></a>    <span class="at">mid      =</span> <span class="st">"white"</span>,</span>
+<span id="cb9-15"><a href="#cb9-15"></a>    <span class="at">high     =</span> <span class="st">"red"</span>,</span>
+<span id="cb9-16"><a href="#cb9-16"></a>    <span class="at">midpoint =</span> <span class="dv">0</span>,</span>
+<span id="cb9-17"><a href="#cb9-17"></a>    <span class="at">limits   =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">5</span>, <span class="dv">5</span>),</span>
+<span id="cb9-18"><a href="#cb9-18"></a>    <span class="at">name     =</span> <span class="st">"Mean bias</span><span class="sc">\n</span><span class="st">(pp)"</span>,</span>
+<span id="cb9-19"><a href="#cb9-19"></a>    <span class="at">guide    =</span> <span class="fu">guide_colorbar</span>( <span class="at">barwidth =</span> <span class="fl">0.9</span>, <span class="at">barheight =</span> <span class="dv">10</span>, <span class="at">title.position =</span> <span class="st">"top"</span>)) <span class="sc">+</span></span>
+<span id="cb9-20"><a href="#cb9-20"></a>  <span class="fu">labs</span>(<span class="at">title    =</span> <span class="st">"Pulse oximeter bias by device model and skin tone"</span>,</span>
+<span id="cb9-21"><a href="#cb9-21"></a>       <span class="at">subtitle =</span> <span class="st">"Mean (SpO2 − SaO2) in percentage points · Red = overestimates true oxygen level"</span>,</span>
+<span id="cb9-22"><a href="#cb9-22"></a>       <span class="at">x =</span> <span class="st">"Fitzpatrick skin tone group"</span>, <span class="at">y =</span> <span class="st">"Device model"</span>) <span class="sc">+</span></span>
+<span id="cb9-23"><a href="#cb9-23"></a><span class="fu">theme_eda</span>() </span>
+<span id="cb9-24"><a href="#cb9-24"></a></span>
+<span id="cb9-25"><a href="#cb9-25"></a>p_heatmap</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="eda-patricia_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid figure-img" width="768"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>This heatmap illustrates how pulse oximeter accuracy varies across different device models and skin tones, specifically highlighting the “mean bias” or the difference between the device’s reading (Sp02) and actual blood oxygen levels (Sa02) with the color scale indicating whether a device tends to overestimate (red/orange) or underestimate (blue/purple) the true oxygen saturation. A quick look at the darker skin tone column reveals a noticeable trend toward more intense orange and red hues, suggesting that many of these models consistently overestimate oxygen levels in individuals with darker skin. This discrepancy is critical because an overestimation could potentially mask dangerously low oxygen levels, highlighting a significant technical bias in how these medical devices perform across diverse populations. Therefore, because the majority of them present this orange/red color, it could be said that this seems to be a problem that the big majority of the devices have in common and it is not just one device affecting the entire dataset, which reafirms the importance of this problem since it is common across all devices.</p>
+</section>
+<section id="analysis-2-within-patient-bias-stability-across-samples" class="level2">
+<h2 class="anchored" data-anchor-id="analysis-2-within-patient-bias-stability-across-samples">Analysis 2: Within patient bias stability across samples</h2>
+<p>On that note, analyzing within-patient bias stability is also essential because it helps us distinguish between a device that is consistently off and one that is dangerously unpredictable. If a pulse oximeter has a high mean bias but stays stable, a clinician can at least anticipate the error; however, high volatility within a single session, measured here through standard deviation and range, suggests that the device is erratic. This “jitter” is particularly risky in a clinical setting because it can lead to intermittent misdiagnosis, where a patient might appear stable during one check but be in respiratory distress the next.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Show code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a>within_patient <span class="ot">&lt;-</span> oximetry_top <span class="sc">|&gt;</span></span>
+<span id="cb10-2"><a href="#cb10-2"></a>  <span class="fu">filter</span>(<span class="fu">between</span>(bias, <span class="sc">-</span><span class="dv">20</span>, <span class="dv">20</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb10-3"><a href="#cb10-3"></a>  <span class="fu">group_by</span>(patient_id, race_eth, skin_group, device_label) <span class="sc">|&gt;</span></span>
+<span id="cb10-4"><a href="#cb10-4"></a>  <span class="fu">summarise</span>(<span class="at">n_readings =</span> <span class="fu">n</span>(), <span class="at">mean_bias  =</span> <span class="fu">mean</span>(bias, <span class="at">na.rm =</span> <span class="cn">TRUE</span>), <span class="at">sd_bias =</span> <span class="fu">sd</span>(bias, <span class="at">na.rm =</span> <span class="cn">TRUE</span>), <span class="at">.groups =</span> <span class="st">"drop"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb10-5"><a href="#cb10-5"></a>  <span class="fu">filter</span>(n_readings <span class="sc">&gt;=</span> <span class="dv">3</span>, <span class="sc">!</span><span class="fu">is.na</span>(sd_bias))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+<div class="cell">
+<details class="code-fold">
+<summary>Show code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a>p_scatter_risk <span class="ot">&lt;-</span> within_patient <span class="sc">|&gt;</span></span>
+<span id="cb11-2"><a href="#cb11-2"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(skin_group)) <span class="sc">|&gt;</span></span>
+<span id="cb11-3"><a href="#cb11-3"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> mean_bias, <span class="at">y =</span> sd_bias, <span class="at">color =</span> skin_group)) <span class="sc">+</span></span>
+<span id="cb11-4"><a href="#cb11-4"></a>  <span class="fu">geom_point</span>(<span class="at">alpha =</span> <span class="fl">0.22</span>, <span class="at">size =</span> <span class="fl">1.2</span>) <span class="sc">+</span></span>
+<span id="cb11-5"><a href="#cb11-5"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>, <span class="at">se =</span> <span class="cn">FALSE</span>, <span class="at">linewidth =</span> <span class="fl">0.8</span>) <span class="sc">+</span></span>
+<span id="cb11-6"><a href="#cb11-6"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="dv">0</span>,  <span class="at">linetype =</span> <span class="st">"dashed"</span>, <span class="at">color =</span> <span class="st">"darkgray"</span>, <span class="at">linewidth =</span> <span class="fl">0.4</span>) <span class="sc">+</span></span>
+<span id="cb11-7"><a href="#cb11-7"></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="dv">0</span>,  <span class="at">linetype =</span> <span class="st">"dashed"</span>, <span class="at">color =</span> <span class="st">"darkgray"</span>, <span class="at">linewidth =</span> <span class="fl">0.4</span>) <span class="sc">+</span></span>
+<span id="cb11-8"><a href="#cb11-8"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values =</span> skin_pal) <span class="sc">+</span></span>
+<span id="cb11-9"><a href="#cb11-9"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">labels =</span> <span class="cf">function</span>(x) <span class="fu">sprintf</span>(<span class="st">"%+.0f pp"</span>, x)) <span class="sc">+</span></span>
+<span id="cb11-10"><a href="#cb11-10"></a>  <span class="fu">labs</span>(</span>
+<span id="cb11-11"><a href="#cb11-11"></a>    <span class="at">title    =</span> <span class="st">"Bias magnitude vs. bias variability per patient"</span>,</span>
+<span id="cb11-12"><a href="#cb11-12"></a>    <span class="at">x =</span> <span class="st">"Mean bias (pp)"</span>, <span class="at">y =</span> <span class="st">"SD of bias (pp)"</span>,</span>
+<span id="cb11-13"><a href="#cb11-13"></a>    <span class="at">color =</span> <span class="st">"Skin tone"</span>) <span class="sc">+</span></span>
+<span id="cb11-14"><a href="#cb11-14"></a>  <span class="fu">theme_eda</span>() </span>
+<span id="cb11-15"><a href="#cb11-15"></a></span>
+<span id="cb11-16"><a href="#cb11-16"></a>p_scatter_risk</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="eda-patricia_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid figure-img" width="768"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>As you can see in this scatter plot, this examines the relationship between how much a device is off on average (mean bias) and how much that error fluctuates during a single session (SD of bias), providing a clear picture of device reliability across different skin tones. Interestingly, while the trend lines show that variability generally decreases as mean bias moves into positive territory, the distribution of data points reveals a troubling pattern for patients in the “Dark” skin tone group. These points are notably more scattered toward the right side of the x-axis, indicating that for these individuals, devices are not just more likely to overestimate oxygen levels, but they often do so with a wide range of inconsistency. This combination of high positive bias and high variability is the “worst-case scenario” for clinical safety, as it suggests that the readings for patients with darker skin are both consistently over-optimistic and technically unstable, making it significantly harder for medical staff to trust the data during critical moments of care. This is another factor imporant to consider in our analysis since it contributes with the fact of knowing that patients with darker skin colors are generally worse off than the patients with lighter skin colors.</p>
+</section>
+<section id="analysis-3-sex-and-race-interactions-between-patients" class="level2">
+<h2 class="anchored" data-anchor-id="analysis-3-sex-and-race-interactions-between-patients">Analysis 3: Sex and Race Interactions Between Patients</h2>
+<p>At the same time, I am also interesrted in analyzing the intersection of sex and race with regards to this topic. For me, this is critical because it uncovers whether clinical disadvantages are compounded for specific subgroups, such as Black or Hispanic women, rather than just affecting racial groups uniformly. Pulse oximetry performance can be influenced by physiological differences, like skin thickness, peripheral perfusion, and hemoglobin level, that often vary by both sex and ethnicity. However, the patriarchal society we currently live on has also influenciated the way in which women, specially women of color, are treated in medical settings. As a woman of color myself, I want to perform this analysis by calculating the mean bias and occult hypoxemia rates across these intersecting identities, seeing if we can identify if certain patients face a “double burden” of inaccuracy that simple, single variable analyses might miss. This level of detail is necessary to determine if current medical device algorithms are failing certain populations more than others, which is a vital step in addressing systemic health inequities and ensuring that life saving interventions are triggered reliably for every patient regardless of their demographic profile.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Show code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="st">"assigned_sex"</span> <span class="sc">%in%</span> <span class="fu">names</span>(oximetry)) {</span>
+<span id="cb12-2"><a href="#cb12-2"></a>  oximetry  <span class="ot">&lt;-</span> oximetry <span class="sc">|&gt;</span></span>
+<span id="cb12-3"><a href="#cb12-3"></a>    <span class="fu">left_join</span>(patients <span class="sc">|&gt;</span> <span class="fu">select</span>(patient_id, assigned_sex), <span class="at">by =</span> <span class="st">"patient_id"</span>)}</span>
+<span id="cb12-4"><a href="#cb12-4"></a></span>
+<span id="cb12-5"><a href="#cb12-5"></a>sex_race <span class="ot">&lt;-</span> oximetry <span class="sc">|&gt;</span></span>
+<span id="cb12-6"><a href="#cb12-6"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(race_eth), <span class="sc">!</span><span class="fu">is.na</span>(assigned_sex), assigned_sex <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"Female"</span>, <span class="st">"Male"</span>), <span class="fu">between</span>(bias, <span class="sc">-</span><span class="dv">20</span>, <span class="dv">20</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb12-7"><a href="#cb12-7"></a>  <span class="fu">group_by</span>(race_eth, assigned_sex) <span class="sc">|&gt;</span></span>
+<span id="cb12-8"><a href="#cb12-8"></a>  <span class="fu">summarise</span>(</span>
+<span id="cb12-9"><a href="#cb12-9"></a>    <span class="at">mean_bias =</span> <span class="fu">mean</span>(bias, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb12-10"><a href="#cb12-10"></a>    <span class="at">se_bias =</span> <span class="fu">sd</span>(bias, <span class="at">na.rm =</span> <span class="cn">TRUE</span>) <span class="sc">/</span> <span class="fu">sqrt</span>(<span class="fu">n</span>()),</span>
+<span id="cb12-11"><a href="#cb12-11"></a>    <span class="at">oh_rate =</span> <span class="fu">mean</span>(occult_hypoxemia, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb12-12"><a href="#cb12-12"></a>    <span class="at">n =</span> <span class="fu">n</span>(), <span class="at">.groups   =</span> <span class="st">"drop"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb12-13"><a href="#cb12-13"></a>  <span class="fu">filter</span>(n <span class="sc">&gt;=</span> <span class="dv">20</span>)</span>
+<span id="cb12-14"><a href="#cb12-14"></a></span>
+<span id="cb12-15"><a href="#cb12-15"></a>sex_pal <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Female"</span> <span class="ot">=</span> <span class="st">"magenta"</span>, <span class="st">"Male"</span> <span class="ot">=</span> <span class="st">"blue"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+<div class="cell">
+<details class="code-fold">
+<summary>Show code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a>p_sex_bias <span class="ot">&lt;-</span> sex_race <span class="sc">|&gt;</span></span>
+<span id="cb13-2"><a href="#cb13-2"></a>  <span class="fu">mutate</span>(<span class="at">race_eth =</span> <span class="fu">fct_reorder</span>(race_eth, mean_bias, max)) <span class="sc">|&gt;</span></span>
+<span id="cb13-3"><a href="#cb13-3"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> race_eth, <span class="at">y =</span> mean_bias, <span class="at">fill =</span> assigned_sex)) <span class="sc">+</span></span>
+<span id="cb13-4"><a href="#cb13-4"></a>  <span class="fu">geom_col</span>(<span class="at">position =</span> <span class="fu">position_dodge</span>(<span class="at">width =</span> <span class="fl">0.70</span>), <span class="at">width =</span> <span class="fl">0.60</span>, <span class="at">alpha =</span> <span class="fl">0.90</span>) <span class="sc">+</span></span>
+<span id="cb13-5"><a href="#cb13-5"></a>  <span class="fu">geom_errorbar</span>(<span class="fu">aes</span>(<span class="at">ymin =</span> mean_bias <span class="sc">-</span> <span class="dv">2</span> <span class="sc">*</span> se_bias, <span class="at">ymax =</span> mean_bias <span class="sc">+</span> <span class="dv">2</span> <span class="sc">*</span> se_bias), <span class="at">position =</span> <span class="fu">position_dodge</span>(<span class="at">width =</span> <span class="fl">0.70</span>), <span class="at">width =</span> <span class="fl">0.20</span>, <span class="at">linewidth =</span> <span class="fl">0.5</span>, <span class="at">color =</span> <span class="st">"darkgray"</span>) <span class="sc">+</span></span>
+<span id="cb13-6"><a href="#cb13-6"></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="dv">0</span>, <span class="at">linetype =</span> <span class="st">"dashed"</span>, <span class="at">color =</span> <span class="st">"darkgray"</span>, <span class="at">linewidth =</span> <span class="fl">0.4</span>) <span class="sc">+</span></span>
+<span id="cb13-7"><a href="#cb13-7"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> sex_pal, <span class="at">name =</span> <span class="st">"Assigned sex"</span>) <span class="sc">+</span></span>
+<span id="cb13-8"><a href="#cb13-8"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">labels =</span> <span class="cf">function</span>(x) <span class="fu">sprintf</span>(<span class="st">"%+.2f pp"</span>, x)) <span class="sc">+</span></span>
+<span id="cb13-9"><a href="#cb13-9"></a>  <span class="fu">labs</span>(<span class="at">title  =</span> <span class="st">"Mean bias by race and assigned sex"</span>,</span>
+<span id="cb13-10"><a href="#cb13-10"></a>    <span class="at">subtitle =</span> <span class="st">"Error bars = 95% CI · Does sex compound the racial bias gradient?"</span>,</span>
+<span id="cb13-11"><a href="#cb13-11"></a>    <span class="at">x =</span> <span class="cn">NULL</span>, <span class="at">y =</span> <span class="st">"Mean bias (SpO2 − SaO2, pp)"</span>) <span class="sc">+</span></span>
+<span id="cb13-12"><a href="#cb13-12"></a>  <span class="fu">theme_eda</span>() </span>
+<span id="cb13-13"><a href="#cb13-13"></a></span>
+<span id="cb13-14"><a href="#cb13-14"></a><span class="co"># Occult hypoxemia rate by race and assigned sex</span></span>
+<span id="cb13-15"><a href="#cb13-15"></a></span>
+<span id="cb13-16"><a href="#cb13-16"></a>p_sex_oh <span class="ot">&lt;-</span> sex_race <span class="sc">|&gt;</span></span>
+<span id="cb13-17"><a href="#cb13-17"></a>  <span class="fu">mutate</span>(<span class="at">race_eth =</span> <span class="fu">fct_reorder</span>(race_eth, oh_rate, max)) <span class="sc">|&gt;</span></span>
+<span id="cb13-18"><a href="#cb13-18"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> race_eth, <span class="at">y =</span> oh_rate, <span class="at">fill =</span> assigned_sex)) <span class="sc">+</span></span>
+<span id="cb13-19"><a href="#cb13-19"></a>  <span class="fu">geom_col</span>(<span class="at">position =</span> <span class="fu">position_dodge</span>(<span class="at">width =</span> <span class="fl">0.75</span>), <span class="at">width =</span> <span class="fl">0.65</span>, <span class="at">alpha =</span> <span class="fl">0.88</span>) <span class="sc">+</span></span>
+<span id="cb13-20"><a href="#cb13-20"></a>  <span class="fu">geom_text</span>(</span>
+<span id="cb13-21"><a href="#cb13-21"></a>    <span class="fu">aes</span>(<span class="at">label =</span> <span class="fu">percent</span>(oh_rate, <span class="at">accuracy =</span> <span class="fl">0.1</span>)),</span>
+<span id="cb13-22"><a href="#cb13-22"></a>    <span class="at">position =</span> <span class="fu">position_dodge</span>(<span class="at">width =</span> <span class="fl">0.75</span>),</span>
+<span id="cb13-23"><a href="#cb13-23"></a>    <span class="at">vjust =</span> <span class="sc">-</span><span class="fl">0.5</span>, <span class="at">size =</span> <span class="fl">2.9</span>, <span class="at">color =</span> <span class="st">"darkgray"</span>) <span class="sc">+</span></span>
+<span id="cb13-24"><a href="#cb13-24"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> sex_pal, <span class="at">name =</span> <span class="st">"Assigned sex"</span>) <span class="sc">+</span></span>
+<span id="cb13-25"><a href="#cb13-25"></a>  <span class="fu">labs</span>(</span>
+<span id="cb13-26"><a href="#cb13-26"></a>    <span class="at">title    =</span> <span class="st">"Occult hypoxemia rate by race and assigned sex"</span>,</span>
+<span id="cb13-27"><a href="#cb13-27"></a>    <span class="at">x =</span> <span class="cn">NULL</span>, <span class="at">y =</span> <span class="st">"Occult hypoxemia rate"</span>) <span class="sc">+</span></span>
+<span id="cb13-28"><a href="#cb13-28"></a>  <span class="fu">theme_eda</span>() </span>
+<span id="cb13-29"><a href="#cb13-29"></a></span>
+<span id="cb13-30"><a href="#cb13-30"></a>(p_sex_bias <span class="sc">/</span> p_sex_oh) <span class="sc">+</span></span>
+<span id="cb13-31"><a href="#cb13-31"></a>  <span class="fu">plot_annotation</span>(</span>
+<span id="cb13-32"><a href="#cb13-32"></a>    <span class="at">title =</span> <span class="st">"Sex × race interaction in pulse oximeter error"</span>,</span>
+<span id="cb13-33"><a href="#cb13-33"></a>    <span class="at">theme =</span> <span class="fu">theme</span>(<span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">15</span>, <span class="at">face =</span> <span class="st">"bold"</span>)))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="eda-patricia_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid figure-img" width="768"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>As expected, these charts reveal a striking interaction between race and sex, demonstrating that pulse oximeter inaccuracies are not evenly distributed across demographics. In the top panel, we see that mean bias, the degree to which the device overestimates oxygen levels, is consistently higher for Black and Asian patients compared to White and Hispanic patients, but the sex-based disparity is most pronounced among Black individuals, where females experience significantly higher overestimation than males. This technical error translates directly into clinical risk, as shown in the bottom panel, where the rate of occult hypoxemia peaks sharply for Black females at 12.6%. This means that for more than one in ten Black women, the device reports a “safe” oxygen level when they are actually experiencing dangerously low saturation. Collectively, the data suggests that while racial bias is a primary driver of device failure, being female often compounds this risk, particularly for Black and Asian patients, potentially leading to systemic delays in care for these specific groups.</p>
+
+
+<!-- -->
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    // Ensure there is a toggle, if there isn't float one in the top right
+    if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+      const a = window.document.createElement('a');
+      a.classList.add('top-right');
+      a.classList.add('quarto-color-scheme-toggle');
+      a.href = "";
+      a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const i = window.document.createElement("i");
+      i.classList.add('bi');
+      a.appendChild(i);
+      window.document.body.appendChild(a);
+    }
+    setColorSchemeToggle(hasAlternateSentinel())
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+    const viewSource = window.document.getElementById('quarto-view-source') ||
+                       window.document.getElementById('quarto-code-tools-source');
+    if (viewSource) {
+      const sourceUrl = viewSource.getAttribute("data-quarto-source-url");
+      viewSource.addEventListener("click", function(e) {
+        if (sourceUrl) {
+          // rstudio viewer pane
+          if (/\bcapabilities=\b/.test(window.location)) {
+            window.open(sourceUrl);
+          } else {
+            window.location.href = sourceUrl;
+          }
+        } else {
+          const modal = new bootstrap.Modal(document.getElementById('quarto-embedded-source-code-modal'));
+          modal.show();
+        }
+        return false;
+      });
+    }
+    function toggleCodeHandler(show) {
+      return function(e) {
+        const detailsSrc = window.document.querySelectorAll(".cell > details > .sourceCode");
+        for (let i=0; i<detailsSrc.length; i++) {
+          const details = detailsSrc[i].parentElement;
+          if (show) {
+            details.open = true;
+          } else {
+            details.removeAttribute("open");
+          }
+        }
+        const cellCodeDivs = window.document.querySelectorAll(".cell > .sourceCode");
+        const fromCls = show ? "hidden" : "unhidden";
+        const toCls = show ? "unhidden" : "hidden";
+        for (let i=0; i<cellCodeDivs.length; i++) {
+          const codeDiv = cellCodeDivs[i];
+          if (codeDiv.classList.contains(fromCls)) {
+            codeDiv.classList.remove(fromCls);
+            codeDiv.classList.add(toCls);
+          } 
+        }
+        return false;
+      }
+    }
+    const hideAllCode = window.document.getElementById("quarto-hide-all-code");
+    if (hideAllCode) {
+      hideAllCode.addEventListener("click", toggleCodeHandler(false));
+    }
+    const showAllCode = window.document.getElementById("quarto-show-all-code");
+    if (showAllCode) {
+      showAllCode.addEventListener("click", toggleCodeHandler(true));
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+            // target, if specified
+            link.setAttribute("target", "_blank");
+            if (link.getAttribute("rel") === null) {
+              link.setAttribute("rel", "noopener");
+            }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation column-body">
+  <div class="nav-page nav-page-previous">
+      <a href="../eda/eda-william_acosta.html" class="pagination-link" aria-label="Individual EDA: Hidden Hypoxemia and Its Economic Consequences">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-title">Individual EDA: Hidden Hypoxemia and Its Economic Consequences</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="../eda/eda-member3.html" class="pagination-link" aria-label="Member 3 First Name &amp; Last Name Initial">
+        <span class="nav-page-text"><span class="chapter-title">Member 3 First Name &amp; Last Name Initial</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb14" data-shortcodes="false"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb14-1"><a href="#cb14-1"></a><span class="co">---</span></span>
+<span id="cb14-2"><a href="#cb14-2"></a><span class="an">title:</span><span class="co"> "Individual EDA: Evaluating Demographic Disparities in Pulse Oximetry Accuracy"</span></span>
+<span id="cb14-3"><a href="#cb14-3"></a><span class="an">subtitle:</span><span class="co"> "OpenOximetry Discharge Data"</span></span>
+<span id="cb14-4"><a href="#cb14-4"></a><span class="an">author:</span><span class="co"> "Patricia Escobar Contreras"</span></span>
+<span id="cb14-5"><a href="#cb14-5"></a><span class="an">date:</span><span class="co"> today</span></span>
+<span id="cb14-6"><a href="#cb14-6"></a><span class="an">format:</span></span>
+<span id="cb14-7"><a href="#cb14-7"></a><span class="co">  html:</span></span>
+<span id="cb14-8"><a href="#cb14-8"></a><span class="co">    toc: true</span></span>
+<span id="cb14-9"><a href="#cb14-9"></a><span class="co">    toc-depth: 3</span></span>
+<span id="cb14-10"><a href="#cb14-10"></a><span class="co">    code-fold: true</span></span>
+<span id="cb14-11"><a href="#cb14-11"></a><span class="co">    code-summary: "Show code"</span></span>
+<span id="cb14-12"><a href="#cb14-12"></a><span class="co">    fig-width: 8</span></span>
+<span id="cb14-13"><a href="#cb14-13"></a><span class="co">    fig-height: 5</span></span>
+<span id="cb14-14"><a href="#cb14-14"></a><span class="an">editor:</span><span class="co"> </span></span>
+<span id="cb14-15"><a href="#cb14-15"></a><span class="co">  markdown: </span></span>
+<span id="cb14-16"><a href="#cb14-16"></a><span class="co">    wrap: 72</span></span>
+<span id="cb14-17"><a href="#cb14-17"></a><span class="co">---</span></span>
+<span id="cb14-18"><a href="#cb14-18"></a></span>
+<span id="cb14-19"><a href="#cb14-19"></a><span class="fu">## Overview</span></span>
+<span id="cb14-20"><a href="#cb14-20"></a></span>
+<span id="cb14-21"><a href="#cb14-21"></a>This EDA covers the **OpenOximetry** dataset:</span>
+<span id="cb14-22"><a href="#cb14-22"></a></span>
+<span id="cb14-23"><a href="#cb14-23"></a><span class="ss">-   </span>**OpenOximetry** (UCSF Hypoxia Lab) - Used to audit the clinical</span>
+<span id="cb14-24"><a href="#cb14-24"></a>    reliability of pulse oximeters by comparing their digital readings</span>
+<span id="cb14-25"><a href="#cb14-25"></a>    against the "gold standard" of direct blood oxygen measurements.</span>
+<span id="cb14-26"><a href="#cb14-26"></a></span>
+<span id="cb14-27"><a href="#cb14-27"></a><span class="fu">## Setup</span></span>
+<span id="cb14-28"><a href="#cb14-28"></a></span>
+<span id="cb14-31"><a href="#cb14-31"></a><span class="in">```{r}</span></span>
+<span id="cb14-32"><a href="#cb14-32"></a><span class="co">#| label: setup</span></span>
+<span id="cb14-33"><a href="#cb14-33"></a><span class="co">#| message: false</span></span>
+<span id="cb14-34"><a href="#cb14-34"></a><span class="co">#| warning: false</span></span>
+<span id="cb14-35"><a href="#cb14-35"></a></span>
+<span id="cb14-36"><a href="#cb14-36"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb14-37"><a href="#cb14-37"></a><span class="fu">library</span>(visdat)</span>
+<span id="cb14-38"><a href="#cb14-38"></a><span class="fu">library</span>(DataExplorer)</span>
+<span id="cb14-39"><a href="#cb14-39"></a><span class="fu">library</span>(gtsummary)</span>
+<span id="cb14-40"><a href="#cb14-40"></a><span class="fu">library</span>(janitor)</span>
+<span id="cb14-41"><a href="#cb14-41"></a><span class="fu">library</span>(scales)</span>
+<span id="cb14-42"><a href="#cb14-42"></a><span class="fu">library</span>(patchwork)</span>
+<span id="cb14-43"><a href="#cb14-43"></a><span class="fu">library</span>(ggrepel)</span>
+<span id="cb14-44"><a href="#cb14-44"></a></span>
+<span id="cb14-45"><a href="#cb14-45"></a><span class="fu">theme_set</span>(<span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">13</span>))</span>
+<span id="cb14-46"><a href="#cb14-46"></a><span class="in">```</span></span>
+<span id="cb14-47"><a href="#cb14-47"></a></span>
+<span id="cb14-48"><a href="#cb14-48"></a></span>
+<span id="cb14-51"><a href="#cb14-51"></a><span class="in">```{r}</span></span>
+<span id="cb14-52"><a href="#cb14-52"></a>patients      <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"../data/raw/patient.csv"</span>)</span>
+<span id="cb14-53"><a href="#cb14-53"></a>encounter     <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"../data/raw/encounter.csv"</span>)</span>
+<span id="cb14-54"><a href="#cb14-54"></a>pulseoximeter <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"../data/raw/pulseoximeter.csv"</span>)</span>
+<span id="cb14-55"><a href="#cb14-55"></a>bloodgas      <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"../data/raw/bloodgas.csv"</span>)</span>
+<span id="cb14-56"><a href="#cb14-56"></a><span class="in">```</span></span>
+<span id="cb14-57"><a href="#cb14-57"></a></span>
+<span id="cb14-58"><a href="#cb14-58"></a></span>
+<span id="cb14-61"><a href="#cb14-61"></a><span class="in">```{r}</span></span>
+<span id="cb14-62"><a href="#cb14-62"></a><span class="co"># Cleaned with William's support </span></span>
+<span id="cb14-63"><a href="#cb14-63"></a>oximetry <span class="ot">&lt;-</span> pulseoximeter <span class="sc">|&gt;</span></span>
+<span id="cb14-64"><a href="#cb14-64"></a>  <span class="fu">inner_join</span>(</span>
+<span id="cb14-65"><a href="#cb14-65"></a>    bloodgas <span class="sc">|&gt;</span> <span class="fu">select</span>(encounter_id, sample, so2),</span>
+<span id="cb14-66"><a href="#cb14-66"></a>    <span class="at">by =</span> <span class="fu">c</span>(<span class="st">"encounter_id"</span>, <span class="st">"sample_number"</span> <span class="ot">=</span> <span class="st">"sample"</span>)</span>
+<span id="cb14-67"><a href="#cb14-67"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb14-68"><a href="#cb14-68"></a>  <span class="fu">rename</span>(<span class="at">SpO2 =</span> saturation, <span class="at">SaO2 =</span> so2) <span class="sc">|&gt;</span></span>
+<span id="cb14-69"><a href="#cb14-69"></a>  <span class="fu">left_join</span>(</span>
+<span id="cb14-70"><a href="#cb14-70"></a>    encounter <span class="sc">|&gt;</span> <span class="fu">select</span>(</span>
+<span id="cb14-71"><a href="#cb14-71"></a>      encounter_id, patient_id, fitzpatrick, age_at_encounter</span>
+<span id="cb14-72"><a href="#cb14-72"></a>    ),</span>
+<span id="cb14-73"><a href="#cb14-73"></a>    <span class="at">by =</span> <span class="st">"encounter_id"</span></span>
+<span id="cb14-74"><a href="#cb14-74"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb14-75"><a href="#cb14-75"></a>  <span class="fu">left_join</span>(</span>
+<span id="cb14-76"><a href="#cb14-76"></a>    patients <span class="sc">|&gt;</span> <span class="fu">select</span>(patient_id, race, ethnicity),</span>
+<span id="cb14-77"><a href="#cb14-77"></a>    <span class="at">by =</span> <span class="st">"patient_id"</span></span>
+<span id="cb14-78"><a href="#cb14-78"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb14-79"><a href="#cb14-79"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb14-80"><a href="#cb14-80"></a>    <span class="at">bias             =</span> SpO2 <span class="sc">-</span> SaO2,</span>
+<span id="cb14-81"><a href="#cb14-81"></a>    <span class="at">occult_hypoxemia =</span> SpO2 <span class="sc">&gt;=</span> <span class="dv">88</span> <span class="sc">&amp;</span> SaO2 <span class="sc">&lt;</span> <span class="dv">88</span>,</span>
+<span id="cb14-82"><a href="#cb14-82"></a></span>
+<span id="cb14-83"><a href="#cb14-83"></a>    <span class="at">skin_group =</span> <span class="fu">cut</span>(</span>
+<span id="cb14-84"><a href="#cb14-84"></a>      fitzpatrick,</span>
+<span id="cb14-85"><a href="#cb14-85"></a>      <span class="at">breaks         =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">2</span>, <span class="dv">4</span>, <span class="dv">6</span>),</span>
+<span id="cb14-86"><a href="#cb14-86"></a>      <span class="at">labels         =</span> <span class="fu">c</span>(<span class="st">"Light (I–II)"</span>, <span class="st">"Medium (III–IV)"</span>, <span class="st">"Dark (V–VI)"</span>),</span>
+<span id="cb14-87"><a href="#cb14-87"></a>      <span class="at">include.lowest =</span> <span class="cn">TRUE</span></span>
+<span id="cb14-88"><a href="#cb14-88"></a>    ),</span>
+<span id="cb14-89"><a href="#cb14-89"></a></span>
+<span id="cb14-90"><a href="#cb14-90"></a>    <span class="at">race_eth =</span> <span class="fu">case_when</span>(</span>
+<span id="cb14-91"><a href="#cb14-91"></a>      ethnicity <span class="sc">==</span> <span class="st">"Hispanic"</span>                            <span class="sc">~</span> <span class="st">"Hispanic/Latino"</span>,</span>
+<span id="cb14-92"><a href="#cb14-92"></a>      <span class="fu">str_detect</span>(race, <span class="st">"African American"</span>) <span class="sc">&amp;</span></span>
+<span id="cb14-93"><a href="#cb14-93"></a>        ethnicity <span class="sc">==</span> <span class="st">"Not Hispanic"</span>                      <span class="sc">~</span> <span class="st">"Black"</span>,</span>
+<span id="cb14-94"><a href="#cb14-94"></a>      race <span class="sc">==</span> <span class="st">"Caucasian"</span> <span class="sc">&amp;</span></span>
+<span id="cb14-95"><a href="#cb14-95"></a>        ethnicity <span class="sc">==</span> <span class="st">"Not Hispanic"</span>                      <span class="sc">~</span> <span class="st">"White"</span>,</span>
+<span id="cb14-96"><a href="#cb14-96"></a>      <span class="fu">str_detect</span>(race, <span class="st">"^Asian"</span>) <span class="sc">&amp;</span></span>
+<span id="cb14-97"><a href="#cb14-97"></a>        ethnicity <span class="sc">==</span> <span class="st">"Not Hispanic"</span>                      <span class="sc">~</span> <span class="st">"Asian"</span>,</span>
+<span id="cb14-98"><a href="#cb14-98"></a>      <span class="cn">TRUE</span>                                               <span class="sc">~</span> <span class="cn">NA_character_</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb14-99"><a href="#cb14-99"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(race_eth))</span>
+<span id="cb14-100"><a href="#cb14-100"></a></span>
+<span id="cb14-101"><a href="#cb14-101"></a><span class="co"># Remove non-finite bias values caused by bad join rows</span></span>
+<span id="cb14-102"><a href="#cb14-102"></a>oximetry <span class="ot">&lt;-</span> oximetry <span class="sc">|&gt;</span></span>
+<span id="cb14-103"><a href="#cb14-103"></a>  <span class="fu">filter</span>(<span class="fu">is.finite</span>(bias), <span class="fu">is.finite</span>(SpO2), <span class="fu">is.finite</span>(SaO2))</span>
+<span id="cb14-104"><a href="#cb14-104"></a><span class="in">```</span></span>
+<span id="cb14-105"><a href="#cb14-105"></a></span>
+<span id="cb14-108"><a href="#cb14-108"></a><span class="in">```{r}</span></span>
+<span id="cb14-109"><a href="#cb14-109"></a><span class="co">#Aestethics purposes </span></span>
+<span id="cb14-110"><a href="#cb14-110"></a>skin_pal <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
+<span id="cb14-111"><a href="#cb14-111"></a>  <span class="st">"Light (I–II)"</span>    <span class="ot">=</span> <span class="st">"#E8C97A"</span>,</span>
+<span id="cb14-112"><a href="#cb14-112"></a>  <span class="st">"Medium (III–IV)"</span> <span class="ot">=</span> <span class="st">"#B06840"</span>,</span>
+<span id="cb14-113"><a href="#cb14-113"></a>  <span class="st">"Dark (V–VI)"</span>     <span class="ot">=</span> <span class="st">"#4A1E0E"</span>)</span>
+<span id="cb14-114"><a href="#cb14-114"></a></span>
+<span id="cb14-115"><a href="#cb14-115"></a><span class="co"># Base theme applied to every plot</span></span>
+<span id="cb14-116"><a href="#cb14-116"></a>theme_eda <span class="ot">&lt;-</span> <span class="cf">function</span>() {</span>
+<span id="cb14-117"><a href="#cb14-117"></a>  <span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">13</span>) <span class="sc">+</span></span>
+<span id="cb14-118"><a href="#cb14-118"></a>  <span class="fu">theme</span>(<span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">14</span>, <span class="at">face =</span> <span class="st">"bold"</span>, <span class="at">margin =</span> <span class="fu">margin</span>(<span class="at">b =</span> <span class="dv">4</span>)), </span>
+<span id="cb14-119"><a href="#cb14-119"></a>        <span class="at">plot.subtitle =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">11</span>, <span class="at">color =</span> <span class="st">"gray"</span>),</span>
+<span id="cb14-120"><a href="#cb14-120"></a>        <span class="at">plot.caption =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">9</span>,  <span class="at">color =</span> <span class="st">"darkgray"</span>),</span>
+<span id="cb14-121"><a href="#cb14-121"></a>        <span class="at">axis.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">11</span>, <span class="at">color =</span> <span class="st">"darkgray"</span>),</span>
+<span id="cb14-122"><a href="#cb14-122"></a>        <span class="at">axis.text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">10</span>, <span class="at">color =</span> <span class="st">"darkgray"</span>),</span>
+<span id="cb14-123"><a href="#cb14-123"></a>        <span class="at">panel.grid.major.x  =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb14-124"><a href="#cb14-124"></a>        <span class="at">panel.grid.minor =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb14-125"><a href="#cb14-125"></a>        <span class="at">strip.text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">11</span>, <span class="at">face =</span> <span class="st">"bold"</span>, <span class="at">color =</span> <span class="st">"darkgray"</span>))}</span>
+<span id="cb14-126"><a href="#cb14-126"></a><span class="in">```</span></span>
+<span id="cb14-127"><a href="#cb14-127"></a></span>
+<span id="cb14-128"><a href="#cb14-128"></a><span class="fu">## OpenOximetry Dataset</span></span>
+<span id="cb14-129"><a href="#cb14-129"></a></span>
+<span id="cb14-130"><a href="#cb14-130"></a>This group project focuses on analyzing the implications of inaccuracies</span>
+<span id="cb14-131"><a href="#cb14-131"></a>in standard pulse oximeters. In this regard, through the analysis of</span>
+<span id="cb14-132"><a href="#cb14-132"></a>relevant data, we have observed that oximeters, which function to detect</span>
+<span id="cb14-133"><a href="#cb14-133"></a>blood oxygen levels, tend to exhibit wider margins of error for</span>
+<span id="cb14-134"><a href="#cb14-134"></a>individuals with dark skin compared to those with light skin.</span>
+<span id="cb14-135"><a href="#cb14-135"></a>Scientifically, this phenomenon is explained by the fact that dark skin</span>
+<span id="cb14-136"><a href="#cb14-136"></a>contains a layer of melanin that impedes the unimpeded passage of the</span>
+<span id="cb14-137"><a href="#cb14-137"></a>oximeter's light beams through the skin, unlike in individuals with</span>
+<span id="cb14-138"><a href="#cb14-138"></a>light skin, who lack these elevated levels of melanin. However, as a</span>
+<span id="cb14-139"><a href="#cb14-139"></a>group, we believe this issue carries broader implications, and we intend</span>
+<span id="cb14-140"><a href="#cb14-140"></a>to analyze how this phenomenon manifests across various demographic</span>
+<span id="cb14-141"><a href="#cb14-141"></a>groups. In my specific analysis, I will focus on examining the biases</span>
+<span id="cb14-142"><a href="#cb14-142"></a>associated with oximeter models and skin tone, specifically, the biases</span>
+<span id="cb14-143"><a href="#cb14-143"></a>that arise among patients of different skin tones, and the interplay of</span>
+<span id="cb14-144"><a href="#cb14-144"></a>these factors with respect to sex and race.</span>
+<span id="cb14-145"><a href="#cb14-145"></a></span>
+<span id="cb14-146"><a href="#cb14-146"></a><span class="fu">## Analysis 1: Bias by device model and skin tone</span></span>
+<span id="cb14-147"><a href="#cb14-147"></a></span>
+<span id="cb14-148"><a href="#cb14-148"></a>Given that we are examining potential biases related to skin tone, it is</span>
+<span id="cb14-149"><a href="#cb14-149"></a>crucial to consider the devices themselves. In this regard, my aim is to</span>
+<span id="cb14-150"><a href="#cb14-150"></a>explore the variability in blood oxygen detection across individual</span>
+<span id="cb14-151"><a href="#cb14-151"></a>devices, and to analyze whether there is a general pattern,</span>
+<span id="cb14-152"><a href="#cb14-152"></a>specifically, if certain devices are less effective and thus skewing the</span>
+<span id="cb14-153"><a href="#cb14-153"></a>overall data results across different skin colors, or if this is a</span>
+<span id="cb14-154"><a href="#cb14-154"></a>generalized issue affecting all devices. This is a controlled within</span>
+<span id="cb14-155"><a href="#cb14-155"></a>encounter comparison: same patient, only the device differs. Any bias</span>
+<span id="cb14-156"><a href="#cb14-156"></a>difference between devices on the same sample is purely a device effect,</span>
+<span id="cb14-157"><a href="#cb14-157"></a>not a patient effect.</span>
+<span id="cb14-158"><a href="#cb14-158"></a></span>
+<span id="cb14-161"><a href="#cb14-161"></a><span class="in">```{r}</span></span>
+<span id="cb14-162"><a href="#cb14-162"></a>oximetry <span class="ot">&lt;-</span> oximetry <span class="sc">|&gt;</span></span>
+<span id="cb14-163"><a href="#cb14-163"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb14-164"><a href="#cb14-164"></a>    <span class="at">device_brand =</span> <span class="fu">as.integer</span>(<span class="fu">floor</span>(device)),</span>
+<span id="cb14-165"><a href="#cb14-165"></a>    <span class="at">device_label =</span> <span class="fu">paste0</span>(<span class="st">"Model "</span>, <span class="fu">as.integer</span>(<span class="fu">floor</span>(device))))</span>
+<span id="cb14-166"><a href="#cb14-166"></a></span>
+<span id="cb14-167"><a href="#cb14-167"></a><span class="co"># Check: how many distinct brands?</span></span>
+<span id="cb14-168"><a href="#cb14-168"></a>oximetry <span class="sc">|&gt;</span> <span class="fu">count</span>(device_brand, <span class="at">sort =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb14-169"><a href="#cb14-169"></a>top_brands <span class="ot">&lt;-</span> oximetry <span class="sc">|&gt;</span></span>
+<span id="cb14-170"><a href="#cb14-170"></a>  <span class="fu">count</span>(device_brand) <span class="sc">|&gt;</span></span>
+<span id="cb14-171"><a href="#cb14-171"></a>  <span class="fu">filter</span>(n <span class="sc">&gt;=</span> <span class="dv">500</span>) <span class="sc">|&gt;</span></span>
+<span id="cb14-172"><a href="#cb14-172"></a>  <span class="fu">pull</span>(device_brand)</span>
+<span id="cb14-173"><a href="#cb14-173"></a></span>
+<span id="cb14-174"><a href="#cb14-174"></a>oximetry_top <span class="ot">&lt;-</span> oximetry <span class="sc">|&gt;</span></span>
+<span id="cb14-175"><a href="#cb14-175"></a>  <span class="fu">filter</span>(device_brand <span class="sc">%in%</span> top_brands) <span class="sc">|&gt;</span></span>
+<span id="cb14-176"><a href="#cb14-176"></a>  <span class="fu">mutate</span>(<span class="at">device_label =</span> <span class="fu">paste0</span>(<span class="st">"Model "</span>, device_brand), <span class="at">device_label =</span> <span class="fu">fct_reorder</span>(device_label, device_brand))</span>
+<span id="cb14-177"><a href="#cb14-177"></a><span class="in">```</span></span>
+<span id="cb14-178"><a href="#cb14-178"></a></span>
+<span id="cb14-179"><a href="#cb14-179"></a>This is the total amount of all the devices that exist in this dataset,</span>
+<span id="cb14-180"><a href="#cb14-180"></a>under the colum "device_brand", togther with the number of dispositives</span>
+<span id="cb14-181"><a href="#cb14-181"></a>for each one of the models, as seen, the most common model is the "59",</span>
+<span id="cb14-182"><a href="#cb14-182"></a>while the least common model is the "21". As now, this does not tells us</span>
+<span id="cb14-183"><a href="#cb14-183"></a>anything directly about the data, but is information that will become</span>
+<span id="cb14-184"><a href="#cb14-184"></a>relevant while analyzing all the other devices and the the different</span>
+<span id="cb14-185"><a href="#cb14-185"></a>skin colors.</span>
+<span id="cb14-186"><a href="#cb14-186"></a></span>
+<span id="cb14-189"><a href="#cb14-189"></a><span class="in">```{r}</span></span>
+<span id="cb14-190"><a href="#cb14-190"></a><span class="co"># Same device disagreen within different samples </span></span>
+<span id="cb14-191"><a href="#cb14-191"></a>device_spread <span class="ot">&lt;-</span> oximetry_top <span class="sc">|&gt;</span></span>
+<span id="cb14-192"><a href="#cb14-192"></a>  <span class="fu">filter</span>(<span class="fu">between</span>(bias, <span class="sc">-</span><span class="dv">20</span>, <span class="dv">20</span>), <span class="sc">!</span><span class="fu">is.na</span>(skin_group)) <span class="sc">|&gt;</span></span>
+<span id="cb14-193"><a href="#cb14-193"></a>  <span class="fu">group_by</span>(encounter_id, sample_number, skin_group) <span class="sc">|&gt;</span></span>
+<span id="cb14-194"><a href="#cb14-194"></a>  <span class="fu">summarise</span>(</span>
+<span id="cb14-195"><a href="#cb14-195"></a>    <span class="at">bias_range =</span> <span class="fu">max</span>(bias) <span class="sc">-</span> <span class="fu">min</span>(bias),</span>
+<span id="cb14-196"><a href="#cb14-196"></a>    <span class="at">n_devices  =</span> <span class="fu">n_distinct</span>(device_brand),</span>
+<span id="cb14-197"><a href="#cb14-197"></a>    <span class="at">.groups    =</span> <span class="st">"drop"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb14-198"><a href="#cb14-198"></a>  <span class="fu">filter</span>(n_devices <span class="sc">&gt;=</span> <span class="dv">2</span>)</span>
+<span id="cb14-199"><a href="#cb14-199"></a></span>
+<span id="cb14-200"><a href="#cb14-200"></a>p_spread <span class="ot">&lt;-</span> device_spread <span class="sc">|&gt;</span></span>
+<span id="cb14-201"><a href="#cb14-201"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> skin_group, <span class="at">y =</span> bias_range, <span class="at">fill =</span> skin_group)) <span class="sc">+</span></span>
+<span id="cb14-202"><a href="#cb14-202"></a>  <span class="fu">geom_violin</span>(<span class="at">alpha =</span> <span class="fl">0.45</span>, <span class="at">trim =</span> <span class="cn">TRUE</span>, <span class="at">linewidth =</span> <span class="fl">0.3</span>) <span class="sc">+</span></span>
+<span id="cb14-203"><a href="#cb14-203"></a>  <span class="fu">geom_boxplot</span>(<span class="at">width =</span> <span class="fl">0.18</span>, <span class="at">outlier.shape =</span> <span class="cn">NA</span>, <span class="at">alpha =</span> <span class="fl">0.85</span>, <span class="at">linewidth =</span> <span class="fl">0.4</span>) <span class="sc">+</span></span>
+<span id="cb14-204"><a href="#cb14-204"></a>  <span class="fu">stat_summary</span>(</span>
+<span id="cb14-205"><a href="#cb14-205"></a>    <span class="at">fun =</span> median, <span class="at">geom =</span> <span class="st">"text"</span>,</span>
+<span id="cb14-206"><a href="#cb14-206"></a>    <span class="fu">aes</span>(<span class="at">label =</span> <span class="fu">sprintf</span>(<span class="st">"%.1f pp"</span>, <span class="fu">after_stat</span>(y))),</span>
+<span id="cb14-207"><a href="#cb14-207"></a>    <span class="at">vjust =</span> <span class="sc">-</span><span class="fl">0.5</span>, <span class="at">size =</span> <span class="fl">3.2</span>, <span class="at">color =</span> <span class="st">"black"</span>) <span class="sc">+</span></span>
+<span id="cb14-208"><a href="#cb14-208"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> skin_pal) <span class="sc">+</span></span>
+<span id="cb14-209"><a href="#cb14-209"></a>  <span class="fu">scale_y_continuous</span>(</span>
+<span id="cb14-210"><a href="#cb14-210"></a>    <span class="at">labels =</span> <span class="cf">function</span>(x) <span class="fu">sprintf</span>(<span class="st">"%+.0f pp"</span>, x),</span>
+<span id="cb14-211"><a href="#cb14-211"></a>    <span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="cn">NA</span>)) <span class="sc">+</span> </span>
+<span id="cb14-212"><a href="#cb14-212"></a>  <span class="fu">labs</span>(</span>
+<span id="cb14-213"><a href="#cb14-213"></a>    <span class="at">title    =</span> <span class="st">"Device disagreement at identical sample moments"</span>,</span>
+<span id="cb14-214"><a href="#cb14-214"></a>    <span class="at">subtitle =</span> <span class="st">"Range of bias readings across devices on the same blood draw"</span>,</span>
+<span id="cb14-215"><a href="#cb14-215"></a>    <span class="at">x =</span> <span class="cn">NULL</span>, <span class="at">y =</span> <span class="st">"Bias range across devices (pp)"</span>,</span>
+<span id="cb14-216"><a href="#cb14-216"></a>    <span class="at">caption  =</span> <span class="st">"Only samples where ≥ 2 devices present"</span>) <span class="sc">+</span></span>
+<span id="cb14-217"><a href="#cb14-217"></a>  <span class="fu">theme_eda</span>() </span>
+<span id="cb14-218"><a href="#cb14-218"></a></span>
+<span id="cb14-219"><a href="#cb14-219"></a>p_spread</span>
+<span id="cb14-220"><a href="#cb14-220"></a><span class="in">```</span></span>
+<span id="cb14-221"><a href="#cb14-221"></a></span>
+<span id="cb14-222"><a href="#cb14-222"></a>This visualization highlights a troubling lack of consistency in medical</span>
+<span id="cb14-223"><a href="#cb14-223"></a>device readings when used on patients with darker skin tones. As we can</span>
+<span id="cb14-224"><a href="#cb14-224"></a>see, there is a range of disagreement between two or more devices</span>
+<span id="cb14-225"><a href="#cb14-225"></a>measuring the exact same blood sample at the same moment. While all</span>
+<span id="cb14-226"><a href="#cb14-226"></a>groups show some level of discrepancy, the "Dark" skin tone category</span>
+<span id="cb14-227"><a href="#cb14-227"></a>(V–VI) has a noticeably higher median disagreement of 4.1 pp compared to</span>
+<span id="cb14-228"><a href="#cb14-228"></a>just 3.0 pp for light skin and 2.1 pp for medium skin. More importantly,</span>
+<span id="cb14-229"><a href="#cb14-229"></a>the "tail" of the dark skin plot stretches significantly higher,</span>
+<span id="cb14-230"><a href="#cb14-230"></a>reaching extremes of over +30 pp in bias range. This means that for</span>
+<span id="cb14-231"><a href="#cb14-231"></a>patients with the darkest skin, two different sensors are far more</span>
+<span id="cb14-232"><a href="#cb14-232"></a>likely to give wildly conflicting results, creating a dangerous level of</span>
+<span id="cb14-233"><a href="#cb14-233"></a>clinical uncertainty that isn't as prevalent for lighter-skinned</span>
+<span id="cb14-234"><a href="#cb14-234"></a>patients.</span>
+<span id="cb14-235"><a href="#cb14-235"></a></span>
+<span id="cb14-238"><a href="#cb14-238"></a><span class="in">```{r}</span></span>
+<span id="cb14-239"><a href="#cb14-239"></a><span class="co"># Looking at each individual oxymeter</span></span>
+<span id="cb14-240"><a href="#cb14-240"></a>device_skin_summary <span class="ot">&lt;-</span> oximetry_top <span class="sc">|&gt;</span></span>
+<span id="cb14-241"><a href="#cb14-241"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(skin_group), <span class="fu">between</span>(bias, <span class="sc">-</span><span class="dv">20</span>, <span class="dv">20</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb14-242"><a href="#cb14-242"></a>  <span class="fu">group_by</span>(device_label, skin_group) <span class="sc">|&gt;</span></span>
+<span id="cb14-243"><a href="#cb14-243"></a>  <span class="fu">summarise</span>(<span class="at">mean_bias =</span> <span class="fu">mean</span>(bias, <span class="at">na.rm =</span> <span class="cn">TRUE</span>), <span class="at">n =</span> <span class="fu">n</span>(), <span class="at">.groups =</span> <span class="st">"drop"</span>)</span>
+<span id="cb14-244"><a href="#cb14-244"></a></span>
+<span id="cb14-245"><a href="#cb14-245"></a>p_heatmap <span class="ot">&lt;-</span> device_skin_summary <span class="sc">|&gt;</span></span>
+<span id="cb14-246"><a href="#cb14-246"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> skin_group, <span class="at">y =</span> device_label, <span class="at">fill =</span> mean_bias)) <span class="sc">+</span></span>
+<span id="cb14-247"><a href="#cb14-247"></a>  <span class="fu">geom_tile</span>(<span class="at">color =</span> <span class="st">"white"</span>, <span class="at">linewidth =</span> <span class="fl">1.6</span>) <span class="sc">+</span></span>
+<span id="cb14-248"><a href="#cb14-248"></a>  <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">label =</span> <span class="fu">sprintf</span>(<span class="st">"%+.2f"</span>, mean_bias), <span class="at">color =</span> <span class="fu">abs</span>(mean_bias) <span class="sc">&gt;</span> <span class="dv">2</span>), <span class="at">size =</span> <span class="fl">3.6</span>, <span class="at">fontface =</span> <span class="st">"bold"</span>, <span class="at">show.legend =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
+<span id="cb14-249"><a href="#cb14-249"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"TRUE"</span> <span class="ot">=</span> <span class="st">"white"</span>, <span class="st">"FALSE"</span> <span class="ot">=</span> <span class="st">"black"</span>)) <span class="sc">+</span></span>
+<span id="cb14-250"><a href="#cb14-250"></a>  <span class="fu">scale_fill_gradient2</span>(</span>
+<span id="cb14-251"><a href="#cb14-251"></a>    <span class="at">low      =</span> <span class="st">"blue"</span>,</span>
+<span id="cb14-252"><a href="#cb14-252"></a>    <span class="at">mid      =</span> <span class="st">"white"</span>,</span>
+<span id="cb14-253"><a href="#cb14-253"></a>    <span class="at">high     =</span> <span class="st">"red"</span>,</span>
+<span id="cb14-254"><a href="#cb14-254"></a>    <span class="at">midpoint =</span> <span class="dv">0</span>,</span>
+<span id="cb14-255"><a href="#cb14-255"></a>    <span class="at">limits   =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">5</span>, <span class="dv">5</span>),</span>
+<span id="cb14-256"><a href="#cb14-256"></a>    <span class="at">name     =</span> <span class="st">"Mean bias</span><span class="sc">\n</span><span class="st">(pp)"</span>,</span>
+<span id="cb14-257"><a href="#cb14-257"></a>    <span class="at">guide    =</span> <span class="fu">guide_colorbar</span>( <span class="at">barwidth =</span> <span class="fl">0.9</span>, <span class="at">barheight =</span> <span class="dv">10</span>, <span class="at">title.position =</span> <span class="st">"top"</span>)) <span class="sc">+</span></span>
+<span id="cb14-258"><a href="#cb14-258"></a>  <span class="fu">labs</span>(<span class="at">title    =</span> <span class="st">"Pulse oximeter bias by device model and skin tone"</span>,</span>
+<span id="cb14-259"><a href="#cb14-259"></a>       <span class="at">subtitle =</span> <span class="st">"Mean (SpO2 − SaO2) in percentage points · Red = overestimates true oxygen level"</span>,</span>
+<span id="cb14-260"><a href="#cb14-260"></a>       <span class="at">x =</span> <span class="st">"Fitzpatrick skin tone group"</span>, <span class="at">y =</span> <span class="st">"Device model"</span>) <span class="sc">+</span></span>
+<span id="cb14-261"><a href="#cb14-261"></a><span class="fu">theme_eda</span>() </span>
+<span id="cb14-262"><a href="#cb14-262"></a></span>
+<span id="cb14-263"><a href="#cb14-263"></a>p_heatmap</span>
+<span id="cb14-264"><a href="#cb14-264"></a><span class="in">```</span></span>
+<span id="cb14-265"><a href="#cb14-265"></a></span>
+<span id="cb14-266"><a href="#cb14-266"></a>This heatmap illustrates how pulse oximeter accuracy varies across</span>
+<span id="cb14-267"><a href="#cb14-267"></a>different device models and skin tones, specifically highlighting the</span>
+<span id="cb14-268"><a href="#cb14-268"></a>"mean bias" or the difference between the device's reading (Sp02) and</span>
+<span id="cb14-269"><a href="#cb14-269"></a>actual blood oxygen levels (Sa02) with the color scale indicating</span>
+<span id="cb14-270"><a href="#cb14-270"></a>whether a device tends to overestimate (red/orange) or underestimate</span>
+<span id="cb14-271"><a href="#cb14-271"></a>(blue/purple) the true oxygen saturation. A quick look at the darker</span>
+<span id="cb14-272"><a href="#cb14-272"></a>skin tone column reveals a noticeable trend toward more intense orange</span>
+<span id="cb14-273"><a href="#cb14-273"></a>and red hues, suggesting that many of these models consistently</span>
+<span id="cb14-274"><a href="#cb14-274"></a>overestimate oxygen levels in individuals with darker skin. This</span>
+<span id="cb14-275"><a href="#cb14-275"></a>discrepancy is critical because an overestimation could potentially mask</span>
+<span id="cb14-276"><a href="#cb14-276"></a>dangerously low oxygen levels, highlighting a significant technical bias</span>
+<span id="cb14-277"><a href="#cb14-277"></a>in how these medical devices perform across diverse populations.</span>
+<span id="cb14-278"><a href="#cb14-278"></a>Therefore, because the majority of them present this orange/red color,</span>
+<span id="cb14-279"><a href="#cb14-279"></a>it could be said that this seems to be a problem that the big majority</span>
+<span id="cb14-280"><a href="#cb14-280"></a>of the devices have in common and it is not just one device affecting</span>
+<span id="cb14-281"><a href="#cb14-281"></a>the entire dataset, which reafirms the importance of this problem since</span>
+<span id="cb14-282"><a href="#cb14-282"></a>it is common across all devices.</span>
+<span id="cb14-283"><a href="#cb14-283"></a></span>
+<span id="cb14-284"><a href="#cb14-284"></a><span class="fu">## Analysis 2: Within patient bias stability across samples</span></span>
+<span id="cb14-285"><a href="#cb14-285"></a></span>
+<span id="cb14-286"><a href="#cb14-286"></a>On that note, analyzing within-patient bias stability is also essential</span>
+<span id="cb14-287"><a href="#cb14-287"></a>because it helps us distinguish between a device that is consistently</span>
+<span id="cb14-288"><a href="#cb14-288"></a>off and one that is dangerously unpredictable. If a pulse oximeter has a</span>
+<span id="cb14-289"><a href="#cb14-289"></a>high mean bias but stays stable, a clinician can at least anticipate the</span>
+<span id="cb14-290"><a href="#cb14-290"></a>error; however, high volatility within a single session, measured here</span>
+<span id="cb14-291"><a href="#cb14-291"></a>through standard deviation and range, suggests that the device is</span>
+<span id="cb14-292"><a href="#cb14-292"></a>erratic. This "jitter" is particularly risky in a clinical setting</span>
+<span id="cb14-293"><a href="#cb14-293"></a>because it can lead to intermittent misdiagnosis, where a patient might</span>
+<span id="cb14-294"><a href="#cb14-294"></a>appear stable during one check but be in respiratory distress the next.</span>
+<span id="cb14-295"><a href="#cb14-295"></a></span>
+<span id="cb14-298"><a href="#cb14-298"></a><span class="in">```{r}</span></span>
+<span id="cb14-299"><a href="#cb14-299"></a>within_patient <span class="ot">&lt;-</span> oximetry_top <span class="sc">|&gt;</span></span>
+<span id="cb14-300"><a href="#cb14-300"></a>  <span class="fu">filter</span>(<span class="fu">between</span>(bias, <span class="sc">-</span><span class="dv">20</span>, <span class="dv">20</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb14-301"><a href="#cb14-301"></a>  <span class="fu">group_by</span>(patient_id, race_eth, skin_group, device_label) <span class="sc">|&gt;</span></span>
+<span id="cb14-302"><a href="#cb14-302"></a>  <span class="fu">summarise</span>(<span class="at">n_readings =</span> <span class="fu">n</span>(), <span class="at">mean_bias  =</span> <span class="fu">mean</span>(bias, <span class="at">na.rm =</span> <span class="cn">TRUE</span>), <span class="at">sd_bias =</span> <span class="fu">sd</span>(bias, <span class="at">na.rm =</span> <span class="cn">TRUE</span>), <span class="at">.groups =</span> <span class="st">"drop"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb14-303"><a href="#cb14-303"></a>  <span class="fu">filter</span>(n_readings <span class="sc">&gt;=</span> <span class="dv">3</span>, <span class="sc">!</span><span class="fu">is.na</span>(sd_bias))</span>
+<span id="cb14-304"><a href="#cb14-304"></a><span class="in">```</span></span>
+<span id="cb14-305"><a href="#cb14-305"></a></span>
+<span id="cb14-308"><a href="#cb14-308"></a><span class="in">```{r}</span></span>
+<span id="cb14-309"><a href="#cb14-309"></a>p_scatter_risk <span class="ot">&lt;-</span> within_patient <span class="sc">|&gt;</span></span>
+<span id="cb14-310"><a href="#cb14-310"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(skin_group)) <span class="sc">|&gt;</span></span>
+<span id="cb14-311"><a href="#cb14-311"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> mean_bias, <span class="at">y =</span> sd_bias, <span class="at">color =</span> skin_group)) <span class="sc">+</span></span>
+<span id="cb14-312"><a href="#cb14-312"></a>  <span class="fu">geom_point</span>(<span class="at">alpha =</span> <span class="fl">0.22</span>, <span class="at">size =</span> <span class="fl">1.2</span>) <span class="sc">+</span></span>
+<span id="cb14-313"><a href="#cb14-313"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>, <span class="at">se =</span> <span class="cn">FALSE</span>, <span class="at">linewidth =</span> <span class="fl">0.8</span>) <span class="sc">+</span></span>
+<span id="cb14-314"><a href="#cb14-314"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="dv">0</span>,  <span class="at">linetype =</span> <span class="st">"dashed"</span>, <span class="at">color =</span> <span class="st">"darkgray"</span>, <span class="at">linewidth =</span> <span class="fl">0.4</span>) <span class="sc">+</span></span>
+<span id="cb14-315"><a href="#cb14-315"></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="dv">0</span>,  <span class="at">linetype =</span> <span class="st">"dashed"</span>, <span class="at">color =</span> <span class="st">"darkgray"</span>, <span class="at">linewidth =</span> <span class="fl">0.4</span>) <span class="sc">+</span></span>
+<span id="cb14-316"><a href="#cb14-316"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values =</span> skin_pal) <span class="sc">+</span></span>
+<span id="cb14-317"><a href="#cb14-317"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">labels =</span> <span class="cf">function</span>(x) <span class="fu">sprintf</span>(<span class="st">"%+.0f pp"</span>, x)) <span class="sc">+</span></span>
+<span id="cb14-318"><a href="#cb14-318"></a>  <span class="fu">labs</span>(</span>
+<span id="cb14-319"><a href="#cb14-319"></a>    <span class="at">title    =</span> <span class="st">"Bias magnitude vs. bias variability per patient"</span>,</span>
+<span id="cb14-320"><a href="#cb14-320"></a>    <span class="at">x =</span> <span class="st">"Mean bias (pp)"</span>, <span class="at">y =</span> <span class="st">"SD of bias (pp)"</span>,</span>
+<span id="cb14-321"><a href="#cb14-321"></a>    <span class="at">color =</span> <span class="st">"Skin tone"</span>) <span class="sc">+</span></span>
+<span id="cb14-322"><a href="#cb14-322"></a>  <span class="fu">theme_eda</span>() </span>
+<span id="cb14-323"><a href="#cb14-323"></a></span>
+<span id="cb14-324"><a href="#cb14-324"></a>p_scatter_risk</span>
+<span id="cb14-325"><a href="#cb14-325"></a><span class="in">```</span></span>
+<span id="cb14-326"><a href="#cb14-326"></a></span>
+<span id="cb14-327"><a href="#cb14-327"></a>As you can see in this scatter plot, this examines the relationship</span>
+<span id="cb14-328"><a href="#cb14-328"></a>between how much a device is off on average (mean bias) and how much</span>
+<span id="cb14-329"><a href="#cb14-329"></a>that error fluctuates during a single session (SD of bias), providing a</span>
+<span id="cb14-330"><a href="#cb14-330"></a>clear picture of device reliability across different skin tones.</span>
+<span id="cb14-331"><a href="#cb14-331"></a>Interestingly, while the trend lines show that variability generally</span>
+<span id="cb14-332"><a href="#cb14-332"></a>decreases as mean bias moves into positive territory, the distribution</span>
+<span id="cb14-333"><a href="#cb14-333"></a>of data points reveals a troubling pattern for patients in the "Dark"</span>
+<span id="cb14-334"><a href="#cb14-334"></a>skin tone group. These points are notably more scattered toward the</span>
+<span id="cb14-335"><a href="#cb14-335"></a>right side of the x-axis, indicating that for these individuals, devices</span>
+<span id="cb14-336"><a href="#cb14-336"></a>are not just more likely to overestimate oxygen levels, but they often</span>
+<span id="cb14-337"><a href="#cb14-337"></a>do so with a wide range of inconsistency. This combination of high</span>
+<span id="cb14-338"><a href="#cb14-338"></a>positive bias and high variability is the "worst-case scenario" for</span>
+<span id="cb14-339"><a href="#cb14-339"></a>clinical safety, as it suggests that the readings for patients with</span>
+<span id="cb14-340"><a href="#cb14-340"></a>darker skin are both consistently over-optimistic and technically</span>
+<span id="cb14-341"><a href="#cb14-341"></a>unstable, making it significantly harder for medical staff to trust the</span>
+<span id="cb14-342"><a href="#cb14-342"></a>data during critical moments of care. This is another factor imporant to</span>
+<span id="cb14-343"><a href="#cb14-343"></a>consider in our analysis since it contributes with the fact of knowing</span>
+<span id="cb14-344"><a href="#cb14-344"></a>that patients with darker skin colors are generally worse off than the</span>
+<span id="cb14-345"><a href="#cb14-345"></a>patients with lighter skin colors.</span>
+<span id="cb14-346"><a href="#cb14-346"></a></span>
+<span id="cb14-347"><a href="#cb14-347"></a><span class="fu">## Analysis 3: Sex and Race Interactions Between Patients </span></span>
+<span id="cb14-348"><a href="#cb14-348"></a></span>
+<span id="cb14-349"><a href="#cb14-349"></a>At the same time, I am also interesrted in analyzing the intersection of</span>
+<span id="cb14-350"><a href="#cb14-350"></a>sex and race with regards to this topic. For me, this is critical</span>
+<span id="cb14-351"><a href="#cb14-351"></a>because it uncovers whether clinical disadvantages are compounded for</span>
+<span id="cb14-352"><a href="#cb14-352"></a>specific subgroups, such as Black or Hispanic women, rather than just</span>
+<span id="cb14-353"><a href="#cb14-353"></a>affecting racial groups uniformly. Pulse oximetry performance can be</span>
+<span id="cb14-354"><a href="#cb14-354"></a>influenced by physiological differences, like skin thickness, peripheral</span>
+<span id="cb14-355"><a href="#cb14-355"></a>perfusion, and hemoglobin level, that often vary by both sex and</span>
+<span id="cb14-356"><a href="#cb14-356"></a>ethnicity. However, the patriarchal society we currently live on has</span>
+<span id="cb14-357"><a href="#cb14-357"></a>also influenciated the way in which women, specially women of color, are</span>
+<span id="cb14-358"><a href="#cb14-358"></a>treated in medical settings. As a woman of color myself, I want to</span>
+<span id="cb14-359"><a href="#cb14-359"></a>perform this analysis by calculating the mean bias and occult hypoxemia</span>
+<span id="cb14-360"><a href="#cb14-360"></a>rates across these intersecting identities, seeing if we can identify if</span>
+<span id="cb14-361"><a href="#cb14-361"></a>certain patients face a "double burden" of inaccuracy that simple,</span>
+<span id="cb14-362"><a href="#cb14-362"></a>single variable analyses might miss. This level of detail is necessary</span>
+<span id="cb14-363"><a href="#cb14-363"></a>to determine if current medical device algorithms are failing certain</span>
+<span id="cb14-364"><a href="#cb14-364"></a>populations more than others, which is a vital step in addressing</span>
+<span id="cb14-365"><a href="#cb14-365"></a>systemic health inequities and ensuring that life saving interventions</span>
+<span id="cb14-366"><a href="#cb14-366"></a>are triggered reliably for every patient regardless of their demographic</span>
+<span id="cb14-367"><a href="#cb14-367"></a>profile.</span>
+<span id="cb14-368"><a href="#cb14-368"></a></span>
+<span id="cb14-371"><a href="#cb14-371"></a><span class="in">```{r}</span></span>
+<span id="cb14-372"><a href="#cb14-372"></a><span class="cf">if</span> (<span class="sc">!</span><span class="st">"assigned_sex"</span> <span class="sc">%in%</span> <span class="fu">names</span>(oximetry)) {</span>
+<span id="cb14-373"><a href="#cb14-373"></a>  oximetry  <span class="ot">&lt;-</span> oximetry <span class="sc">|&gt;</span></span>
+<span id="cb14-374"><a href="#cb14-374"></a>    <span class="fu">left_join</span>(patients <span class="sc">|&gt;</span> <span class="fu">select</span>(patient_id, assigned_sex), <span class="at">by =</span> <span class="st">"patient_id"</span>)}</span>
+<span id="cb14-375"><a href="#cb14-375"></a></span>
+<span id="cb14-376"><a href="#cb14-376"></a>sex_race <span class="ot">&lt;-</span> oximetry <span class="sc">|&gt;</span></span>
+<span id="cb14-377"><a href="#cb14-377"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(race_eth), <span class="sc">!</span><span class="fu">is.na</span>(assigned_sex), assigned_sex <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"Female"</span>, <span class="st">"Male"</span>), <span class="fu">between</span>(bias, <span class="sc">-</span><span class="dv">20</span>, <span class="dv">20</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb14-378"><a href="#cb14-378"></a>  <span class="fu">group_by</span>(race_eth, assigned_sex) <span class="sc">|&gt;</span></span>
+<span id="cb14-379"><a href="#cb14-379"></a>  <span class="fu">summarise</span>(</span>
+<span id="cb14-380"><a href="#cb14-380"></a>    <span class="at">mean_bias =</span> <span class="fu">mean</span>(bias, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb14-381"><a href="#cb14-381"></a>    <span class="at">se_bias =</span> <span class="fu">sd</span>(bias, <span class="at">na.rm =</span> <span class="cn">TRUE</span>) <span class="sc">/</span> <span class="fu">sqrt</span>(<span class="fu">n</span>()),</span>
+<span id="cb14-382"><a href="#cb14-382"></a>    <span class="at">oh_rate =</span> <span class="fu">mean</span>(occult_hypoxemia, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb14-383"><a href="#cb14-383"></a>    <span class="at">n =</span> <span class="fu">n</span>(), <span class="at">.groups   =</span> <span class="st">"drop"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb14-384"><a href="#cb14-384"></a>  <span class="fu">filter</span>(n <span class="sc">&gt;=</span> <span class="dv">20</span>)</span>
+<span id="cb14-385"><a href="#cb14-385"></a></span>
+<span id="cb14-386"><a href="#cb14-386"></a>sex_pal <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Female"</span> <span class="ot">=</span> <span class="st">"magenta"</span>, <span class="st">"Male"</span> <span class="ot">=</span> <span class="st">"blue"</span>)</span>
+<span id="cb14-387"><a href="#cb14-387"></a><span class="in">```</span></span>
+<span id="cb14-388"><a href="#cb14-388"></a></span>
+<span id="cb14-391"><a href="#cb14-391"></a><span class="in">```{r}</span></span>
+<span id="cb14-392"><a href="#cb14-392"></a>p_sex_bias <span class="ot">&lt;-</span> sex_race <span class="sc">|&gt;</span></span>
+<span id="cb14-393"><a href="#cb14-393"></a>  <span class="fu">mutate</span>(<span class="at">race_eth =</span> <span class="fu">fct_reorder</span>(race_eth, mean_bias, max)) <span class="sc">|&gt;</span></span>
+<span id="cb14-394"><a href="#cb14-394"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> race_eth, <span class="at">y =</span> mean_bias, <span class="at">fill =</span> assigned_sex)) <span class="sc">+</span></span>
+<span id="cb14-395"><a href="#cb14-395"></a>  <span class="fu">geom_col</span>(<span class="at">position =</span> <span class="fu">position_dodge</span>(<span class="at">width =</span> <span class="fl">0.70</span>), <span class="at">width =</span> <span class="fl">0.60</span>, <span class="at">alpha =</span> <span class="fl">0.90</span>) <span class="sc">+</span></span>
+<span id="cb14-396"><a href="#cb14-396"></a>  <span class="fu">geom_errorbar</span>(<span class="fu">aes</span>(<span class="at">ymin =</span> mean_bias <span class="sc">-</span> <span class="dv">2</span> <span class="sc">*</span> se_bias, <span class="at">ymax =</span> mean_bias <span class="sc">+</span> <span class="dv">2</span> <span class="sc">*</span> se_bias), <span class="at">position =</span> <span class="fu">position_dodge</span>(<span class="at">width =</span> <span class="fl">0.70</span>), <span class="at">width =</span> <span class="fl">0.20</span>, <span class="at">linewidth =</span> <span class="fl">0.5</span>, <span class="at">color =</span> <span class="st">"darkgray"</span>) <span class="sc">+</span></span>
+<span id="cb14-397"><a href="#cb14-397"></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="dv">0</span>, <span class="at">linetype =</span> <span class="st">"dashed"</span>, <span class="at">color =</span> <span class="st">"darkgray"</span>, <span class="at">linewidth =</span> <span class="fl">0.4</span>) <span class="sc">+</span></span>
+<span id="cb14-398"><a href="#cb14-398"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> sex_pal, <span class="at">name =</span> <span class="st">"Assigned sex"</span>) <span class="sc">+</span></span>
+<span id="cb14-399"><a href="#cb14-399"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">labels =</span> <span class="cf">function</span>(x) <span class="fu">sprintf</span>(<span class="st">"%+.2f pp"</span>, x)) <span class="sc">+</span></span>
+<span id="cb14-400"><a href="#cb14-400"></a>  <span class="fu">labs</span>(<span class="at">title  =</span> <span class="st">"Mean bias by race and assigned sex"</span>,</span>
+<span id="cb14-401"><a href="#cb14-401"></a>    <span class="at">subtitle =</span> <span class="st">"Error bars = 95% CI · Does sex compound the racial bias gradient?"</span>,</span>
+<span id="cb14-402"><a href="#cb14-402"></a>    <span class="at">x =</span> <span class="cn">NULL</span>, <span class="at">y =</span> <span class="st">"Mean bias (SpO2 − SaO2, pp)"</span>) <span class="sc">+</span></span>
+<span id="cb14-403"><a href="#cb14-403"></a>  <span class="fu">theme_eda</span>() </span>
+<span id="cb14-404"><a href="#cb14-404"></a></span>
+<span id="cb14-405"><a href="#cb14-405"></a><span class="co"># Occult hypoxemia rate by race and assigned sex</span></span>
+<span id="cb14-406"><a href="#cb14-406"></a></span>
+<span id="cb14-407"><a href="#cb14-407"></a>p_sex_oh <span class="ot">&lt;-</span> sex_race <span class="sc">|&gt;</span></span>
+<span id="cb14-408"><a href="#cb14-408"></a>  <span class="fu">mutate</span>(<span class="at">race_eth =</span> <span class="fu">fct_reorder</span>(race_eth, oh_rate, max)) <span class="sc">|&gt;</span></span>
+<span id="cb14-409"><a href="#cb14-409"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> race_eth, <span class="at">y =</span> oh_rate, <span class="at">fill =</span> assigned_sex)) <span class="sc">+</span></span>
+<span id="cb14-410"><a href="#cb14-410"></a>  <span class="fu">geom_col</span>(<span class="at">position =</span> <span class="fu">position_dodge</span>(<span class="at">width =</span> <span class="fl">0.75</span>), <span class="at">width =</span> <span class="fl">0.65</span>, <span class="at">alpha =</span> <span class="fl">0.88</span>) <span class="sc">+</span></span>
+<span id="cb14-411"><a href="#cb14-411"></a>  <span class="fu">geom_text</span>(</span>
+<span id="cb14-412"><a href="#cb14-412"></a>    <span class="fu">aes</span>(<span class="at">label =</span> <span class="fu">percent</span>(oh_rate, <span class="at">accuracy =</span> <span class="fl">0.1</span>)),</span>
+<span id="cb14-413"><a href="#cb14-413"></a>    <span class="at">position =</span> <span class="fu">position_dodge</span>(<span class="at">width =</span> <span class="fl">0.75</span>),</span>
+<span id="cb14-414"><a href="#cb14-414"></a>    <span class="at">vjust =</span> <span class="sc">-</span><span class="fl">0.5</span>, <span class="at">size =</span> <span class="fl">2.9</span>, <span class="at">color =</span> <span class="st">"darkgray"</span>) <span class="sc">+</span></span>
+<span id="cb14-415"><a href="#cb14-415"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> sex_pal, <span class="at">name =</span> <span class="st">"Assigned sex"</span>) <span class="sc">+</span></span>
+<span id="cb14-416"><a href="#cb14-416"></a>  <span class="fu">labs</span>(</span>
+<span id="cb14-417"><a href="#cb14-417"></a>    <span class="at">title    =</span> <span class="st">"Occult hypoxemia rate by race and assigned sex"</span>,</span>
+<span id="cb14-418"><a href="#cb14-418"></a>    <span class="at">x =</span> <span class="cn">NULL</span>, <span class="at">y =</span> <span class="st">"Occult hypoxemia rate"</span>) <span class="sc">+</span></span>
+<span id="cb14-419"><a href="#cb14-419"></a>  <span class="fu">theme_eda</span>() </span>
+<span id="cb14-420"><a href="#cb14-420"></a></span>
+<span id="cb14-421"><a href="#cb14-421"></a>(p_sex_bias <span class="sc">/</span> p_sex_oh) <span class="sc">+</span></span>
+<span id="cb14-422"><a href="#cb14-422"></a>  <span class="fu">plot_annotation</span>(</span>
+<span id="cb14-423"><a href="#cb14-423"></a>    <span class="at">title =</span> <span class="st">"Sex × race interaction in pulse oximeter error"</span>,</span>
+<span id="cb14-424"><a href="#cb14-424"></a>    <span class="at">theme =</span> <span class="fu">theme</span>(<span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">15</span>, <span class="at">face =</span> <span class="st">"bold"</span>)))</span>
+<span id="cb14-425"><a href="#cb14-425"></a><span class="in">```</span></span>
+<span id="cb14-426"><a href="#cb14-426"></a></span>
+<span id="cb14-427"><a href="#cb14-427"></a>As expected, these charts reveal a striking interaction between race and</span>
+<span id="cb14-428"><a href="#cb14-428"></a>sex, demonstrating that pulse oximeter inaccuracies are not evenly</span>
+<span id="cb14-429"><a href="#cb14-429"></a>distributed across demographics. In the top panel, we see that mean</span>
+<span id="cb14-430"><a href="#cb14-430"></a>bias, the degree to which the device overestimates oxygen levels, is</span>
+<span id="cb14-431"><a href="#cb14-431"></a>consistently higher for Black and Asian patients compared to White and</span>
+<span id="cb14-432"><a href="#cb14-432"></a>Hispanic patients, but the sex-based disparity is most pronounced among</span>
+<span id="cb14-433"><a href="#cb14-433"></a>Black individuals, where females experience significantly higher</span>
+<span id="cb14-434"><a href="#cb14-434"></a>overestimation than males. This technical error translates directly into</span>
+<span id="cb14-435"><a href="#cb14-435"></a>clinical risk, as shown in the bottom panel, where the rate of occult</span>
+<span id="cb14-436"><a href="#cb14-436"></a>hypoxemia peaks sharply for Black females at 12.6%. This means that for</span>
+<span id="cb14-437"><a href="#cb14-437"></a>more than one in ten Black women, the device reports a "safe" oxygen</span>
+<span id="cb14-438"><a href="#cb14-438"></a>level when they are actually experiencing dangerously low saturation.</span>
+<span id="cb14-439"><a href="#cb14-439"></a>Collectively, the data suggests that while racial bias is a primary</span>
+<span id="cb14-440"><a href="#cb14-440"></a>driver of device failure, being female often compounds this risk,</span>
+<span id="cb14-441"><a href="#cb14-441"></a>particularly for Black and Asian patients, potentially leading to</span>
+<span id="cb14-442"><a href="#cb14-442"></a>systemic delays in care for these specific groups.</span>
+</code></pre></div><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
+</div></div></div></div></div>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+      &nbsp;
+    </div>   
+    <div class="nav-footer-center">
+
+<div class="cookie-consent-footer"><a href="#" id="open_preferences_center">Cookie Preferences</a></div></div>
+    <div class="nav-footer-right">
+      &nbsp;
+    </div>
+  </div>
+</footer>
+
+
+
+
+<script src="../site_libs/quarto-html/zenscroll-min.js"></script>
+</body></html>
