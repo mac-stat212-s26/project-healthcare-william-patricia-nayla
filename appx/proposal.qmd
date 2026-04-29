@@ -20,9 +20,14 @@ format:
 
 ## Project Description
 
-We are interested in exploring racial and gender disparities in access, treatment, and healthcare outcomes in the medical industry for patients. Specifically, we focus on hidden hypoxemia, a condition where pulse oximeters fail to accurately detect low blood oxygen levels in patients with darker skin tones. This makes it a measurable, concrete case study of medical device bias in action. We use it to examine how that bias translates into unequal care and unequal economic burden for patients of color.
+We are interested in exploring racial and gender disparities in access, treatment, and healthcare outcomes in the medical industry for patients.
+Specifically, we focus on hidden hypoxemia, a condition where pulse oximeters fail to accurately detect low blood oxygen levels in patients with darker skin tones.
+This makes it a measurable, concrete case study of medical device bias in action.
+We use it to examine how that bias translates into unequal care and unequal economic burden for patients of color.
 
-Hidden hypoxemia through pulse oximeter bias is a particularly powerful entry point because it is not a question of patient behavior or lifestyle — it is a direct, measurable failure of medical technology. Research has documented that Black and Hispanic patients are significantly more likely to experience undetected hypoxemia, which has been linked to delayed eligibility for critical treatments and worse outcomes. The economic consequences of this — higher costs, longer stays, greater morbidity — fall disproportionately on communities of color, making this both a health equity and an economic justice issue.
+Hidden hypoxemia through pulse oximeter bias is a particularly powerful entry point because it is not a question of patient behavior or lifestyle — it is a direct, measurable failure of medical technology.
+Research has documented that Black and Hispanic patients are significantly more likely to experience undetected hypoxemia, which has been linked to delayed eligibility for critical treatments and worse outcomes.
+The economic consequences of this — higher costs, longer stays, greater morbidity — fall disproportionately on communities of color, making this both a health equity and an economic justice issue.
 
 ------------------------------------------------------------------------
 
@@ -40,19 +45,28 @@ Do race, gender, and insurance status intersect to compound economic disparities
 
 ## Motivation and Inspiration
 
-As international students and people of color from different countries across Latin America, we bring perspectives shaped by healthcare systems outside the United States. Having navigated both our home countries' medical institutions and the U.S. system, we have noticed firsthand how race and skin tone influence the quality of care patients receive, and how those dynamics shift depending on the country and context. Moving to a predominantly white country has made these disparities more visible to us, not less. The experience of being a patient, or watching family members be patients, in systems that were not designed with us in mind gives this project a personal dimension alongside its academic one. We want to use data to examine what we have observed anecdotally, and to measure the real consequences that medical device bias and systemic inequity have on patients of color in U.S. hospital settings.
+As international students and people of color from different countries across Latin America, we bring perspectives shaped by healthcare systems outside the United States.
+Having navigated both our home countries' medical institutions and the U.S. system, we have noticed firsthand how race and skin tone influence the quality of care patients receive, and how those dynamics shift depending on the country and context.
+Moving to a predominantly white country has made these disparities more visible to us, not less.
+The experience of being a patient, or watching family members be patients, in systems that were not designed with us in mind gives this project a personal dimension alongside its academic one.
+We want to use data to examine what we have observed anecdotally, and to measure the real consequences that medical device bias and systemic inequity have on patients of color in U.S. hospital settings.
 
 ------------------------------------------------------------------------
 
 ## Dataset
 
-Our project combines two datasets: the **OpenOximetry dataset** (UCSF Hypoxia Lab), which gives us paired pulse oximeter and blood gas measurements stratified by skin tone and race, and the **NY SPARCS Inpatient Discharge dataset**, which provides hospital-level economic outcomes (total charges, length of stay, costs, mortality) broken down by race, gender, and diagnosis. Together, they let us connect the clinical disparity to its downstream economic consequences.
+Our project combines two datasets: the **OpenOximetry dataset** (UCSF Hypoxia Lab), which gives us paired pulse oximeter and blood gas measurements stratified by skin tone and race, and the **NY SPARCS Inpatient Discharge dataset**, which provides hospital-level economic outcomes (total charges, length of stay, costs, mortality) broken down by race, gender, and diagnosis.
+Together, they let us connect the clinical disparity to its downstream economic consequences.
 
 We use these two complementary datasets that together let us measure both the clinical disparity (who gets misdiagnosed) and the economic consequences (who pays more and stays longer).
 
 ### Primary Dataset: NY SPARCS Hospital Inpatient Discharges (2021)
 
-The New York State Statewide Planning and Research Cooperative System (SPARCS) \[<https://health.data.ny.gov/resource/tg3i-cinn.csv?$limit=10000>\] is a free, publicly available hospital discharge database from the NY Department of Health. The 2021 de-identified file contains over 2 million patient-level discharge records with race, ethnicity, gender, diagnosis, total charges, total costs, length of stay, insurance type, and severity of illness. The dataset is downloaded directly from the NY Health Data open portal, no login or account needed. We load it locally and filter to respiratory diagnoses only using the ccsr_diagnosis_code column, which uses CCSR (Clinical Classifications Software Refined) codes. All respiratory diagnoses begin with "RSP".
+The New York State Statewide Planning and Research Cooperative System (SPARCS) \[<https://health.data.ny.gov/resource/tg3i-cinn.csv?$limit=10000>\] is a free, publicly available hospital discharge database from the NY Department of Health.
+The 2021 de-identified file contains over 2 million patient-level discharge records with race, ethnicity, gender, diagnosis, total charges, total costs, length of stay, insurance type, and severity of illness.
+The dataset is downloaded directly from the NY Health Data open portal, no login or account needed.
+We load it locally and filter to respiratory diagnoses only using the ccsr_diagnosis_code column, which uses CCSR (Clinical Classifications Software Refined) codes.
+All respiratory diagnoses begin with "RSP".
 
 The following output shows the structure of the filtered respiratory dataset, including variable names, types, and a preview of values.
 
@@ -66,7 +80,7 @@ library(tidyverse)
 # Source: https://health.data.ny.gov/resource/tg3i-cinn.csv?$limit=10000
 # Downloaded from NY Health Data open portal 
 
-sparcs_raw <- read_csv("../data/tg3i-cinn.csv", show_col_types = FALSE)
+sparcs_raw <- read_csv("../data/raw/tg3i-cinn.csv", show_col_types = FALSE)
 
 # Filter to respiratory diagnoses only (all CCSR codes starting with RSP)
 # and clean numeric columns
@@ -82,6 +96,7 @@ glimpse(sparcs)
 ```
 
 The table below lists all respiratory diagnosis codes present in the data, sorted by how frequently each appears in the dataset
+
 ```{r}
 #| label: sparcs-diagnosis-breakdown
 #| message: false
@@ -94,6 +109,7 @@ sparcs |>
 ```
 
 The table below shows the racial and ethnic breakdown of respiratory patients in the dataset, sorted by count.
+
 ```{r}
 #| label: sparcs-race-breakdown
 #| message: false
@@ -108,7 +124,7 @@ sparcs |>
 **Key variables:**
 
 | Variable | Description |
-|------------------------------------|------------------------------------|
+|----|----|
 | `race` / `ethnicity` | Patient self-reported race and Hispanic/Latino ethnicity |
 | `gender` | Patient sex |
 | `length_of_stay` | Days hospitalized |
@@ -132,7 +148,9 @@ sparcs |>
 
 ### Secondary Dataset: OpenOximetry Dataset (UCSF Hypoxia Lab)
 
-The **OpenOximetry dataset** [<https://physionet.org/content/openox-repo/1.1.1/>] is a prospective dataset from the University of California San Francisco Hypoxia Lab. It contains paired SpO₂ (pulse oximeter) and SaO₂ (arterial blood gas gold standard) measurements alongside objective skin tone measurements using the Fitzpatrick scale, Monk scale, and spectrophotometry. This dataset is stored locally as five relational CSVs.
+The **OpenOximetry dataset** \[<https://physionet.org/content/openox-repo/1.1.1/>\] is a prospective dataset from the University of California San Francisco Hypoxia Lab.
+It contains paired SpO₂ (pulse oximeter) and SaO₂ (arterial blood gas gold standard) measurements alongside objective skin tone measurements using the Fitzpatrick scale, Monk scale, and spectrophotometry.
+This dataset is stored locally as five relational CSVs.
 The following output shows the structure of the merged oximetry dataset after joining all five relational tables and computing key outcome variables.
 
 ```{r}
@@ -184,7 +202,7 @@ glimpse(oximetry)
 **Key variables:**
 
 | Variable | Description |
-|---|---|
+|----|----|
 | `SpO2` | Blood oxygen saturation measured by pulse oximeter |
 | `SaO2` | True blood oxygen saturation from arterial blood gas |
 | `bias` | Difference between SpO2 and SaO2 (SpO2 minus SaO2) |
@@ -215,7 +233,7 @@ glimpse(oximetry)
 ## Roles
 
 | Role | Team Member |
-|------------------------------------|------------------------------------|
+|----|----|
 | **Point of Contact** — emails instructor and preceptors | Patricia Escobar Contreras |
 | **Technical Lead** — oversees codebase and Quarto website | William Acosta Lora |
 | **Style Lead** — enforces COMP/STAT 212 Code Styling Guide | Nayla Trigueros Ortiz |
@@ -226,9 +244,12 @@ All three team members are expected to contribute equally to data analysis, visu
 
 ## Conflict Resolution
 
-Communication will be key. If any of the members will be late to a commitment or misses a deadline, they should feel comfortable communicating that to the team and we will redistribute the workload accordingly. If anyone has to take on more work for a deadline due to a re-adjustment, we will adjust back for the next deadline so that the responsibilities remain balanced.
+Communication will be key.
+If any of the members will be late to a commitment or misses a deadline, they should feel comfortable communicating that to the team and we will redistribute the workload accordingly.
+If anyone has to take on more work for a deadline due to a re-adjustment, we will adjust back for the next deadline so that the responsibilities remain balanced.
 
-For disagreements where the team is split, we will discuss openly during our Thursday meeting. Ties on project direction will be resolved by a short async team vote with a 24-hour window, deferring to the lead most relevant to the decision (e.g., technical disagreements go to the Technical Lead, formatting to the Style Lead).
+For disagreements where the team is split, we will discuss openly during our Thursday meeting.
+Ties on project direction will be resolved by a short async team vote with a 24-hour window, deferring to the lead most relevant to the decision (e.g., technical disagreements go to the Technical Lead, formatting to the Style Lead).
 
 ------------------------------------------------------------------------
 
@@ -237,7 +258,7 @@ For disagreements where the team is split, we will discuss openly during our Thu
 The following tasks will also be added as **GitHub Issues** in the project repository, with role and priority labels.
 
 | \# | Task | Due | Lead |
-|------------------|------------------|------------------|------------------|
+|----|----|----|----|
 | 1 | Set up GitHub repo and Quarto project website skeleton | Week 1 | William |
 | 2 | Submit this proposal | Week 2 | Patricia |
 | 3 | EDA on SPARCS: charges, LOS, and mortality by race, gender, and insurance | Week 3 | Patricia + William |
