@@ -1,15 +1,12 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
-
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta name="generator" content="quarto-1.9.37">
-
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-
 <meta name="author" content="Patricia Escobar Contreras">
-<meta name="dcterms.date" content="2026-04-27">
-
-<title>Individual EDA: Evaluating Demographic Disparities in Pulse Oximetry Accuracy – Project Title</title>
+<meta name="dcterms.date" content="2026-04-29">
+<title>Individual EDA: Evaluating Demographic Disparities in Pulse Oximetry Accuracy – Oxymeter Equity</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -62,7 +59,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 }
 </style>
 
-
 <script src="../site_libs/quarto-nav/quarto-nav.js"></script>
 <script src="../site_libs/clipboard/clipboard.min.js"></script>
 <script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
@@ -86,8 +82,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="../site_libs/bootstrap/bootstrap-aa768d0510026dbab67ce2f8e698749f.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
 <link href="../site_libs/bootstrap/bootstrap-dark-ce494e159dae1eb1aeb2beb157b73888.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="../site_libs/bootstrap/bootstrap-aa768d0510026dbab67ce2f8e698749f.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
-<script id="quarto-search-options" type="application/json">{
+<link href="../site_libs/bootstrap/bootstrap-aa768d0510026dbab67ce2f8e698749f.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light"><script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
   "collapse-after": 3,
@@ -113,9 +108,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-submit-button-title": "Submit",
     "search-label": "Search"
   }
-}</script>
-
-<script type="text/javascript" charset="UTF-8">
+}</script><script type="text/javascript" charset="UTF-8">
 document.addEventListener('DOMContentLoaded', function () {
 cookieconsent.run({
   "notice_banner_type":"simple",
@@ -130,14 +123,9 @@ cookieconsent.run({
 "language":"en"
   });
 });
-</script> 
-  
-<style>html{ scroll-behavior: smooth; }</style>
-
-
+</script><style>html{ scroll-behavior: smooth; }</style>
 <link rel="stylesheet" href="../style/custom.css">
 </head>
-
 <body class="nav-sidebar docked quarto-light"><script id="quarto-html-before-body" type="application/javascript">
     const toggleBodyColorMode = (bsSheetEl) => {
       const mode = bsSheetEl.getAttribute("data-mode");
@@ -303,9 +291,7 @@ cookieconsent.run({
   </script>
 
 <div id="quarto-search-results"></div>
-  <header id="quarto-header" class="headroom fixed-top">
-  <nav class="quarto-secondary-nav">
-    <div class="container-fluid d-flex">
+  <header id="quarto-header" class="headroom fixed-top"><nav class="quarto-secondary-nav"><div class="container-fluid d-flex">
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
@@ -316,17 +302,11 @@ cookieconsent.run({
         <i class="bi bi-search"></i>
       </button>
     </div>
-  </nav>
-</header>
-<!-- content -->
-<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full">
+  </nav></header><!-- content --><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
-    <div class="pt-lg-2 mt-2 text-left sidebar-header sidebar-header-stacked">
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto"><div class="pt-lg-2 mt-2 text-left sidebar-header sidebar-header-stacked">
       <a href="../index.html" class="sidebar-logo-link">
-      <img src="../assets/sidebar-logo.png" alt="Random negative space illustration" class="sidebar-logo light-content py-0 d-lg-inline d-none">
-      <img src="../assets/sidebar-logo.png" alt="Random negative space illustration" class="sidebar-logo dark-content py-0 d-lg-inline d-none">
-      </a>
+      <img src="../assets/sidebar-logo.png" alt="Random negative space illustration" class="sidebar-logo light-content py-0 d-lg-inline d-none"><img src="../assets/sidebar-logo.png" alt="Random negative space illustration" class="sidebar-logo dark-content py-0 d-lg-inline d-none"></a>
     <div class="sidebar-title mb-0 py-0">
       <a href="../">Oxymeter Equity</a> 
         <div class="sidebar-tools-main">
@@ -346,7 +326,7 @@ cookieconsent.run({
         </div>
     <div class="sidebar-menu-container"> 
     <ul class="list-unstyled mt-1">
-        <li class="sidebar-item">
+<li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../index.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Undetected and Undertreated</span></a>
   </div>
@@ -359,8 +339,8 @@ cookieconsent.run({
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../eda/eda-william_acosta.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Individual EDA: Hidden Hypoxemia and Its Economic Consequences</span></a>
   </div>
@@ -376,17 +356,33 @@ cookieconsent.run({
   </div>
 </li>
       </ul>
-  </li>
+</li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
- <span class="menu-text">Appendices</span></a>
+ <span class="menu-text">Shiny App</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../appx/app.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">app</span></a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
+ <span class="menu-text">Appendices</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../appx/proposal.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Project Proposal</span></a>
   </div>
@@ -412,32 +408,25 @@ cookieconsent.run({
   </div>
 </li>
       </ul>
-  </li>
+</li>
     </ul>
-    </div>
-</nav>
-<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+</div>
+</nav><div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active" data-toc-expanded="99">
-    <h2 id="toc-title">Table of contents</h2>
+        <nav id="TOC" role="doc-toc" class="toc-active" data-toc-expanded="99"><h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#overview" id="toc-overview" class="nav-link active" data-scroll-target="#overview">Overview</a></li>
+<li><a href="#overview" id="toc-overview" class="nav-link active" data-scroll-target="#overview">Overview</a></li>
   <li><a href="#setup" id="toc-setup" class="nav-link" data-scroll-target="#setup">Setup</a></li>
   <li><a href="#openoximetry-dataset" id="toc-openoximetry-dataset" class="nav-link" data-scroll-target="#openoximetry-dataset">OpenOximetry Dataset</a></li>
   <li><a href="#analysis-1-bias-by-device-model-and-skin-tone" id="toc-analysis-1-bias-by-device-model-and-skin-tone" class="nav-link" data-scroll-target="#analysis-1-bias-by-device-model-and-skin-tone">Analysis 1: Bias by device model and skin tone</a></li>
   <li><a href="#analysis-2-within-patient-bias-stability-across-samples" id="toc-analysis-2-within-patient-bias-stability-across-samples" class="nav-link" data-scroll-target="#analysis-2-within-patient-bias-stability-across-samples">Analysis 2: Within patient bias stability across samples</a></li>
   <li><a href="#analysis-3-sex-and-race-interactions-between-patients" id="toc-analysis-3-sex-and-race-interactions-between-patients" class="nav-link" data-scroll-target="#analysis-3-sex-and-race-interactions-between-patients">Analysis 3: Sex and Race Interactions Between Patients</a></li>
-  </ul>
-</nav>
+  </ul></nav>
     </div>
 <!-- main -->
-<main class="content column-body" id="quarto-document-content">
-
-
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../eda/eda-william_acosta.html">EDA</a></li><li class="breadcrumb-item"><a href="../eda/eda-patricia.html"><span class="chapter-title">Individual EDA: Evaluating Demographic Disparities in Pulse Oximetry Accuracy</span></a></li></ol></nav>
-<div class="quarto-title">
+<main class="content column-body" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../eda/eda-william_acosta.html">EDA</a></li><li class="breadcrumb-item"><a href="../eda/eda-patricia.html"><span class="chapter-title">Individual EDA: Evaluating Demographic Disparities in Pulse Oximetry Accuracy</span></a></li></ol></nav><div class="quarto-title">
 <div class="quarto-title-block"><div><h1 class="title"><span class="chapter-title">Individual EDA: Evaluating Demographic Disparities in Pulse Oximetry Accuracy</span></h1><button type="button" class="btn code-tools-button dropdown-toggle" id="quarto-code-tools-menu" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi"></i> Code</button><ul class="dropdown-menu dropdown-menu-end" aria-labelelledby="quarto-code-tools-menu"><li><a id="quarto-show-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Show All Code</a></li><li><a id="quarto-hide-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Hide All Code</a></li><li><hr class="dropdown-divider"></li><li><a id="quarto-view-source" class="dropdown-item" href="javascript:void(0)" role="button">View Source</a></li></ul></div></div>
 <p class="subtitle lead">OpenOximetry Discharge Data</p>
 </div>
@@ -456,7 +445,7 @@ cookieconsent.run({
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">April 27, 2026</p>
+      <p class="date">April 29, 2026</p>
     </div>
   </div>
   
@@ -465,22 +454,14 @@ cookieconsent.run({
   
 
 
-</header>
-
-
-<section id="overview" class="level2">
-<h2 class="anchored" data-anchor-id="overview">Overview</h2>
+</header><section id="overview" class="level2"><h2 class="anchored" data-anchor-id="overview">Overview</h2>
 <p>This EDA covers the <strong>OpenOximetry</strong> dataset:</p>
 <ul>
-<li><strong>OpenOximetry</strong> (UCSF Hypoxia Lab) - Used to audit the clinical reliability of pulse oximeters by comparing their digital readings against the “gold standard” of direct blood oxygen measurements.</li>
-</ul>
-</section>
-<section id="setup" class="level2">
-<h2 class="anchored" data-anchor-id="setup">Setup</h2>
+<li>
+<strong>OpenOximetry</strong> (UCSF Hypoxia Lab) - Used to audit the clinical reliability of pulse oximeters by comparing their digital readings against the “gold standard” of direct blood oxygen measurements.</li>
+</ul></section><section id="setup" class="level2"><h2 class="anchored" data-anchor-id="setup">Setup</h2>
 <div class="cell">
-<details class="code-fold">
-<summary>Show code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="fu">library</span>(tidyverse)</span>
+<details class="code-fold"><summary>Show code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="fu">library</span>(tidyverse)</span>
 <span id="cb1-2"><a href="#cb1-2"></a><span class="fu">library</span>(visdat)</span>
 <span id="cb1-3"><a href="#cb1-3"></a><span class="fu">library</span>(DataExplorer)</span>
 <span id="cb1-4"><a href="#cb1-4"></a><span class="fu">library</span>(gtsummary)</span>
@@ -493,18 +474,14 @@ cookieconsent.run({
 </details>
 </div>
 <div class="cell">
-<details class="code-fold">
-<summary>Show code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a>patients      <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"../data/raw/patient.csv"</span>)</span>
+<details class="code-fold"><summary>Show code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a>patients      <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"../data/raw/patient.csv"</span>)</span>
 <span id="cb2-2"><a href="#cb2-2"></a>encounter     <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"../data/raw/encounter.csv"</span>)</span>
 <span id="cb2-3"><a href="#cb2-3"></a>pulseoximeter <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"../data/raw/pulseoximeter.csv"</span>)</span>
 <span id="cb2-4"><a href="#cb2-4"></a>bloodgas      <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"../data/raw/bloodgas.csv"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
 <div class="cell">
-<details class="code-fold">
-<summary>Show code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a><span class="co"># Cleaned with William's support </span></span>
+<details class="code-fold"><summary>Show code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a><span class="co"># Cleaned with William's support </span></span>
 <span id="cb3-2"><a href="#cb3-2"></a>oximetry <span class="ot">&lt;-</span> pulseoximeter <span class="sc">|&gt;</span></span>
 <span id="cb3-3"><a href="#cb3-3"></a>  <span class="fu">inner_join</span>(</span>
 <span id="cb3-4"><a href="#cb3-4"></a>    bloodgas <span class="sc">|&gt;</span> <span class="fu">select</span>(encounter_id, sample, so2),</span>
@@ -549,9 +526,7 @@ cookieconsent.run({
 </details>
 </div>
 <div class="cell">
-<details class="code-fold">
-<summary>Show code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a><span class="co">#Aestethics purposes </span></span>
+<details class="code-fold"><summary>Show code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a><span class="co">#Aestethics purposes </span></span>
 <span id="cb4-2"><a href="#cb4-2"></a>skin_pal <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
 <span id="cb4-3"><a href="#cb4-3"></a>  <span class="st">"Light (I–II)"</span>    <span class="ot">=</span> <span class="st">"#E8C97A"</span>,</span>
 <span id="cb4-4"><a href="#cb4-4"></a>  <span class="st">"Medium (III–IV)"</span> <span class="ot">=</span> <span class="st">"#B06840"</span>,</span>
@@ -570,26 +545,19 @@ cookieconsent.run({
 <span id="cb4-17"><a href="#cb4-17"></a>        <span class="at">strip.text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">11</span>, <span class="at">face =</span> <span class="st">"bold"</span>, <span class="at">color =</span> <span class="st">"darkgray"</span>))}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
-</section>
-<section id="openoximetry-dataset" class="level2">
-<h2 class="anchored" data-anchor-id="openoximetry-dataset">OpenOximetry Dataset</h2>
+</section><section id="openoximetry-dataset" class="level2"><h2 class="anchored" data-anchor-id="openoximetry-dataset">OpenOximetry Dataset</h2>
 <p>This group project focuses on analyzing the implications of inaccuracies in standard pulse oximeters. In this regard, through the analysis of relevant data, we have observed that oximeters, which function to detect blood oxygen levels, tend to exhibit wider margins of error for individuals with dark skin compared to those with light skin. Scientifically, this phenomenon is explained by the fact that dark skin contains a layer of melanin that impedes the unimpeded passage of the oximeter’s light beams through the skin, unlike in individuals with light skin, who lack these elevated levels of melanin. However, as a group, we believe this issue carries broader implications, and we intend to analyze how this phenomenon manifests across various demographic groups. In my specific analysis, I will focus on examining the biases associated with oximeter models and skin tone, specifically, the biases that arise among patients of different skin tones, and the interplay of these factors with respect to sex and race.</p>
-</section>
-<section id="analysis-1-bias-by-device-model-and-skin-tone" class="level2">
-<h2 class="anchored" data-anchor-id="analysis-1-bias-by-device-model-and-skin-tone">Analysis 1: Bias by device model and skin tone</h2>
+</section><section id="analysis-1-bias-by-device-model-and-skin-tone" class="level2"><h2 class="anchored" data-anchor-id="analysis-1-bias-by-device-model-and-skin-tone">Analysis 1: Bias by device model and skin tone</h2>
 <p>Given that we are examining potential biases related to skin tone, it is crucial to consider the devices themselves. In this regard, my aim is to explore the variability in blood oxygen detection across individual devices, and to analyze whether there is a general pattern, specifically, if certain devices are less effective and thus skewing the overall data results across different skin colors, or if this is a generalized issue affecting all devices. This is a controlled within encounter comparison: same patient, only the device differs. Any bias difference between devices on the same sample is purely a device effect, not a patient effect.</p>
 <div class="cell">
-<details class="code-fold">
-<summary>Show code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a>oximetry <span class="ot">&lt;-</span> oximetry <span class="sc">|&gt;</span></span>
+<details class="code-fold"><summary>Show code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a>oximetry <span class="ot">&lt;-</span> oximetry <span class="sc">|&gt;</span></span>
 <span id="cb5-2"><a href="#cb5-2"></a>  <span class="fu">mutate</span>(</span>
 <span id="cb5-3"><a href="#cb5-3"></a>    <span class="at">device_brand =</span> <span class="fu">as.integer</span>(<span class="fu">floor</span>(device)),</span>
 <span id="cb5-4"><a href="#cb5-4"></a>    <span class="at">device_label =</span> <span class="fu">paste0</span>(<span class="st">"Model "</span>, <span class="fu">as.integer</span>(<span class="fu">floor</span>(device))))</span>
 <span id="cb5-5"><a href="#cb5-5"></a></span>
 <span id="cb5-6"><a href="#cb5-6"></a><span class="co"># Check: how many distinct brands?</span></span>
 <span id="cb5-7"><a href="#cb5-7"></a>oximetry <span class="sc">|&gt;</span> <span class="fu">count</span>(device_brand, <span class="at">sort =</span> <span class="cn">TRUE</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</details>
-<div class="cell-output cell-output-stdout">
+</details><div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 41 × 2
    device_brand     n
           &lt;int&gt; &lt;int&gt;
@@ -605,9 +573,7 @@ cookieconsent.run({
 10           21  2391
 # ℹ 31 more rows</code></pre>
 </div>
-<details class="code-fold">
-<summary>Show code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a>top_brands <span class="ot">&lt;-</span> oximetry <span class="sc">|&gt;</span></span>
+<details class="code-fold"><summary>Show code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a>top_brands <span class="ot">&lt;-</span> oximetry <span class="sc">|&gt;</span></span>
 <span id="cb7-2"><a href="#cb7-2"></a>  <span class="fu">count</span>(device_brand) <span class="sc">|&gt;</span></span>
 <span id="cb7-3"><a href="#cb7-3"></a>  <span class="fu">filter</span>(n <span class="sc">&gt;=</span> <span class="dv">500</span>) <span class="sc">|&gt;</span></span>
 <span id="cb7-4"><a href="#cb7-4"></a>  <span class="fu">pull</span>(device_brand)</span>
@@ -619,9 +585,7 @@ cookieconsent.run({
 </div>
 <p>This is the total amount of all the devices that exist in this dataset, under the colum “device_brand”, togther with the number of dispositives for each one of the models, as seen, the most common model is the “59”, while the least common model is the “21”. As now, this does not tells us anything directly about the data, but is information that will become relevant while analyzing all the other devices and the the different skin colors.</p>
 <div class="cell">
-<details class="code-fold">
-<summary>Show code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a><span class="co"># Same device disagreen within different samples </span></span>
+<details class="code-fold"><summary>Show code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a><span class="co"># Same device disagreen within different samples </span></span>
 <span id="cb8-2"><a href="#cb8-2"></a>device_spread <span class="ot">&lt;-</span> oximetry_top <span class="sc">|&gt;</span></span>
 <span id="cb8-3"><a href="#cb8-3"></a>  <span class="fu">filter</span>(<span class="fu">between</span>(bias, <span class="sc">-</span><span class="dv">20</span>, <span class="dv">20</span>), <span class="sc">!</span><span class="fu">is.na</span>(skin_group)) <span class="sc">|&gt;</span></span>
 <span id="cb8-4"><a href="#cb8-4"></a>  <span class="fu">group_by</span>(encounter_id, sample_number, skin_group) <span class="sc">|&gt;</span></span>
@@ -651,20 +615,16 @@ cookieconsent.run({
 <span id="cb8-28"><a href="#cb8-28"></a>  <span class="fu">theme_eda</span>() </span>
 <span id="cb8-29"><a href="#cb8-29"></a></span>
 <span id="cb8-30"><a href="#cb8-30"></a>p_spread</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</details>
-<div class="cell-output-display">
+</details><div class="cell-output-display">
 <div>
-<figure class="figure">
-<p><img src="eda-patricia_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid figure-img" width="768"></p>
+<figure class="figure"><p><img src="eda-patricia_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid figure-img" width="768"></p>
 </figure>
 </div>
 </div>
 </div>
 <p>This visualization highlights a troubling lack of consistency in medical device readings when used on patients with darker skin tones. As we can see, there is a range of disagreement between two or more devices measuring the exact same blood sample at the same moment. While all groups show some level of discrepancy, the “Dark” skin tone category (V–VI) has a noticeably higher median disagreement of 4.1 pp compared to just 3.0 pp for light skin and 2.1 pp for medium skin. More importantly, the “tail” of the dark skin plot stretches significantly higher, reaching extremes of over +30 pp in bias range. This means that for patients with the darkest skin, two different sensors are far more likely to give wildly conflicting results, creating a dangerous level of clinical uncertainty that isn’t as prevalent for lighter-skinned patients.</p>
 <div class="cell">
-<details class="code-fold">
-<summary>Show code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a><span class="co"># Looking at each individual oxymeter</span></span>
+<details class="code-fold"><summary>Show code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a><span class="co"># Looking at each individual oxymeter</span></span>
 <span id="cb9-2"><a href="#cb9-2"></a>device_skin_summary <span class="ot">&lt;-</span> oximetry_top <span class="sc">|&gt;</span></span>
 <span id="cb9-3"><a href="#cb9-3"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(skin_group), <span class="fu">between</span>(bias, <span class="sc">-</span><span class="dv">20</span>, <span class="dv">20</span>)) <span class="sc">|&gt;</span></span>
 <span id="cb9-4"><a href="#cb9-4"></a>  <span class="fu">group_by</span>(device_label, skin_group) <span class="sc">|&gt;</span></span>
@@ -689,24 +649,18 @@ cookieconsent.run({
 <span id="cb9-23"><a href="#cb9-23"></a><span class="fu">theme_eda</span>() </span>
 <span id="cb9-24"><a href="#cb9-24"></a></span>
 <span id="cb9-25"><a href="#cb9-25"></a>p_heatmap</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</details>
-<div class="cell-output-display">
+</details><div class="cell-output-display">
 <div>
-<figure class="figure">
-<p><img src="eda-patricia_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid figure-img" width="768"></p>
+<figure class="figure"><p><img src="eda-patricia_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid figure-img" width="768"></p>
 </figure>
 </div>
 </div>
 </div>
 <p>This heatmap illustrates how pulse oximeter accuracy varies across different device models and skin tones, specifically highlighting the “mean bias” or the difference between the device’s reading (Sp02) and actual blood oxygen levels (Sa02) with the color scale indicating whether a device tends to overestimate (red/orange) or underestimate (blue/purple) the true oxygen saturation. A quick look at the darker skin tone column reveals a noticeable trend toward more intense orange and red hues, suggesting that many of these models consistently overestimate oxygen levels in individuals with darker skin. This discrepancy is critical because an overestimation could potentially mask dangerously low oxygen levels, highlighting a significant technical bias in how these medical devices perform across diverse populations. Therefore, because the majority of them present this orange/red color, it could be said that this seems to be a problem that the big majority of the devices have in common and it is not just one device affecting the entire dataset, which reafirms the importance of this problem since it is common across all devices.</p>
-</section>
-<section id="analysis-2-within-patient-bias-stability-across-samples" class="level2">
-<h2 class="anchored" data-anchor-id="analysis-2-within-patient-bias-stability-across-samples">Analysis 2: Within patient bias stability across samples</h2>
+</section><section id="analysis-2-within-patient-bias-stability-across-samples" class="level2"><h2 class="anchored" data-anchor-id="analysis-2-within-patient-bias-stability-across-samples">Analysis 2: Within patient bias stability across samples</h2>
 <p>On that note, analyzing within-patient bias stability is also essential because it helps us distinguish between a device that is consistently off and one that is dangerously unpredictable. If a pulse oximeter has a high mean bias but stays stable, a clinician can at least anticipate the error; however, high volatility within a single session, measured here through standard deviation and range, suggests that the device is erratic. This “jitter” is particularly risky in a clinical setting because it can lead to intermittent misdiagnosis, where a patient might appear stable during one check but be in respiratory distress the next.</p>
 <div class="cell">
-<details class="code-fold">
-<summary>Show code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a>within_patient <span class="ot">&lt;-</span> oximetry_top <span class="sc">|&gt;</span></span>
+<details class="code-fold"><summary>Show code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a>within_patient <span class="ot">&lt;-</span> oximetry_top <span class="sc">|&gt;</span></span>
 <span id="cb10-2"><a href="#cb10-2"></a>  <span class="fu">filter</span>(<span class="fu">between</span>(bias, <span class="sc">-</span><span class="dv">20</span>, <span class="dv">20</span>)) <span class="sc">|&gt;</span></span>
 <span id="cb10-3"><a href="#cb10-3"></a>  <span class="fu">group_by</span>(patient_id, race_eth, skin_group, device_label) <span class="sc">|&gt;</span></span>
 <span id="cb10-4"><a href="#cb10-4"></a>  <span class="fu">summarise</span>(<span class="at">n_readings =</span> <span class="fu">n</span>(), <span class="at">mean_bias  =</span> <span class="fu">mean</span>(bias, <span class="at">na.rm =</span> <span class="cn">TRUE</span>), <span class="at">sd_bias =</span> <span class="fu">sd</span>(bias, <span class="at">na.rm =</span> <span class="cn">TRUE</span>), <span class="at">.groups =</span> <span class="st">"drop"</span>) <span class="sc">|&gt;</span></span>
@@ -714,9 +668,7 @@ cookieconsent.run({
 </details>
 </div>
 <div class="cell">
-<details class="code-fold">
-<summary>Show code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a>p_scatter_risk <span class="ot">&lt;-</span> within_patient <span class="sc">|&gt;</span></span>
+<details class="code-fold"><summary>Show code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a>p_scatter_risk <span class="ot">&lt;-</span> within_patient <span class="sc">|&gt;</span></span>
 <span id="cb11-2"><a href="#cb11-2"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(skin_group)) <span class="sc">|&gt;</span></span>
 <span id="cb11-3"><a href="#cb11-3"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> mean_bias, <span class="at">y =</span> sd_bias, <span class="at">color =</span> skin_group)) <span class="sc">+</span></span>
 <span id="cb11-4"><a href="#cb11-4"></a>  <span class="fu">geom_point</span>(<span class="at">alpha =</span> <span class="fl">0.22</span>, <span class="at">size =</span> <span class="fl">1.2</span>) <span class="sc">+</span></span>
@@ -732,24 +684,18 @@ cookieconsent.run({
 <span id="cb11-14"><a href="#cb11-14"></a>  <span class="fu">theme_eda</span>() </span>
 <span id="cb11-15"><a href="#cb11-15"></a></span>
 <span id="cb11-16"><a href="#cb11-16"></a>p_scatter_risk</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</details>
-<div class="cell-output-display">
+</details><div class="cell-output-display">
 <div>
-<figure class="figure">
-<p><img src="eda-patricia_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid figure-img" width="768"></p>
+<figure class="figure"><p><img src="eda-patricia_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid figure-img" width="768"></p>
 </figure>
 </div>
 </div>
 </div>
 <p>As you can see in this scatter plot, this examines the relationship between how much a device is off on average (mean bias) and how much that error fluctuates during a single session (SD of bias), providing a clear picture of device reliability across different skin tones. Interestingly, while the trend lines show that variability generally decreases as mean bias moves into positive territory, the distribution of data points reveals a troubling pattern for patients in the “Dark” skin tone group. These points are notably more scattered toward the right side of the x-axis, indicating that for these individuals, devices are not just more likely to overestimate oxygen levels, but they often do so with a wide range of inconsistency. This combination of high positive bias and high variability is the “worst-case scenario” for clinical safety, as it suggests that the readings for patients with darker skin are both consistently over-optimistic and technically unstable, making it significantly harder for medical staff to trust the data during critical moments of care. This is another factor imporant to consider in our analysis since it contributes with the fact of knowing that patients with darker skin colors are generally worse off than the patients with lighter skin colors.</p>
-</section>
-<section id="analysis-3-sex-and-race-interactions-between-patients" class="level2">
-<h2 class="anchored" data-anchor-id="analysis-3-sex-and-race-interactions-between-patients">Analysis 3: Sex and Race Interactions Between Patients</h2>
+</section><section id="analysis-3-sex-and-race-interactions-between-patients" class="level2"><h2 class="anchored" data-anchor-id="analysis-3-sex-and-race-interactions-between-patients">Analysis 3: Sex and Race Interactions Between Patients</h2>
 <p>At the same time, I am also interesrted in analyzing the intersection of sex and race with regards to this topic. For me, this is critical because it uncovers whether clinical disadvantages are compounded for specific subgroups, such as Black or Hispanic women, rather than just affecting racial groups uniformly. Pulse oximetry performance can be influenced by physiological differences, like skin thickness, peripheral perfusion, and hemoglobin level, that often vary by both sex and ethnicity. However, the patriarchal society we currently live on has also influenciated the way in which women, specially women of color, are treated in medical settings. As a woman of color myself, I want to perform this analysis by calculating the mean bias and occult hypoxemia rates across these intersecting identities, seeing if we can identify if certain patients face a “double burden” of inaccuracy that simple, single variable analyses might miss. This level of detail is necessary to determine if current medical device algorithms are failing certain populations more than others, which is a vital step in addressing systemic health inequities and ensuring that life saving interventions are triggered reliably for every patient regardless of their demographic profile.</p>
 <div class="cell">
-<details class="code-fold">
-<summary>Show code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="st">"assigned_sex"</span> <span class="sc">%in%</span> <span class="fu">names</span>(oximetry)) {</span>
+<details class="code-fold"><summary>Show code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="st">"assigned_sex"</span> <span class="sc">%in%</span> <span class="fu">names</span>(oximetry)) {</span>
 <span id="cb12-2"><a href="#cb12-2"></a>  oximetry  <span class="ot">&lt;-</span> oximetry <span class="sc">|&gt;</span></span>
 <span id="cb12-3"><a href="#cb12-3"></a>    <span class="fu">left_join</span>(patients <span class="sc">|&gt;</span> <span class="fu">select</span>(patient_id, assigned_sex), <span class="at">by =</span> <span class="st">"patient_id"</span>)}</span>
 <span id="cb12-4"><a href="#cb12-4"></a></span>
@@ -767,9 +713,7 @@ cookieconsent.run({
 </details>
 </div>
 <div class="cell">
-<details class="code-fold">
-<summary>Show code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a>p_sex_bias <span class="ot">&lt;-</span> sex_race <span class="sc">|&gt;</span></span>
+<details class="code-fold"><summary>Show code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a>p_sex_bias <span class="ot">&lt;-</span> sex_race <span class="sc">|&gt;</span></span>
 <span id="cb13-2"><a href="#cb13-2"></a>  <span class="fu">mutate</span>(<span class="at">race_eth =</span> <span class="fu">fct_reorder</span>(race_eth, mean_bias, max)) <span class="sc">|&gt;</span></span>
 <span id="cb13-3"><a href="#cb13-3"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> race_eth, <span class="at">y =</span> mean_bias, <span class="at">fill =</span> assigned_sex)) <span class="sc">+</span></span>
 <span id="cb13-4"><a href="#cb13-4"></a>  <span class="fu">geom_col</span>(<span class="at">position =</span> <span class="fu">position_dodge</span>(<span class="at">width =</span> <span class="fl">0.70</span>), <span class="at">width =</span> <span class="fl">0.60</span>, <span class="at">alpha =</span> <span class="fl">0.90</span>) <span class="sc">+</span></span>
@@ -802,11 +746,9 @@ cookieconsent.run({
 <span id="cb13-31"><a href="#cb13-31"></a>  <span class="fu">plot_annotation</span>(</span>
 <span id="cb13-32"><a href="#cb13-32"></a>    <span class="at">title =</span> <span class="st">"Sex × race interaction in pulse oximeter error"</span>,</span>
 <span id="cb13-33"><a href="#cb13-33"></a>    <span class="at">theme =</span> <span class="fu">theme</span>(<span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">15</span>, <span class="at">face =</span> <span class="st">"bold"</span>)))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</details>
-<div class="cell-output-display">
+</details><div class="cell-output-display">
 <div>
-<figure class="figure">
-<p><img src="eda-patricia_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid figure-img" width="768"></p>
+<figure class="figure"><p><img src="eda-patricia_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid figure-img" width="768"></p>
 </figure>
 </div>
 </div>
@@ -816,10 +758,7 @@ cookieconsent.run({
 
 <!-- -->
 
-</section>
-
-</main> <!-- /main -->
-<script id="quarto-html-after-body" type="application/javascript">
+</section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
     // Ensure there is a toggle, if there isn't float one in the top right
     if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
@@ -1287,9 +1226,7 @@ cookieconsent.run({
       }
     }
   });
-  </script>
-<nav class="page-navigation column-body">
-  <div class="nav-page nav-page-previous">
+  </script><nav class="page-navigation column-body"><div class="nav-page nav-page-previous">
       <a href="../eda/eda-william_acosta.html" class="pagination-link" aria-label="Individual EDA: Hidden Hypoxemia and Its Economic Consequences">
         <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-title">Individual EDA: Hidden Hypoxemia and Its Economic Consequences</span></span>
       </a>          
@@ -1723,8 +1660,7 @@ cookieconsent.run({
 </code></pre></div><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
-<footer class="footer">
-  <div class="nav-footer">
+<footer class="footer"><div class="nav-footer">
     <div class="nav-footer-left">
       &nbsp;
     </div>   
@@ -1736,8 +1672,6 @@ cookieconsent.run({
     </div>
   </div>
 </footer>
-
-
 
 
 <script src="../site_libs/quarto-html/zenscroll-min.js"></script>

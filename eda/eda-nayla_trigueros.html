@@ -1,15 +1,12 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
-
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta name="generator" content="quarto-1.9.37">
-
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-
 <meta name="author" content="Nayla Trigueros Ortiz">
-<meta name="dcterms.date" content="2026-04-27">
-
-<title>Individual EDA: Looking at – Project Title</title>
+<meta name="dcterms.date" content="2026-04-29">
+<title>Individual EDA: Looking at – Oxymeter Equity</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -62,14 +59,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 }
 </style>
 
-
 <script src="../site_libs/quarto-nav/quarto-nav.js"></script>
 <script src="../site_libs/clipboard/clipboard.min.js"></script>
 <script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
-<link href="../appx/proposal.html" rel="next">
+<link href="../appx/app.html" rel="next">
 <link href="../eda/eda-patricia.html" rel="prev">
 <script src="../site_libs/cookie-consent/cookie-consent.js"></script>
 <link href="../site_libs/cookie-consent/cookie-consent.css" rel="stylesheet">
@@ -86,8 +82,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="../site_libs/bootstrap/bootstrap-aa768d0510026dbab67ce2f8e698749f.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
 <link href="../site_libs/bootstrap/bootstrap-dark-ce494e159dae1eb1aeb2beb157b73888.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="../site_libs/bootstrap/bootstrap-aa768d0510026dbab67ce2f8e698749f.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
-<script id="quarto-search-options" type="application/json">{
+<link href="../site_libs/bootstrap/bootstrap-aa768d0510026dbab67ce2f8e698749f.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light"><script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
   "collapse-after": 3,
@@ -113,9 +108,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-submit-button-title": "Submit",
     "search-label": "Search"
   }
-}</script>
-
-<script type="text/javascript" charset="UTF-8">
+}</script><script type="text/javascript" charset="UTF-8">
 document.addEventListener('DOMContentLoaded', function () {
 cookieconsent.run({
   "notice_banner_type":"simple",
@@ -130,14 +123,9 @@ cookieconsent.run({
 "language":"en"
   });
 });
-</script> 
-  
-<style>html{ scroll-behavior: smooth; }</style>
-
-
+</script><style>html{ scroll-behavior: smooth; }</style>
 <link rel="stylesheet" href="../style/custom.css">
 </head>
-
 <body class="nav-sidebar docked quarto-light"><script id="quarto-html-before-body" type="application/javascript">
     const toggleBodyColorMode = (bsSheetEl) => {
       const mode = bsSheetEl.getAttribute("data-mode");
@@ -303,9 +291,7 @@ cookieconsent.run({
   </script>
 
 <div id="quarto-search-results"></div>
-  <header id="quarto-header" class="headroom fixed-top">
-  <nav class="quarto-secondary-nav">
-    <div class="container-fluid d-flex">
+  <header id="quarto-header" class="headroom fixed-top"><nav class="quarto-secondary-nav"><div class="container-fluid d-flex">
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
@@ -316,17 +302,11 @@ cookieconsent.run({
         <i class="bi bi-search"></i>
       </button>
     </div>
-  </nav>
-</header>
-<!-- content -->
-<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full">
+  </nav></header><!-- content --><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
-    <div class="pt-lg-2 mt-2 text-left sidebar-header sidebar-header-stacked">
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto"><div class="pt-lg-2 mt-2 text-left sidebar-header sidebar-header-stacked">
       <a href="../index.html" class="sidebar-logo-link">
-      <img src="../assets/sidebar-logo.png" alt="Random negative space illustration" class="sidebar-logo light-content py-0 d-lg-inline d-none">
-      <img src="../assets/sidebar-logo.png" alt="Random negative space illustration" class="sidebar-logo dark-content py-0 d-lg-inline d-none">
-      </a>
+      <img src="../assets/sidebar-logo.png" alt="Random negative space illustration" class="sidebar-logo light-content py-0 d-lg-inline d-none"><img src="../assets/sidebar-logo.png" alt="Random negative space illustration" class="sidebar-logo dark-content py-0 d-lg-inline d-none"></a>
     <div class="sidebar-title mb-0 py-0">
       <a href="../">Oxymeter Equity</a> 
         <div class="sidebar-tools-main">
@@ -346,7 +326,7 @@ cookieconsent.run({
         </div>
     <div class="sidebar-menu-container"> 
     <ul class="list-unstyled mt-1">
-        <li class="sidebar-item">
+<li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../index.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Undetected and Undertreated</span></a>
   </div>
@@ -359,8 +339,8 @@ cookieconsent.run({
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../eda/eda-william_acosta.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Individual EDA: Hidden Hypoxemia and Its Economic Consequences</span></a>
   </div>
@@ -376,17 +356,33 @@ cookieconsent.run({
   </div>
 </li>
       </ul>
-  </li>
+</li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
- <span class="menu-text">Appendices</span></a>
+ <span class="menu-text">Shiny App</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../appx/app.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">app</span></a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
+ <span class="menu-text">Appendices</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../appx/proposal.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Project Proposal</span></a>
   </div>
@@ -412,48 +408,47 @@ cookieconsent.run({
   </div>
 </li>
       </ul>
-  </li>
+</li>
     </ul>
-    </div>
-</nav>
-<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+</div>
+</nav><div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active" data-toc-expanded="99">
-    <h2 id="toc-title">Table of contents</h2>
+        <nav id="TOC" role="doc-toc" class="toc-active" data-toc-expanded="99"><h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#overview" id="toc-overview" class="nav-link active" data-scroll-target="#overview">Overview</a></li>
+<li><a href="#overview" id="toc-overview" class="nav-link active" data-scroll-target="#overview">Overview</a></li>
   <li><a href="#setup" id="toc-setup" class="nav-link" data-scroll-target="#setup">Setup</a></li>
   <li><a href="#loadclean" id="toc-loadclean" class="nav-link" data-scroll-target="#loadclean">Load/Clean</a></li>
   <li><a href="#structure-and-missingness" id="toc-structure-and-missingness" class="nav-link" data-scroll-target="#structure-and-missingness">Structure and Missingness</a></li>
-  <li><a href="#part-1-severity-of-illness" id="toc-part-1-severity-of-illness" class="nav-link" data-scroll-target="#part-1-severity-of-illness">Part 1 — Severity of Illness</a>
+  <li>
+<a href="#part-1-severity-of-illness" id="toc-part-1-severity-of-illness" class="nav-link" data-scroll-target="#part-1-severity-of-illness">Part 1 — Severity of Illness</a>
   <ul class="collapse">
-  <li><a href="#overall-severity-distribution" id="toc-overall-severity-distribution" class="nav-link" data-scroll-target="#overall-severity-distribution">Overall Severity Distribution</a></li>
+<li><a href="#overall-severity-distribution" id="toc-overall-severity-distribution" class="nav-link" data-scroll-target="#overall-severity-distribution">Overall Severity Distribution</a></li>
   <li><a href="#risk-of-mortality-distribution" id="toc-risk-of-mortality-distribution" class="nav-link" data-scroll-target="#risk-of-mortality-distribution">Risk of Mortality Distribution</a></li>
-  </ul></li>
-  <li><a href="#part-2-clinical-outcomes" id="toc-part-2-clinical-outcomes" class="nav-link" data-scroll-target="#part-2-clinical-outcomes">Part 2 — Clinical Outcomes</a>
+  </ul>
+</li>
+  <li>
+<a href="#part-2-clinical-outcomes" id="toc-part-2-clinical-outcomes" class="nav-link" data-scroll-target="#part-2-clinical-outcomes">Part 2 — Clinical Outcomes</a>
   <ul class="collapse">
-  <li><a href="#in-hospital-mortality" id="toc-in-hospital-mortality" class="nav-link" data-scroll-target="#in-hospital-mortality">In-Hospital Mortality</a></li>
+<li><a href="#in-hospital-mortality" id="toc-in-hospital-mortality" class="nav-link" data-scroll-target="#in-hospital-mortality">In-Hospital Mortality</a></li>
   <li><a href="#length-of-stay-by-race" id="toc-length-of-stay-by-race" class="nav-link" data-scroll-target="#length-of-stay-by-race">Length of Stay by Race</a></li>
   <li><a href="#length-of-stay-within-severity-level" id="toc-length-of-stay-within-severity-level" class="nav-link" data-scroll-target="#length-of-stay-within-severity-level">Length of Stay within Severity Level</a></li>
-  </ul></li>
-  <li><a href="#part-3-age-stratified-analysis" id="toc-part-3-age-stratified-analysis" class="nav-link" data-scroll-target="#part-3-age-stratified-analysis">Part 3 — Age-Stratified Analysis</a>
+  </ul>
+</li>
+  <li>
+<a href="#part-3-age-stratified-analysis" id="toc-part-3-age-stratified-analysis" class="nav-link" data-scroll-target="#part-3-age-stratified-analysis">Part 3 — Age-Stratified Analysis</a>
   <ul class="collapse">
-  <li><a href="#severity-by-age-group-and-race" id="toc-severity-by-age-group-and-race" class="nav-link" data-scroll-target="#severity-by-age-group-and-race">Severity by Age Group and Race</a></li>
+<li><a href="#severity-by-age-group-and-race" id="toc-severity-by-age-group-and-race" class="nav-link" data-scroll-target="#severity-by-age-group-and-race">Severity by Age Group and Race</a></li>
   <li><a href="#mortality-rate-by-age-group-and-race" id="toc-mortality-rate-by-age-group-and-race" class="nav-link" data-scroll-target="#mortality-rate-by-age-group-and-race">Mortality Rate by Age Group and Race</a></li>
   <li><a href="#major-or-extreme-by-age-group-and-race" id="toc-major-or-extreme-by-age-group-and-race" class="nav-link" data-scroll-target="#major-or-extreme-by-age-group-and-race">% Major or Extreme by Age Group and Race</a></li>
-  </ul></li>
-  <li><a href="#summary-of-key-findings" id="toc-summary-of-key-findings" class="nav-link" data-scroll-target="#summary-of-key-findings">Summary of Key Findings</a></li>
   </ul>
-</nav>
+</li>
+  <li><a href="#summary-of-key-findings" id="toc-summary-of-key-findings" class="nav-link" data-scroll-target="#summary-of-key-findings">Summary of Key Findings</a></li>
+  </ul></nav>
     </div>
 <!-- main -->
-<main class="content column-body" id="quarto-document-content">
-
-
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../eda/eda-william_acosta.html">EDA</a></li><li class="breadcrumb-item"><a href="../eda/eda-nayla_trigueros.html"><span class="chapter-title">Individual EDA: Looking at</span></a></li></ol></nav>
-<div class="quarto-title">
+<main class="content column-body" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../eda/eda-william_acosta.html">EDA</a></li><li class="breadcrumb-item"><a href="../eda/eda-nayla_trigueros.html"><span class="chapter-title">Individual EDA: Looking at</span></a></li></ol></nav><div class="quarto-title">
 <div class="quarto-title-block"><div><h1 class="title"><span class="chapter-title">Individual EDA: Looking at</span></h1><button type="button" class="btn code-tools-button dropdown-toggle" id="quarto-code-tools-menu" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi"></i> Code</button><ul class="dropdown-menu dropdown-menu-end" aria-labelelledby="quarto-code-tools-menu"><li><a id="quarto-show-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Show All Code</a></li><li><a id="quarto-hide-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Hide All Code</a></li><li><hr class="dropdown-divider"></li><li><a id="quarto-view-source" class="dropdown-item" href="javascript:void(0)" role="button">View Source</a></li></ul></div></div>
 <p class="subtitle lead">NY SPARCS Inpatient Discharge Data</p>
 </div>
@@ -472,7 +467,7 @@ cookieconsent.run({
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">April 27, 2026</p>
+      <p class="date">April 29, 2026</p>
     </div>
   </div>
   
@@ -481,21 +476,13 @@ cookieconsent.run({
   
 
 
-</header>
-
-
-<section id="overview" class="level2">
-<h2 class="anchored" data-anchor-id="overview">Overview</h2>
+</header><section id="overview" class="level2"><h2 class="anchored" data-anchor-id="overview">Overview</h2>
 <p>This EDA covers both project datasets and the bridge connecting them: - <strong>NY SPARCS Inpatient Discharge 2021</strong> — 103K respiratory discharge records from New York State hospitals with charges, costs, length of stay, insurance, and severity. Used to measure who pays more and arrives sicker.</p>
 <p>I will analyze clinical severity and outcomes across racial and ethnic groups using the <strong>NY SPARCS Inpatient Discharge 2021</strong> dataset, filtered to respiratory diagnoses. The central question is whether Black, White, and Hispanic/Latino patients arrive at New York State hospitals with different levels of illness severity, experience different lengths of stay, and face different in-hospital mortality rates — and whether those differences persist after controlling for age.</p>
 <p>The analysis is structured in three parts. First, I characterize the overall patient population and examine how severity of illness is distributed across racial groups. Second, I look at length of stay and in-hospital mortality as downstream clinical outcomes of that severity. Third, I stratify all findings by age group to remove the most important demographic confounder: White respiratory patients skew older, and older patients tend to arrive sicker regardless of race. And finally, ask whether the disparities hold within the same life stage.</p>
-</section>
-<section id="setup" class="level2">
-<h2 class="anchored" data-anchor-id="setup">Setup</h2>
+</section><section id="setup" class="level2"><h2 class="anchored" data-anchor-id="setup">Setup</h2>
 <div class="cell">
-<details class="code-fold">
-<summary>Show code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="fu">library</span>(tidyverse)</span>
+<details class="code-fold"><summary>Show code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="fu">library</span>(tidyverse)</span>
 <span id="cb1-2"><a href="#cb1-2"></a><span class="fu">library</span>(DataExplorer)</span>
 <span id="cb1-3"><a href="#cb1-3"></a><span class="fu">library</span>(scales)</span>
 <span id="cb1-4"><a href="#cb1-4"></a><span class="fu">library</span>(ggrepel)</span>
@@ -503,14 +490,10 @@ cookieconsent.run({
 <span id="cb1-6"><a href="#cb1-6"></a><span class="fu">theme_set</span>(<span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">13</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
-</section>
-<section id="loadclean" class="level2">
-<h2 class="anchored" data-anchor-id="loadclean">Load/Clean</h2>
+</section><section id="loadclean" class="level2"><h2 class="anchored" data-anchor-id="loadclean">Load/Clean</h2>
 <p>SPARCS is pulled directly from the NY Health Data API, filtered server-side to respiratory diagnoses (CCSR codes beginning with “RSP”). No file is saved to disk. Race and ethnicity are combined into a single <code>race_eth</code> variable using an ethnicity-first strategy: Hispanic patients are classified as Hispanic/Latino regardless of their reported race code, which is necessary because SPARCS frequently records Hispanic patients under multiple race categories.</p>
 <div class="cell">
-<details class="code-fold">
-<summary>Show code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a>sparcs_raw <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(</span>
+<details class="code-fold"><summary>Show code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a>sparcs_raw <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(</span>
 <span id="cb2-2"><a href="#cb2-2"></a>  <span class="st">"https://health.data.ny.gov/resource/tg3i-cinn.csv?$where=ccsr_diagnosis_code%20like%20%27RSP%25%27&amp;$limit=500000"</span>,</span>
 <span id="cb2-3"><a href="#cb2-3"></a>  <span class="at">show_col_types =</span> <span class="cn">FALSE</span></span>
 <span id="cb2-4"><a href="#cb2-4"></a>)</span>
@@ -566,8 +549,7 @@ cookieconsent.run({
 <span id="cb2-54"><a href="#cb2-54"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(race_eth))</span>
 <span id="cb2-55"><a href="#cb2-55"></a></span>
 <span id="cb2-56"><a href="#cb2-56"></a><span class="fu">glimpse</span>(sparcs)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</details>
-<div class="cell-output cell-output-stdout">
+</details><div class="cell-output cell-output-stdout">
 <pre><code>Rows: 87,175
 Columns: 39
 $ hospital_service_area          &lt;chr&gt; "New York City", "New York City", "New …
@@ -612,38 +594,27 @@ $ died                           &lt;lgl&gt; FALSE, FALSE, FALSE, FALSE, FALSE, 
 </div>
 </div>
 <p>After filtering to respiratory diagnoses and the three focal racial groups, the dataset contains <strong>87,175 discharge records</strong> from New York State hospitals in 2021. Each row represents one inpatient discharge. The key clinical variables are <code>severity</code> (APR-DRG severity of illness, a four-level ordinal from Minor to Extreme), <code>risk_of_mortality</code> (the corresponding APR-DRG mortality risk score), <code>length_of_stay</code>, and <code>died</code> (whether the patient died during the admission).</p>
-</section>
-<section id="structure-and-missingness" class="level2">
-<h2 class="anchored" data-anchor-id="structure-and-missingness">Structure and Missingness</h2>
+</section><section id="structure-and-missingness" class="level2"><h2 class="anchored" data-anchor-id="structure-and-missingness">Structure and Missingness</h2>
 <div class="cell">
-<details class="code-fold">
-<summary>Show code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a>sparcs <span class="sc">|&gt;</span></span>
+<details class="code-fold"><summary>Show code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a>sparcs <span class="sc">|&gt;</span></span>
 <span id="cb4-2"><a href="#cb4-2"></a>  <span class="fu">select</span>(race_eth, age_group, severity, risk_of_mortality,</span>
 <span id="cb4-3"><a href="#cb4-3"></a>         length_of_stay, total_charges, died) <span class="sc">|&gt;</span></span>
 <span id="cb4-4"><a href="#cb4-4"></a>  <span class="fu">plot_missing</span>(</span>
 <span id="cb4-5"><a href="#cb4-5"></a>    <span class="at">title   =</span> <span class="st">"Missingness in key SPARCS clinical variables"</span>,</span>
 <span id="cb4-6"><a href="#cb4-6"></a>    <span class="at">ggtheme =</span> <span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">12</span>)</span>
 <span id="cb4-7"><a href="#cb4-7"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</details>
-<div class="cell-output-display">
+</details><div class="cell-output-display">
 <div>
-<figure class="figure">
-<p><img src="eda-nayla_trigueros_files/figure-html/sparcs-visdat-1.png" class="img-fluid figure-img" alt="Missingness bar chart for key SPARCS clinical variables" width="768"></p>
+<figure class="figure"><p><img src="eda-nayla_trigueros_files/figure-html/sparcs-visdat-1.png" class="img-fluid figure-img" alt="Missingness bar chart for key SPARCS clinical variables" width="768"></p>
 </figure>
 </div>
 </div>
 </div>
 <p>Missingness is low across all key variables. <code>severity</code> and <code>risk_of_mortality</code> are coded at discharge from the patient record and are nearly complete. <code>length_of_stay</code> and <code>died</code> are administrative fields populated for every inpatient record. The analysis proceeds on the full dataset without imputation.</p>
-</section>
-<section id="part-1-severity-of-illness" class="level2">
-<h2 class="anchored" data-anchor-id="part-1-severity-of-illness">Part 1 — Severity of Illness</h2>
-<section id="overall-severity-distribution" class="level3">
-<h3 class="anchored" data-anchor-id="overall-severity-distribution">Overall Severity Distribution</h3>
+</section><section id="part-1-severity-of-illness" class="level2"><h2 class="anchored" data-anchor-id="part-1-severity-of-illness">Part 1 — Severity of Illness</h2>
+<section id="overall-severity-distribution" class="level3"><h3 class="anchored" data-anchor-id="overall-severity-distribution">Overall Severity Distribution</h3>
 <div class="cell">
-<details class="code-fold">
-<summary>Show code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a>sparcs <span class="sc">|&gt;</span></span>
+<details class="code-fold"><summary>Show code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a>sparcs <span class="sc">|&gt;</span></span>
 <span id="cb5-2"><a href="#cb5-2"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(severity)) <span class="sc">|&gt;</span></span>
 <span id="cb5-3"><a href="#cb5-3"></a>  <span class="fu">count</span>(race_eth, severity) <span class="sc">|&gt;</span></span>
 <span id="cb5-4"><a href="#cb5-4"></a>  <span class="fu">group_by</span>(race_eth) <span class="sc">|&gt;</span></span>
@@ -658,19 +629,15 @@ $ died                           &lt;lgl&gt; FALSE, FALSE, FALSE, FALSE, FALSE, 
 <span id="cb5-13"><a href="#cb5-13"></a>    <span class="at">subtitle =</span> <span class="st">"Darker = more severe; share of Major and Extreme cases differs by group"</span>,</span>
 <span id="cb5-14"><a href="#cb5-14"></a>    <span class="at">x =</span> <span class="cn">NULL</span>, <span class="at">y =</span> <span class="st">"Proportion of discharges"</span>, <span class="at">fill =</span> <span class="st">"Severity"</span></span>
 <span id="cb5-15"><a href="#cb5-15"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</details>
-<div class="cell-output-display">
+</details><div class="cell-output-display">
 <div>
-<figure class="figure">
-<p><img src="eda-nayla_trigueros_files/figure-html/severity-dist-stacked-1.png" class="img-fluid figure-img" alt="Proportional stacked bar chart of severity by race" width="768"></p>
+<figure class="figure"><p><img src="eda-nayla_trigueros_files/figure-html/severity-dist-stacked-1.png" class="img-fluid figure-img" alt="Proportional stacked bar chart of severity by race" width="768"></p>
 </figure>
 </div>
 </div>
 </div>
 <div class="cell">
-<details class="code-fold">
-<summary>Show code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a>sparcs <span class="sc">|&gt;</span></span>
+<details class="code-fold"><summary>Show code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a>sparcs <span class="sc">|&gt;</span></span>
 <span id="cb6-2"><a href="#cb6-2"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(severity_code)) <span class="sc">|&gt;</span></span>
 <span id="cb6-3"><a href="#cb6-3"></a>  <span class="fu">group_by</span>(race_eth) <span class="sc">|&gt;</span></span>
 <span id="cb6-4"><a href="#cb6-4"></a>  <span class="fu">summarise</span>(</span>
@@ -694,24 +661,18 @@ $ died                           &lt;lgl&gt; FALSE, FALSE, FALSE, FALSE, FALSE, 
 <span id="cb6-22"><a href="#cb6-22"></a>    <span class="at">subtitle =</span> <span class="st">"Scale: 1 = Minor, 2 = Moderate, 3 = Major, 4 = Extreme; error bars = 95% CI"</span>,</span>
 <span id="cb6-23"><a href="#cb6-23"></a>    <span class="at">x =</span> <span class="cn">NULL</span>, <span class="at">y =</span> <span class="st">"Mean severity score"</span></span>
 <span id="cb6-24"><a href="#cb6-24"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</details>
-<div class="cell-output-display">
+</details><div class="cell-output-display">
 <div>
-<figure class="figure">
-<p><img src="eda-nayla_trigueros_files/figure-html/severity-mean-bar-1.png" class="img-fluid figure-img" alt="Bar chart of mean APR severity score with 95% CI error bars by race" width="768"></p>
+<figure class="figure"><p><img src="eda-nayla_trigueros_files/figure-html/severity-mean-bar-1.png" class="img-fluid figure-img" alt="Bar chart of mean APR severity score with 95% CI error bars by race" width="768"></p>
 </figure>
 </div>
 </div>
 </div>
 <p>The severity distribution and mean score plots tell a consistent story: Black and Hispanic/Latino patients arrive at the hospital with higher recorded illness severity than White patients on average. The stacked bars show this as a shift in the composition of discharges — a larger share of Major and Extreme cases among Black patients, a larger share of Minor and Moderate cases among White patients. The mean score bar chart quantifies the gap, and the confidence intervals — tight given the large sample size — confirm it is not a sampling artifact.</p>
 <p>The key caveat is age. The severity score is assigned by administrative coders at discharge and reflects the full clinical picture at that point, but White patients skewing older means they have more years of accumulated comorbidities. The age-stratified analysis below tests whether the severity gap is an artifact of that demographic difference or whether it holds within the same age band.</p>
-</section>
-<section id="risk-of-mortality-distribution" class="level3">
-<h3 class="anchored" data-anchor-id="risk-of-mortality-distribution">Risk of Mortality Distribution</h3>
+</section><section id="risk-of-mortality-distribution" class="level3"><h3 class="anchored" data-anchor-id="risk-of-mortality-distribution">Risk of Mortality Distribution</h3>
 <div class="cell">
-<details class="code-fold">
-<summary>Show code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a>sparcs <span class="sc">|&gt;</span></span>
+<details class="code-fold"><summary>Show code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a>sparcs <span class="sc">|&gt;</span></span>
 <span id="cb7-2"><a href="#cb7-2"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(risk_of_mortality)) <span class="sc">|&gt;</span></span>
 <span id="cb7-3"><a href="#cb7-3"></a>  <span class="fu">count</span>(race_eth, risk_of_mortality) <span class="sc">|&gt;</span></span>
 <span id="cb7-4"><a href="#cb7-4"></a>  <span class="fu">group_by</span>(race_eth) <span class="sc">|&gt;</span></span>
@@ -726,26 +687,18 @@ $ died                           &lt;lgl&gt; FALSE, FALSE, FALSE, FALSE, FALSE, 
 <span id="cb7-13"><a href="#cb7-13"></a>    <span class="at">subtitle =</span> <span class="st">"Share of Major and Extreme mortality-risk cases differs across groups"</span>,</span>
 <span id="cb7-14"><a href="#cb7-14"></a>    <span class="at">x =</span> <span class="cn">NULL</span>, <span class="at">y =</span> <span class="st">"Proportion of discharges"</span>, <span class="at">fill =</span> <span class="st">"Risk of Mortality"</span></span>
 <span id="cb7-15"><a href="#cb7-15"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</details>
-<div class="cell-output-display">
+</details><div class="cell-output-display">
 <div>
-<figure class="figure">
-<p><img src="eda-nayla_trigueros_files/figure-html/risk-mortality-stacked-1.png" class="img-fluid figure-img" alt="Proportional stacked bar chart of APR risk of mortality by race" width="768"></p>
+<figure class="figure"><p><img src="eda-nayla_trigueros_files/figure-html/risk-mortality-stacked-1.png" class="img-fluid figure-img" alt="Proportional stacked bar chart of APR risk of mortality by race" width="768"></p>
 </figure>
 </div>
 </div>
 </div>
 <p>The APR risk of mortality score is a related but distinct variable from severity — it is calibrated specifically to predict in-hospital death rather than to summarize overall illness burden. The distribution mirrors the severity pattern: Black patients show a higher share of Major and Extreme mortality risk, White patients show a higher share of Minor risk. Hispanic/Latino patients again fall between the two. Because risk of mortality is a predictive score derived from diagnosis and procedure codes, a higher score means the clinical record at discharge codes as more life-threatening — not simply that the patient arrived older or sicker due to age.</p>
-</section>
-</section>
-<section id="part-2-clinical-outcomes" class="level2">
-<h2 class="anchored" data-anchor-id="part-2-clinical-outcomes">Part 2 — Clinical Outcomes</h2>
-<section id="in-hospital-mortality" class="level3">
-<h3 class="anchored" data-anchor-id="in-hospital-mortality">In-Hospital Mortality</h3>
+</section></section><section id="part-2-clinical-outcomes" class="level2"><h2 class="anchored" data-anchor-id="part-2-clinical-outcomes">Part 2 — Clinical Outcomes</h2>
+<section id="in-hospital-mortality" class="level3"><h3 class="anchored" data-anchor-id="in-hospital-mortality">In-Hospital Mortality</h3>
 <div class="cell">
-<details class="code-fold">
-<summary>Show code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a>sparcs <span class="sc">|&gt;</span></span>
+<details class="code-fold"><summary>Show code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a>sparcs <span class="sc">|&gt;</span></span>
 <span id="cb8-2"><a href="#cb8-2"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(died)) <span class="sc">|&gt;</span></span>
 <span id="cb8-3"><a href="#cb8-3"></a>  <span class="fu">group_by</span>(race_eth) <span class="sc">|&gt;</span></span>
 <span id="cb8-4"><a href="#cb8-4"></a>  <span class="fu">summarise</span>(</span>
@@ -766,23 +719,17 @@ $ died                           &lt;lgl&gt; FALSE, FALSE, FALSE, FALSE, FALSE, 
 <span id="cb8-19"><a href="#cb8-19"></a>    <span class="at">subtitle =</span> <span class="st">"Percentage of respiratory discharges that resulted in death"</span>,</span>
 <span id="cb8-20"><a href="#cb8-20"></a>    <span class="at">x =</span> <span class="cn">NULL</span>, <span class="at">y =</span> <span class="st">"Mortality rate"</span></span>
 <span id="cb8-21"><a href="#cb8-21"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</details>
-<div class="cell-output-display">
+</details><div class="cell-output-display">
 <div>
-<figure class="figure">
-<p><img src="eda-nayla_trigueros_files/figure-html/mortality-bar-1.png" class="img-fluid figure-img" alt="Bar chart of in-hospital mortality rate by race" width="768"></p>
+<figure class="figure"><p><img src="eda-nayla_trigueros_files/figure-html/mortality-bar-1.png" class="img-fluid figure-img" alt="Bar chart of in-hospital mortality rate by race" width="768"></p>
 </figure>
 </div>
 </div>
 </div>
 <p>The raw in-hospital mortality rate follows the same racial ordering as severity: the group with the highest mean severity score has the highest mortality rate, and the group with the lowest has the lowest. This ordering is consistent with the severity findings but does not on its own establish that race is the driver — age and severity are mediating variables that must be controlled before any causal claim can be made. The next plot addresses this directly.</p>
-</section>
-<section id="length-of-stay-by-race" class="level3">
-<h3 class="anchored" data-anchor-id="length-of-stay-by-race">Length of Stay by Race</h3>
+</section><section id="length-of-stay-by-race" class="level3"><h3 class="anchored" data-anchor-id="length-of-stay-by-race">Length of Stay by Race</h3>
 <div class="cell">
-<details class="code-fold">
-<summary>Show code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a>sparcs <span class="sc">|&gt;</span></span>
+<details class="code-fold"><summary>Show code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a>sparcs <span class="sc">|&gt;</span></span>
 <span id="cb9-2"><a href="#cb9-2"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(length_of_stay)) <span class="sc">|&gt;</span></span>
 <span id="cb9-3"><a href="#cb9-3"></a>  <span class="fu">mutate</span>(<span class="at">race_eth =</span> <span class="fu">fct_reorder</span>(race_eth, length_of_stay, median)) <span class="sc">|&gt;</span></span>
 <span id="cb9-4"><a href="#cb9-4"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> race_eth, <span class="at">y =</span> length_of_stay, <span class="at">fill =</span> race_eth)) <span class="sc">+</span></span>
@@ -795,22 +742,16 @@ $ died                           &lt;lgl&gt; FALSE, FALSE, FALSE, FALSE, FALSE, 
 <span id="cb9-11"><a href="#cb9-11"></a>    <span class="at">x =</span> <span class="cn">NULL</span>, <span class="at">y =</span> <span class="st">"Days"</span></span>
 <span id="cb9-12"><a href="#cb9-12"></a>  ) <span class="sc">+</span></span>
 <span id="cb9-13"><a href="#cb9-13"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"none"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</details>
-<div class="cell-output-display">
+</details><div class="cell-output-display">
 <div>
-<figure class="figure">
-<p><img src="eda-nayla_trigueros_files/figure-html/los-boxplot-1.png" class="img-fluid figure-img" alt="Boxplot of length of stay by race, capped at 30 days" width="768"></p>
+<figure class="figure"><p><img src="eda-nayla_trigueros_files/figure-html/los-boxplot-1.png" class="img-fluid figure-img" alt="Boxplot of length of stay by race, capped at 30 days" width="768"></p>
 </figure>
 </div>
 </div>
 </div>
-</section>
-<section id="length-of-stay-within-severity-level" class="level3">
-<h3 class="anchored" data-anchor-id="length-of-stay-within-severity-level">Length of Stay within Severity Level</h3>
+</section><section id="length-of-stay-within-severity-level" class="level3"><h3 class="anchored" data-anchor-id="length-of-stay-within-severity-level">Length of Stay within Severity Level</h3>
 <div class="cell">
-<details class="code-fold">
-<summary>Show code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a>sparcs <span class="sc">|&gt;</span></span>
+<details class="code-fold"><summary>Show code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a>sparcs <span class="sc">|&gt;</span></span>
 <span id="cb10-2"><a href="#cb10-2"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(length_of_stay), <span class="sc">!</span><span class="fu">is.na</span>(severity)) <span class="sc">|&gt;</span></span>
 <span id="cb10-3"><a href="#cb10-3"></a>  <span class="fu">group_by</span>(race_eth, severity) <span class="sc">|&gt;</span></span>
 <span id="cb10-4"><a href="#cb10-4"></a>  <span class="fu">summarise</span>(<span class="at">median_los =</span> <span class="fu">median</span>(length_of_stay, <span class="at">na.rm =</span> <span class="cn">TRUE</span>), <span class="at">.groups =</span> <span class="st">"drop"</span>) <span class="sc">|&gt;</span></span>
@@ -824,20 +765,16 @@ $ died                           &lt;lgl&gt; FALSE, FALSE, FALSE, FALSE, FALSE, 
 <span id="cb10-12"><a href="#cb10-12"></a>    <span class="at">subtitle =</span> <span class="st">"Within-severity comparison removes illness burden as a confounder"</span>,</span>
 <span id="cb10-13"><a href="#cb10-13"></a>    <span class="at">x =</span> <span class="st">"Severity of illness"</span>, <span class="at">y =</span> <span class="st">"Median LOS (days)"</span>, <span class="at">color =</span> <span class="st">"Race / Ethnicity"</span></span>
 <span id="cb10-14"><a href="#cb10-14"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</details>
-<div class="cell-output-display">
+</details><div class="cell-output-display">
 <div>
-<figure class="figure">
-<p><img src="eda-nayla_trigueros_files/figure-html/los-severity-line-1.png" class="img-fluid figure-img" alt="Line plot of median length of stay by severity and race" width="768"></p>
+<figure class="figure"><p><img src="eda-nayla_trigueros_files/figure-html/los-severity-line-1.png" class="img-fluid figure-img" alt="Line plot of median length of stay by severity and race" width="768"></p>
 </figure>
 </div>
 </div>
 </div>
 <p>The within-severity comparison is the strongest single plot in this section. By holding severity constant, it removes the most obvious alternative explanation for the LOS gap — that Black and Hispanic/Latino patients simply arrive sicker. Within every severity category, Black and Hispanic/Latino patients spend as many or more days in the hospital as White patients at the same illness level. The gap is not driven by severity alone. This raises the question of what else might explain it: differences in treatment course, delays in response to treatment, comorbidity burden not fully captured by the APR severity score, or upstream clinical failures that caused the condition to progress further before the patient sought care. ### Severity Heatmap by Diagnosis and Race</p>
 <div class="cell">
-<details class="code-fold">
-<summary>Show code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a>top_dx <span class="ot">&lt;-</span> sparcs <span class="sc">|&gt;</span></span>
+<details class="code-fold"><summary>Show code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a>top_dx <span class="ot">&lt;-</span> sparcs <span class="sc">|&gt;</span></span>
 <span id="cb11-2"><a href="#cb11-2"></a>  <span class="fu">count</span>(ccsr_diagnosis_description) <span class="sc">|&gt;</span></span>
 <span id="cb11-3"><a href="#cb11-3"></a>  <span class="fu">slice_max</span>(n, <span class="at">n =</span> <span class="dv">10</span>) <span class="sc">|&gt;</span></span>
 <span id="cb11-4"><a href="#cb11-4"></a>  <span class="fu">pull</span>(ccsr_diagnosis_description)</span>
@@ -857,25 +794,18 @@ $ died                           &lt;lgl&gt; FALSE, FALSE, FALSE, FALSE, FALSE, 
 <span id="cb11-18"><a href="#cb11-18"></a>    <span class="at">x =</span> <span class="cn">NULL</span>, <span class="at">y =</span> <span class="cn">NULL</span>, <span class="at">fill =</span> <span class="st">"Mean severity"</span></span>
 <span id="cb11-19"><a href="#cb11-19"></a>  ) <span class="sc">+</span></span>
 <span id="cb11-20"><a href="#cb11-20"></a>  <span class="fu">theme</span>(<span class="at">axis.text.y =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">9</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</details>
-<div class="cell-output-display">
+</details><div class="cell-output-display">
 <div>
-<figure class="figure">
-<p><img src="eda-nayla_trigueros_files/figure-html/severity-heatmap-1.png" class="img-fluid figure-img" alt="Heatmap of mean severity score by top diagnosis and race" width="768"></p>
+<figure class="figure"><p><img src="eda-nayla_trigueros_files/figure-html/severity-heatmap-1.png" class="img-fluid figure-img" alt="Heatmap of mean severity score by top diagnosis and race" width="768"></p>
 </figure>
 </div>
 </div>
 </div>
 <p>The heatmap is a diagnosis-controlled comparison: it asks whether, for the same respiratory condition, Black and Hispanic/Latino patients present at higher severity than White patients. Cells in the same row hold the diagnosis constant, so differences across columns reflect patient-level variation rather than diagnosis-mix. Where a racial group shows consistently darker cells across diagnoses — not just for one condition but for many — the severity gap is more likely to reflect something about the patient’s journey to the hospital (access to care, delays in treatment, or upstream clinical failures) than the type of condition they were admitted for.</p>
-</section>
-</section>
-<section id="part-3-age-stratified-analysis" class="level2">
-<h2 class="anchored" data-anchor-id="part-3-age-stratified-analysis">Part 3 — Age-Stratified Analysis</h2>
+</section></section><section id="part-3-age-stratified-analysis" class="level2"><h2 class="anchored" data-anchor-id="part-3-age-stratified-analysis">Part 3 — Age-Stratified Analysis</h2>
 <p>Age is the most important confounder in this dataset. White respiratory patients skew older, and older patients accumulate more comorbidities, generate higher severity scores, and are more likely to die during admission. Stratifying by age band tests whether the racial gradients in severity and outcomes hold within the same life stage — or whether they disappear once age is controlled.</p>
 <div class="cell">
-<details class="code-fold">
-<summary>Show code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a>sparcs_age <span class="ot">&lt;-</span> sparcs <span class="sc">|&gt;</span></span>
+<details class="code-fold"><summary>Show code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a>sparcs_age <span class="ot">&lt;-</span> sparcs <span class="sc">|&gt;</span></span>
 <span id="cb12-2"><a href="#cb12-2"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(race_eth), <span class="sc">!</span><span class="fu">is.na</span>(age_group)) <span class="sc">|&gt;</span></span>
 <span id="cb12-3"><a href="#cb12-3"></a>  <span class="fu">group_by</span>(race_eth, age_group) <span class="sc">|&gt;</span></span>
 <span id="cb12-4"><a href="#cb12-4"></a>  <span class="fu">summarise</span>(</span>
@@ -900,8 +830,7 @@ $ died                           &lt;lgl&gt; FALSE, FALSE, FALSE, FALSE, FALSE, 
 <span id="cb12-23"><a href="#cb12-23"></a>                  <span class="st">"Median LOS"</span>, <span class="st">"Mortality rate"</span>, <span class="st">"% Major / Extreme"</span>),</span>
 <span id="cb12-24"><a href="#cb12-24"></a>    <span class="at">caption =</span> <span class="st">"**Table 2. Age-stratified clinical outcomes by race — SPARCS respiratory discharges**"</span></span>
 <span id="cb12-25"><a href="#cb12-25"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</details>
-<div class="cell-output-display">
+</details><div class="cell-output-display">
 <table class="caption-top table table-sm table-striped small">
 <caption><strong>Table 2. Age-stratified clinical outcomes by race — SPARCS respiratory discharges</strong></caption>
 <colgroup>
@@ -913,8 +842,7 @@ $ died                           &lt;lgl&gt; FALSE, FALSE, FALSE, FALSE, FALSE, 
 <col style="width: 16%">
 <col style="width: 20%">
 </colgroup>
-<thead>
-<tr class="header">
+<thead><tr class="header">
 <th style="text-align: left;">Race</th>
 <th style="text-align: left;">Age group</th>
 <th style="text-align: right;">N</th>
@@ -922,8 +850,7 @@ $ died                           &lt;lgl&gt; FALSE, FALSE, FALSE, FALSE, FALSE, 
 <th style="text-align: right;">Median LOS</th>
 <th style="text-align: left;">Mortality rate</th>
 <th style="text-align: left;">% Major / Extreme</th>
-</tr>
-</thead>
+</tr></thead>
 <tbody>
 <tr class="odd">
 <td style="text-align: left;">Black</td>
@@ -1011,12 +938,9 @@ $ died                           &lt;lgl&gt; FALSE, FALSE, FALSE, FALSE, FALSE, 
 </div>
 </div>
 <p>Cell counts range from several thousand to over twenty thousand per race × age combination, so all estimates are stable. The 18–49 band tests whether disparities appear before age-related comorbidities accumulate — this is the cleanest comparison because older patients have more accumulated health burden by definition. The 50–69 band captures patients with real respiratory disease burden but before the Medicare transition dominates. The 70+ band is where age-related confounding is strongest — making any residual gap in this group the hardest to explain away.</p>
-<section id="severity-by-age-group-and-race" class="level3">
-<h3 class="anchored" data-anchor-id="severity-by-age-group-and-race">Severity by Age Group and Race</h3>
+<section id="severity-by-age-group-and-race" class="level3"><h3 class="anchored" data-anchor-id="severity-by-age-group-and-race">Severity by Age Group and Race</h3>
 <div class="cell">
-<details class="code-fold">
-<summary>Show code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a>sparcs_age <span class="sc">|&gt;</span></span>
+<details class="code-fold"><summary>Show code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a>sparcs_age <span class="sc">|&gt;</span></span>
 <span id="cb13-2"><a href="#cb13-2"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> age_group, <span class="at">y =</span> mean_severity,</span>
 <span id="cb13-3"><a href="#cb13-3"></a>             <span class="at">color =</span> race_eth, <span class="at">group =</span> race_eth)) <span class="sc">+</span></span>
 <span id="cb13-4"><a href="#cb13-4"></a>  <span class="fu">geom_line</span>(<span class="at">linewidth =</span> <span class="fl">1.1</span>) <span class="sc">+</span></span>
@@ -1029,22 +953,16 @@ $ died                           &lt;lgl&gt; FALSE, FALSE, FALSE, FALSE, FALSE, 
 <span id="cb13-11"><a href="#cb13-11"></a>    <span class="at">subtitle =</span> <span class="st">"Age-controlled comparison: does the severity gap hold within the same life stage?"</span>,</span>
 <span id="cb13-12"><a href="#cb13-12"></a>    <span class="at">x =</span> <span class="st">"Age group"</span>, <span class="at">y =</span> <span class="st">"Mean severity score (1–4)"</span>, <span class="at">color =</span> <span class="st">"Race / Ethnicity"</span></span>
 <span id="cb13-13"><a href="#cb13-13"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</details>
-<div class="cell-output-display">
+</details><div class="cell-output-display">
 <div>
-<figure class="figure">
-<p><img src="eda-nayla_trigueros_files/figure-html/severity-age-line-1.png" class="img-fluid figure-img" alt="Line plot of mean severity score by age group and race" width="768"></p>
+<figure class="figure"><p><img src="eda-nayla_trigueros_files/figure-html/severity-age-line-1.png" class="img-fluid figure-img" alt="Line plot of mean severity score by age group and race" width="768"></p>
 </figure>
 </div>
 </div>
 </div>
-</section>
-<section id="mortality-rate-by-age-group-and-race" class="level3">
-<h3 class="anchored" data-anchor-id="mortality-rate-by-age-group-and-race">Mortality Rate by Age Group and Race</h3>
+</section><section id="mortality-rate-by-age-group-and-race" class="level3"><h3 class="anchored" data-anchor-id="mortality-rate-by-age-group-and-race">Mortality Rate by Age Group and Race</h3>
 <div class="cell">
-<details class="code-fold">
-<summary>Show code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1"></a>sparcs_age <span class="sc">|&gt;</span></span>
+<details class="code-fold"><summary>Show code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1"></a>sparcs_age <span class="sc">|&gt;</span></span>
 <span id="cb14-2"><a href="#cb14-2"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> age_group, <span class="at">y =</span> mortality_rate,</span>
 <span id="cb14-3"><a href="#cb14-3"></a>             <span class="at">color =</span> race_eth, <span class="at">group =</span> race_eth)) <span class="sc">+</span></span>
 <span id="cb14-4"><a href="#cb14-4"></a>  <span class="fu">geom_line</span>(<span class="at">linewidth =</span> <span class="fl">1.1</span>) <span class="sc">+</span></span>
@@ -1058,22 +976,16 @@ $ died                           &lt;lgl&gt; FALSE, FALSE, FALSE, FALSE, FALSE, 
 <span id="cb14-12"><a href="#cb14-12"></a>    <span class="at">subtitle =</span> <span class="st">"Each band holds age constant; differences across lines reflect racial variation"</span>,</span>
 <span id="cb14-13"><a href="#cb14-13"></a>    <span class="at">x =</span> <span class="st">"Age group"</span>, <span class="at">y =</span> <span class="st">"Mortality rate"</span>, <span class="at">color =</span> <span class="st">"Race / Ethnicity"</span></span>
 <span id="cb14-14"><a href="#cb14-14"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</details>
-<div class="cell-output-display">
+</details><div class="cell-output-display">
 <div>
-<figure class="figure">
-<p><img src="eda-nayla_trigueros_files/figure-html/mortality-age-line-1.png" class="img-fluid figure-img" alt="Line plot of in-hospital mortality rate by age group and race" width="768"></p>
+<figure class="figure"><p><img src="eda-nayla_trigueros_files/figure-html/mortality-age-line-1.png" class="img-fluid figure-img" alt="Line plot of in-hospital mortality rate by age group and race" width="768"></p>
 </figure>
 </div>
 </div>
 </div>
-</section>
-<section id="major-or-extreme-by-age-group-and-race" class="level3">
-<h3 class="anchored" data-anchor-id="major-or-extreme-by-age-group-and-race">% Major or Extreme by Age Group and Race</h3>
+</section><section id="major-or-extreme-by-age-group-and-race" class="level3"><h3 class="anchored" data-anchor-id="major-or-extreme-by-age-group-and-race">% Major or Extreme by Age Group and Race</h3>
 <div class="cell">
-<details class="code-fold">
-<summary>Show code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1"></a>sparcs_age <span class="sc">|&gt;</span></span>
+<details class="code-fold"><summary>Show code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1"></a>sparcs_age <span class="sc">|&gt;</span></span>
 <span id="cb15-2"><a href="#cb15-2"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> age_group, <span class="at">y =</span> pct_major_ext,</span>
 <span id="cb15-3"><a href="#cb15-3"></a>             <span class="at">color =</span> race_eth, <span class="at">group =</span> race_eth)) <span class="sc">+</span></span>
 <span id="cb15-4"><a href="#cb15-4"></a>  <span class="fu">geom_line</span>(<span class="at">linewidth =</span> <span class="fl">1.1</span>) <span class="sc">+</span></span>
@@ -1087,32 +999,25 @@ $ died                           &lt;lgl&gt; FALSE, FALSE, FALSE, FALSE, FALSE, 
 <span id="cb15-12"><a href="#cb15-12"></a>    <span class="at">subtitle =</span> <span class="st">"Higher share = more patients arriving at the most severe illness levels"</span>,</span>
 <span id="cb15-13"><a href="#cb15-13"></a>    <span class="at">x =</span> <span class="st">"Age group"</span>, <span class="at">y =</span> <span class="st">"% Major or Extreme"</span>, <span class="at">color =</span> <span class="st">"Race / Ethnicity"</span></span>
 <span id="cb15-14"><a href="#cb15-14"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</details>
-<div class="cell-output-display">
+</details><div class="cell-output-display">
 <div>
-<figure class="figure">
-<p><img src="eda-nayla_trigueros_files/figure-html/major-ext-age-line-1.png" class="img-fluid figure-img" alt="Line plot of share of Major or Extreme severity discharges by age group and race" width="768"></p>
+<figure class="figure"><p><img src="eda-nayla_trigueros_files/figure-html/major-ext-age-line-1.png" class="img-fluid figure-img" alt="Line plot of share of Major or Extreme severity discharges by age group and race" width="768"></p>
 </figure>
 </div>
 </div>
 </div>
 <p>The age-stratified plots are the core evidence of this section. Across all three age bands, the racial ordering on severity, mortality, and share of Major/Extreme cases is consistent: Black patients at or near the top, White patients at or near the bottom, Hispanic/Latino patients in between. The gaps narrow somewhat at 70+, where severity scores converge as all groups accumulate serious illness burden — but they do not disappear. At 18–49, the comparison is especially striking: these are working-age patients with fewer accumulated comorbidities, yet Black and Hispanic/Latino patients still arrive at higher severity levels and die at higher rates than White patients of the same age.</p>
 <p>The persistence of the severity and mortality gaps after controlling for age points to something happening before the patient reaches the hospital. One hypothesis — consistent with the broader group project — is that clinical tools used earlier in the care pathway are less accurate for darker-skinned patients, allowing conditions to deteriorate further before they are detected and treated. That upstream failure, whatever its source, would produce exactly the pattern seen here: higher severity at admission, longer stays, and higher mortality — not because these patients are intrinsically sicker, but because their illness was permitted to progress further before intervention.</p>
-</section>
-</section>
-<section id="summary-of-key-findings" class="level2">
-<h2 class="anchored" data-anchor-id="summary-of-key-findings">Summary of Key Findings</h2>
+</section></section><section id="summary-of-key-findings" class="level2"><h2 class="anchored" data-anchor-id="summary-of-key-findings">Summary of Key Findings</h2>
 <table class="caption-top table">
 <colgroup>
 <col style="width: 50%">
 <col style="width: 50%">
 </colgroup>
-<thead>
-<tr class="header">
+<thead><tr class="header">
 <th>Finding</th>
 <th>Evidence</th>
-</tr>
-</thead>
+</tr></thead>
 <tbody>
 <tr class="odd">
 <td><strong>Black patients arrive at higher severity</strong></td>
@@ -1157,10 +1062,7 @@ Note
 
 <!-- -->
 
-</section>
-
-</main> <!-- /main -->
-<script id="quarto-html-after-body" type="application/javascript">
+</section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
     // Ensure there is a toggle, if there isn't float one in the top right
     if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
@@ -1628,16 +1530,14 @@ Note
       }
     }
   });
-  </script>
-<nav class="page-navigation column-body">
-  <div class="nav-page nav-page-previous">
+  </script><nav class="page-navigation column-body"><div class="nav-page nav-page-previous">
       <a href="../eda/eda-patricia.html" class="pagination-link" aria-label="Individual EDA: Evaluating Demographic Disparities in Pulse Oximetry Accuracy">
         <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-title">Individual EDA: Evaluating Demographic Disparities in Pulse Oximetry Accuracy</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../appx/proposal.html" class="pagination-link" aria-label="Project Proposal">
-        <span class="nav-page-text"><span class="chapter-title">Project Proposal</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../appx/app.html" class="pagination-link" aria-label="app">
+        <span class="nav-page-text"><span class="chapter-title">app</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
@@ -2200,8 +2100,7 @@ Note
 </code></pre></div><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
-<footer class="footer">
-  <div class="nav-footer">
+<footer class="footer"><div class="nav-footer">
     <div class="nav-footer-left">
       &nbsp;
     </div>   
@@ -2213,8 +2112,6 @@ Note
     </div>
   </div>
 </footer>
-
-
 
 
 <script src="../site_libs/quarto-html/zenscroll-min.js"></script>
