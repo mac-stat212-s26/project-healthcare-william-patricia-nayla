@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>quarto-inputffaec59caed6bfd3 – Undetected &amp; Undertreated</title>
+<title>quarto-input1636894ee90b46e6 – Undetected &amp; Undertreated</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -67,7 +67,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="/site_libs/quarto-search/fuse.min.js"></script>
 <script src="/site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="/">
-<link href="/./assets/sidebar-logo.png" rel="icon" type="image/png">
+<link href="/./assets/logo.png" rel="icon" type="image/png">
 <script src="/site_libs/cookie-consent/cookie-consent.js"></script>
 <link href="/site_libs/cookie-consent/cookie-consent.css" rel="stylesheet">
 <script src="/site_libs/quarto-html/quarto.js" type="module"></script>
@@ -301,14 +301,14 @@ cookieconsent.run({
 
 <div id="quarto-search-results"></div>
 <!-- content -->
-<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full">
 <!-- sidebar -->
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
         
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block"><h1 class="title display-7"></h1></header><div class="quarto-title-block"><div class="quarto-title-tools-only"><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> Code</button></div></div>
+<main class="content column-page" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block"><h1 class="title display-7"></h1></header><div class="quarto-title-block"><div class="quarto-title-tools-only"><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> Code</button></div></div>
 
 
 
@@ -328,6 +328,35 @@ cookieconsent.run({
 
 
 </main> <!-- /main -->
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  var btn = document.getElementById("quarto-code-tools-menu");
+  if (btn && window.bootstrap && window.bootstrap.Dropdown) {
+    new window.bootstrap.Dropdown(btn);
+  }
+  var viewSource = document.getElementById("quarto-view-source");
+  if (viewSource) {
+    viewSource.addEventListener("click", function (e) {
+      e.preventDefault();
+      var modalEl = document.getElementById("quarto-embedded-source-code-modal");
+      if (modalEl && window.bootstrap && window.bootstrap.Modal) {
+        var modal = new window.bootstrap.Modal(modalEl);
+        modal.show();
+        modalEl.addEventListener("hidden.bs.modal", function () {
+          // Remove any leftover backdrops
+          document.querySelectorAll(".modal-backdrop").forEach(function (el) {
+            el.remove();
+          });
+          // Restore body scroll and classes
+          document.body.classList.remove("modal-open");
+          document.body.style.overflow = "";
+          document.body.style.paddingRight = "";
+        }, { once: true });
+      }
+    });
+  }
+});
+</script>
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
     // Ensure there is a toggle, if there isn't float one in the top right

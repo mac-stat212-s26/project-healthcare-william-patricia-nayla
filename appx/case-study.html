@@ -68,7 +68,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
 <link href="../appx/proposal.html" rel="prev">
-<link href="../assets/sidebar-logo.png" rel="icon" type="image/png">
+<link href="../assets/logo.png" rel="icon" type="image/png">
 <script src="../site_libs/cookie-consent/cookie-consent.js"></script>
 <link href="../site_libs/cookie-consent/cookie-consent.css" rel="stylesheet">
 <script src="../site_libs/quarto-html/quarto.js" type="module"></script>
@@ -317,13 +317,13 @@ cookieconsent.run({
   </nav>
 </header>
 <!-- content -->
-<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full">
 <!-- sidebar -->
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header sidebar-header-stacked">
       <a href="../index.html" class="sidebar-logo-link">
-      <img src="../assets/sidebar-logo.png" alt="Undetected and Undertreated project logo" class="sidebar-logo light-content py-0 d-lg-inline d-none">
-      <img src="../assets/sidebar-logo.png" alt="Undetected and Undertreated project logo" class="sidebar-logo dark-content py-0 d-lg-inline d-none">
+      <img src="../assets/logo.png" alt="Undetected and Undertreated project logo" class="sidebar-logo light-content py-0 d-lg-inline d-none">
+      <img src="../assets/logo.png" alt="Undetected and Undertreated project logo" class="sidebar-logo dark-content py-0 d-lg-inline d-none">
       </a>
     <div class="sidebar-title mb-0 py-0">
       <a href="../">Oxymeter Equity</a> 
@@ -424,7 +424,7 @@ cookieconsent.run({
 </nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content">
+<main class="content column-body" id="quarto-document-content">
 
 
 <header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../appx/proposal.html">Appendices</a></li><li class="breadcrumb-item"><a href="../appx/case-study.html"><span class="chapter-title">Case Study: <em>Twin Cities Police Use Physical Force at Rates Well Above National Average</em></span></a></li></ol></nav>
@@ -434,7 +434,7 @@ cookieconsent.run({
 
 
 
-<div class="quarto-title-meta">
+<div class="quarto-title-meta column-body">
 
     
   
@@ -492,6 +492,35 @@ The final substantive paragraph reports that MPD used force against Black reside
 </section>
 
 </main> <!-- /main -->
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  var btn = document.getElementById("quarto-code-tools-menu");
+  if (btn && window.bootstrap && window.bootstrap.Dropdown) {
+    new window.bootstrap.Dropdown(btn);
+  }
+  var viewSource = document.getElementById("quarto-view-source");
+  if (viewSource) {
+    viewSource.addEventListener("click", function (e) {
+      e.preventDefault();
+      var modalEl = document.getElementById("quarto-embedded-source-code-modal");
+      if (modalEl && window.bootstrap && window.bootstrap.Modal) {
+        var modal = new window.bootstrap.Modal(modalEl);
+        modal.show();
+        modalEl.addEventListener("hidden.bs.modal", function () {
+          // Remove any leftover backdrops
+          document.querySelectorAll(".modal-backdrop").forEach(function (el) {
+            el.remove();
+          });
+          // Restore body scroll and classes
+          document.body.classList.remove("modal-open");
+          document.body.style.overflow = "";
+          document.body.style.paddingRight = "";
+        }, { once: true });
+      }
+    });
+  }
+});
+</script>
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
     // Ensure there is a toggle, if there isn't float one in the top right
@@ -963,7 +992,7 @@ The final substantive paragraph reports that MPD used force against Black reside
     }
   });
   </script>
-<nav class="page-navigation">
+<nav class="page-navigation column-body">
   <div class="nav-page nav-page-previous">
       <a href="../appx/proposal.html" class="pagination-link" aria-label="Project Proposal">
         <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-title">Project Proposal</span></span>
