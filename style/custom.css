@@ -68,10 +68,44 @@ body {
    and the sidebar collapse toggle button
    ═══════════════════════════════════════════════════════════════════ */
 
-/* Global "Code ▾" button that shows/hides ALL code — hidden */
-.code-tools-button,
-div.code-tools-menu {
-  display: none !important;
+/* ── GLOBAL CODE-TOOLS BUTTON ("Code ▾" / "Source") ─────────────── */
+/* Styled but NOT hidden — this is the page-level source viewer.
+   Do NOT set position, z-index, or hide ::after — Bootstrap dropdown needs them. */
+.code-tools-button {
+  background: rgba(2,128,144,0.12) !important;
+  border: 1px solid rgba(2,128,144,0.30) !important;
+  color: #028090 !important;
+  font-size: 0.78rem !important;
+  font-weight: 600 !important;
+  border-radius: var(--radius-sm) !important;
+  padding: 0.25rem 0.85rem !important;
+  transition: var(--transition) !important;
+}
+
+.code-tools-button:hover,
+.code-tools-button:focus {
+  background: #028090 !important;
+  color: white !important;
+  border-color: #028090 !important;
+}
+
+.code-tools-button ~ .dropdown-menu {
+  border: 1px solid rgba(2,128,144,0.20) !important;
+  border-radius: var(--radius-md) !important;
+  box-shadow: var(--shadow-md) !important;
+  background: white !important;
+  font-size: 0.82rem !important;
+  padding: 0.3rem 0 !important;
+}
+
+.code-tools-button ~ .dropdown-menu .dropdown-item {
+  color: var(--navy) !important;
+  padding: 0.4rem 1rem !important;
+}
+
+.code-tools-button ~ .dropdown-menu .dropdown-item:hover {
+  background: rgba(2,128,144,0.08) !important;
+  color: var(--teal) !important;
 }
 
 /* Sidebar hamburger / collapse toggle — hidden so sidebar stays open */
