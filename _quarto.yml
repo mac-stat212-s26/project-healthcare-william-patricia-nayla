@@ -79,7 +79,7 @@ format:
     code-block-bg: true
     code-block-border-left: "#028090"
 
-    code-tools: false
+    code-tools: true
     code-fold: true
     code-summary: "Show Code"
 
