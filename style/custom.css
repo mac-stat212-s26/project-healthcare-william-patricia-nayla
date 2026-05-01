@@ -1,5 +1,5 @@
 /* ═══════════════════════════════════════════════════════════════════
-   UNDETECTED & UNDERTREATED — custom.css v3
+   UNDETECTED & UNDERTREATED — custom.css v4
    ═══════════════════════════════════════════════════════════════════ */
 
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Sora:wght@400;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap');
@@ -64,15 +64,70 @@ body {
 }
 
 /* ═══════════════════════════════════════════════════════════════════
-   SUPPRESS: right TOC sidebar + Code-tools dropdown
+   LAYOUT: eliminate right whitespace + lock sidebar open
    ═══════════════════════════════════════════════════════════════════ */
 
+/*
+ * RIGHT COLUMN WHITESPACE
+ * Quarto's page grid always reserves a "margin" column on the right
+ * for the TOC, even when toc: false. We collapse it to zero and let
+ * the body column fill the remaining space.
+ */
+.page-columns {
+  grid-template-columns:
+    [screen-start] 0fr
+    [screen-start-inset] 0fr
+    [page-start] var(--quarto-sidebar-width, 250px)
+    [page-start-inset] 0fr
+    [body-start-outset] 0fr
+    [body-start] 1fr
+    [body-end] 0fr
+    [body-end-outset] 0fr
+    [page-end-inset] 0fr
+    [page-end] 0fr
+    [screen-end-inset] 0fr
+    [screen-end] !important;
+}
+
+/* Belt-and-suspenders: hide the margin sidebar element itself */
 #quarto-margin-sidebar,
 .quarto-margin-sidebar,
-nav[role="doc-toc"] {
+nav[role="doc-toc"],
+.margin-sidebar {
+  display: none !important;
+  width: 0 !important;
+}
+
+/*
+ * SIDEBAR ALWAYS VISIBLE — hide the toggle button that collapses it.
+ * Quarto renders a hamburger/chevron toggle; hiding it prevents users
+ * from accidentally collapsing the sidebar.
+ */
+#quarto-sidebar-toggle,
+.quarto-sidebar-toggle,
+#sidebar-toggle,
+button.sidebar-toggle,
+.sidebar-navigation .sidebar-toggle,
+#quarto-sidebar > .sidebar-toggle-btn,
+.toggle-sidebar {
   display: none !important;
 }
 
+/* Ensure the sidebar itself is always shown at full width on desktop */
+@media (min-width: 992px) {
+  #quarto-sidebar,
+  .sidebar {
+    display: flex !important;
+    visibility: visible !important;
+    transform: none !important;
+    position: sticky !important;
+    top: 0;
+    height: 100vh;
+    overflow-y: auto;
+  }
+}
+
+/* ── SUPPRESS: Code ▾ global dropdown ───────────────────────────── */
 .code-tools-button,
 .code-tools-menu,
 div.code-tools-menu,
@@ -181,7 +236,7 @@ div.code-tools-menu,
 
 /* ── TITLE BLOCK ─────────────────────────────────────────────────── */
 
-/* Suppress on pages that render no real title */
+/* Suppress on pages with no real title content */
 #title-block-header:not(:has(.title:not(:empty))),
 .quarto-title-block:not(:has(.title:not(:empty))) {
   display: none !important;
@@ -216,9 +271,8 @@ div.code-tools-menu,
 }
 
 /*
- * KEY FIX: global h1 has border-bottom + padding-bottom.
- * Quarto renders the book title as h1.title inside the block,
- * so we must strip all of that here with high specificity.
+ * KEY FIX: strip the global h1's border-bottom + padding-bottom
+ * that bleed into the title block (Quarto renders title as h1.title).
  */
 .quarto-title-block h1,
 .quarto-title-block h1.title,
@@ -368,22 +422,38 @@ pre code {
   font-size: 0.85em;
 }
 
-/* Show / hide code fold toggle */
-.code-fold-btn-container .btn {
-  background: rgba(2,128,144,0.10);
-  border: 1px solid rgba(2,128,144,0.22);
-  color: var(--teal);
-  font-size: 0.78rem;
-  font-weight: 600;
-  border-radius: var(--radius-sm);
-  padding: 0.2rem 0.7rem;
-  transition: var(--transition);
-  cursor: pointer;
+/*
+ * CODE FOLD TOGGLE ("▶ Show code" / "▼ Hide code")
+ * This is the per-chunk toggle, NOT the global Code ▾ dropdown.
+ * Must be explicitly visible and styled — do not hide it.
+ */
+.code-fold-btn-container {
+  display: flex !important;
+  margin-bottom: 0.35rem;
 }
 
-.code-fold-btn-container .btn:hover {
-  background: var(--teal);
-  color: white;
+.code-fold-btn-container .btn,
+.quarto-code-fold-btn {
+  display: inline-flex !important;
+  align-items: center;
+  gap: 0.35rem;
+  background: rgba(2,128,144,0.10) !important;
+  border: 1px solid rgba(2,128,144,0.25) !important;
+  color: var(--teal) !important;
+  font-family: 'Inter', sans-serif !important;
+  font-size: 0.78rem !important;
+  font-weight: 600 !important;
+  border-radius: var(--radius-sm) !important;
+  padding: 0.22rem 0.75rem !important;
+  cursor: pointer !important;
+  transition: var(--transition) !important;
+}
+
+.code-fold-btn-container .btn:hover,
+.quarto-code-fold-btn:hover {
+  background: var(--teal) !important;
+  color: white !important;
+  border-color: var(--teal) !important;
 }
 
 /* ── TABLES ──────────────────────────────────────────────────────── */
