@@ -46,23 +46,20 @@ book:
     - part: "Report"
       chapters:
         - index.qmd
-    - part: "Shiny App"
+    - part: "🩺 Shiny App"
       chapters:
         - appx/app.qmd
 
   appendices:
     - appx/proposal.qmd
     - appx/case-study.qmd
-    - wa/wa-member1.qmd
-    - wa/wa-member2.qmd
-    - wa/wa-member3.qmd
 
 format:
   html:
     theme:
       light: flatly
       dark: darkly
-      css: style/custom.css
+    css: style/custom.css
     search: true
     toc: true
     toc-depth: 3
