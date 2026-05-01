@@ -45,7 +45,7 @@ book:
         - eda/eda-nayla_trigueros.qmd
     - part: "Report"
       chapters:
-        - - index.qmd
+        - index.qmd
     - part: "Shiny App"
       chapters:
         - appx/app.qmd
