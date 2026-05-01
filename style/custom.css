@@ -1,50 +1,57 @@
 /* ═══════════════════════════════════════════════════════════════════
-   UNDETECTED & UNDERTREATED — Complete Style Overhaul
+   UNDETECTED & UNDERTREATED — Complete Style Overhaul v2
+   Fixes: empty title-block space, code-tools dropdown, legibility
    ═══════════════════════════════════════════════════════════════════ */
 
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Sora:wght@400;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap');
 
-/* ── CUSTOM VARIABLES — must come first ──────────────────────── */
+/* ── DESIGN TOKENS ───────────────────────────────────────────────── */
 :root {
-  --navy:       #0D1F35;
-  --navy-soft:  #132030;
-  --teal:       #028090;
-  --teal-light: #03A0B3;
-  --mint:       #02C39A;
-  --cream:      #F4F7F9;
-  --cream-dark: #E8EDF2;
-  --red:        #D94F3D;
-  --gold:       #E8A838;
-  --gray:       #64748B;
-  --gray-light: #94A3B8;
-  --white:      #ffffff;
+  --navy:          #0D1F35;
+  --navy-soft:     #132030;
+  --navy-mid:      #163050;
+  --teal:          #028090;
+  --teal-light:    #03A0B3;
+  --mint:          #02C39A;
+  --mint-dark:     #019270;
+  --cream:         #F4F7F9;
+  --cream-dark:    #E8EDF2;
+  --red:           #D94F3D;
+  --gold:          #E8A838;
+  --gold-dark:     #b07c10;
+  --gray:          #64748B;
+  --gray-light:    #94A3B8;
+  --white:         #ffffff;
+
+  --radius-xs:  4px;
   --radius-sm:  6px;
   --radius-md:  12px;
   --radius-lg:  20px;
-  --shadow-sm:  0 2px 8px rgba(13,31,53,0.08);
+
+  --shadow-sm:  0 2px 8px  rgba(13,31,53,0.08);
   --shadow-md:  0 6px 24px rgba(13,31,53,0.12);
   --shadow-lg:  0 16px 48px rgba(13,31,53,0.16);
-  --transition: all 0.22s cubic-bezier(0.4,0,0.2,1);
-}
-/* Override Bootstrap/flatly variables — must come before everything else */
-:root {
-  --bs-body-bg:              #F4F7F9;
-  --bs-body-color:           #0D1F35;
-  --bs-body-font-family:     'Inter', system-ui, sans-serif;
-  --bs-link-color:           #028090;
-  --bs-link-hover-color:     #02C39A;
-  --bs-link-color-rgb:       2, 128, 144;
-  --bs-primary:              #028090;
-  --bs-primary-rgb:          2, 128, 144;
-  --bs-border-color:         #E8EDF2;
-  --bs-border-radius:        12px;
-  --bs-border-radius-sm:     6px;
-  --bs-border-radius-lg:     20px;
-  --bs-heading-color:        #0D1F35;
-  --bs-navbar-color:         rgba(255,255,255,0.75);
-  --bs-navbar-hover-color:   #02C39A;
-  --bs-navbar-active-color:  #02C39A;
-  --bs-navbar-bg:            #0D1F35;
+
+  --transition: all 0.22s cubic-bezier(0.4, 0, 0.2, 1);
+
+  /* Bootstrap / Quarto overrides */
+  --bs-body-bg:            #F4F7F9;
+  --bs-body-color:         #0D1F35;
+  --bs-body-font-family:   'Inter', system-ui, sans-serif;
+  --bs-link-color:         #028090;
+  --bs-link-hover-color:   #02C39A;
+  --bs-link-color-rgb:     2, 128, 144;
+  --bs-primary:            #028090;
+  --bs-primary-rgb:        2, 128, 144;
+  --bs-border-color:       #E8EDF2;
+  --bs-border-radius:      12px;
+  --bs-border-radius-sm:   6px;
+  --bs-border-radius-lg:   20px;
+  --bs-heading-color:      #0D1F35;
+  --bs-navbar-color:       rgba(255,255,255,0.75);
+  --bs-navbar-hover-color: #02C39A;
+  --bs-navbar-active-color:#02C39A;
+  --bs-navbar-bg:          #0D1F35;
 }
 
 *, *::before, *::after { box-sizing: border-box; }
@@ -58,7 +65,7 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
-/* ── NAVBAR ─────────────────────────────────────────────────────── */
+/* ── NAVBAR ──────────────────────────────────────────────────────── */
 .navbar {
   background: var(--navy) !important;
   border-bottom: 2px solid var(--teal);
@@ -88,8 +95,9 @@ body {
   background: rgba(2,195,154,0.1);
 }
 
-/* ── SIDEBAR ────────────────────────────────────────────────────── */
-.sidebar {
+/* ── SIDEBAR ─────────────────────────────────────────────────────── */
+.sidebar,
+#quarto-sidebar {
   background: var(--navy) !important;
   border-right: none !important;
   box-shadow: 4px 0 24px rgba(0,0,0,0.15);
@@ -104,22 +112,28 @@ body {
   text-decoration: none !important;
 }
 
+/* Part / section labels */
 .sidebar-item-section-toggle,
-.sidebar .sidebar-section > .sidebar-item-toggle-btn {
+.sidebar .sidebar-section > .sidebar-item-toggle-btn,
+.sidebar .sidebar-section .sidebar-section-item,
+.sidebar .part-title {
   font-size: 0.67rem !important;
   font-weight: 700 !important;
   letter-spacing: 2px !important;
   text-transform: uppercase !important;
-  color: rgba(255,255,255,0.35) !important;
+  color: rgba(255,255,255,0.38) !important;
   padding: 0.8rem 0.75rem 0.25rem !important;
   margin-top: 0.4rem;
 }
 
+/* Sidebar links — base */
 .sidebar-item a,
-.sidebar .chapter-title {
+.sidebar .chapter-title,
+.sidebar-item .sidebar-item-text,
+.sidebar-item a span {
   font-size: 0.84rem !important;
   font-weight: 400 !important;
-  color: rgba(255,255,255,0.62) !important;
+  color: rgba(255,255,255,0.70) !important;
   padding: 0.3rem 0.75rem !important;
   border-radius: var(--radius-sm);
   display: block;
@@ -128,30 +142,47 @@ body {
   border-left: 2px solid transparent;
 }
 
+/* Hover */
 .sidebar-item a:hover,
-.sidebar .chapter-title:hover {
+.sidebar .chapter-title:hover,
+.sidebar-item a:hover span,
+.sidebar-item a:hover .sidebar-item-text {
   color: var(--mint) !important;
   background: rgba(2,195,154,0.08);
   border-left-color: var(--teal);
 }
 
+/* Active */
 .sidebar-item.active > a,
 .sidebar .active > .chapter-title,
-.sidebar-item a.active {
+.sidebar-item a.active,
+.sidebar-item.active .sidebar-item-text,
+.sidebar-item.active a span {
   color: var(--mint) !important;
   font-weight: 600 !important;
   background: rgba(2,195,154,0.12);
   border-left: 2px solid var(--mint) !important;
 }
 
-#quarto-sidebar {
-  background-color: #0D1F35 !important;
-  background: #0D1F35 !important;
+/* ── TITLE BLOCK ─────────────────────────────────────────────────── */
+/*
+ * FIX: suppress the title block when it renders empty
+ * (e.g. on appendix pages that have no title/subtitle/author metadata)
+ */
+#title-block-header {
+  margin: 0 !important;
+  padding: 0 !important;
 }
 
-/* ── TITLE BLOCK ────────────────────────────────────────────────── */
+/* Hide the whole block when no h1.title child has content */
+#title-block-header:not(:has(.title:not(:empty))),
+.quarto-title-block:not(:has(.title:not(:empty))) {
+  display: none !important;
+}
+
+/* Normal styled title block (pages that DO have a title) */
 .quarto-title-block {
-  background: linear-gradient(135deg, var(--navy) 0%, #163050 60%, #1a3a5c 100%);
+  background: linear-gradient(135deg, var(--navy) 0%, var(--navy-mid) 60%, #1a3a5c 100%);
   color: white;
   padding: 3.5rem 3rem 2.5rem;
   margin: -1rem -1rem 2.5rem;
@@ -210,7 +241,12 @@ body {
   font-size: 0.88rem;
 }
 
-/* ── TYPOGRAPHY ─────────────────────────────────────────────────── */
+/* First content element shouldn't inherit orphaned top margin */
+#quarto-document-content > *:first-child {
+  margin-top: 0 !important;
+}
+
+/* ── TYPOGRAPHY ──────────────────────────────────────────────────── */
 h1 {
   font-family: 'Sora', sans-serif;
   font-size: 2rem;
@@ -280,14 +316,14 @@ a:hover {
 
 strong { font-weight: 700; color: var(--navy); }
 
-/* ── CODE ───────────────────────────────────────────────────────── */
+/* ── CODE ────────────────────────────────────────────────────────── */
 code {
   font-family: 'JetBrains Mono', monospace;
   font-size: 0.83em;
   color: var(--teal);
   background: rgba(2,128,144,0.10);
   padding: 0.15em 0.45em;
-  border-radius: 4px;
+  border-radius: var(--radius-xs);
   border: 1px solid rgba(2,128,144,0.15);
 }
 
@@ -307,6 +343,7 @@ pre code {
   font-size: 0.85em;
 }
 
+/* Code-fold toggle button */
 .code-fold-btn-container .btn {
   background: rgba(2,128,144,0.12);
   border: 1px solid rgba(2,128,144,0.25);
@@ -323,7 +360,56 @@ pre code {
   color: white;
 }
 
-/* ── TABLES ─────────────────────────────────────────────────────── */
+/* ── CODE TOOLS DROPDOWN ─────────────────────────────────────────── */
+/*
+ * FIX: style the button without overriding position/z-index/::after,
+ * which are required for Bootstrap's dropdown to function correctly.
+ */
+.code-tools-button {
+  background: rgba(2,128,144,0.12) !important;
+  border: 1px solid rgba(2,128,144,0.30) !important;
+  color: #028090 !important;
+  font-size: 0.78rem !important;
+  font-weight: 600 !important;
+  border-radius: var(--radius-sm) !important;
+  padding: 0.25rem 0.8rem !important;
+  transition: var(--transition) !important;
+  /* Do NOT touch position, z-index, or ::after — Bootstrap needs them */
+}
+
+.code-tools-button:hover,
+.code-tools-button:focus {
+  background: #028090 !important;
+  color: white !important;
+  border-color: #028090 !important;
+}
+
+/* Style the dropdown menu that appears */
+.code-tools-button ~ .dropdown-menu,
+div.sourceCode .dropdown-menu {
+  border: 1px solid rgba(2,128,144,0.20) !important;
+  border-radius: var(--radius-md) !important;
+  box-shadow: var(--shadow-md) !important;
+  background: white !important;
+  font-size: 0.82rem !important;
+  padding: 0.35rem 0 !important;
+  min-width: 160px !important;
+}
+
+.code-tools-button ~ .dropdown-menu .dropdown-item,
+div.sourceCode .dropdown-menu .dropdown-item {
+  color: var(--navy) !important;
+  padding: 0.4rem 1rem !important;
+  transition: var(--transition);
+}
+
+.code-tools-button ~ .dropdown-menu .dropdown-item:hover,
+div.sourceCode .dropdown-menu .dropdown-item:hover {
+  background: rgba(2,128,144,0.08) !important;
+  color: var(--teal) !important;
+}
+
+/* ── TABLES ──────────────────────────────────────────────────────── */
 .table-responsive {
   border-radius: var(--radius-md);
   overflow: hidden;
@@ -361,7 +447,7 @@ tbody tr:hover td { background: rgba(2,128,144,0.04); }
 tbody tr:last-child td { border-bottom: none; }
 tbody tr:nth-child(even) td { background: var(--cream); }
 
-/* ── CALLOUT BLOCKS ─────────────────────────────────────────────── */
+/* ── CALLOUT BLOCKS ──────────────────────────────────────────────── */
 .callout {
   border: none !important;
   border-radius: var(--radius-md) !important;
@@ -386,13 +472,13 @@ tbody tr:nth-child(even) td { background: var(--cream); }
   background: rgba(232,168,56,0.07) !important;
   border-left: 5px solid var(--gold) !important;
 }
-.callout-warning .callout-title { color: #b07c10 !important; }
+.callout-warning .callout-title { color: var(--gold-dark) !important; }
 
 .callout-tip {
   background: rgba(2,195,154,0.07) !important;
   border-left: 5px solid var(--mint) !important;
 }
-.callout-tip .callout-title { color: #019270 !important; }
+.callout-tip .callout-title { color: var(--mint-dark) !important; }
 
 .callout-title {
   font-family: 'Inter', sans-serif;
@@ -401,7 +487,7 @@ tbody tr:nth-child(even) td { background: var(--cream); }
   letter-spacing: 0.3px;
 }
 
-/* ── FIGURES ────────────────────────────────────────────────────── */
+/* ── FIGURES ─────────────────────────────────────────────────────── */
 .quarto-figure {
   margin: 2rem 0;
   border-radius: var(--radius-md);
@@ -419,7 +505,7 @@ figcaption {
   padding: 0 1rem;
 }
 
-/* ── TOC ────────────────────────────────────────────────────────── */
+/* ── TOC (margin sidebar) ────────────────────────────────────────── */
 #quarto-margin-sidebar { padding-top: 2rem; }
 
 #quarto-margin-sidebar .toc-title {
@@ -455,7 +541,7 @@ figcaption {
   border-left: 2px solid var(--teal) !important;
 }
 
-/* ── PAGE NAV ───────────────────────────────────────────────────── */
+/* ── PAGE NAVIGATION ─────────────────────────────────────────────── */
 .page-navigation {
   display: flex;
   gap: 1rem;
@@ -469,7 +555,7 @@ figcaption {
   flex-direction: column;
   padding: 1rem 1.25rem;
   background: white;
-  border: 1px solid var(--cream-dark);
+  border: 1px solid var(--cream-dark) !important;
   border-radius: var(--radius-md) !important;
   text-decoration: none !important;
   border-bottom: 1px solid var(--cream-dark) !important;
@@ -497,7 +583,7 @@ figcaption {
   margin-bottom: 0.2rem;
 }
 
-/* ── FOOTER ─────────────────────────────────────────────────────── */
+/* ── FOOTER ──────────────────────────────────────────────────────── */
 .nav-footer {
   background: var(--navy) !important;
   border-top: 2px solid var(--teal);
@@ -514,7 +600,7 @@ figcaption {
 
 .nav-footer a:hover { color: white !important; }
 
-/* ── BACK TO TOP ────────────────────────────────────────────────── */
+/* ── BACK TO TOP ─────────────────────────────────────────────────── */
 #quarto-back-to-top {
   background: var(--teal);
   color: white;
@@ -531,6 +617,7 @@ figcaption {
   transform: translateY(-3px);
 }
 
+/* ── DIVIDERS ────────────────────────────────────────────────────── */
 hr {
   border: none;
   height: 1px;
@@ -542,6 +629,7 @@ hr {
 /* ══════════════════════════════════════════════════════════════════
    UTILITY CLASSES
    Use in Quarto prose with div fences:
+
    ::: {.metric-row}
    ::: {.metric-card}
    [11.6%]{.metric-value}
@@ -550,10 +638,10 @@ hr {
    :::
    ══════════════════════════════════════════════════════════════════ */
 
-.hl-teal  { color: var(--teal);  font-weight: 700; }
-.hl-mint  { color: #019270;      font-weight: 700; }
-.hl-red   { color: var(--red);   font-weight: 700; }
-.hl-gold  { color: #b07c10;      font-weight: 700; }
+.hl-teal { color: var(--teal);     font-weight: 700; }
+.hl-mint { color: var(--mint-dark);font-weight: 700; }
+.hl-red  { color: var(--red);      font-weight: 700; }
+.hl-gold { color: var(--gold-dark);font-weight: 700; }
 
 .metric-row {
   display: grid;
@@ -603,7 +691,7 @@ hr {
   border-bottom: 1px solid var(--cream-dark);
 }
 
-/* ── RESPONSIVE ─────────────────────────────────────────────────── */
+/* ── RESPONSIVE ──────────────────────────────────────────────────── */
 @media (max-width: 991px) {
   .quarto-title-block { padding: 2rem 1.5rem; }
   .quarto-title-block .title { font-size: 1.8rem; }
@@ -614,80 +702,4 @@ hr {
 @media (max-width: 576px) {
   .metric-row { grid-template-columns: 1fr 1fr; }
   .metric-value { font-size: 1.6rem; }
-}
-
-/* ── FIX 1: Sidebar text legibility ────────────────────────────── */
-/* flatly uses --bs-body-color for sidebar links, overriding our color */
-.sidebar-item .sidebar-item-text,
-.sidebar-item .chapter-title,
-.sidebar-item a,
-.sidebar-item a span,
-.sidebar .sidebar-item-text {
-  color: rgba(255, 255, 255, 0.75) !important;
-}
-
-.sidebar-item a:hover span,
-.sidebar-item a:hover .sidebar-item-text {
-  color: var(--mint) !important;
-}
-
-.sidebar-item.active a span,
-.sidebar-item.active .sidebar-item-text {
-  color: var(--mint) !important;
-}
-
-/* Section part headers */
-.sidebar .sidebar-section .sidebar-section-item,
-.sidebar .part-title {
-  color: rgba(255, 255, 255, 0.38) !important;
-  font-size: 0.67rem !important;
-  font-weight: 700 !important;
-  letter-spacing: 2px !important;
-  text-transform: uppercase !important;
-}
-
-/* ── FIX 2: Empty space at top of content ───────────────────────── */
-/* The empty space is the quarto-title-block on pages with no title metadata */
-.quarto-title-block:empty,
-.quarto-title-block:not(:has(.title)) {
-  display: none;
-}
-
-/* For the case-study page which has a breadcrumb/subtitle but no full title */
-#title-block-header {
-  margin-bottom: 0 !important;
-  padding-bottom: 0 !important;
-}
-
-/* Remove empty top margin from first element in content */
-#quarto-content .quarto-title-block {
-  min-height: unset;
-}
-
-/* If the block is mostly empty (just the breadcrumb line), collapse it */
-.quarto-title-block .title:empty + * {
-  margin-top: 0;
-}
-/* ── FIX 3: Code source button ───────────────────────────────── */
-.code-tools-button {
-  cursor: pointer !important;
-  background: rgba(2,128,144,0.12) !important;
-  border: 1px solid rgba(2,128,144,0.3) !important;
-  color: #028090 !important;
-  font-size: 0.78rem !important;
-  font-weight: 600 !important;
-  border-radius: 6px !important;
-  padding: 0.25rem 0.8rem !important;
-  position: static !important;
-  z-index: 1 !important;
-  box-shadow: none !important;
-}
-
-.code-tools-button::after {
-  display: none !important;
-}
-
-.code-tools-button:hover {
-  background: #028090 !important;
-  color: white !important;
 }
