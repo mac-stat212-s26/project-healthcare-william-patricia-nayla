@@ -60,8 +60,9 @@ book:
 format:
   html:
     theme:
-      light: [flatly, style/custom.css]
-      dark:  [darkly, style/custom-dark.css]
+      light: flatly
+      dark: darkly
+      css: style/custom.css
     search: true
     toc: true
     toc-depth: 3
