@@ -32,7 +32,7 @@ book:
     title: "Oxymeter Equity"
     logo: assets/sidebar-logo.png
     logo-alt: "Undetected and Undertreated project logo"
-    collapse-level: 1       # only top-level parts collapse; chapters always show
+    collapse-level: 2
     style: "docked"
     pinned: true
     search: true
@@ -59,8 +59,10 @@ format:
       dark: darkly
     css: style/custom.css
     search: true
-    toc: false              # no right-side "On this page" panel
+    toc: true              # right-side "On this page" panel ON
     toc-depth: 3
+    toc-title: "On this page"
+    toc-expand: true
     link-external-newwindow: true
     link-external-icon: true
     fontsize: 1em
@@ -71,9 +73,9 @@ format:
     code-line-numbers: true
     code-block-bg: true
     code-block-border-left: "#028090"
-    code-tools: false       # no global Code ▾ dropdown
-    page-layout: article    # article gives proper sidebar+content layout
-    code-fold: show         # code visible by default; toggle to hide
+    code-tools: false      # no global Code ▾ dropdown button
+    page-layout: article   # standard sidebar + content + toc grid
+    code-fold: show        # code visible by default with toggle to hide
     number-sections: false
     fig-align: center
     fig-cap-location: bottom
