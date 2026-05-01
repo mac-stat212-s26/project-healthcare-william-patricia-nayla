@@ -133,12 +133,12 @@ div.code-tools-button .dropdown-menu .dropdown-item:hover,
  * code-fold: show renders <details open> around each chunk.
  * These rules ensure nothing in our CSS accidentally collapses them.
  */
+/* Keep Quarto code folding functional */
 details.code-fold {
-  display: block !important;
+  margin-bottom: 1rem;
 }
 
 details.code-fold > summary {
-  display: list-item !important;
   cursor: pointer;
   color: var(--teal);
   font-size: 0.78rem;
@@ -147,20 +147,18 @@ details.code-fold > summary {
   list-style: none;
 }
 
+details.code-fold > summary::-webkit-details-marker {
+  display: none;
+}
+
 details.code-fold > summary::before {
-  content: '▶ ';
-  font-size: 0.6em;
-  transition: var(--transition);
+  content: "▶ ";
+  font-size: 0.7em;
 }
 
 details.code-fold[open] > summary::before {
-  content: '▼ ';
+  content: "▼ ";
 }
-
-details.code-fold > :not(summary) {
-  display: block !important;
-}
-
 /* Sidebar hamburger / collapse toggle — hidden so sidebar stays open */
 #quarto-sidebar-toggle,
 .quarto-sidebar-toggle,

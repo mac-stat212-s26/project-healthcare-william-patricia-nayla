@@ -22,7 +22,7 @@ book:
     style: simple
 
   page-footer:
-    background: "dark"
+    background: dark
     left: |
       **Undetected & Undertreated** · COMP/STAT 212 · Macalester College · Spring 2026
     right: |
@@ -33,7 +33,7 @@ book:
     logo: assets/sidebar-logo.png
     logo-alt: "Undetected and Undertreated project logo"
     collapse-level: 2
-    style: "docked"
+    style: docked
     pinned: true
     search: true
 
@@ -58,24 +58,31 @@ format:
       light: flatly
       dark: darkly
     css: style/custom.css
+
     search: true
-    toc: true              # right-side "On this page" panel ON
+    toc: true
     toc-depth: 3
     toc-title: "On this page"
     toc-expand: true
+
+    page-layout: article
+    smooth-scroll: true
+    fontsize: 1em
+
     link-external-newwindow: true
     link-external-icon: true
-    fontsize: 1em
-    smooth-scroll: true
-    code-overflow: scroll
+
     code-copy: true
     code-link: true
     code-line-numbers: true
+    code-overflow: scroll
     code-block-bg: true
     code-block-border-left: "#028090"
-    code-tools: true       # page-level "Source" button — view full .qmd source
-    page-layout: article   # standard sidebar + content + toc grid
-    code-fold: show        # code visible by default with toggle to hide
+
+    code-tools: false
+    code-fold: true
+    code-summary: "Show Code"
+
     number-sections: false
     fig-align: center
     fig-cap-location: bottom
