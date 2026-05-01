@@ -38,15 +38,13 @@ book:
     search: true
 
   chapters:
+    - index.qmd
     - part: "Exploratory Data Analysis"
       chapters:
         - eda/eda-william_acosta.qmd
         - eda/eda-patricia.qmd
         - eda/eda-nayla_trigueros.qmd
-    - part: "Report"
-      chapters:
-        - index.qmd
-    - part: "🩺 Shiny App"
+    - part: "Shiny App"
       chapters:
         - appx/app.qmd
 
@@ -87,6 +85,7 @@ execute:
   warning: false
   error: false
   cache: false
+  freeze: auto
 
 editor:
   mode: source
