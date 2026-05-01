@@ -1,9 +1,7 @@
 project:
   type: book
   output-dir: docs
-
 number-depth: 2
-
 book:
   title: "Undetected & Undertreated"
   author:
@@ -15,28 +13,24 @@ book:
   reader-mode: false
   page-navigation: true
   back-to-top-navigation: true
-  favicon: assets/sidebar-logo.png
-
+  favicon: assets/logo.png
   cookie-consent:
     type: implied
     style: simple
-
   page-footer:
     background: dark
     left: |
       **Undetected & Undertreated** · COMP/STAT 212 · Macalester College · Spring 2026
     right: |
       Data: [OpenOximetry](https://physionet.org/content/openox-repo/1.1.1/) · [NY SPARCS](https://health.data.ny.gov/resource/tg3i-cinn.csv)
-
   sidebar:
     title: "Oxymeter Equity"
-    logo: assets/sidebar-logo.png
+    logo: assets/logo.png
     logo-alt: "Undetected and Undertreated project logo"
     collapse-level: 2
     style: docked
     pinned: true
     search: true
-
   chapters:
     - index.qmd
     - part: "Exploratory Data Analysis"
@@ -47,53 +41,43 @@ book:
     - part: "Shiny App"
       chapters:
         - appx/app.qmd
-
   appendices:
     - appx/proposal.qmd
     - appx/case-study.qmd
-
 format:
   html:
+    include-after-body: style/code-tools-fix.html
     theme:
       light: flatly
       dark: darkly
     css: style/custom.css
-
     search: true
     toc: true
     toc-depth: 3
     toc-title: "On this page"
     toc-expand: true
-
-    page-layout: article
+    page-layout: full
     smooth-scroll: true
     fontsize: 1em
-
     link-external-newwindow: true
     link-external-icon: true
-
     code-copy: true
-    code-link: true
     code-line-numbers: true
     code-overflow: scroll
     code-block-bg: true
     code-block-border-left: "#028090"
-
     code-tools: true
     code-fold: true
     code-summary: "Show Code"
-
     number-sections: false
     fig-align: center
     fig-cap-location: bottom
-
 execute:
   echo: true
   warning: false
   error: false
   cache: false
   freeze: auto
-
 editor:
   mode: source
   markdown:

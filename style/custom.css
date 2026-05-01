@@ -1,5 +1,7 @@
 /* ═══════════════════════════════════════════════════════════════════
-   UNDETECTED & UNDERTREATED — custom.css v5
+   UNDETECTED & UNDERTREATED — custom.css v6
+   Key fix: code-tools: true + code-fold: true (not show)
+   .code-tools-button selector wires up the global Code ▾ button
    ═══════════════════════════════════════════════════════════════════ */
 
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Sora:wght@400;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap');
@@ -64,76 +66,74 @@ body {
 }
 
 /* ═══════════════════════════════════════════════════════════════════
-   SUPPRESS ONLY: global Code ▾ dropdown (not the per-chunk toggle)
-   and the sidebar collapse toggle button
+   CODE TOOLS BUTTON  ← THE FIX
+   Quarto renders this as .code-tools-button inside the navbar.
+   Must be visible, styled, and pointer-events: auto.
+   Works because _quarto.yml now has code-fold: true (not show),
+   giving the button a real toggle action to perform.
    ═══════════════════════════════════════════════════════════════════ */
-
-/* ── CODE-TOOLS BUTTON ("Code ▾") ───────────────────────────────── */
-/*
- * Quarto renders this as a Bootstrap dropdown:
- *   <div class="code-tools-button dropdown">
- *     <button data-bs-toggle="dropdown">Code</button>
- *     <ul class="dropdown-menu">...</ul>
- *   </div>
- *
- * RULES:
- *  - Style only visual properties (color, bg, border, font)
- *  - NEVER touch position / z-index / display / ::after
- *    Bootstrap's dropdown JS depends on all of them
- */
-div.code-tools-button > .btn,
-.code-tools-button.dropdown > .btn,
-button.code-tools-button {
-  background: rgba(2,128,144,0.12) !important;
-  border: 1px solid rgba(2,128,144,0.30) !important;
-  color: #028090 !important;
-  font-size: 0.78rem !important;
-  font-weight: 600 !important;
-  border-radius: var(--radius-sm) !important;
-  padding: 0.25rem 0.85rem !important;
-  transition: var(--transition) !important;
+.code-tools-button {
+  display: inline-flex !important;
+  justify-content: center;
+  align-items: center;
+  padding: 0.25em 0.85em;
+  background: rgba(2,195,154,0.12);
+  border: 1px solid rgba(2,195,154,0.35);
+  color: var(--mint) !important;
+  border-radius: 1000px;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+  cursor: pointer;
+  transition: var(--transition);
+  text-decoration: none !important;
+  white-space: nowrap;
 }
 
-div.code-tools-button > .btn:hover,
-div.code-tools-button > .btn:focus,
-button.code-tools-button:hover {
-  background: #028090 !important;
-  color: white !important;
-  border-color: #028090 !important;
-}
-
-/* Dropdown panel */
-div.code-tools-button .dropdown-menu,
-.code-tools-button + .dropdown-menu,
-ul.dropdown-menu[aria-labelledby] {
-  border: 1px solid rgba(2,128,144,0.18) !important;
-  border-radius: var(--radius-md) !important;
-  box-shadow: var(--shadow-md) !important;
-  background: white !important;
-  font-size: 0.82rem !important;
-  padding: 0.3rem 0 !important;
-  min-width: 160px;
-}
-
-div.code-tools-button .dropdown-menu .dropdown-item,
-.code-tools-button + .dropdown-menu .dropdown-item {
+.code-tools-button:hover {
+  background: var(--mint);
   color: var(--navy) !important;
-  padding: 0.4rem 1rem !important;
-  font-weight: 400 !important;
+  border-color: var(--mint);
+  box-shadow: 0 0 20px rgba(2,195,154,0.40);
+  text-decoration: none !important;
 }
 
-div.code-tools-button .dropdown-menu .dropdown-item:hover,
-.code-tools-button + .dropdown-menu .dropdown-item:hover {
-  background: rgba(2,128,144,0.08) !important;
-  color: var(--teal) !important;
+/* Dropdown menu spawned by the code-tools button */
+.code-tools-button + .dropdown-menu,
+.dropdown-menu[aria-labelledby="quarto-code-tools-menu"] {
+  background: var(--navy) !important;
+  border: 1px solid rgba(2,195,154,0.25) !important;
+  border-radius: var(--radius-md) !important;
+  box-shadow: var(--shadow-lg) !important;
+  min-width: 160px;
+  z-index: 9999 !important;
 }
 
-/* ── CODE CHUNK VISIBILITY ───────────────────────────────────────── */
-/*
- * code-fold: show renders <details open> around each chunk.
- * These rules ensure nothing in our CSS accidentally collapses them.
- */
-/* Keep Quarto code folding functional */
+.code-tools-button + .dropdown-menu .dropdown-item,
+.dropdown-menu[aria-labelledby="quarto-code-tools-menu"] .dropdown-item {
+  color: rgba(255,255,255,0.80) !important;
+  font-size: 0.83rem !important;
+  font-weight: 500 !important;
+  padding: 0.45rem 1rem !important;
+  transition: var(--transition);
+}
+
+.code-tools-button + .dropdown-menu .dropdown-item:hover,
+.dropdown-menu[aria-labelledby="quarto-code-tools-menu"] .dropdown-item:hover {
+  background: rgba(2,195,154,0.15) !important;
+  color: var(--mint) !important;
+}
+
+/* ── SIDEBAR COLLAPSE TOGGLE — keep hidden ───────────────────────── */
+#quarto-sidebar-toggle,
+.quarto-sidebar-toggle,
+button.sidebar-toggle,
+#sidebar-toggle {
+  display: none !important;
+}
+
+/* ── PER-CHUNK FOLD TOGGLE ───────────────────────────────────────── */
 details.code-fold {
   margin-bottom: 1rem;
 }
@@ -147,9 +147,7 @@ details.code-fold > summary {
   list-style: none;
 }
 
-details.code-fold > summary::-webkit-details-marker {
-  display: none;
-}
+details.code-fold > summary::-webkit-details-marker { display: none; }
 
 details.code-fold > summary::before {
   content: "▶ ";
@@ -159,12 +157,35 @@ details.code-fold > summary::before {
 details.code-fold[open] > summary::before {
   content: "▼ ";
 }
-/* Sidebar hamburger / collapse toggle — hidden so sidebar stays open */
-#quarto-sidebar-toggle,
-.quarto-sidebar-toggle,
-button.sidebar-toggle,
-#sidebar-toggle {
-  display: none !important;
+
+.code-fold-btn-container {
+  display: flex !important;
+  margin-bottom: 0.4rem;
+}
+
+.code-fold-btn-container .btn,
+.quarto-code-fold-btn {
+  display: inline-flex !important;
+  align-items: center;
+  gap: 0.3rem;
+  background: rgba(2,128,144,0.10) !important;
+  border: 1px solid rgba(2,128,144,0.25) !important;
+  color: var(--teal) !important;
+  font-family: 'Inter', sans-serif !important;
+  font-size: 0.78rem !important;
+  font-weight: 600 !important;
+  border-radius: var(--radius-sm) !important;
+  padding: 0.22rem 0.75rem !important;
+  cursor: pointer !important;
+  transition: var(--transition) !important;
+  box-shadow: none !important;
+}
+
+.code-fold-btn-container .btn:hover,
+.quarto-code-fold-btn:hover {
+  background: var(--teal) !important;
+  color: white !important;
+  border-color: var(--teal) !important;
 }
 
 /* ── NAVBAR ──────────────────────────────────────────────────────── */
@@ -205,7 +226,6 @@ button.sidebar-toggle,
   box-shadow: 4px 0 24px rgba(0,0,0,0.15);
 }
 
-/* Keep sidebar visible on desktop — no collapse */
 @media (min-width: 992px) {
   #quarto-sidebar {
     display: flex !important;
@@ -224,7 +244,6 @@ button.sidebar-toggle,
   text-decoration: none !important;
 }
 
-/* Part / section labels */
 .sidebar-item-section-toggle,
 .sidebar .sidebar-section > .sidebar-item-toggle-btn,
 .sidebar .sidebar-section .sidebar-section-item,
@@ -238,7 +257,6 @@ button.sidebar-toggle,
   margin-top: 0.4rem;
 }
 
-/* Sidebar links — base */
 .sidebar-item a,
 .sidebar .chapter-title,
 .sidebar-item .sidebar-item-text,
@@ -254,7 +272,6 @@ button.sidebar-toggle,
   border-left: 2px solid transparent;
 }
 
-/* Hover */
 .sidebar-item a:hover,
 .sidebar .chapter-title:hover,
 .sidebar-item a:hover span,
@@ -264,7 +281,6 @@ button.sidebar-toggle,
   border-left-color: var(--teal);
 }
 
-/* Active */
 .sidebar-item.active > a,
 .sidebar .active > .chapter-title,
 .sidebar-item a.active,
@@ -276,18 +292,12 @@ button.sidebar-toggle,
   border-left: 2px solid var(--mint) !important;
 }
 
-/* ── RIGHT TOC SIDEBAR ("On this page") ──────────────────────────── */
-/*
- * Always visible, never collapsed.
- * flatly overrides link colors via Bootstrap vars — need !important
- * on every color, font-size, and border property to win the cascade.
- */
+/* ── RIGHT TOC ───────────────────────────────────────────────────── */
 #quarto-margin-sidebar {
   padding-top: 1.5rem !important;
   background: transparent !important;
 }
 
-/* "On this page" heading */
 #quarto-margin-sidebar .toc-title,
 #quarto-margin-sidebar p.sidebar-title,
 nav[role="doc-toc"] .toc-title {
@@ -299,7 +309,6 @@ nav[role="doc-toc"] .toc-title {
   margin-bottom: 0.6rem !important;
 }
 
-/* All TOC links — dark enough to read on cream background */
 #quarto-margin-sidebar a,
 nav[role="doc-toc"] a {
   color: var(--navy) !important;
@@ -322,7 +331,6 @@ nav[role="doc-toc"] a:hover {
   border-left-color: var(--teal) !important;
 }
 
-/* Active / in-viewport section */
 #quarto-margin-sidebar .toc-active > a,
 #quarto-margin-sidebar li.active > a,
 nav[role="doc-toc"] .active > a {
@@ -332,7 +340,6 @@ nav[role="doc-toc"] .active > a {
   background: rgba(2,128,144,0.06) !important;
 }
 
-/* Nested h3 entries — slightly indented and lighter */
 #quarto-margin-sidebar ul ul a,
 nav[role="doc-toc"] ul ul a {
   font-size: 0.75rem !important;
@@ -346,8 +353,6 @@ nav[role="doc-toc"] ul ul a:hover {
 }
 
 /* ── TITLE BLOCK ─────────────────────────────────────────────────── */
-
-/* Suppress on pages with no real title */
 #title-block-header:not(:has(.title:not(:empty))),
 .quarto-title-block:not(:has(.title:not(:empty))) {
   display: none !important;
@@ -379,7 +384,6 @@ nav[role="doc-toc"] ul ul a:hover {
   pointer-events: none;
 }
 
-/* Strip h1 border-bottom / padding that bleeds into the title banner */
 .quarto-title-block h1,
 .quarto-title-block h1.title,
 #title-block-header h1,
@@ -526,41 +530,6 @@ pre code {
   border: none;
   padding: 0;
   font-size: 0.85em;
-}
-
-/*
- * PER-CHUNK FOLD TOGGLE ("▶ Show code" / "▼ Hide code")
- * This is DIFFERENT from the global Code ▾ dropdown (which is hidden above).
- * Must stay visible and clickable.
- */
-.code-fold-btn-container {
-  display: flex !important;
-  margin-bottom: 0.4rem;
-}
-
-.code-fold-btn-container .btn,
-.quarto-code-fold-btn {
-  display: inline-flex !important;
-  align-items: center;
-  gap: 0.3rem;
-  background: rgba(2,128,144,0.10) !important;
-  border: 1px solid rgba(2,128,144,0.25) !important;
-  color: var(--teal) !important;
-  font-family: 'Inter', sans-serif !important;
-  font-size: 0.78rem !important;
-  font-weight: 600 !important;
-  border-radius: var(--radius-sm) !important;
-  padding: 0.22rem 0.75rem !important;
-  cursor: pointer !important;
-  transition: var(--transition) !important;
-  box-shadow: none !important;
-}
-
-.code-fold-btn-container .btn:hover,
-.quarto-code-fold-btn:hover {
-  background: var(--teal) !important;
-  color: white !important;
-  border-color: var(--teal) !important;
 }
 
 /* ── TABLES ──────────────────────────────────────────────────────── */
@@ -799,6 +768,15 @@ hr {
   margin-bottom: 2rem;
   padding-bottom: 1.5rem;
   border-bottom: 1px solid var(--cream-dark);
+}
+
+/* ── FIX: code-tools dropdown clips behind title block ──────────── */
+.quarto-title-block {
+  overflow: visible !important;
+}
+
+.dropdown-menu.show {
+  z-index: 9999 !important;
 }
 
 /* ── RESPONSIVE ──────────────────────────────────────────────────── */
