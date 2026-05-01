@@ -1,95 +1,73 @@
-# Creating Quarto Book
-# https://quarto.org/docs/books/
-#
-# options for Quarto book
-# https://quarto.org/docs/reference/projects/books.html
-#
-# Options for html
-# https://quarto.org/docs/reference/projects/websites.html#section
-
 project:
   type: book
   output-dir: docs
-  # resources:  # in case something was not included in rendered site automatically
-  #   - "data/*"
-  #   - "images/*"
-
-
 
 number-depth: 2
 
-
-
 book:
-  title: "Oxymeter Equity"
-  author: ["WA","PE", "NT"]
-  date: today  # use today to update date published based on last time project was edited
+  title: "Undetected & Undertreated"
+  author:
+    - name: "William Acosta Lora"
+    - name: "Patricia Escobar Contreras"
+    - name: "Nayla Trigueros Ortiz"
+  date: today
   date-format: full
-  # favicon: path/to/favorite-logo.png
   reader-mode: true
-  # site-url: https://site-url
   page-navigation: true
   back-to-top-navigation: true
+  favicon: assets/sidebar-logo.png
+
   cookie-consent:
     type: implied
     style: simple
-  # bread-crumbs: true  # causes problems with older Quarto version
-  # downloads: [pdf]
-  # repo-url: https://repo-url
-  # repo-actions: [edit, issue]
-  # repo-link-target: "_blank" #makes issue and edit links open in a new window/tab
 
-  # page-footer:
-    # background: "dark"
-    # left: |
-      # footer text
+  page-footer:
+    background: "dark"
+    left: |
+      **Undetected & Undertreated** · COMP/STAT 212 · Macalester College · Spring 2026
+    right: |
+      Data: [OpenOximetry](https://physionet.org/content/openox-repo/1.1.1/) · [NY SPARCS](https://health.data.ny.gov/resource/tg3i-cinn.csv)
 
   sidebar:
     title: "Oxymeter Equity"
     logo: assets/sidebar-logo.png
-    logo-alt: "Random negative space illustration"
+    logo-alt: "Undetected and Undertreated project logo"
     collapse-level: 2
     style: "docked"
     pinned: true
     search: true
-    # tools:
-    #   - icon: "filetype-doc"
-    #     href: "https://link-to-tool"
 
   chapters:
-    - index.qmd
-
-    - part: "EDA"
+    - part: "Exploratory Data Analysis"
       chapters:
         - eda/eda-william_acosta.qmd
         - eda/eda-patricia.qmd
         - eda/eda-nayla_trigueros.qmd
-
+    - part: "Report"
+      chapters:
+        - - index.qmd
     - part: "Shiny App"
       chapters:
         - appx/app.qmd
 
   appendices:
-  - appx/proposal.qmd
-  - appx/case-study.qmd
-  - wa/wa-member1.qmd
-  - wa/wa-member2.qmd
-  - wa/wa-member3.qmd
-
-
-
-
+    - appx/proposal.qmd
+    - appx/case-study.qmd
+    - wa/wa-member1.qmd
+    - wa/wa-member2.qmd
+    - wa/wa-member3.qmd
 
 format:
   html:
-    theme: # bootswatch themes--other options https://bootswatch.com/
-      light: flatly
-      dark: darkly
+    theme:
+      light: [flatly, style/custom.css]
+      dark:  [darkly, style/custom-dark.css]
     search: true
     toc: true
     toc-depth: 3
+    toc-title: "On this page"
     link-external-newwindow: true
-    css: style/custom.css
+    link-external-icon: true
     fontsize: 1em
     smooth-scroll: true
     code-overflow: scroll
@@ -97,33 +75,22 @@ format:
     code-link: true
     code-line-numbers: true
     code-block-bg: true
-    code-block-border-left: "#1482FA"
+    code-block-border-left: "#028090"
     code-tools: true
     page-layout: full
     code-fold: true
     number-sections: false
     toc-expand: true
-    # grid:
-    #   sidebar-width: 200px
-    #   body-width: 950px
-    #   margin-width: 150px
-
-  # pdf:
-  #   documentclass: scrreprt
-  #   keep-tex: false
-
-
+    fig-align: center
+    fig-cap-location: bottom
 
 execute:
   echo: true
   warning: false
   error: false
   cache: false
-#   freeze: auto # remove when using GitHub action to execute code
-
-
 
 editor:
   mode: source
   markdown:
-    wrap: sentence # Forces each sentence to be on its own line in source markdown, however, it doesn't affect how it is rendered
+    wrap: sentence
