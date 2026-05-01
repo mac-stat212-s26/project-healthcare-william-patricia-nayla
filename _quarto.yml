@@ -12,7 +12,7 @@ book:
     - name: "Nayla Trigueros Ortiz"
   date: today
   date-format: full
-  reader-mode: true
+  reader-mode: false
   page-navigation: true
   back-to-top-navigation: true
   favicon: assets/sidebar-logo.png
@@ -32,7 +32,7 @@ book:
     title: "Oxymeter Equity"
     logo: assets/sidebar-logo.png
     logo-alt: "Undetected and Undertreated project logo"
-    collapse-level: 2
+    collapse-level: 1       # only top-level parts collapse; chapters always show
     style: "docked"
     pinned: true
     search: true
@@ -59,9 +59,8 @@ format:
       dark: darkly
     css: style/custom.css
     search: true
-    toc: false
+    toc: false              # no right-side "On this page" panel
     toc-depth: 3
-    toc-title: "On this page"
     link-external-newwindow: true
     link-external-icon: true
     fontsize: 1em
@@ -72,11 +71,10 @@ format:
     code-line-numbers: true
     code-block-bg: true
     code-block-border-left: "#028090"
-    code-tools: false
-    page-layout: full
-    code-fold: true
+    code-tools: false       # no global Code ▾ dropdown
+    page-layout: article    # article gives proper sidebar+content layout
+    code-fold: show         # code visible by default; toggle to hide
     number-sections: false
-    toc-expand: true
     fig-align: center
     fig-cap-location: bottom
 
