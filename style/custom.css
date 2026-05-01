@@ -593,3 +593,86 @@ hr {
   .metric-row { grid-template-columns: 1fr 1fr; }
   .metric-value { font-size: 1.6rem; }
 }
+
+/* ── FIX 1: Sidebar text legibility ────────────────────────────── */
+/* flatly uses --bs-body-color for sidebar links, overriding our color */
+.sidebar-item .sidebar-item-text,
+.sidebar-item .chapter-title,
+.sidebar-item a,
+.sidebar-item a span,
+.sidebar .sidebar-item-text {
+  color: rgba(255, 255, 255, 0.75) !important;
+}
+
+.sidebar-item a:hover span,
+.sidebar-item a:hover .sidebar-item-text {
+  color: var(--mint) !important;
+}
+
+.sidebar-item.active a span,
+.sidebar-item.active .sidebar-item-text {
+  color: var(--mint) !important;
+}
+
+/* Section part headers */
+.sidebar .sidebar-section .sidebar-section-item,
+.sidebar .part-title {
+  color: rgba(255, 255, 255, 0.38) !important;
+  font-size: 0.67rem !important;
+  font-weight: 700 !important;
+  letter-spacing: 2px !important;
+  text-transform: uppercase !important;
+}
+
+/* ── FIX 2: Empty space at top of content ───────────────────────── */
+/* The empty space is the quarto-title-block on pages with no title metadata */
+.quarto-title-block:empty,
+.quarto-title-block:not(:has(.title)) {
+  display: none;
+}
+
+/* For the case-study page which has a breadcrumb/subtitle but no full title */
+#title-block-header {
+  margin-bottom: 0 !important;
+  padding-bottom: 0 !important;
+}
+
+/* Remove empty top margin from first element in content */
+#quarto-content .quarto-title-block {
+  min-height: unset;
+}
+
+/* If the block is mostly empty (just the breadcrumb line), collapse it */
+.quarto-title-block .title:empty + * {
+  margin-top: 0;
+}
+
+/* ── FIX 3: Code source button ──────────────────────────────────── */
+/* The old custom.css had a .code-tools-button style that broke the button */
+.code-tools-button {
+  all: unset !important;
+  cursor: pointer !important;
+  background: rgba(2,128,144,0.12) !important;
+  border: 1px solid rgba(2,128,144,0.3) !important;
+  color: var(--teal) !important;
+  font-size: 0.78rem !important;
+  font-weight: 600 !important;
+  border-radius: var(--radius-sm) !important;
+  padding: 0.25rem 0.8rem !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 0.3rem !important;
+  transition: var(--transition) !important;
+  position: relative !important;
+  z-index: auto !important;
+}
+
+.code-tools-button::after {
+  display: none !important;
+}
+
+.code-tools-button:hover {
+  background: var(--teal) !important;
+  color: white !important;
+  box-shadow: var(--shadow-sm) !important;
+}
