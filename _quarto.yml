@@ -59,7 +59,7 @@ format:
       dark: darkly
     css: style/custom.css
     search: true
-    toc: true
+    toc: false
     toc-depth: 3
     toc-title: "On this page"
     link-external-newwindow: true
@@ -72,7 +72,7 @@ format:
     code-line-numbers: true
     code-block-bg: true
     code-block-border-left: "#028090"
-    code-tools: true
+    code-tools: false
     page-layout: full
     code-fold: true
     number-sections: false
