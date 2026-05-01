@@ -23,41 +23,6 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-/* CSS for syntax highlighting */
-html { -webkit-text-size-adjust: 100%; }
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-  }
-pre.numberSource { margin-left: 3em;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
-}
 </style>
 
 
@@ -417,29 +382,19 @@ cookieconsent.run({
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active" data-toc-expanded="99">
-    <h2 id="toc-title">On this page</h2>
-   
-  <ul>
-  <li><a href="#overview" id="toc-overview" class="nav-link active" data-scroll-target="#overview">Overview</a></li>
-  <li><a href="#story-structure" id="toc-story-structure" class="nav-link" data-scroll-target="#story-structure">Story Structure</a></li>
-  <li><a href="#key-takeaways-for-data-storytelling" id="toc-key-takeaways-for-data-storytelling" class="nav-link" data-scroll-target="#key-takeaways-for-data-storytelling">Key Takeaways for Data Storytelling</a></li>
-  </ul>
-</nav>
-    </div>
+    
 <!-- main -->
-<main class="content column-body" id="quarto-document-content">
+<main class="content column-page-right" id="quarto-document-content">
 
 
 <header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../appx/proposal.html">Appendices</a></li><li class="breadcrumb-item"><a href="../appx/case-study.html"><span class="chapter-title">Case Study: <em>Twin Cities Police Use Physical Force at Rates Well Above National Average</em></span></a></li></ol></nav>
 <div class="quarto-title">
-<div class="quarto-title-block"><div><h1 class="title">Appendix B — Case Study: <em>Twin Cities Police Use Physical Force at Rates Well Above National Average</em></h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> Code</button></div></div>
+<h1 class="title">Appendix B — Case Study: <em>Twin Cities Police Use Physical Force at Rates Well Above National Average</em></h1>
 </div>
 
 
 
-<div class="quarto-title-meta column-body">
+<div class="quarto-title-meta column-page-right">
 
     
   
@@ -491,8 +446,6 @@ The final substantive paragraph reports that MPD used force against Black reside
 <li>Let the racial disparity land last. Structurally, saving the most consequential finding for the end gives the piece rhetorical weight and a clear moral conclusion.</li>
 </ul>
 
-
-<!-- -->
 
 </section>
 
@@ -580,57 +533,6 @@ The final substantive paragraph reports that MPD used force against Black reside
         container: window.document.getElementById('quarto-embedded-source-code-modal')
       });
       clipboardModal.on('success', onCopySuccess);
-    }
-    const viewSource = window.document.getElementById('quarto-view-source') ||
-                       window.document.getElementById('quarto-code-tools-source');
-    if (viewSource) {
-      const sourceUrl = viewSource.getAttribute("data-quarto-source-url");
-      viewSource.addEventListener("click", function(e) {
-        if (sourceUrl) {
-          // rstudio viewer pane
-          if (/\bcapabilities=\b/.test(window.location)) {
-            window.open(sourceUrl);
-          } else {
-            window.location.href = sourceUrl;
-          }
-        } else {
-          const modal = new bootstrap.Modal(document.getElementById('quarto-embedded-source-code-modal'));
-          modal.show();
-        }
-        return false;
-      });
-    }
-    function toggleCodeHandler(show) {
-      return function(e) {
-        const detailsSrc = window.document.querySelectorAll(".cell > details > .sourceCode");
-        for (let i=0; i<detailsSrc.length; i++) {
-          const details = detailsSrc[i].parentElement;
-          if (show) {
-            details.open = true;
-          } else {
-            details.removeAttribute("open");
-          }
-        }
-        const cellCodeDivs = window.document.querySelectorAll(".cell > .sourceCode");
-        const fromCls = show ? "hidden" : "unhidden";
-        const toCls = show ? "unhidden" : "hidden";
-        for (let i=0; i<cellCodeDivs.length; i++) {
-          const codeDiv = cellCodeDivs[i];
-          if (codeDiv.classList.contains(fromCls)) {
-            codeDiv.classList.remove(fromCls);
-            codeDiv.classList.add(toCls);
-          } 
-        }
-        return false;
-      }
-    }
-    const hideAllCode = window.document.getElementById("quarto-hide-all-code");
-    if (hideAllCode) {
-      hideAllCode.addEventListener("click", toggleCodeHandler(false));
-    }
-    const showAllCode = window.document.getElementById("quarto-show-all-code");
-    if (showAllCode) {
-      showAllCode.addEventListener("click", toggleCodeHandler(true));
     }
       var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
       var mailtoRegex = new RegExp(/^mailto:/);
@@ -968,7 +870,7 @@ The final substantive paragraph reports that MPD used force against Black reside
     }
   });
   </script>
-<nav class="page-navigation column-body">
+<nav class="page-navigation column-page-right">
   <div class="nav-page nav-page-previous">
       <a href="../appx/proposal.html" class="pagination-link" aria-label="Project Proposal">
         <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-title">Project Proposal</span></span>
@@ -976,56 +878,7 @@ The final substantive paragraph reports that MPD used force against Black reside
   </div>
   <div class="nav-page nav-page-next">
   </div>
-</nav><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1" data-shortcodes="false"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb1-1"><a href="#cb1-1"></a><span class="fu"># Case Study: *Twin Cities Police Use Physical Force at Rates Well Above National Average*</span></span>
-<span id="cb1-2"><a href="#cb1-2"></a></span>
-<span id="cb1-3"><a href="#cb1-3"></a> Source:  Christopher Ingraham, *Minnesota Reformer*, August 28, 2024.  </span>
-<span id="cb1-4"><a href="#cb1-4"></a> URL:  <span class="ot">&lt;https://minnesotareformer.com/2024/08/28/twin-cities-police-use-physical-force-at-rates-well-above-national-average/&gt;</span></span>
-<span id="cb1-5"><a href="#cb1-5"></a></span>
-<span id="cb1-6"><a href="#cb1-6"></a>---</span>
-<span id="cb1-7"><a href="#cb1-7"></a></span>
-<span id="cb1-8"><a href="#cb1-8"></a><span class="fu">## Overview</span></span>
-<span id="cb1-9"><a href="#cb1-9"></a></span>
-<span id="cb1-10"><a href="#cb1-10"></a>This piece by data journalist Christopher Ingraham is a compact but well-structured example of local data journalism. It uses a single external dataset, compiled by the nonprofit Mapping Police Violence via public records requests, to tell a story about policing patterns in Minneapolis and St. Paul. The report is worth studying for how efficiently it moves from data release to civic implication with minimal word count.</span>
-<span id="cb1-11"><a href="#cb1-11"></a></span>
-<span id="cb1-12"><a href="#cb1-12"></a>---</span>
-<span id="cb1-13"><a href="#cb1-13"></a></span>
-<span id="cb1-14"><a href="#cb1-14"></a><span class="fu">## Story Structure</span></span>
-<span id="cb1-15"><a href="#cb1-15"></a></span>
-<span id="cb1-16"><a href="#cb1-16"></a><span class="ss"> 1. </span>Lead with the headline number.   </span>
-<span id="cb1-17"><a href="#cb1-17"></a>The piece opens by anchoring readers immediately in a concrete, surprising figure: MPD officers used physical force more than 1,000 times in 2022, placing Minneapolis among the highest per-capita rates in the nation. This is a classic data journalism hook — one number that earns the reader's attention before any context is given.</span>
-<span id="cb1-18"><a href="#cb1-18"></a></span>
-<span id="cb1-19"><a href="#cb1-19"></a><span class="ss"> 2. </span>Widen the frame with comparison.   </span>
-<span id="cb1-20"><a href="#cb1-20"></a>The story immediately zooms out to include St. Paul, showing that use-of-force roughly doubled there between 2018 and 2022. By the second paragraph, the reader understands this is not just a Minneapolis story. The national ranking (third and fourth among cities over 100,000 residents) gives a comparative anchor that makes the local numbers feel legible and significant.</span>
-<span id="cb1-21"><a href="#cb1-21"></a></span>
-<span id="cb1-22"><a href="#cb1-22"></a><span class="ss"> 3. </span>Establish data provenance and limitations.   </span>
-<span id="cb1-23"><a href="#cb1-23"></a>Before going further, Ingraham explains where the data came from (Mapping Police Violence, via public records), how "use of force" is defined, and importantly, what makes cross-department comparisons difficult. This transparency is a hallmark of responsible data journalism — it builds credibility and preempts the most obvious reader objections.</span>
-<span id="cb1-24"><a href="#cb1-24"></a></span>
-<span id="cb1-25"><a href="#cb1-25"></a><span class="ss"> 4. </span>Contextualize with national scope.   </span>
-<span id="cb1-26"><a href="#cb1-26"></a>A brief national-scale figure (roughly 300,000 force incidents per year nationally) situates the Twin Cities data within a broader pattern. The report also incorporates a DOJ statistic about the share of incidents that produce injuries and the share involving unarmed suspects, which reframes the data from administrative record-keeping into a human rights story.</span>
-<span id="cb1-27"><a href="#cb1-27"></a></span>
-<span id="cb1-28"><a href="#cb1-28"></a><span class="ss"> 5. </span>Layer in institutional accountability.   </span>
-<span id="cb1-29"><a href="#cb1-29"></a>The piece then introduces the 2023 DOJ civil rights report on MPD, which found that officers used excessive force, targeted people for petty or no crimes, and punished people for exercising legal rights. This section transitions the story from descriptive statistics to documented institutional failure, giving the numbers moral and legal weight.</span>
-<span id="cb1-30"><a href="#cb1-30"></a></span>
-<span id="cb1-31"><a href="#cb1-31"></a><span class="ss"> 6. </span>Drill into specific trends within the data.   </span>
-<span id="cb1-32"><a href="#cb1-32"></a>Rather than leaving the data abstract, the story highlights specific weapon-use trends: baton incidents increased from 10 in 2019 to 78 in 2021; Taser use rose from 78 to 108 incidents. This granularity gives readers a more textured picture than a single summary statistic would.</span>
-<span id="cb1-33"><a href="#cb1-33"></a></span>
-<span id="cb1-34"><a href="#cb1-34"></a><span class="ss"> 7. </span>Surface the outlier.   </span>
-<span id="cb1-35"><a href="#cb1-35"></a>St. Cloud's use-of-force rate is mentioned as even higher than the Twin Cities on a per-capita basis (more than twice as often), but excluded from the main rankings due to population. This is a good structural move: it acknowledges a complicating data point without letting it derail the main narrative, and it demonstrates analytical honesty.</span>
-<span id="cb1-36"><a href="#cb1-36"></a></span>
-<span id="cb1-37"><a href="#cb1-37"></a><span class="ss"> 8. </span>Close with the racial disparity finding.   </span>
-<span id="cb1-38"><a href="#cb1-38"></a>The final substantive paragraph reports that MPD used force against Black residents more than eight times as often as against white residents. Ending here is a deliberate editorial choice — it reframes the entire piece around equity and leaves the reader with the most politically and ethically charged finding.</span>
-<span id="cb1-39"><a href="#cb1-39"></a></span>
-<span id="cb1-40"><a href="#cb1-40"></a>---</span>
-<span id="cb1-41"><a href="#cb1-41"></a></span>
-<span id="cb1-42"><a href="#cb1-42"></a><span class="fu">## Key Takeaways for Data Storytelling</span></span>
-<span id="cb1-43"><a href="#cb1-43"></a></span>
-<span id="cb1-44"><a href="#cb1-44"></a><span class="ss">-  </span>Lead with one specific, surprising number.  The 1,000+ incidents figure immediately earns attention without requiring context first.</span>
-<span id="cb1-45"><a href="#cb1-45"></a><span class="ss">-  </span>Use rankings and comparisons to make local data feel significant.  Third and fourth in the nation is more meaningful than a raw per-capita rate.</span>
-<span id="cb1-46"><a href="#cb1-46"></a><span class="ss">-  </span>Acknowledge methodological limits early.  Ingraham addresses data comparability issues before the reader can use them to dismiss the findings.</span>
-<span id="cb1-47"><a href="#cb1-47"></a><span class="ss">-  </span>Layer context progressively.  The story moves from local → national → institutional → granular → equity, each layer adding a different kind of meaning to the same dataset.</span>
-<span id="cb1-48"><a href="#cb1-48"></a><span class="ss">-  </span>Let the racial disparity land last.  Structurally, saving the most consequential finding for the end gives the piece rhetorical weight and a clear moral conclusion.</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
-</div></div></div></div></div>
+</nav>
 </div> <!-- /content -->
 <footer class="footer">
   <div class="nav-footer">

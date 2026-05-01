@@ -1,57 +1,55 @@
 /* ═══════════════════════════════════════════════════════════════════
-   UNDETECTED & UNDERTREATED — Complete Style Overhaul v2
-   Fixes: empty title-block space, code-tools dropdown, legibility
+   UNDETECTED & UNDERTREATED — custom.css v3
    ═══════════════════════════════════════════════════════════════════ */
 
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Sora:wght@400;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap');
 
 /* ── DESIGN TOKENS ───────────────────────────────────────────────── */
 :root {
-  --navy:          #0D1F35;
-  --navy-soft:     #132030;
-  --navy-mid:      #163050;
-  --teal:          #028090;
-  --teal-light:    #03A0B3;
-  --mint:          #02C39A;
-  --mint-dark:     #019270;
-  --cream:         #F4F7F9;
-  --cream-dark:    #E8EDF2;
-  --red:           #D94F3D;
-  --gold:          #E8A838;
-  --gold-dark:     #b07c10;
-  --gray:          #64748B;
-  --gray-light:    #94A3B8;
-  --white:         #ffffff;
+  --navy:       #0D1F35;
+  --navy-mid:   #163050;
+  --teal:       #028090;
+  --teal-light: #03A0B3;
+  --mint:       #02C39A;
+  --mint-dark:  #019270;
+  --cream:      #F4F7F9;
+  --cream-dark: #E8EDF2;
+  --red:        #D94F3D;
+  --gold:       #E8A838;
+  --gold-dark:  #b07c10;
+  --gray:       #64748B;
+  --gray-light: #94A3B8;
+  --white:      #ffffff;
 
-  --radius-xs:  4px;
-  --radius-sm:  6px;
-  --radius-md:  12px;
-  --radius-lg:  20px;
+  --radius-xs: 4px;
+  --radius-sm: 6px;
+  --radius-md: 12px;
+  --radius-lg: 20px;
 
-  --shadow-sm:  0 2px 8px  rgba(13,31,53,0.08);
-  --shadow-md:  0 6px 24px rgba(13,31,53,0.12);
-  --shadow-lg:  0 16px 48px rgba(13,31,53,0.16);
+  --shadow-sm: 0 2px 8px  rgba(13,31,53,0.08);
+  --shadow-md: 0 6px 24px rgba(13,31,53,0.12);
+  --shadow-lg: 0 16px 48px rgba(13,31,53,0.16);
 
-  --transition: all 0.22s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition: all 0.22s cubic-bezier(0.4,0,0.2,1);
 
-  /* Bootstrap / Quarto overrides */
-  --bs-body-bg:            #F4F7F9;
-  --bs-body-color:         #0D1F35;
-  --bs-body-font-family:   'Inter', system-ui, sans-serif;
-  --bs-link-color:         #028090;
-  --bs-link-hover-color:   #02C39A;
-  --bs-link-color-rgb:     2, 128, 144;
-  --bs-primary:            #028090;
-  --bs-primary-rgb:        2, 128, 144;
-  --bs-border-color:       #E8EDF2;
-  --bs-border-radius:      12px;
-  --bs-border-radius-sm:   6px;
-  --bs-border-radius-lg:   20px;
-  --bs-heading-color:      #0D1F35;
-  --bs-navbar-color:       rgba(255,255,255,0.75);
-  --bs-navbar-hover-color: #02C39A;
-  --bs-navbar-active-color:#02C39A;
-  --bs-navbar-bg:          #0D1F35;
+  /* Bootstrap / flatly overrides */
+  --bs-body-bg:             #F4F7F9;
+  --bs-body-color:          #0D1F35;
+  --bs-body-font-family:    'Inter', system-ui, sans-serif;
+  --bs-link-color:          #028090;
+  --bs-link-hover-color:    #02C39A;
+  --bs-link-color-rgb:      2, 128, 144;
+  --bs-primary:             #028090;
+  --bs-primary-rgb:         2, 128, 144;
+  --bs-border-color:        #E8EDF2;
+  --bs-border-radius:       12px;
+  --bs-border-radius-sm:    6px;
+  --bs-border-radius-lg:    20px;
+  --bs-heading-color:       #0D1F35;
+  --bs-navbar-color:        rgba(255,255,255,0.75);
+  --bs-navbar-hover-color:  #02C39A;
+  --bs-navbar-active-color: #02C39A;
+  --bs-navbar-bg:           #0D1F35;
 }
 
 *, *::before, *::after { box-sizing: border-box; }
@@ -63,6 +61,23 @@ body {
   color: var(--navy);
   background: var(--cream);
   -webkit-font-smoothing: antialiased;
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+   SUPPRESS: right TOC sidebar + Code-tools dropdown
+   ═══════════════════════════════════════════════════════════════════ */
+
+#quarto-margin-sidebar,
+.quarto-margin-sidebar,
+nav[role="doc-toc"] {
+  display: none !important;
+}
+
+.code-tools-button,
+.code-tools-menu,
+div.code-tools-menu,
+.code-tools-button ~ .dropdown-menu {
+  display: none !important;
 }
 
 /* ── NAVBAR ──────────────────────────────────────────────────────── */
@@ -95,7 +110,7 @@ body {
   background: rgba(2,195,154,0.1);
 }
 
-/* ── SIDEBAR ─────────────────────────────────────────────────────── */
+/* ── LEFT SIDEBAR ────────────────────────────────────────────────── */
 .sidebar,
 #quarto-sidebar {
   background: var(--navy) !important;
@@ -165,33 +180,32 @@ body {
 }
 
 /* ── TITLE BLOCK ─────────────────────────────────────────────────── */
-/*
- * FIX: suppress the title block when it renders empty
- * (e.g. on appendix pages that have no title/subtitle/author metadata)
- */
-#title-block-header {
-  margin: 0 !important;
-  padding: 0 !important;
-}
 
-/* Hide the whole block when no h1.title child has content */
+/* Suppress on pages that render no real title */
 #title-block-header:not(:has(.title:not(:empty))),
 .quarto-title-block:not(:has(.title:not(:empty))) {
   display: none !important;
 }
 
-/* Normal styled title block (pages that DO have a title) */
-.quarto-title-block {
+/* No orphaned margin when title block is absent */
+#quarto-document-content > *:first-child {
+  margin-top: 0 !important;
+}
+
+/* Styled banner */
+.quarto-title-block,
+#title-block-header {
   background: linear-gradient(135deg, var(--navy) 0%, var(--navy-mid) 60%, #1a3a5c 100%);
   color: white;
-  padding: 3.5rem 3rem 2.5rem;
+  padding: 2.5rem 2.5rem 2rem;
   margin: -1rem -1rem 2.5rem;
   border-radius: 0 0 var(--radius-lg) var(--radius-lg);
   position: relative;
   overflow: hidden;
 }
 
-.quarto-title-block::before {
+.quarto-title-block::before,
+#title-block-header::before {
   content: '';
   position: absolute;
   top: -40px; right: -40px;
@@ -201,49 +215,60 @@ body {
   pointer-events: none;
 }
 
-.quarto-title-block .title {
-  font-family: 'Sora', sans-serif;
-  font-size: 2.4rem;
-  font-weight: 800;
+/*
+ * KEY FIX: global h1 has border-bottom + padding-bottom.
+ * Quarto renders the book title as h1.title inside the block,
+ * so we must strip all of that here with high specificity.
+ */
+.quarto-title-block h1,
+.quarto-title-block h1.title,
+#title-block-header h1,
+#title-block-header h1.title,
+.quarto-title-block .title,
+#title-block-header .title {
+  font-family: 'Sora', sans-serif !important;
+  font-size: 2.2rem !important;
+  font-weight: 800 !important;
   color: white !important;
-  margin-bottom: 0.5rem;
-  line-height: 1.15;
-  letter-spacing: -0.5px;
+  line-height: 1.2 !important;
+  letter-spacing: -0.5px !important;
+  border-bottom: none !important;
+  padding-bottom: 0 !important;
+  margin-top: 0 !important;
+  margin-bottom: 0.3rem !important;
 }
 
-.quarto-title-block .subtitle {
-  font-size: 1rem;
-  color: rgba(255,255,255,0.65) !important;
+.quarto-title-block .subtitle,
+#title-block-header .description {
+  font-size: 0.95rem;
+  color: rgba(255,255,255,0.60) !important;
   font-weight: 400;
-  margin-bottom: 1.5rem;
+  margin-top: 0.2rem;
+  margin-bottom: 0;
 }
 
-.quarto-title-block .quarto-title-meta {
+.quarto-title-block .quarto-title-meta,
+#title-block-header .quarto-title-meta {
   display: flex;
   gap: 3rem;
   flex-wrap: wrap;
-  margin-top: 1.5rem;
-  padding-top: 1.5rem;
+  margin-top: 1.25rem;
+  padding-top: 1.25rem;
   border-top: 1px solid rgba(255,255,255,0.12);
 }
 
 .quarto-title-meta-heading {
-  font-size: 0.64rem !important;
+  font-size: 0.63rem !important;
   font-weight: 700 !important;
   letter-spacing: 2px !important;
   text-transform: uppercase !important;
   color: var(--mint) !important;
-  margin-bottom: 0.25rem;
+  margin-bottom: 0.2rem;
 }
 
 .quarto-title-meta-contents {
-  color: rgba(255,255,255,0.8) !important;
+  color: rgba(255,255,255,0.80) !important;
   font-size: 0.88rem;
-}
-
-/* First content element shouldn't inherit orphaned top margin */
-#quarto-document-content > *:first-child {
-  margin-top: 0 !important;
 }
 
 /* ── TYPOGRAPHY ──────────────────────────────────────────────────── */
@@ -258,24 +283,6 @@ h1 {
   letter-spacing: -0.4px;
   padding-bottom: 0.6rem;
   border-bottom: 3px solid var(--teal);
-}
-
-/*
- * FIX: the global h1 rule's border-bottom, margin-top, and padding-bottom
- * bleed into the title block because Quarto renders the title as an h1.
- * Reset ALL h1 structural chrome inside the title block container.
- */
-.quarto-title-block h1,
-.quarto-title-block h1.title,
-#title-block-header h1,
-#title-block-header h1.title {
-  border-bottom: none !important;
-  padding-bottom: 0 !important;
-  margin-top: 0 !important;
-  margin-bottom: 0.4rem !important;
-  font-size: 2.4rem !important;
-  color: white !important;
-  letter-spacing: -0.5px !important;
 }
 
 h2 {
@@ -361,70 +368,22 @@ pre code {
   font-size: 0.85em;
 }
 
-/* Code-fold toggle button */
+/* Show / hide code fold toggle */
 .code-fold-btn-container .btn {
-  background: rgba(2,128,144,0.12);
-  border: 1px solid rgba(2,128,144,0.25);
+  background: rgba(2,128,144,0.10);
+  border: 1px solid rgba(2,128,144,0.22);
   color: var(--teal);
   font-size: 0.78rem;
   font-weight: 600;
   border-radius: var(--radius-sm);
   padding: 0.2rem 0.7rem;
   transition: var(--transition);
+  cursor: pointer;
 }
 
 .code-fold-btn-container .btn:hover {
   background: var(--teal);
   color: white;
-}
-
-/* ── CODE TOOLS DROPDOWN ─────────────────────────────────────────── */
-/*
- * FIX: style the button without overriding position/z-index/::after,
- * which are required for Bootstrap's dropdown to function correctly.
- */
-.code-tools-button {
-  background: rgba(2,128,144,0.12) !important;
-  border: 1px solid rgba(2,128,144,0.30) !important;
-  color: #028090 !important;
-  font-size: 0.78rem !important;
-  font-weight: 600 !important;
-  border-radius: var(--radius-sm) !important;
-  padding: 0.25rem 0.8rem !important;
-  transition: var(--transition) !important;
-  /* Do NOT touch position, z-index, or ::after — Bootstrap needs them */
-}
-
-.code-tools-button:hover,
-.code-tools-button:focus {
-  background: #028090 !important;
-  color: white !important;
-  border-color: #028090 !important;
-}
-
-/* Style the dropdown menu that appears */
-.code-tools-button ~ .dropdown-menu,
-div.sourceCode .dropdown-menu {
-  border: 1px solid rgba(2,128,144,0.20) !important;
-  border-radius: var(--radius-md) !important;
-  box-shadow: var(--shadow-md) !important;
-  background: white !important;
-  font-size: 0.82rem !important;
-  padding: 0.35rem 0 !important;
-  min-width: 160px !important;
-}
-
-.code-tools-button ~ .dropdown-menu .dropdown-item,
-div.sourceCode .dropdown-menu .dropdown-item {
-  color: var(--navy) !important;
-  padding: 0.4rem 1rem !important;
-  transition: var(--transition);
-}
-
-.code-tools-button ~ .dropdown-menu .dropdown-item:hover,
-div.sourceCode .dropdown-menu .dropdown-item:hover {
-  background: rgba(2,128,144,0.08) !important;
-  color: var(--teal) !important;
 }
 
 /* ── TABLES ──────────────────────────────────────────────────────── */
@@ -523,73 +482,6 @@ figcaption {
   padding: 0 1rem;
 }
 
-/* ── TOC (right margin sidebar) ──────────────────────────────────── */
-/*
- * FIX: flatly's --bs-link-color and body color override TOC links
- * unless we use !important throughout. Also targets nav[role="doc-toc"]
- * which is Quarto's actual rendered selector in many themes.
- */
-#quarto-margin-sidebar {
-  padding-top: 2rem;
-  background: transparent !important;
-}
-
-#quarto-margin-sidebar .toc-title,
-#quarto-margin-sidebar p.sidebar-title {
-  font-size: 0.65rem !important;
-  font-weight: 700 !important;
-  letter-spacing: 2px !important;
-  text-transform: uppercase !important;
-  color: var(--gray) !important;
-  margin-bottom: 0.75rem !important;
-}
-
-#quarto-margin-sidebar a,
-#quarto-margin-sidebar .toc-entry a,
-nav[role="doc-toc"] a {
-  color: var(--navy) !important;
-  font-size: 0.82rem !important;
-  font-weight: 400 !important;
-  text-decoration: none !important;
-  display: block !important;
-  padding: 0.22rem 0.6rem !important;
-  border-left: 2px solid transparent !important;
-  border-bottom: none !important;
-  transition: var(--transition) !important;
-  border-radius: 0 var(--radius-sm) var(--radius-sm) 0 !important;
-  line-height: 1.45 !important;
-}
-
-#quarto-margin-sidebar a:hover,
-#quarto-margin-sidebar .toc-entry a:hover,
-nav[role="doc-toc"] a:hover {
-  color: var(--teal) !important;
-  background: rgba(2,128,144,0.07) !important;
-  border-left-color: var(--teal) !important;
-}
-
-#quarto-margin-sidebar .toc-active > a,
-#quarto-margin-sidebar .active > a,
-nav[role="doc-toc"] .active > a {
-  color: var(--teal) !important;
-  font-weight: 600 !important;
-  border-left: 2px solid var(--teal) !important;
-  background: rgba(2,128,144,0.06) !important;
-}
-
-/* Nested entries — slightly smaller and indented */
-#quarto-margin-sidebar ul ul a,
-nav[role="doc-toc"] ul ul a {
-  font-size: 0.78rem !important;
-  padding-left: 1.2rem !important;
-  color: var(--gray) !important;
-}
-
-#quarto-margin-sidebar ul ul a:hover,
-nav[role="doc-toc"] ul ul a:hover {
-  color: var(--teal) !important;
-}
-
 /* ── PAGE NAVIGATION ─────────────────────────────────────────────── */
 .page-navigation {
   display: flex;
@@ -677,14 +569,6 @@ hr {
 
 /* ══════════════════════════════════════════════════════════════════
    UTILITY CLASSES
-   Use in Quarto prose with div fences:
-
-   ::: {.metric-row}
-   ::: {.metric-card}
-   [11.6%]{.metric-value}
-   Dark skin occult hypoxemia rate
-   :::
-   :::
    ══════════════════════════════════════════════════════════════════ */
 
 .hl-teal { color: var(--teal);     font-weight: 700; }
@@ -742,8 +626,10 @@ hr {
 
 /* ── RESPONSIVE ──────────────────────────────────────────────────── */
 @media (max-width: 991px) {
-  .quarto-title-block { padding: 2rem 1.5rem; }
-  .quarto-title-block .title { font-size: 1.8rem; }
+  .quarto-title-block,
+  #title-block-header { padding: 2rem 1.5rem; }
+  .quarto-title-block .title,
+  #title-block-header .title { font-size: 1.7rem !important; }
   h1 { font-size: 1.6rem; }
   h2 { font-size: 1.15rem; }
 }
