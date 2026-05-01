@@ -73,7 +73,7 @@ format:
     code-line-numbers: true
     code-block-bg: true
     code-block-border-left: "#028090"
-    code-tools: false      # no global Code ▾ dropdown button
+    code-tools: true       # page-level "Source" button — view full .qmd source
     page-layout: article   # standard sidebar + content + toc grid
     code-fold: show        # code visible by default with toggle to hide
     number-sections: false
