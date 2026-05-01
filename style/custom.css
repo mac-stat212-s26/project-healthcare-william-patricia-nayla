@@ -68,10 +68,22 @@ body {
    and the sidebar collapse toggle button
    ═══════════════════════════════════════════════════════════════════ */
 
-/* ── GLOBAL CODE-TOOLS BUTTON ("Code ▾" / "Source") ─────────────── */
-/* Styled but NOT hidden — this is the page-level source viewer.
-   Do NOT set position, z-index, or hide ::after — Bootstrap dropdown needs them. */
-.code-tools-button {
+/* ── CODE-TOOLS BUTTON ("Code ▾") ───────────────────────────────── */
+/*
+ * Quarto renders this as a Bootstrap dropdown:
+ *   <div class="code-tools-button dropdown">
+ *     <button data-bs-toggle="dropdown">Code</button>
+ *     <ul class="dropdown-menu">...</ul>
+ *   </div>
+ *
+ * RULES:
+ *  - Style only visual properties (color, bg, border, font)
+ *  - NEVER touch position / z-index / display / ::after
+ *    Bootstrap's dropdown JS depends on all of them
+ */
+div.code-tools-button > .btn,
+.code-tools-button.dropdown > .btn,
+button.code-tools-button {
   background: rgba(2,128,144,0.12) !important;
   border: 1px solid rgba(2,128,144,0.30) !important;
   color: #028090 !important;
@@ -82,30 +94,71 @@ body {
   transition: var(--transition) !important;
 }
 
-.code-tools-button:hover,
-.code-tools-button:focus {
+div.code-tools-button > .btn:hover,
+div.code-tools-button > .btn:focus,
+button.code-tools-button:hover {
   background: #028090 !important;
   color: white !important;
   border-color: #028090 !important;
 }
 
-.code-tools-button ~ .dropdown-menu {
-  border: 1px solid rgba(2,128,144,0.20) !important;
+/* Dropdown panel */
+div.code-tools-button .dropdown-menu,
+.code-tools-button + .dropdown-menu,
+ul.dropdown-menu[aria-labelledby] {
+  border: 1px solid rgba(2,128,144,0.18) !important;
   border-radius: var(--radius-md) !important;
   box-shadow: var(--shadow-md) !important;
   background: white !important;
   font-size: 0.82rem !important;
   padding: 0.3rem 0 !important;
+  min-width: 160px;
 }
 
-.code-tools-button ~ .dropdown-menu .dropdown-item {
+div.code-tools-button .dropdown-menu .dropdown-item,
+.code-tools-button + .dropdown-menu .dropdown-item {
   color: var(--navy) !important;
   padding: 0.4rem 1rem !important;
+  font-weight: 400 !important;
 }
 
-.code-tools-button ~ .dropdown-menu .dropdown-item:hover {
+div.code-tools-button .dropdown-menu .dropdown-item:hover,
+.code-tools-button + .dropdown-menu .dropdown-item:hover {
   background: rgba(2,128,144,0.08) !important;
   color: var(--teal) !important;
+}
+
+/* ── CODE CHUNK VISIBILITY ───────────────────────────────────────── */
+/*
+ * code-fold: show renders <details open> around each chunk.
+ * These rules ensure nothing in our CSS accidentally collapses them.
+ */
+details.code-fold {
+  display: block !important;
+}
+
+details.code-fold > summary {
+  display: list-item !important;
+  cursor: pointer;
+  color: var(--teal);
+  font-size: 0.78rem;
+  font-weight: 600;
+  margin-bottom: 0.35rem;
+  list-style: none;
+}
+
+details.code-fold > summary::before {
+  content: '▶ ';
+  font-size: 0.6em;
+  transition: var(--transition);
+}
+
+details.code-fold[open] > summary::before {
+  content: '▼ ';
+}
+
+details.code-fold > :not(summary) {
+  display: block !important;
 }
 
 /* Sidebar hamburger / collapse toggle — hidden so sidebar stays open */
