@@ -4,6 +4,28 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Sora:wght@400;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap');
 
+/* ── CUSTOM VARIABLES — must come first ──────────────────────── */
+:root {
+  --navy:       #0D1F35;
+  --navy-soft:  #132030;
+  --teal:       #028090;
+  --teal-light: #03A0B3;
+  --mint:       #02C39A;
+  --cream:      #F4F7F9;
+  --cream-dark: #E8EDF2;
+  --red:        #D94F3D;
+  --gold:       #E8A838;
+  --gray:       #64748B;
+  --gray-light: #94A3B8;
+  --white:      #ffffff;
+  --radius-sm:  6px;
+  --radius-md:  12px;
+  --radius-lg:  20px;
+  --shadow-sm:  0 2px 8px rgba(13,31,53,0.08);
+  --shadow-md:  0 6px 24px rgba(13,31,53,0.12);
+  --shadow-lg:  0 16px 48px rgba(13,31,53,0.16);
+  --transition: all 0.22s cubic-bezier(0.4,0,0.2,1);
+}
 /* Override Bootstrap/flatly variables — must come before everything else */
 :root {
   --bs-body-bg:              #F4F7F9;
@@ -646,25 +668,19 @@ hr {
 .quarto-title-block .title:empty + * {
   margin-top: 0;
 }
-
-/* ── FIX 3: Code source button ──────────────────────────────────── */
-/* The old custom.css had a .code-tools-button style that broke the button */
+/* ── FIX 3: Code source button ───────────────────────────────── */
 .code-tools-button {
-  all: unset !important;
   cursor: pointer !important;
   background: rgba(2,128,144,0.12) !important;
   border: 1px solid rgba(2,128,144,0.3) !important;
-  color: var(--teal) !important;
+  color: #028090 !important;
   font-size: 0.78rem !important;
   font-weight: 600 !important;
-  border-radius: var(--radius-sm) !important;
+  border-radius: 6px !important;
   padding: 0.25rem 0.8rem !important;
-  display: inline-flex !important;
-  align-items: center !important;
-  gap: 0.3rem !important;
-  transition: var(--transition) !important;
-  position: relative !important;
-  z-index: auto !important;
+  position: static !important;
+  z-index: 1 !important;
+  box-shadow: none !important;
 }
 
 .code-tools-button::after {
@@ -672,7 +688,6 @@ hr {
 }
 
 .code-tools-button:hover {
-  background: var(--teal) !important;
+  background: #028090 !important;
   color: white !important;
-  box-shadow: var(--shadow-sm) !important;
 }
