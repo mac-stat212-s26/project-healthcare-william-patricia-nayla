@@ -1,0 +1,29 @@
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  var btn = document.getElementById("quarto-code-tools-menu");
+  if (btn && window.bootstrap && window.bootstrap.Dropdown) {
+    new window.bootstrap.Dropdown(btn);
+  }
+  var viewSource = document.getElementById("quarto-view-source");
+  if (viewSource) {
+    viewSource.addEventListener("click", function (e) {
+      e.preventDefault();
+      var modalEl = document.getElementById("quarto-embedded-source-code-modal");
+      if (modalEl && window.bootstrap && window.bootstrap.Modal) {
+        var modal = new window.bootstrap.Modal(modalEl);
+        modal.show();
+        modalEl.addEventListener("hidden.bs.modal", function () {
+          // Remove any leftover backdrops
+          document.querySelectorAll(".modal-backdrop").forEach(function (el) {
+            el.remove();
+          });
+          // Restore body scroll and classes
+          document.body.classList.remove("modal-open");
+          document.body.style.overflow = "";
+          document.body.style.paddingRight = "";
+        }, { once: true });
+      }
+    });
+  }
+});
+</script>
