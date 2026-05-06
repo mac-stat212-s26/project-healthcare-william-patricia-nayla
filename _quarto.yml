@@ -1,7 +1,12 @@
 project:
   type: book
   output-dir: docs
+
 number-depth: 2
+
+resources:
+  - "hypoxemia_presentation (1).pdf"
+
 book:
   title: "Undetected & Undertreated"
   author:
@@ -44,8 +49,7 @@ book:
   appendices:
     - appx/proposal.qmd
     - appx/case-study.qmd
-  resources:
-    - hypoxemia_presentation (1).pdf
+
 format:
   html:
     include-after-body: style/code-tools-fix.html
@@ -74,12 +78,14 @@ format:
     number-sections: false
     fig-align: center
     fig-cap-location: bottom
+
 execute:
   echo: true
   warning: false
   error: false
   cache: false
   freeze: auto
+
 editor:
   mode: source
   markdown:
