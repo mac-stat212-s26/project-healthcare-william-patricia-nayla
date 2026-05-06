@@ -1240,19 +1240,20 @@ time, for the specific patient in front of the clinician.
 
 ## Video Presentation and Slides
 
-### Video
+## Video
 
 ::: {#fig-video}
 {{< video https://youtu.be/NLKsuO_sdbk>}} Video Presenattion
 :::
 
-### Slides
+## Slides
 
-```{html}
-<iframe src="https://docs.google.com/presentation/d/e/2PACX-1vTtyBlAm5x2-aImcRpH_QA1kfCmpNmo7hJderKtfiTpNMyVBMMrR1DAerh7WJhWdhBVLM91Fbsx0aq1/pubembed?start=true&amp;loop=false&amp;delayms=3000" frameborder="0" width="960" height="569" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true">
+<iframe src="https://docs.google.com/presentation/d/e/2PACX-1vTtyBlAm5x2-aImcRpH_QA1kfCmpNmo7hJderKtfiTpNMyVBMMrR1DAerh7WJhWdhBVLM91Fbsx0aq1/pubembed?start=true&amp;loop=false&amp;delayms=3000" frameborder="0" width="960" height="569" allowfullscreen="true">
 
 </iframe>
-```
+
+\[Download the PDF\](hypoxemia_presentation (1).pdf)
+
 ## Conclusions
 
 Our three research questions asked whether pulse oximetry accuracy

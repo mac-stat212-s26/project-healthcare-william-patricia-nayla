@@ -44,6 +44,8 @@ book:
   appendices:
     - appx/proposal.qmd
     - appx/case-study.qmd
+  resources:
+    - hypoxemia_presentation (1).pdf
 format:
   html:
     include-after-body: style/code-tools-fix.html
