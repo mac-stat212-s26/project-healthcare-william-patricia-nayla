@@ -23,55 +23,132 @@ format:
 execute:
   warning: false
   message: false
+editor: 
+  markdown: 
+    wrap: 72
 ---
 
 ## Motivation
 
-As international students and people of color from different countries across Latin America, we bring perspectives shaped by healthcare systems outside the United States. Having navigated both our home countries' medical institutions and the U.S. system, we have noticed firsthand how race and skin tone influence the quality of care patients receive, and how those dynamics shift depending on country and context. Moving to a predominantly white country has made these disparities more visible to us, not less. The experience of being a patient — or watching family members be patients — in systems that were not designed with us in mind gives this project a personal dimension alongside its academic one.
+As international students and people of color from different countries
+across Latin America, we bring perspectives shaped by healthcare systems
+outside the United States. Having navigated both our home countries'
+medical institutions and the U.S. system, we have noticed firsthand how
+race and skin tone influence the quality of care patients receive, and
+how those dynamics shift depending on country and context. Moving to a
+predominantly white country has made these disparities more visible to
+us, not less. The experience of being a patient — or watching family
+members be patients — in systems that were not designed with us in mind
+gives this project a personal dimension alongside its academic one.
 
-The project centers on **hidden hypoxemia**, a condition where pulse oximeters fail to accurately detect low blood oxygen levels in patients with darker skin tones. We chose this topic because it offers something rare in health equity research: measurability. The bias is not anecdotal. It shows up in paired device readings, patient by patient, and it can be directly quantified. A pulse oximeter clips to your fingertip and estimates blood oxygen saturation by shining near-infrared light through the skin. Melanin, the pigment responsible for skin color, absorbs some of those wavelengths and inflates the reading — causing the device to report higher oxygen levels than the patient actually has. The most dangerous consequence is occult hypoxemia: the device reads normal while the patient is genuinely hypoxic, and clinicians, trusting the number they see, withhold the oxygen therapy and interventions the patient needs.
+The project centers on **hidden hypoxemia**, a condition where pulse
+oximeters fail to accurately detect low blood oxygen levels in patients
+with darker skin tones. We chose this topic because it offers something
+rare in health equity research: measurability. The bias is not
+anecdotal. It shows up in paired device readings, patient by patient,
+and it can be directly quantified. A pulse oximeter clips to your
+fingertip and estimates blood oxygen saturation by shining near-infrared
+light through the skin. Melanin, the pigment responsible for skin color,
+absorbs some of those wavelengths and inflates the reading — causing the
+device to report higher oxygen levels than the patient actually has. The
+most dangerous consequence is occult hypoxemia: the device reads normal
+while the patient is genuinely hypoxic, and clinicians, trusting the
+number they see, withhold the oxygen therapy and interventions the
+patient needs.
 
-This makes pulse oximeter bias a particularly powerful entry point for studying health equity. It is not a question of patient behavior or lifestyle — it is a direct, measurable failure of medical technology, built into device calibration curves that were historically validated on lighter-skinned subjects. The downstream consequences — delayed treatment, longer hospitalizations, higher costs, worse outcomes — fall disproportionately on communities of color, making this simultaneously a health equity issue and an economic justice issue. We want to use data to examine what we have observed anecdotally, and to measure the real consequences that medical device bias and systemic inequity have on patients of color in U.S. hospital settings.
-
+This makes pulse oximeter bias a particularly powerful entry point for
+studying health equity. It is not a question of patient behavior or
+lifestyle — it is a direct, measurable failure of medical technology,
+built into device calibration curves that were historically validated on
+lighter-skinned subjects. The downstream consequences — delayed
+treatment, longer hospitalizations, higher costs, worse outcomes — fall
+disproportionately on communities of color, making this simultaneously a
+health equity issue and an economic justice issue. We want to use data
+to examine what we have observed anecdotally, and to measure the real
+consequences that medical device bias and systemic inequity have on
+patients of color in U.S. hospital settings.
 
 ## Research Questions
 
 Our analysis is organized around three core questions:
 
-1. **How does pulse oximetry accuracy vary across skin tone, race, and sex, and what is the magnitude of hidden hypoxemia disparities?** We examine both the raw measurement bias and the rate of clinically significant misdiagnosis by Fitzpatrick skin tone group and by self-reported race and ethnicity.
+1.  **How does pulse oximetry accuracy vary across skin tone, race, and
+    sex, and what is the magnitude of hidden hypoxemia disparities?** We
+    examine both the raw measurement bias and the rate of clinically
+    significant misdiagnosis by Fitzpatrick skin tone group and by
+    self-reported race and ethnicity.
 
-2. **What are the economic consequences of respiratory misdiagnosis and delayed treatment for patients of color in hospital settings?** We connect the clinical disparity to its downstream economic burden using hospital discharge data, examining charges, costs, and length of stay stratified by race.
+2.  **What are the economic consequences of respiratory misdiagnosis and
+    delayed treatment for patients of color in hospital settings?** We
+    connect the clinical disparity to its downstream economic burden
+    using hospital discharge data, examining charges, costs, and length
+    of stay stratified by race.
 
-3. **Do race, sex, and insurance status intersect to compound economic disparities in respiratory care?** We examine whether the disparities in misdiagnosis and cost are uniform across demographic groups or whether certain intersecting identities — such as Black women, or uninsured Hispanic/Latino patients — face compounded disadvantages.
+3.  **Do race, sex, and insurance status intersect to compound economic
+    disparities in respiratory care?** We examine whether the
+    disparities in misdiagnosis and cost are uniform across demographic
+    groups or whether certain intersecting identities — such as Black
+    women, or uninsured Hispanic/Latino patients — face compounded
+    disadvantages.
 
-The ideas we most want to communicate are: that pulse oximeter bias is real and measurable; that it follows a racial and skin-tone gradient; that the downstream economic consequences mirror that same gradient; and that even after controlling for age, insurance, and illness severity, a residual charge gap persists that is consistent with a pre-admission clinical failure upstream of the hospital.
-
+The ideas we most want to communicate are: that pulse oximeter bias is
+real and measurable; that it follows a racial and skin-tone gradient;
+that the downstream economic consequences mirror that same gradient; and
+that even after controlling for age, insurance, and illness severity, a
+residual charge gap persists that is consistent with a pre-admission
+clinical failure upstream of the hospital.
 
 ## Background
 
 ### Key Terms
 
-**Pulse oximeter (SpO₂):** A non-invasive device that clips to the fingertip and estimates blood oxygen saturation using light absorption. The reading is expressed as a percentage and labeled SpO₂.
+**Pulse oximeter (SpO₂):** A non-invasive device that clips to the
+fingertip and estimates blood oxygen saturation using light absorption.
+The reading is expressed as a percentage and labeled SpO₂.
 
-**Arterial blood gas (SaO₂):** The gold-standard measurement of true blood oxygen saturation, obtained via a needle draw from an artery and analyzed in a laboratory. SaO₂ is slower and more invasive than pulse oximetry but is not subject to melanin interference.
+**Arterial blood gas (SaO₂):** The gold-standard measurement of true
+blood oxygen saturation, obtained via a needle draw from an artery and
+analyzed in a laboratory. SaO₂ is slower and more invasive than pulse
+oximetry but is not subject to melanin interference.
 
-**Bias:** The difference between a device's reading and the true value (SpO₂ − SaO₂). Positive bias means the device overestimates — it reports a higher oxygen level than the patient actually has.
+**Bias:** The difference between a device's reading and the true value
+(SpO₂ − SaO₂). Positive bias means the device overestimates — it reports
+a higher oxygen level than the patient actually has.
 
-**Occult hypoxemia:** The clinical event where SpO₂ is at or above 88% (the device reads "normal") while SaO₂ is below 88% (the patient is genuinely hypoxic). This is the specific failure mode that causes clinicians to withhold treatment.
+**Occult hypoxemia:** The clinical event where SpO₂ is at or above 88%
+(the device reads "normal") while SaO₂ is below 88% (the patient is
+genuinely hypoxic). This is the specific failure mode that causes
+clinicians to withhold treatment.
 
-**Fitzpatrick scale:** A six-point scale (I = lightest, VI = darkest) used to classify human skin tone based on its response to UV exposure. Used in the OpenOximetry dataset as an objective, observer-measured skin tone score.
+**Fitzpatrick scale:** A six-point scale (I = lightest, VI = darkest)
+used to classify human skin tone based on its response to UV exposure.
+Used in the OpenOximetry dataset as an objective, observer-measured skin
+tone score.
 
-**APR severity of illness:** The All Patients Refined (APR) Diagnosis Related Group severity score, coded on a 1–4 scale (Minor, Moderate, Major, Extreme) from hospital discharge records. It summarizes the clinical complexity of an admission.
+**APR severity of illness:** The All Patients Refined (APR) Diagnosis
+Related Group severity score, coded on a 1–4 scale (Minor, Moderate,
+Major, Extreme) from hospital discharge records. It summarizes the
+clinical complexity of an admission.
 
-**CCSR codes:** Clinical Classifications Software Refined codes, a standardized system for grouping ICD-10 diagnosis codes. All respiratory diagnoses share the prefix RSP.
+**CCSR codes:** Clinical Classifications Software Refined codes, a
+standardized system for grouping ICD-10 diagnosis codes. All respiratory
+diagnoses share the prefix RSP.
 
-**Ecological association:** A statistical relationship observed at the group level (e.g., racial groups) rather than at the individual patient level. Our bridge analysis produces ecological associations — not patient-level causal estimates.
+**Ecological association:** A statistical relationship observed at the
+group level (e.g., racial groups) rather than at the individual patient
+level. Our bridge analysis produces ecological associations — not
+patient-level causal estimates.
 
 ### Why 88%?
 
-The 88% SpO₂ threshold is a standard clinical decision point. Patients with SpO₂ readings below 88% are typically eligible for supplemental oxygen, certain medications, and in some cases specific therapeutic interventions. Patients at or above 88% may be discharged or have treatment withheld. A device that reports SpO₂ ≥ 88% when true SaO₂ is below 88% therefore shifts a patient across a consequential clinical threshold — from eligible for treatment to ineligible — on the basis of a measurement error.
-
-
+The 88% SpO₂ threshold is a standard clinical decision point. Patients
+with SpO₂ readings below 88% are typically eligible for supplemental
+oxygen, certain medications, and in some cases specific therapeutic
+interventions. Patients at or above 88% may be discharged or have
+treatment withheld. A device that reports SpO₂ ≥ 88% when true SaO₂ is
+below 88% therefore shifts a patient across a consequential clinical
+threshold — from eligible for treatment to ineligible — on the basis of
+a measurement error.
 
 ## Data
 
@@ -173,11 +250,38 @@ oximetry |>
   modify_caption("**Table 1. Patient demographics — OpenOximetry (unique patients)**")
 ```
 
-The **OpenOximetry dataset** was collected prospectively by the UCSF Hypoxia Lab as part of the OpenOximetry Project. Participants were recruited from volunteers in the San Francisco Bay Area and exposed to controlled hypoxic conditions in a laboratory setting. Researchers simultaneously measured blood oxygen saturation using multiple commercially available pulse oximeter devices and an indwelling arterial catheter, providing a ground-truth SaO₂ reading for each device reading at each moment in time. Skin tone was measured objectively using a spectrophotometer at multiple body sites and converted to both Fitzpatrick and Monk scale scores by trained staff. Patients self-reported race and ethnicity. The dataset is stored as five relational CSVs and accessed through a Data Use Agreement on the PhysioNet platform. The version used here is OpenOximetry 1.1.1, released in 2023.
+The **OpenOximetry dataset** was collected prospectively by the UCSF
+Hypoxia Lab as part of the OpenOximetry Project. Participants were
+recruited from volunteers in the San Francisco Bay Area and exposed to
+controlled hypoxic conditions in a laboratory setting. Researchers
+simultaneously measured blood oxygen saturation using multiple
+commercially available pulse oximeter devices and an indwelling arterial
+catheter, providing a ground-truth SaO₂ reading for each device reading
+at each moment in time. Skin tone was measured objectively using a
+spectrophotometer at multiple body sites and converted to both
+Fitzpatrick and Monk scale scores by trained staff. Patients
+self-reported race and ethnicity. The dataset is stored as five
+relational CSVs and accessed through a Data Use Agreement on the
+PhysioNet platform. The version used here is OpenOximetry 1.1.1,
+released in 2023.
 
-After joining all five tables and removing non-finite bias values from unmatched rows, the merged dataset contains **`r nrow(oximetry) |> comma()` paired measurements** across **`r n_distinct(oximetry$patient_id)` unique patients** and **`r n_distinct(oximetry$encounter_id)` encounters**. Each row represents one device reading matched to one arterial blood gas measurement. Because multiple devices are read simultaneously on the same patient at the same moment, a single blood draw generates multiple rows — one per device. This structure is deliberate: it enables within-encounter comparisons that hold patient physiology constant and isolate device effects.
+After joining all five tables and removing non-finite bias values from
+unmatched rows, the merged dataset contains
+**`r nrow(oximetry) |> comma()` paired measurements** across
+**`r n_distinct(oximetry$patient_id)` unique patients** and
+**`r n_distinct(oximetry$encounter_id)` encounters**. Each row
+represents one device reading matched to one arterial blood gas
+measurement. Because multiple devices are read simultaneously on the
+same patient at the same moment, a single blood draw generates multiple
+rows — one per device. This structure is deliberate: it enables
+within-encounter comparisons that hold patient physiology constant and
+isolate device effects.
 
-The key derived variables are `bias` (SpO₂ − SaO₂, positive = overestimate) and `occult_hypoxemia` (logical: SpO₂ ≥ 88% while SaO₂ < 88%). The primary skin tone variable is `fitzpatrick`, grouped into three bands for visualization: Light (I–II), Medium (III–IV), and Dark (V–VI).
+The key derived variables are `bias` (SpO₂ − SaO₂, positive =
+overestimate) and `occult_hypoxemia` (logical: SpO₂ ≥ 88% while SaO₂ \<
+88%). The primary skin tone variable is `fitzpatrick`, grouped into
+three bands for visualization: Light (I–II), Medium (III–IV), and Dark
+(V–VI).
 
 ### NY SPARCS Dataset
 
@@ -253,17 +357,48 @@ sparcs |>
   modify_caption("**Table 2. Patient characteristics — SPARCS respiratory discharges**")
 ```
 
-The **NY SPARCS dataset** (Statewide Planning and Research Cooperative System) is a mandatory hospital discharge reporting system administered by the New York State Department of Health. All hospitals operating in New York State are required to submit a discharge record for every inpatient stay. The 2021 de-identified file is freely available through the NY Health Data open portal with no login required. It contains over 2 million discharge records statewide; we filter server-side to respiratory diagnoses (CCSR codes beginning with RSP) and pull 103,907 records via the public API — no file is saved to disk.
+The **NY SPARCS dataset** (Statewide Planning and Research Cooperative
+System) is a mandatory hospital discharge reporting system administered
+by the New York State Department of Health. All hospitals operating in
+New York State are required to submit a discharge record for every
+inpatient stay. The 2021 de-identified file is freely available through
+the NY Health Data open portal with no login required. It contains over
+2 million discharge records statewide; we filter server-side to
+respiratory diagnoses (CCSR codes beginning with RSP) and pull 103,907
+records via the public API — no file is saved to disk.
 
-SPARCS is administrative data, collected primarily for billing and regulatory purposes rather than research. This matters for interpretation: the APR severity score is assigned by coders working from the discharge record after the fact, not by clinicians at the bedside. Race and ethnicity are recorded using a combination of self-report and administrative assignment. Hispanic patients appear under multiple race codes in SPARCS, requiring an ethnicity-first recode strategy: patients coded as Spanish/Hispanic ethnicity are classified as Hispanic/Latino regardless of their race field. This captures the full Hispanic/Latino population, which would otherwise be substantially undercounted.
+SPARCS is administrative data, collected primarily for billing and
+regulatory purposes rather than research. This matters for
+interpretation: the APR severity score is assigned by coders working
+from the discharge record after the fact, not by clinicians at the
+bedside. Race and ethnicity are recorded using a combination of
+self-report and administrative assignment. Hispanic patients appear
+under multiple race codes in SPARCS, requiring an ethnicity-first recode
+strategy: patients coded as Spanish/Hispanic ethnicity are classified as
+Hispanic/Latino regardless of their race field. This captures the full
+Hispanic/Latino population, which would otherwise be substantially
+undercounted.
 
-After filtering and recoding, the dataset contains **`r nrow(sparcs) |> comma()` discharge records** across three focal racial groups. Key variables include total charges, total costs, length of stay, APR severity of illness (1–4), APR risk of mortality (1–4), insurance type, and a derived binary mortality indicator from the patient disposition field.
+After filtering and recoding, the dataset contains
+**`r nrow(sparcs) |> comma()` discharge records** across three focal
+racial groups. Key variables include total charges, total costs, length
+of stay, APR severity of illness (1–4), APR risk of mortality (1–4),
+insurance type, and a derived binary mortality indicator from the
+patient disposition field.
 
 ### Connection Between the Two Datasets
 
-The two datasets do not share patients. OpenOximetry is a San Francisco Bay Area laboratory population; SPARCS is a New York State hospital discharge population. We connect them at the **group level** by computing race-stratified summary statistics from each dataset and joining on race. This produces an ecological bridge: if the racial gradient in occult hypoxemia from OpenOximetry is consistent with the racial gradient in charges and severity from SPARCS, that consistency is evidence — though not proof — that the clinical disparity translates into downstream economic burden.
+The two datasets do not share patients. OpenOximetry is a San Francisco
+Bay Area laboratory population; SPARCS is a New York State hospital
+discharge population. We connect them at the **group level** by
+computing race-stratified summary statistics from each dataset and
+joining on race. This produces an ecological bridge: if the racial
+gradient in occult hypoxemia from OpenOximetry is consistent with the
+racial gradient in charges and severity from SPARCS, that consistency is
+evidence — though not proof — that the clinical disparity translates
+into downstream economic burden.
 
----
+------------------------------------------------------------------------
 
 ## Data Insights
 
@@ -367,7 +502,6 @@ This is not a measurement nuisance — it is the specific failure mode
 that causes clinicians to withhold oxygen therapy and delay intervention
 from patients who need it.
 
-
 #### The occult hypoxemia rate nearly doubles from lightest to darkest skin tone
 
 ```{r}
@@ -396,7 +530,12 @@ oximetry |>
   theme(legend.position = "none")
 ```
 
-Among patients with Dark (V–VI) skin tones, 11.6% of measurements result in occult hypoxemia — the device reports normal while the patient is genuinely hypoxic. For Light (I–II) skin tones, the rate is 6.2%. This is not a difference in how sick the patients actually are: the arterial blood gas tells us the truth, and both groups are equally hypoxic in those moments. The difference is entirely in what the device reports.
+Among patients with Dark (V–VI) skin tones, 11.6% of measurements result
+in occult hypoxemia — the device reports normal while the patient is
+genuinely hypoxic. For Light (I–II) skin tones, the rate is 6.2%. This
+is not a difference in how sick the patients actually are: the arterial
+blood gas tells us the truth, and both groups are equally hypoxic in
+those moments. The difference is entirely in what the device reports.
 
 #### Device disagreement is worst for darker-skinned patients
 
@@ -445,7 +584,17 @@ device_spread |>
   theme(legend.position = "none")
 ```
 
-This plot shows a within-encounter, controlled comparison: the same patient, the same blood draw, multiple devices reading simultaneously. Any disagreement between devices on the same sample is a pure device effect — patient physiology is held constant. The median disagreement for Dark skin tones is 4.1 pp, compared to 3.0 pp for Light and 2.1 pp for Medium. More importantly, the upper tail for Dark skin extends significantly further — two devices measuring the same dark-skinned patient can differ by more than 30 pp at the same moment. This level of within-patient variability creates dangerous clinical uncertainty: a clinician checking a patient twice with two different devices might get readings that imply very different treatment decisions.
+This plot shows a within-encounter, controlled comparison: the same
+patient, the same blood draw, multiple devices reading simultaneously.
+Any disagreement between devices on the same sample is a pure device
+effect — patient physiology is held constant. The median disagreement
+for Dark skin tones is 4.1 pp, compared to 3.0 pp for Light and 2.1 pp
+for Medium. More importantly, the upper tail for Dark skin extends
+significantly further — two devices measuring the same dark-skinned
+patient can differ by more than 30 pp at the same moment. This level of
+within-patient variability creates dangerous clinical uncertainty: a
+clinician checking a patient twice with two different devices might get
+readings that imply very different treatment decisions.
 
 #### The bias is consistent across device models — not driven by one outlier
 
@@ -480,7 +629,14 @@ device_skin_summary |>
   theme_eda()
 ```
 
-The heatmap reveals that the overestimation bias for Dark skin tones is not driven by a single faulty device — it is present across the majority of models. Most cells in the Dark column trend orange or red, while cells in the Light column are closer to neutral. This is a systemic calibration failure shared across commercially available devices, not a quality control problem with one manufacturer. The implication is that switching devices would not solve the problem for darker-skinned patients.
+The heatmap reveals that the overestimation bias for Dark skin tones is
+not driven by a single faulty device — it is present across the majority
+of models. Most cells in the Dark column trend orange or red, while
+cells in the Light column are closer to neutral. This is a systemic
+calibration failure shared across commercially available devices, not a
+quality control problem with one manufacturer. The implication is that
+switching devices would not solve the problem for darker-skinned
+patients.
 
 #### Sex compounds the racial disparity — Black women face the highest occult hypoxemia rate
 
@@ -549,13 +705,20 @@ p_sex_oh <- sex_race |>
   )
 ```
 
-The sex-stratified analysis reveals that being female amplifies the racial bias gradient, particularly for Black patients. Black females experience higher mean bias and a 12.6% occult hypoxemia rate — more than one in eight encounters — compared to 10.0% for Black males. Asian females also show higher rates than their male counterparts. This suggests that the device failures are not uniform within racial groups and that sex is a meaningful moderating variable, not simply a demographic control. Patricia's analysis is the only one in the team's EDA to examine this intersection, and the finding motivates the intersectional regression analysis planned for Milestone 5.
+The sex-stratified analysis reveals that being female amplifies the
+racial bias gradient, particularly for Black patients. Black females
+experience higher mean bias and a 12.6% occult hypoxemia rate — more
+than one in eight encounters — compared to 10.0% for Black males. Asian
+females also show higher rates than their male counterparts. This
+suggests that the device failures are not uniform within racial groups
+and that sex is a meaningful moderating variable, not simply a
+demographic control. Patricia's analysis is the only one in the team's
+EDA to examine this intersection, and the finding motivates the
+intersectional regression analysis planned for Milestone 5.
 
----
+------------------------------------------------------------------------
 
 ### Part 2: The Economic Burden — Who Pays More?
-
-
 
 ```{r}
 #| label: severity-los-heatmap
@@ -583,10 +746,14 @@ sparcs |>
   theme(axis.text.y = element_text(size = 9))
 ```
 
-Black patients show a higher share of Major and Extreme severity discharges than White or Hispanic/Latino patients. The heatmap holds diagnosis constant — cells in the same row represent the same respiratory condition — and still shows that Black patients present at higher severity for most individual diagnoses. This rules out case-mix as the sole explanation: it is not simply that Black patients are admitted with different, more severe conditions. They arrive sicker even for the same diagnoses.
-
-
-
+Black patients show a higher share of Major and Extreme severity
+discharges than White or Hispanic/Latino patients. The heatmap holds
+diagnosis constant — cells in the same row represent the same
+respiratory condition — and still shows that Black patients present at
+higher severity for most individual diagnoses. This rules out case-mix
+as the sole explanation: it is not simply that Black patients are
+admitted with different, more severe conditions. They arrive sicker even
+for the same diagnoses.
 
 ### Race-Level Bridge Table
 
@@ -929,100 +1096,270 @@ beyond what severity scores capture at the point of care.
 #### The 70+ finding: when insurance and severity converge, the charge gap remains
 
 ::: callout-important
-**Key finding:** At 70+, two potential explanations for the charge gap simultaneously collapse. First, Medicaid coverage converges to near zero as patients shift to Medicare (Hispanic/Latino 10%, Black 4%, White 1%) — so insurance can no longer explain the difference. Second, severity scores converge tightly (White 2.79, Black 2.78, Hispanic/Latino 2.69) — so illness severity at admission cannot explain it either. Yet Black patients are billed ~$16K more than White patients and Hispanic/Latino patients ~$13K more, at the same age, with the same insurance, at the same severity. The residual gap — unexplained by age, insurance, or recorded severity — is consistent with a clinical mechanism upstream of hospital admission, such as delayed treatment from undetected hypoxemia inflating the true disease burden beyond what severity scores capture at the point of care.
+**Key finding:** At 70+, two potential explanations for the charge gap
+simultaneously collapse. First, Medicaid coverage converges to near zero
+as patients shift to Medicare (Hispanic/Latino 10%, Black 4%, White 1%)
+— so insurance can no longer explain the difference. Second, severity
+scores converge tightly (White 2.79, Black 2.78, Hispanic/Latino 2.69) —
+so illness severity at admission cannot explain it either. Yet Black
+patients are billed \~\$16K more than White patients and Hispanic/Latino
+patients \~\$13K more, at the same age, with the same insurance, at the
+same severity. The residual gap — unexplained by age, insurance, or
+recorded severity — is consistent with a clinical mechanism upstream of
+hospital admission, such as delayed treatment from undetected hypoxemia
+inflating the true disease burden beyond what severity scores capture at
+the point of care.
 :::
 
 ## Interactive Tool: Provider Bias Correction Dashboard
 
-The Shiny dashboard is available embedded in the [Shiny App](appx/app.qmd) section of this site and live at [shinyapps.io](https://1wrn0x-liam-acosta0lora.shinyapps.io/project-healthcare-william-patricia-nayla/). It has four tabs: a clinical visualization dashboard, an economic burden explorer, a provider correction tool, and a data table. This section documents the statistical methodology behind the correction tool specifically, since it goes beyond data visualization into applied estimation.
+The Shiny dashboard is available embedded in the [Shiny
+App](appx/app.qmd) section of this site and live at
+[shinyapps.io](https://1wrn0x-liam-acosta0lora.shinyapps.io/project-healthcare-william-patricia-nayla/).
+It has four tabs: a clinical visualization dashboard, an economic burden
+explorer, a provider correction tool, and a data table. This section
+documents the statistical methodology behind the correction tool
+specifically, since it goes beyond data visualization into applied
+estimation.
 
 ### What the Provider Tool Does
 
-A clinician enters four inputs: the pulse oximeter reading (SpO₂ %), the patient's Fitzpatrick skin tone group (Light I–II, Medium III–IV, or Dark V–VI), self-reported race/ethnicity, and assigned sex at birth. The tool returns three outputs in real time: an estimated true arterial oxygen saturation (SaO₂) with a 95% confidence interval, an occult hypoxemia risk probability, and a color-coded clinical flag (MASKED, MONITOR, or WITHIN RANGE).
+A clinician enters four inputs: the pulse oximeter reading (SpO₂ %), the
+patient's Fitzpatrick skin tone group (Light I–II, Medium III–IV, or
+Dark V–VI), self-reported race/ethnicity, and assigned sex at birth. The
+tool returns three outputs in real time: an estimated true arterial
+oxygen saturation (SaO₂) with a 95% confidence interval, an occult
+hypoxemia risk probability, and a color-coded clinical flag (MASKED,
+MONITOR, or WITHIN RANGE).
 
 ### Statistical Model
 
-The tool is an **empirical bias correction**, not a machine learning model. It is grounded in the paired measurement structure of the OpenOximetry dataset, where each row represents one pulse oximeter reading matched to a simultaneous arterial blood gas draw from the same patient at the same moment. The correction has three components.
+The tool is an **empirical bias correction**, not a machine learning
+model. It is grounded in the paired measurement structure of the
+OpenOximetry dataset, where each row represents one pulse oximeter
+reading matched to a simultaneous arterial blood gas draw from the same
+patient at the same moment. The correction has three components.
 
-**Component 1 — Point correction.** For each Fitzpatrick group, we compute the mean bias $\bar{b}_k$ from all paired measurements in that group, where bias is defined as SpO₂ − SaO₂. A positive mean bias means the device systematically overestimates. The corrected SaO₂ estimate is:
+**Component 1 — Point correction.** For each Fitzpatrick group, we
+compute the mean bias $\bar{b}_k$ from all paired measurements in that
+group, where bias is defined as SpO₂ − SaO₂. A positive mean bias means
+the device systematically overestimates. The corrected SaO₂ estimate is:
 
 $$\hat{\text{SaO}}_2 = \text{SpO}_2 - \bar{b}_k - \delta_{\text{sex}}$$
 
-where $k \in \{\text{Light, Medium, Dark}\}$ and $\delta_{\text{sex}}$ is a sex adjustment term applied only to Black and Asian female patients ($\delta_{\text{sex}} = 0.32$ pp), derived from Patricia's intersectional analysis showing those subgroups carry approximately 0.32 percentage points of additional bias beyond the skin tone group mean.
+where $k \in \{\text{Light, Medium, Dark}\}$ and $\delta_{\text{sex}}$
+is a sex adjustment term applied only to Black and Asian female patients
+($\delta_{\text{sex}} = 0.32$ pp), derived from Patricia's
+intersectional analysis showing those subgroups carry approximately 0.32
+percentage points of additional bias beyond the skin tone group mean.
 
 The empirical bias parameters are:
 
 | Skin tone group | Mean bias $\bar{b}_k$ | SD of bias $s_k$ | Occult hypoxemia rate |
-|---|---|---|---|
+|------------------|------------------|------------------|------------------|
 | Light (I–II) | +0.62 pp | 3.21 pp | 6.2% |
 | Medium (III–IV) | +1.08 pp | 3.45 pp | 6.6% |
 | Dark (V–VI) | +1.82 pp | 3.89 pp | 11.6% |
 
-**Component 2 — Uncertainty interval.** The 95% confidence interval around the corrected estimate uses a normal approximation of the bias distribution:
+**Component 2 — Uncertainty interval.** The 95% confidence interval
+around the corrected estimate uses a normal approximation of the bias
+distribution:
 
 $$\hat{\text{SaO}}_2 \pm 1.96 \cdot \frac{s_k}{\sqrt{n_{\text{ref}}}}$$
 
-where $s_k$ is the within-group standard deviation of bias from OpenOximetry and $n_{\text{ref}} = 30$ is a conservative reference sample size representing a typical clinical encounter. This is an approximation: it treats the group-level variance as a proxy for the measurement uncertainty a clinician faces when relying on a single device reading. The interval is deliberately wide — individual-level bias can deviate substantially from the group mean, as shown by the violin plots in the dashboard.
+where $s_k$ is the within-group standard deviation of bias from
+OpenOximetry and $n_{\text{ref}} = 30$ is a conservative reference
+sample size representing a typical clinical encounter. This is an
+approximation: it treats the group-level variance as a proxy for the
+measurement uncertainty a clinician faces when relying on a single
+device reading. The interval is deliberately wide — individual-level
+bias can deviate substantially from the group mean, as shown by the
+violin plots in the dashboard.
 
-**Component 3 — Occult hypoxemia risk.** The risk displayed is the empirical occult hypoxemia rate for the patient's skin tone group, adjusted upward by a factor of 1.18 for Black and Asian female patients based on the intersectional bias finding. It is not computed from the SpO₂ value directly. It represents the background probability that a device reading above 88% in that demographic group is concealing true SaO₂ below 88%.
+**Component 3 — Occult hypoxemia risk.** The risk displayed is the
+empirical occult hypoxemia rate for the patient's skin tone group,
+adjusted upward by a factor of 1.18 for Black and Asian female patients
+based on the intersectional bias finding. It is not computed from the
+SpO₂ value directly. It represents the background probability that a
+device reading above 88% in that demographic group is concealing true
+SaO₂ below 88%.
 
 ### Clinical Flags
 
-Three flag levels are triggered based on where the corrected estimate falls relative to clinical thresholds:
+Three flag levels are triggered based on where the corrected estimate
+falls relative to clinical thresholds:
 
-- **MASKED** — SpO₂ ≥ 88% but $\hat{\text{SaO}}_2$ < 88%. The device reading passes the standard treatment threshold but the corrected estimate falls below it. The patient may be eligible for supplemental oxygen that is not being triggered.
-- **MONITOR** — SpO₂ ≥ 92% but $\hat{\text{SaO}}_2$ < 92%. The corrected estimate falls below a common secondary monitoring threshold. Arterial blood gas confirmation is recommended.
-- **WITHIN RANGE** — Both the device reading and the corrected estimate are above key thresholds. Bias correction has been applied; routine monitoring is appropriate.
+-   **MASKED** — SpO₂ ≥ 88% but $\hat{\text{SaO}}_2$ \< 88%. The device
+    reading passes the standard treatment threshold but the corrected
+    estimate falls below it. The patient may be eligible for
+    supplemental oxygen that is not being triggered.
+-   **MONITOR** — SpO₂ ≥ 92% but $\hat{\text{SaO}}_2$ \< 92%. The
+    corrected estimate falls below a common secondary monitoring
+    threshold. Arterial blood gas confirmation is recommended.
+-   **WITHIN RANGE** — Both the device reading and the corrected
+    estimate are above key thresholds. Bias correction has been applied;
+    routine monitoring is appropriate.
 
 ### What This Tool Is and Is Not
 
-The correction is based on **group-level statistics**, not an individual patient model. The mean bias for Dark skin patients is +1.82 pp on average, but the standard deviation of 3.89 pp means the actual bias for any individual measurement can range from strongly negative to strongly positive. The confidence interval reflects this uncertainty. The tool should be interpreted as a clinical awareness aid — a prompt to consider ABG confirmation — not as a replacement for direct measurement.
+The correction is based on **group-level statistics**, not an individual
+patient model. The mean bias for Dark skin patients is +1.82 pp on
+average, but the standard deviation of 3.89 pp means the actual bias for
+any individual measurement can range from strongly negative to strongly
+positive. The confidence interval reflects this uncertainty. The tool
+should be interpreted as a clinical awareness aid — a prompt to consider
+ABG confirmation — not as a replacement for direct measurement.
 
-The sex adjustment is a fixed additive term derived from our analysis of the OpenOximetry intersectional subgroups and should be treated as a preliminary estimate. The correction does not adjust for device model, peripheral perfusion, nail polish, or motion artifact, all of which are known sources of additional error. The occult hypoxemia rates are derived from a controlled laboratory population in San Francisco and may not generalize perfectly to all clinical settings.
+The sex adjustment is a fixed additive term derived from our analysis of
+the OpenOximetry intersectional subgroups and should be treated as a
+preliminary estimate. The correction does not adjust for device model,
+peripheral perfusion, nail polish, or motion artifact, all of which are
+known sources of additional error. The occult hypoxemia rates are
+derived from a controlled laboratory population in San Francisco and may
+not generalize perfectly to all clinical settings.
 
-::: {.callout-important}
-**This tool is for clinical awareness only — not a diagnostic device.** Estimates are based on population-level bias statistics from OpenOximetry 1.1.1 (UCSF Hypoxia Lab). Individual patient physiology varies. Arterial blood gas measurement remains the gold standard for determining true oxygen saturation, and clinical judgment should always prevail.
+::: callout-important
+**This tool is for clinical awareness only — not a diagnostic device.**
+Estimates are based on population-level bias statistics from
+OpenOximetry 1.1.1 (UCSF Hypoxia Lab). Individual patient physiology
+varies. Arterial blood gas measurement remains the gold standard for
+determining true oxygen saturation, and clinical judgment should always
+prevail.
 :::
 
 ### Why This Matters
 
-The 88% treatment threshold is a binary clinical trigger. Patients above it may be sent home or have oxygen therapy withheld; patients below it become eligible for interventions. A device that systematically reads 1.82 pp high for patients with Dark skin tones shifts a meaningful fraction of genuinely hypoxic patients above this threshold — hiding their condition from the clinical decision that should catch it. The provider tool makes this bias visible at the point of care, in real time, for the specific patient in front of the clinician.
+The 88% treatment threshold is a binary clinical trigger. Patients above
+it may be sent home or have oxygen therapy withheld; patients below it
+become eligible for interventions. A device that systematically reads
+1.82 pp high for patients with Dark skin tones shifts a meaningful
+fraction of genuinely hypoxic patients above this threshold — hiding
+their condition from the clinical decision that should catch it. The
+provider tool makes this bias visible at the point of care, in real
+time, for the specific patient in front of the clinician.
 
+## Video Presentation and Slides
 
+### Video
+
+::: {#fig-video}
+{{< video https://youtu.be/NLKsuO_sdbk>}} Video Presenattion
+:::
+
+### Slides
+
+```{html}
+<iframe src="https://docs.google.com/presentation/d/e/2PACX-1vTtyBlAm5x2-aImcRpH_QA1kfCmpNmo7hJderKtfiTpNMyVBMMrR1DAerh7WJhWdhBVLM91Fbsx0aq1/pubembed?start=true&amp;loop=false&amp;delayms=3000" frameborder="0" width="960" height="569" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true">
+
+</iframe>
+```
 ## Conclusions
 
-Our three research questions asked whether pulse oximetry accuracy varies by race and skin tone, whether that disparity has economic consequences, and whether race and insurance intersect to compound the burden. The answer to all three is yes, and the evidence chain is consistent across multiple analyses.
+Our three research questions asked whether pulse oximetry accuracy
+varies by race and skin tone, whether that disparity has economic
+consequences, and whether race and insurance intersect to compound the
+burden. The answer to all three is yes, and the evidence chain is
+consistent across multiple analyses.
 
-The clinical disparity is real, measurable, and systematic. Pulse oximeters overestimate oxygen saturation for darker-skinned patients, and this overestimation directly translates into a higher rate of occult hypoxemia — the specific failure mode that causes treatment to be withheld. The bias is not driven by one faulty device model; it is present across the majority of commercially available devices tested in the OpenOximetry lab. It is also not uniform by sex: Black and Asian women face higher rates of occult hypoxemia than their male counterparts, suggesting that sex amplifies the racial disparity in ways that simple single-variable analyses miss.
+The clinical disparity is real, measurable, and systematic. Pulse
+oximeters overestimate oxygen saturation for darker-skinned patients,
+and this overestimation directly translates into a higher rate of occult
+hypoxemia — the specific failure mode that causes treatment to be
+withheld. The bias is not driven by one faulty device model; it is
+present across the majority of commercially available devices tested in
+the OpenOximetry lab. It is also not uniform by sex: Black and Asian
+women face higher rates of occult hypoxemia than their male
+counterparts, suggesting that sex amplifies the racial disparity in ways
+that simple single-variable analyses miss.
 
-The economic consequences mirror the clinical disparity. The racial ordering in occult hypoxemia rates from OpenOximetry — White lowest, Hispanic/Latino moderate, Black highest — is the same ordering that appears in hospital charges from SPARCS. This matching gradient across two independent datasets from different cities is the ecological evidence connecting the clinical failure to its economic downstream. After controlling for age by stratifying into three age bands, the charge gap persists and widens. At 70+, when both insurance and severity scores nearly equalize across racial groups, the charge gap reaches its maximum — ruling out both as primary explanations and pointing toward a pre-admission clinical mechanism as the most plausible remaining candidate.
+The economic consequences mirror the clinical disparity. The racial
+ordering in occult hypoxemia rates from OpenOximetry — White lowest,
+Hispanic/Latino moderate, Black highest — is the same ordering that
+appears in hospital charges from SPARCS. This matching gradient across
+two independent datasets from different cities is the ecological
+evidence connecting the clinical failure to its economic downstream.
+After controlling for age by stratifying into three age bands, the
+charge gap persists and widens. At 70+, when both insurance and severity
+scores nearly equalize across racial groups, the charge gap reaches its
+maximum — ruling out both as primary explanations and pointing toward a
+pre-admission clinical mechanism as the most plausible remaining
+candidate.
 
-The insurance stratification adds the final dimension. Black and Hispanic/Latino patients face both elevated misdiagnosis risk and dramatically lower insurance protection at working age. The groups most likely to be misdiagnosed are also the groups least equipped to absorb the financial consequences when that misdiagnosis leads to a longer, more expensive hospitalization.
+The insurance stratification adds the final dimension. Black and
+Hispanic/Latino patients face both elevated misdiagnosis risk and
+dramatically lower insurance protection at working age. The groups most
+likely to be misdiagnosed are also the groups least equipped to absorb
+the financial consequences when that misdiagnosis leads to a longer,
+more expensive hospitalization.
 
----
+------------------------------------------------------------------------
 
 ## Limitations and Future Work
 
 ### Limitations
 
-**Ecological association, not causal.** The bridge between OpenOximetry and SPARCS is built at the group level across two independent populations. Race-level summary statistics from a San Francisco Bay Area laboratory sample are matched to race-level summaries from New York State hospital discharges. Directional consistency is evidence, not proof. A patient-linked dataset containing both oximetry measurements and hospitalization records for the same individuals would be necessary to estimate causal effects.
+**Ecological association, not causal.** The bridge between OpenOximetry
+and SPARCS is built at the group level across two independent
+populations. Race-level summary statistics from a San Francisco Bay Area
+laboratory sample are matched to race-level summaries from New York
+State hospital discharges. Directional consistency is evidence, not
+proof. A patient-linked dataset containing both oximetry measurements
+and hospitalization records for the same individuals would be necessary
+to estimate causal effects.
 
-**Severity scores may themselves be biased.** APR severity is coded at discharge from the patient record. If pulse oximeter bias causes delayed treatment — allowing a condition to deteriorate further before intervention — then the severity score documented at admission may understate the true disease burden the patient carried into the encounter. Controlling for severity in a regression may therefore underestimate the disparity rather than remove confounding cleanly.
+**Severity scores may themselves be biased.** APR severity is coded at
+discharge from the patient record. If pulse oximeter bias causes delayed
+treatment — allowing a condition to deteriorate further before
+intervention — then the severity score documented at admission may
+understate the true disease burden the patient carried into the
+encounter. Controlling for severity in a regression may therefore
+underestimate the disparity rather than remove confounding cleanly.
 
-**SPARCS has no separable Asian category.** Asian patients are recorded under "Other Race" in SPARCS with no way to identify them, limiting the bridge to three racial groups. OpenOximetry includes Asian patients, but they cannot be matched to an economic outcome group in SPARCS.
+**SPARCS has no separable Asian category.** Asian patients are recorded
+under "Other Race" in SPARCS with no way to identify them, limiting the
+bridge to three racial groups. OpenOximetry includes Asian patients, but
+they cannot be matched to an economic outcome group in SPARCS.
 
-**New York State is not nationally representative.** SPARCS reflects the state's dense urban hospital system, high Medicaid enrollment, and specific demographic composition. Findings may not generalize to states with different payer mixes or rural hospital landscapes.
+**New York State is not nationally representative.** SPARCS reflects the
+state's dense urban hospital system, high Medicaid enrollment, and
+specific demographic composition. Findings may not generalize to states
+with different payer mixes or rural hospital landscapes.
 
-**Device models are labeled numerically and not linked to manufacturer names.** The heatmap shows that the bias gradient is consistent across device models, but without knowing which models correspond to which manufacturers, we cannot make device-specific recommendations.
+**Device models are labeled numerically and not linked to manufacturer
+names.** The heatmap shows that the bias gradient is consistent across
+device models, but without knowing which models correspond to which
+manufacturers, we cannot make device-specific recommendations.
 
 ### Future Work
 
-The most important next step is a **formal regression analysis** controlling for age, severity, insurance, and gender simultaneously — producing residual race coefficients that cannot be attributed to any of the observable confounders. This is planned for Milestone 5.
+The most important next step is a **formal regression analysis**
+controlling for age, severity, insurance, and gender simultaneously —
+producing residual race coefficients that cannot be attributed to any of
+the observable confounders.
 
-We also want to run the **intersectional analysis** specified in the project proposal: race × gender × insurance interaction effects on charges. Patricia's EDA shows that sex compounds the occult hypoxemia disparity; the regression will test whether it also compounds the economic disparity.
+We also want to run the **intersectional analysis** specified in the
+project proposal: race × gender × insurance interaction effects on
+charges. Patricia's EDA shows that sex compounds the occult hypoxemia
+disparity; the regression will test whether it also compounds the
+economic disparity.
 
-Geographically, SPARCS provides hospital county information that we have not yet used. A **county-level analysis** would test whether disparities are concentrated in specific regions of New York or distributed statewide — a finding that would inform where targeted interventions might be most effective.
+Geographically, SPARCS provides hospital county information that we have
+not yet used. A **county-level analysis** would test whether disparities
+are concentrated in specific regions of New York or distributed
+statewide — a finding that would inform where targeted interventions
+might be most effective.
 
-On the OpenOximetry side, Monk skin tone scores are present for a subset of patients but have substantial missingness. Where both Fitzpatrick and Monk scores are available, we plan to test whether **Monk captures additional variance** in bias and occult hypoxemia beyond Fitzpatrick alone, since Monk was designed to better represent the full range of human skin tones.
+On the OpenOximetry side, Monk skin tone scores are present for a subset
+of patients but have substantial missingness. Where both Fitzpatrick and
+Monk scores are available, we plan to test whether **Monk captures
+additional variance** in bias and occult hypoxemia beyond Fitzpatrick
+alone, since Monk was designed to better represent the full range of
+human skin tones.
 
-Finally, the project has regulatory implications that we have not yet quantified. Current FDA guidance for pulse oximeter clearance does not require validation across the full Fitzpatrick spectrum. A natural extension of this work is to estimate **what calibration requirements would be necessary** to bring occult hypoxemia rates for Dark skin tones within a clinically acceptable range of those for Light skin tones, and what that would mean for current device approvals.
+Finally, the project has regulatory implications that we have not yet
+quantified. Current FDA guidance for pulse oximeter clearance does not
+require validation across the full Fitzpatrick spectrum. A natural
+extension of this work is to estimate **what calibration requirements
+would be necessary** to bring occult hypoxemia rates for Dark skin tones
+within a clinically acceptable range of those for Light skin tones, and
+what that would mean for current device approvals.
