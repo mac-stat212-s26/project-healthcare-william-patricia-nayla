@@ -932,7 +932,62 @@ beyond what severity scores capture at the point of care.
 **Key finding:** At 70+, two potential explanations for the charge gap simultaneously collapse. First, Medicaid coverage converges to near zero as patients shift to Medicare (Hispanic/Latino 10%, Black 4%, White 1%) — so insurance can no longer explain the difference. Second, severity scores converge tightly (White 2.79, Black 2.78, Hispanic/Latino 2.69) — so illness severity at admission cannot explain it either. Yet Black patients are billed ~$16K more than White patients and Hispanic/Latino patients ~$13K more, at the same age, with the same insurance, at the same severity. The residual gap — unexplained by age, insurance, or recorded severity — is consistent with a clinical mechanism upstream of hospital admission, such as delayed treatment from undetected hypoxemia inflating the true disease burden beyond what severity scores capture at the point of care.
 :::
 
----
+## Interactive Tool: Provider Bias Correction Dashboard
+
+The Shiny dashboard is available embedded in the [Shiny App](appx/app.qmd) section of this site and live at [shinyapps.io](https://1wrn0x-liam-acosta0lora.shinyapps.io/project-healthcare-william-patricia-nayla/). It has four tabs: a clinical visualization dashboard, an economic burden explorer, a provider correction tool, and a data table. This section documents the statistical methodology behind the correction tool specifically, since it goes beyond data visualization into applied estimation.
+
+### What the Provider Tool Does
+
+A clinician enters four inputs: the pulse oximeter reading (SpO₂ %), the patient's Fitzpatrick skin tone group (Light I–II, Medium III–IV, or Dark V–VI), self-reported race/ethnicity, and assigned sex at birth. The tool returns three outputs in real time: an estimated true arterial oxygen saturation (SaO₂) with a 95% confidence interval, an occult hypoxemia risk probability, and a color-coded clinical flag (MASKED, MONITOR, or WITHIN RANGE).
+
+### Statistical Model
+
+The tool is an **empirical bias correction**, not a machine learning model. It is grounded in the paired measurement structure of the OpenOximetry dataset, where each row represents one pulse oximeter reading matched to a simultaneous arterial blood gas draw from the same patient at the same moment. The correction has three components.
+
+**Component 1 — Point correction.** For each Fitzpatrick group, we compute the mean bias $\bar{b}_k$ from all paired measurements in that group, where bias is defined as SpO₂ − SaO₂. A positive mean bias means the device systematically overestimates. The corrected SaO₂ estimate is:
+
+$$\hat{\text{SaO}}_2 = \text{SpO}_2 - \bar{b}_k - \delta_{\text{sex}}$$
+
+where $k \in \{\text{Light, Medium, Dark}\}$ and $\delta_{\text{sex}}$ is a sex adjustment term applied only to Black and Asian female patients ($\delta_{\text{sex}} = 0.32$ pp), derived from Patricia's intersectional analysis showing those subgroups carry approximately 0.32 percentage points of additional bias beyond the skin tone group mean.
+
+The empirical bias parameters are:
+
+| Skin tone group | Mean bias $\bar{b}_k$ | SD of bias $s_k$ | Occult hypoxemia rate |
+|---|---|---|---|
+| Light (I–II) | +0.62 pp | 3.21 pp | 6.2% |
+| Medium (III–IV) | +1.08 pp | 3.45 pp | 6.6% |
+| Dark (V–VI) | +1.82 pp | 3.89 pp | 11.6% |
+
+**Component 2 — Uncertainty interval.** The 95% confidence interval around the corrected estimate uses a normal approximation of the bias distribution:
+
+$$\hat{\text{SaO}}_2 \pm 1.96 \cdot \frac{s_k}{\sqrt{n_{\text{ref}}}}$$
+
+where $s_k$ is the within-group standard deviation of bias from OpenOximetry and $n_{\text{ref}} = 30$ is a conservative reference sample size representing a typical clinical encounter. This is an approximation: it treats the group-level variance as a proxy for the measurement uncertainty a clinician faces when relying on a single device reading. The interval is deliberately wide — individual-level bias can deviate substantially from the group mean, as shown by the violin plots in the dashboard.
+
+**Component 3 — Occult hypoxemia risk.** The risk displayed is the empirical occult hypoxemia rate for the patient's skin tone group, adjusted upward by a factor of 1.18 for Black and Asian female patients based on the intersectional bias finding. It is not computed from the SpO₂ value directly. It represents the background probability that a device reading above 88% in that demographic group is concealing true SaO₂ below 88%.
+
+### Clinical Flags
+
+Three flag levels are triggered based on where the corrected estimate falls relative to clinical thresholds:
+
+- **MASKED** — SpO₂ ≥ 88% but $\hat{\text{SaO}}_2$ < 88%. The device reading passes the standard treatment threshold but the corrected estimate falls below it. The patient may be eligible for supplemental oxygen that is not being triggered.
+- **MONITOR** — SpO₂ ≥ 92% but $\hat{\text{SaO}}_2$ < 92%. The corrected estimate falls below a common secondary monitoring threshold. Arterial blood gas confirmation is recommended.
+- **WITHIN RANGE** — Both the device reading and the corrected estimate are above key thresholds. Bias correction has been applied; routine monitoring is appropriate.
+
+### What This Tool Is and Is Not
+
+The correction is based on **group-level statistics**, not an individual patient model. The mean bias for Dark skin patients is +1.82 pp on average, but the standard deviation of 3.89 pp means the actual bias for any individual measurement can range from strongly negative to strongly positive. The confidence interval reflects this uncertainty. The tool should be interpreted as a clinical awareness aid — a prompt to consider ABG confirmation — not as a replacement for direct measurement.
+
+The sex adjustment is a fixed additive term derived from our analysis of the OpenOximetry intersectional subgroups and should be treated as a preliminary estimate. The correction does not adjust for device model, peripheral perfusion, nail polish, or motion artifact, all of which are known sources of additional error. The occult hypoxemia rates are derived from a controlled laboratory population in San Francisco and may not generalize perfectly to all clinical settings.
+
+::: {.callout-important}
+**This tool is for clinical awareness only — not a diagnostic device.** Estimates are based on population-level bias statistics from OpenOximetry 1.1.1 (UCSF Hypoxia Lab). Individual patient physiology varies. Arterial blood gas measurement remains the gold standard for determining true oxygen saturation, and clinical judgment should always prevail.
+:::
+
+### Why This Matters
+
+The 88% treatment threshold is a binary clinical trigger. Patients above it may be sent home or have oxygen therapy withheld; patients below it become eligible for interventions. A device that systematically reads 1.82 pp high for patients with Dark skin tones shifts a meaningful fraction of genuinely hypoxic patients above this threshold — hiding their condition from the clinical decision that should catch it. The provider tool makes this bias visible at the point of care, in real time, for the specific patient in front of the clinician.
+
 
 ## Conclusions
 
