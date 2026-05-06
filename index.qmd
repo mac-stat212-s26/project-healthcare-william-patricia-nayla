@@ -19,7 +19,6 @@ format:
     code-summary: "Show code"
     fig-width: 8
     fig-height: 5
-    embed-resources: true
 execute:
   warning: false
   message: false
@@ -1240,19 +1239,25 @@ time, for the specific patient in front of the clinician.
 
 ## Video Presentation and Slides
 
-## Video
+### Video
 
 ::: {#fig-video}
-{{< video https://youtu.be/NLKsuO_sdbk>}} Video Presenattion
+{{< video https://youtu.be/NLKsuO_sdbk >}}
+
+Video Presentation
 :::
 
-## Slides
+### Slides
 
-<iframe src="https://docs.google.com/presentation/d/e/2PACX-1vTtyBlAm5x2-aImcRpH_QA1kfCmpNmo7hJderKtfiTpNMyVBMMrR1DAerh7WJhWdhBVLM91Fbsx0aq1/pubembed?start=true&amp;loop=false&amp;delayms=3000" frameborder="0" width="960" height="569" allowfullscreen="true">
-
+<iframe
+  src="https://docs.google.com/presentation/d/e/2PACX-1vTtyBlAm5x2-aImcRpH_QA1kfCmpNmo7hJderKtfiTpNMyVBMMrR1DAerh7WJhWdhBVLM91Fbsx0aq1/pubembed?start=true&loop=false&delayms=3000"
+  frameborder="0"
+  width="100%"
+  height="569"
+  allowfullscreen="true">
 </iframe>
 
-\[Download the PDF\](hypoxemia_presentation (1).pdf)
+[Download the PDF slides](hypoxemia_presentation%20(1).pdf)
 
 ## Conclusions
 
