@@ -1,0 +1,1026 @@
+---
+title: "Individual EDA: Hidden Hypoxemia and Its Economic Consequences"
+subtitle: "OpenOximetry + NY SPARCS Inpatient Discharge Data"
+author: "William Acosta Lora"
+date: today
+format:
+  html:
+    toc: true
+    toc-depth: 3
+    code-fold: true
+    code-summary: "Show code"
+    fig-width: 8
+    fig-height: 5
+editor: 
+  markdown: 
+    wrap: 72
+---
+
+## Overview
+
+This EDA covers both project datasets and the bridge connecting them:
+
+-   **OpenOximetry** (UCSF Hypoxia Lab) — paired pulse oximeter (SpO₂)
+    and arterial blood gas (SaO₂) measurements with objective skin tone
+    scores. Used to measure who gets misdiagnosed and by how much.
+-   **NY SPARCS Inpatient Discharge 2021** — 103K respiratory discharge
+    records from New York State hospitals with charges, costs, length of
+    stay, insurance, and severity. Used to measure who pays more and
+    arrives sicker.
+-   **Bridge analysis** — because the two datasets do not share
+    patients, the connection is made at the group level: race-stratified
+    summaries from each dataset are joined on race to trace the
+    downstream economic consequences of pulse oximeter bias.
+
+------------------------------------------------------------------------
+
+## Setup
+
+```{r}
+#| label: setup
+#| message: false
+#| warning: false
+
+library(tidyverse)
+library(visdat)
+library(DataExplorer)
+library(gtsummary)
+library(janitor)
+library(scales)
+library(patchwork)
+library(ggrepel)
+
+theme_set(theme_minimal(base_size = 13))
+```
+
+The analysis is structured as a three-part argument. Part 1 establishes
+the clinical reality: pulse oximeters systematically fail darker-skinned
+patients, and that failure is measurable and graded by skin tone. Part 2
+documents the economic reality: Black and Hispanic/Latino patients pay
+more for respiratory care at every age, under every insurance type, at
+every severity level. Part 3 asks whether these two realities are
+connected and finds that the racial ordering in misdiagnosis rates is
+consistent with the racial ordering in costs, and that the charge gap
+persists even after the two most obvious confounders (insurance and
+severity) are removed.
+
+## Part 1 — OpenOximetry Dataset
+
+### Load and Merge
+
+The OpenOximetry dataset is stored as five relational CSVs. All five are
+joined into a single analysis-ready tibble. `age_at_encounter` is pulled
+from the encounter table and `race_eth` is constructed with ethnicity
+taking priority over race to correctly classify Hispanic patients.
+
+```{r}
+#| label: load-oximetry
+#| message: false
+#| warning: false
+
+patients      <- read_csv("../data/raw/patient.csv")
+encounter     <- read_csv("../data/raw/encounter.csv")
+pulseoximeter <- read_csv("../data/raw/pulseoximeter.csv")
+bloodgas      <- read_csv("../data/raw/bloodgas.csv")
+
+oximetry <- pulseoximeter |>
+  inner_join(
+    bloodgas |> select(encounter_id, sample, so2),
+    by = c("encounter_id", "sample_number" = "sample")
+  ) |>
+  rename(SpO2 = saturation, SaO2 = so2) |>
+  left_join(
+    encounter |> select(
+      encounter_id, patient_id, fitzpatrick, age_at_encounter
+    ),
+    by = "encounter_id"
+  ) |>
+  left_join(
+    patients |> select(patient_id, race, ethnicity),
+    by = "patient_id"
+  ) |>
+  mutate(
+    bias             = SpO2 - SaO2,
+    occult_hypoxemia = SpO2 >= 88 & SaO2 < 88,
+
+    skin_group = cut(
+      fitzpatrick,
+      breaks         = c(0, 2, 4, 6),
+      labels         = c("Light (I–II)", "Medium (III–IV)", "Dark (V–VI)"),
+      include.lowest = TRUE
+    ),
+
+    race_eth = case_when(
+      ethnicity == "Hispanic"                            ~ "Hispanic/Latino",
+      str_detect(race, "African American") &
+        ethnicity == "Not Hispanic"                      ~ "Black",
+      race == "Caucasian" &
+        ethnicity == "Not Hispanic"                      ~ "White",
+      str_detect(race, "^Asian") &
+        ethnicity == "Not Hispanic"                      ~ "Asian",
+      TRUE                                               ~ NA_character_
+    )
+  ) |>
+  filter(!is.na(race_eth))
+
+# Remove non-finite bias values caused by bad join rows
+oximetry <- oximetry |>
+  filter(is.finite(bias), is.finite(SpO2), is.finite(SaO2))
+
+glimpse(oximetry)
+```
+
+The merged dataset contains **`r nrow(oximetry) |> comma()` paired
+measurements** across **`r n_distinct(oximetry$patient_id)` unique
+patients**.
+
+The dataset captures paired measurements taken simultaneously by
+multiple pulse oximeter devices and an arterial blood gas draw. Each row
+is one device reading matched to one blood gas measurement, so a single
+patient encounter generates multiple rows — one per device per sample.
+The key outcome variables are `bias` (how much the device overestimates
+true saturation) and `occult_hypoxemia` (whether the device reads normal
+while the patient is actually hypoxic
+
+### Structure and Missingness
+
+```{r}
+#| label: oximetry-visdat
+#| fig-alt: "Missingness bar chart for key oximetry variables"
+
+oximetry |>
+  select(SpO2, SaO2, bias, fitzpatrick, age_at_encounter,
+         race_eth, skin_group, occult_hypoxemia) |>
+  plot_missing(
+    title   = "Missingness in key OpenOximetry variables",
+    ggtheme = theme_minimal(base_size = 12)
+  )
+```
+
+```{r}
+#| label: oximetry-missing
+#| message: false
+
+plot_missing(
+  oximetry,
+  title   = "Missing values per variable — OpenOximetry",
+  ggtheme = theme_minimal(base_size = 12)
+)
+```
+
+------------------------------------------------------------------------
+
+### Patient Demographics
+
+```{r}
+#| label: oximetry-demographics
+#| message: false
+
+oximetry |>
+  distinct(patient_id, .keep_all = TRUE) |>
+  select(race_eth, age_at_encounter, fitzpatrick, skin_group) |>
+  tbl_summary(
+    label = list(
+      race_eth           ~ "Race / Ethnicity",
+      age_at_encounter   ~ "Age at encounter (years)",
+      fitzpatrick        ~ "Fitzpatrick score (1–6)",
+      skin_group         ~ "Skin tone group"
+    ),
+    statistic = list(
+      all_continuous()  ~ "{mean} ({sd})",
+      all_categorical() ~ "{n} ({p}%)"
+    ),
+    missing = "ifany"
+  ) |>
+  bold_labels() |>
+  modify_caption("**Table 1. Patient demographics — OpenOximetry (unique patients)**")
+```
+
+```{r fig.width=10}
+#| label: oximetry-race-skin
+#| fig-alt: "Bar charts of patients by race and by Fitzpatrick skin tone group"
+
+p_race <- oximetry |>
+  distinct(patient_id, .keep_all = TRUE) |>
+  count(race_eth) |>
+  mutate(race_eth = fct_reorder(race_eth, n)) |>
+  ggplot(aes(x = n, y = race_eth, fill = race_eth)) +
+  geom_col(show.legend = FALSE, alpha = 0.85) +
+  scale_fill_brewer(palette = "Set2") +
+  labs(title = "Patients by race / ethnicity", x = "Count", y = NULL)
+
+p_skin <- oximetry |>
+  distinct(patient_id, .keep_all = TRUE) |>
+  filter(!is.na(skin_group)) |>
+  count(skin_group) |>
+  ggplot(aes(x = skin_group, y = n, fill = skin_group)) +
+  geom_col(show.legend = FALSE, alpha = 0.85) +
+  scale_fill_manual(values = c("#f5c07a", "#c8855a", "#6b3a2a")) +
+  labs(title = "Patients by Fitzpatrick group", x = NULL, y = "Count")
+
+p_race + p_skin
+```
+
+The sample skews toward medium Fitzpatrick scores (III–IV), with fewer
+patients at the extremes of the scale. Estimates for Fitzpatrick I–II
+and V–VI are based on smaller subgroups and carry more uncertainty than
+estimates for the middle range. This is worth keeping in mind when
+interpreting the skin-tone gradients below.
+
+### SpO₂, SaO₂, and Bias Distributions
+
+```{r fig.width=10}
+#| label: spo2-sao2
+#| fig-alt: "Overlapping density plots of SpO2 and SaO2"
+
+oximetry |>
+  select(SpO2, SaO2) |>
+  pivot_longer(everything(), names_to = "measure", values_to = "value") |>
+  ggplot(aes(x = value, fill = measure)) +
+  geom_density(alpha = 0.45) +
+  scale_fill_manual(values = c("SaO2" = "#2171b5", "SpO2" = "#ef6548")) +
+  geom_vline(xintercept = 88, linetype = "dashed", color = "grey40") +
+  annotate("text", x = 87.3, y = 0.15, label = "88% threshold",
+           hjust = 1, size = 3.5, color = "grey40") +
+  labs(
+    title = "SpO₂ (pulse ox) vs. SaO₂ (arterial blood gas)",
+    x = "Oxygen saturation (%)", y = "Density", fill = "Measurement"
+  )
+```
+
+```{r}
+#| label: bias-dist
+#| fig-alt: "Density plot of pulse oximeter bias capped at plus or minus 20pp"
+
+bias_mean <- mean(oximetry$bias, na.rm = TRUE)
+
+oximetry |>
+  filter(between(bias, -20, 20)) |>
+  ggplot(aes(x = bias)) +
+  geom_density(fill = "#9ecae1", alpha = 0.7) +
+  geom_vline(xintercept = 0,         linetype = "solid",  color = "grey30") +
+  geom_vline(xintercept = bias_mean, linetype = "dashed", color = "#e34a33") +
+  annotate("text", x = bias_mean + 0.3, y = Inf, vjust = 1.5,
+           label = paste0("Mean = ", round(bias_mean, 2), " pp"),
+           color = "#e34a33", size = 3.8) +
+  labs(
+    title    = "Distribution of pulse oximeter bias (SpO₂ − SaO₂)",
+    subtitle = "Positive = device overestimates true oxygen saturation; capped at ±20 pp for readability",
+    x = "Bias (pp)", y = "Density"
+  )
+```
+
+The mean bias of `r round(bias_mean, 2)` percentage points means the
+pulse oximeter reports oxygen saturation about one point higher than the
+patient actually has on average. That sounds small, but clinical
+decisions — whether to administer supplemental oxygen, whether a patient
+is stable for discharge — are often made on differences of one or two
+points. A device that consistently flatters the reading shifts those
+decision thresholds in ways that disadvantage every patient, but
+disadvantage darker-skinned patients most.
+
+```{r}
+#| label: bias-skin
+#| fig-alt: "Violin and boxplot of bias by Fitzpatrick skin tone group"
+
+oximetry |>
+  filter(!is.na(skin_group), between(bias, -20, 20)) |>
+  ggplot(aes(x = skin_group, y = bias, fill = skin_group)) +
+  geom_violin(alpha = 0.5, trim = TRUE) +
+  geom_boxplot(width = 0.15, outlier.shape = NA, alpha = 0.8) +
+  geom_hline(yintercept = 0, linetype = "dashed", color = "grey40") +
+  scale_fill_manual(values = c("#f5c07a", "#c8855a", "#6b3a2a")) +
+  labs(
+    title    = "Pulse oximeter bias by Fitzpatrick skin tone group",
+    subtitle = "Capped at ±20 pp; shows bulk of distribution",
+    x = "Skin tone group", y = "Bias (SpO₂ − SaO₂, pp)"
+  ) +
+  theme(legend.position = "none")
+```
+
+```{r}
+#| label: bias-fitzpatrick-scatter
+#| message: false
+#| fig-alt: "Scatter of bias vs continuous Fitzpatrick score with loess smoother"
+
+oximetry |>
+  filter(!is.na(fitzpatrick), between(bias, -20, 20)) |>
+  ggplot(aes(x = fitzpatrick, y = bias)) +
+  geom_jitter(alpha = 0.15, width = 0.15, color = "#6b3a2a") +
+  geom_smooth(method = "loess", se = TRUE, color = "#e34a33", linewidth = 1.2) +
+  geom_hline(yintercept = 0, linetype = "dashed", color = "grey40") +
+  scale_x_continuous(breaks = 1:6) +
+  labs(
+    title    = "Pulse oximeter bias vs. continuous Fitzpatrick score",
+    subtitle = "Bias increases continuously with darker skin tone; capped at ±20 pp",
+    x = "Fitzpatrick score (1 = lightest, 6 = darkest)", y = "Bias (pp)"
+  )
+```
+
+Bias magnitude matters because it determines whether a patient crosses
+the clinical threshold for treatment. The most consequential form of
+error is **occult hypoxemia**: the device reads SpO₂ ≥ 88% (appearing
+normal) while true SaO₂ is below 88% (the patient is genuinely hypoxic).
+This is not a measurement nuisance — it is the specific failure mode
+that causes clinicians to withhold oxygen therapy and delay intervention
+from patients who need it.
+
+```{r}
+#| label: occult-skin
+#| fig-alt: "Bar chart of occult hypoxemia rate by skin tone group"
+
+oximetry |>
+  filter(!is.na(skin_group)) |>
+  group_by(skin_group) |>
+  summarise(
+    n        = n(),
+    n_occult = sum(occult_hypoxemia, na.rm = TRUE),
+    rate     = n_occult / n
+  ) |>
+  ggplot(aes(x = skin_group, y = rate, fill = skin_group)) +
+  geom_col(alpha = 0.85) +
+  geom_text(aes(label = percent(rate, accuracy = 0.1)), vjust = -0.5, size = 4) +
+  scale_y_continuous(labels = percent_format(),
+                     expand  = expansion(mult = c(0, 0.1))) +
+  scale_fill_manual(values = c("#f5c07a", "#c8855a", "#6b3a2a")) +
+  labs(
+    title = "Occult hypoxemia rate by Fitzpatrick skin tone group",
+    x = "Skin tone group", y = "Rate of occult hypoxemia"
+  ) +
+  theme(legend.position = "none")
+```
+
+The pattern by skin tone group maps directly onto race when the same
+data is stratified by self-reported race and ethnicity. Because race and
+skin tone are correlated but not identical — not all Black patients have
+dark Fitzpatrick scores, and not all patients with dark Fitzpatrick
+scores are Black — the race analysis captures a slightly different slice
+of the disparity. Together, the two views strengthen the case: the
+device fails systematically along both a biological dimension (melanin
+concentration) and a social one (race as experienced in a clinical
+encounter).
+
+### Occult Hypoxemia by Race
+
+```{r}
+#| label: occult-race
+#| fig-alt: "Bar chart of occult hypoxemia rate by race"
+
+oximetry |>
+  filter(!is.na(race_eth)) |>
+  group_by(race_eth) |>
+  summarise(rate = mean(occult_hypoxemia, na.rm = TRUE), n = n()) |>
+  mutate(race_eth = fct_reorder(race_eth, rate)) |>
+  ggplot(aes(x = rate, y = race_eth, fill = race_eth)) +
+  geom_col(alpha = 0.85, show.legend = FALSE) +
+  geom_text(aes(label = percent(rate, accuracy = 0.1)),
+            hjust = -0.15, size = 3.8) +
+  scale_x_continuous(labels = percent_format(),
+                     expand  = expansion(mult = c(0, 0.12))) +
+  scale_fill_brewer(palette = "Set2") +
+  labs(
+    title = "Occult hypoxemia rate by race / ethnicity",
+    x = "Rate of occult hypoxemia", y = NULL
+  )
+```
+
+Part 1 has established who gets misdiagnosed and by how much. Part 2 now
+turns to the economic side of the same question: among patients admitted
+to New York State hospitals with respiratory diagnoses, who pays more,
+who stays longer, and who arrives sicker — and does that ordering match
+what the oximetry data predicts?
+
+## Part 2 — NY SPARCS Inpatient Discharge Dataset
+
+### Load and Clean
+
+SPARCS is pulled directly from the NY Health Data API, filtered
+server-side to respiratory diagnoses. No file is saved to disk.
+
+```{r}
+#| label: load-sparcs
+#| message: false
+#| warning: false
+
+sparcs_raw <- read_csv(
+  "https://health.data.ny.gov/resource/tg3i-cinn.csv?$where=ccsr_diagnosis_code%20like%20%27RSP%25%27&$limit=500000",
+  show_col_types = FALSE
+)
+
+sparcs <- sparcs_raw |>
+  filter(str_starts(ccsr_diagnosis_code, "RSP")) |>
+  mutate(
+    length_of_stay = as.numeric(length_of_stay),
+    total_charges  = as.numeric(total_charges),
+    total_costs    = as.numeric(total_costs),
+
+    # Ethnicity-first: Hispanic patients appear under multiple race codes
+    race_eth = case_when(
+      ethnicity == "Spanish/Hispanic"                    ~ "Hispanic/Latino",
+      race == "Black/African American" &
+        ethnicity == "Not Span/Hispanic"                 ~ "Black",
+      race == "White" &
+        ethnicity == "Not Span/Hispanic"                 ~ "White",
+      TRUE                                               ~ NA_character_
+    ),
+
+    age_group = case_when(
+      age_group %in% c("18 to 29", "30 to 49") ~ "18–49",
+      age_group == "50 to 69"                  ~ "50–69",
+      age_group == "70 or Older"               ~ "70+",
+      TRUE                                     ~ NA_character_
+    ),
+
+    insurance = case_when(
+      str_detect(payment_typology_1, regex("medicaid", ignore_case = TRUE)) ~ "Medicaid",
+      str_detect(payment_typology_1, regex("medicare", ignore_case = TRUE)) ~ "Medicare",
+      str_detect(payment_typology_1, regex("private",  ignore_case = TRUE)) ~ "Private",
+      str_detect(payment_typology_1, regex("self",     ignore_case = TRUE)) ~ "Self-Pay",
+      TRUE                                                                   ~ "Other"
+    ),
+
+    severity = factor(
+      apr_severity_of_illness,
+      levels = c("Minor", "Moderate", "Major", "Extreme")
+    ),
+
+    severity_code = apr_severity_of_illness_code,
+
+    died = str_detect(
+      patient_disposition,
+      regex("expired|died", ignore_case = TRUE)
+    )
+  ) |>
+  filter(!is.na(race_eth))
+
+glimpse(sparcs)
+```
+
+After filtering, the dataset contains **`r nrow(sparcs) |> comma()`
+discharge records**.
+
+Unlike OpenOximetry, which is a controlled lab dataset with careful
+measurement protocols, SPARCS is administrative data — collected at the
+point of hospital discharge primarily for billing and regulatory
+purposes. The economic variables (charges, costs, length of stay) are
+measured precisely, but clinical variables like severity are assigned by
+coders working from discharge records rather than by clinicians at the
+bedside. That distinction matters for interpreting the bridge: if pulse
+oximeter bias causes delayed treatment, the true severity of a patient's
+condition at the time of intervention may be worse than the coded APR
+severity score reflects — the score captures severity as documented, not
+severity as it actually developed.
+
+------------------------------------------------------------------------
+
+### Structure and Missingness
+
+```{r}
+#| label: sparcs-visdat
+#| fig-alt: "Missingness bar chart for key SPARCS variables"
+
+sparcs |>
+  select(race_eth, age_group, gender, insurance, severity,
+         length_of_stay, total_charges, total_costs, died) |>
+  plot_missing(
+    title   = "Missingness in key SPARCS variables",
+    ggtheme = theme_minimal(base_size = 12)
+  )
+```
+
+```{r fig.height=10, fig.width=10}
+#| label: sparcs-missing
+#| message: false
+
+plot_missing(
+  sparcs,
+  title   = "Missing values per variable — SPARCS",
+  ggtheme = theme_minimal(base_size = 12)
+)
+```
+
+------------------------------------------------------------------------
+
+### Patient Characteristics
+
+```{r }
+#| label: sparcs-demographics
+#| message: false
+
+sparcs |>
+  select(gender, race_eth, age_group, insurance, severity,
+         length_of_stay, total_charges, total_costs) |>
+  tbl_summary(
+    label = list(
+      gender         ~ "Gender",
+      race_eth       ~ "Race / Ethnicity",
+      age_group      ~ "Age group",
+      insurance      ~ "Insurance type",
+      severity       ~ "Illness severity",
+      length_of_stay ~ "Length of stay (days)",
+      total_charges  ~ "Total charges ($)",
+      total_costs    ~ "Total costs ($)"
+    ),
+    statistic = list(
+      all_continuous()  ~ "{median} ({p25}, {p75})",
+      all_categorical() ~ "{n} ({p}%)"
+    ),
+    missing = "ifany"
+  ) |>
+  bold_labels() |>
+  modify_caption("**Table 2. Patient characteristics — SPARCS respiratory discharges**")
+```
+
+### Race, Insurance, and Diagnosis Breakdown
+
+```{r fig.height=10, fig.width=10}
+#| label: sparcs-race-insurance
+#| fig-alt: "Bar charts showing race and insurance breakdown"
+
+p_race_s <- sparcs |>
+  count(race_eth) |>
+  mutate(race_eth = fct_reorder(race_eth, n)) |>
+  ggplot(aes(x = n, y = race_eth, fill = race_eth)) +
+  geom_col(show.legend = FALSE, alpha = 0.85) +
+  scale_x_continuous(labels = comma_format()) +
+  scale_fill_brewer(palette = "Set1") +
+  labs(title = "Discharges by race / ethnicity", x = "Count", y = NULL)
+
+p_ins <- sparcs |>
+  count(insurance) |>
+  mutate(insurance = fct_reorder(insurance, n)) |>
+  ggplot(aes(x = n, y = insurance, fill = insurance)) +
+  geom_col(show.legend = FALSE, alpha = 0.85) +
+  scale_x_continuous(labels = comma_format()) +
+  scale_fill_brewer(palette = "Set2") +
+  labs(title = "Discharges by insurance type", x = "Count", y = NULL)
+
+p_race_s + p_ins
+```
+
+```{r}
+#| label: sparcs-diagnoses
+#| fig-alt: "Horizontal bar chart of top 15 respiratory diagnoses"
+
+sparcs |>
+  count(ccsr_diagnosis_description) |>
+  slice_max(n, n = 15) |>
+  mutate(ccsr_diagnosis_description = fct_reorder(ccsr_diagnosis_description, n)) |>
+  ggplot(aes(x = n, y = ccsr_diagnosis_description)) +
+  geom_col(fill = "#6baed6", alpha = 0.85) +
+  scale_x_continuous(labels = comma_format()) +
+  labs(title = "Top 15 respiratory diagnoses", x = "Number of discharges", y = NULL)
+```
+
+### Distributions of Economic Outcomes
+
+```{r}
+#| label: sparcs-econ-dist
+#| message: false
+#| fig-height: 7
+
+sparcs |>
+  select(length_of_stay, total_charges, total_costs, severity_code) |>
+  plot_histogram(
+    title   = "Distributions of key economic and severity variables",
+    ggtheme = theme_minimal(base_size = 12)
+  )
+```
+
+### Charges and LOS by Race
+
+```{r}
+#| label: charges-race
+#| fig-alt: "Boxplots of charges and LOS by race"
+
+p_charges_r <- sparcs |>
+  filter(!is.na(total_charges), total_charges > 0) |>
+  mutate(race_eth = fct_reorder(race_eth, total_charges, median)) |>
+  ggplot(aes(x = race_eth, y = total_charges, fill = race_eth)) +
+  geom_boxplot(outlier.alpha = 0.04, alpha = 0.8) +
+  scale_y_log10(labels = dollar_format()) +
+  scale_fill_brewer(palette = "Set1") +
+  labs(title = "Total charges by race (log scale)",
+       x = NULL, y = "Total charges") +
+  theme(legend.position = "none",
+        axis.text.x = element_text(angle = 20, hjust = 1))
+
+p_los_r <- sparcs |>
+  filter(!is.na(length_of_stay)) |>
+  mutate(race_eth = fct_reorder(race_eth, length_of_stay, median)) |>
+  ggplot(aes(x = race_eth, y = length_of_stay, fill = race_eth)) +
+  geom_boxplot(outlier.alpha = 0.04, alpha = 0.8) +
+  scale_y_continuous(limits = c(0, 30)) +
+  scale_fill_brewer(palette = "Set1") +
+  labs(title = "Length of stay by race (capped at 30d)",
+       x = NULL, y = "Days") +
+  theme(legend.position = "none",
+        axis.text.x = element_text(angle = 20, hjust = 1))
+
+p_charges_r + p_los_r
+```
+
+### Insurance Mix by Race
+
+```{r}
+#| label: insurance-race-heatmap
+#| message: false
+#| fig-alt: "Heatmap of insurance type proportion within each racial group"
+
+sparcs |>
+  filter(!is.na(insurance)) |>
+  count(race_eth, insurance) |>
+  group_by(race_eth) |>
+  mutate(pct = n / sum(n)) |>
+  ungroup() |>
+  ggplot(aes(x = insurance, y = race_eth, fill = pct)) +
+  geom_tile(color = "white") +
+  geom_text(aes(label = percent(pct, accuracy = 1)), size = 3.2) +
+  scale_fill_distiller(palette = "Blues", direction = 1,
+                       labels  = percent_format()) +
+  labs(
+    title = "Insurance type distribution within each racial group",
+    x = "Insurance type", y = NULL, fill = "% within group"
+  ) +
+  theme(axis.text.x = element_text(angle = 20, hjust = 1))
+```
+
+Two patterns in the SPARCS data are worth carrying forward into the
+bridge analysis. First, Black and Hispanic/Latino patients face higher
+charges and longer stays than White patients in the raw comparisons —
+but age is a major confounder because White respiratory patients skew
+older and are predominantly on Medicare. Second, the insurance
+distribution differs sharply by race, with Black and Hispanic/Latino
+patients far more likely to be on Medicaid or Self-Pay. Both of these
+alternative explanations need to be examined and ruled out before the
+charge disparity can be attributed to a clinical mechanism like pulse
+oximeter bias.
+
+## Part 3 — Bridge Analysis: Hypoxemia Leads to Economic Burden
+
+The two datasets do not share patients. The connection is made at the
+**group level**: race-stratified summaries from each dataset are joined
+on race to test whether the racial gradient in occult hypoxemia is
+consistent with the racial gradient in costs and severity.
+
+> **Hypothesized pathway:** darker skin tone = higher occult hypoxemia
+> rate = delayed treatment = higher severity at admission = longer stay
+> = higher charges = compounded by insurance type
+
+### Race-Level Bridge Table
+
+```{r}
+#| label: build-bridge
+
+oximetry_summary <- oximetry |>
+  group_by(race_eth) |>
+  summarise(
+    n_measurements        = n(),
+    occult_hypoxemia_rate = mean(occult_hypoxemia, na.rm = TRUE),
+    mean_bias             = mean(bias, na.rm = TRUE),
+    .groups = "drop"
+  )
+
+sparcs_summary <- sparcs |>
+  group_by(race_eth) |>
+  summarise(
+    n_discharges    = n(),
+    median_charges  = median(total_charges,  na.rm = TRUE),
+    median_costs    = median(total_costs,    na.rm = TRUE),
+    median_los      = median(length_of_stay, na.rm = TRUE),
+    mean_severity   = mean(severity_code,    na.rm = TRUE),
+    mortality_rate  = mean(died,             na.rm = TRUE),
+    pct_unprotected = mean(
+      insurance %in% c("Medicaid", "Self-Pay"), na.rm = TRUE
+    ),
+    .groups = "drop"
+  )
+
+bridge <- oximetry_summary |>
+  inner_join(sparcs_summary, by = "race_eth")
+
+
+
+
+bridge |>
+  mutate(
+    occult_hypoxemia_rate = percent(occult_hypoxemia_rate, accuracy = 0.1),
+    mean_bias             = round(mean_bias, 2),
+    median_charges        = dollar(median_charges),
+    median_los            = round(median_los, 1),
+    mean_severity         = round(mean_severity, 2),
+    mortality_rate        = percent(mortality_rate, accuracy = 0.1),
+    pct_unprotected       = percent(pct_unprotected, accuracy = 0.1)
+  ) |>
+  select(race_eth, occult_hypoxemia_rate, mean_bias,
+         mean_severity, median_los, median_charges,
+         mortality_rate, pct_unprotected) |>
+  knitr::kable(
+    col.names = c("Race / Ethnicity", "Occult hypoxemia rate",
+                  "Mean bias (pp)", "Mean severity", "Median LOS",
+                  "Median charges", "Mortality rate", "% Medicaid/Self-Pay"),
+    caption = "**Table 3. Race-level bridge: clinical disparity → economic burden**"
+  )
+
+# The clearest statement of the connection: the same racial ordering
+# that appears in hypoxemia rates also appears in hospital charges
+race_order <- bridge |>
+  arrange(occult_hypoxemia_rate) |>
+  pull(race_eth)
+```
+
+This is an **ecological association** across two independent
+populations. The table tests whether racial gradients in hypoxemia and
+costs are directionally consistent — not whether one causes the other at
+the patient level.
+
+The table above shows the race-level bridge at a glance. Reading across
+a row gives the full picture for each group: how often they are
+misdiagnosed, how biased the device reading is, how sick they are at
+admission, how long they stay, what they are billed, and how financially
+exposed they are. Reading down a column shows the racial gradient on
+each dimension. The question the rest of Part 3 asks is whether those
+gradients move together — and whether they survive the most obvious
+alternative explanations.
+
+```{r fig.height=10, fig.width=10}
+#| label: insurance-stacked-race
+#| fig-alt: "Stacked bar showing insurance mix by race ordered by occult hypoxemia rate"
+
+sparcs |>
+  filter(!is.na(insurance)) |>
+  count(race_eth, insurance) |>
+  group_by(race_eth) |>
+  mutate(
+    pct      = n / sum(n),
+    race_eth = factor(race_eth, levels = race_order)
+  ) |>
+  ungroup() |>
+  ggplot(aes(x = race_eth, y = pct, fill = insurance)) +
+  geom_col(position = "fill", alpha = 0.85) +
+  scale_y_continuous(labels = percent_format()) +
+  scale_fill_brewer(palette = "Set2") +
+  labs(
+    title    = "Insurance type by race — ordered by occult hypoxemia risk (low -> high)",
+    subtitle = "Groups most at risk of hidden hypoxemia have the least financial protection",
+    x = NULL, y = "Proportion of discharges", fill = "Insurance"
+  )
+```
+
+The insurance breakdown, ordered from lowest to highest occult hypoxemia
+risk left to right, illustrates the compounding structure of the
+problem. Moving from White to Hispanic/Latino to Black, Medicaid share
+rises and Medicare share falls — meaning the groups most likely to be
+misdiagnosed are also the groups with the least financial cushion when
+that misdiagnosis leads to a more expensive hospitalization. The next
+plot asks whether the misdiagnosis gradient and the cost gradient point
+in the same direction.
+
+### Hypoxemia Charges Side by Side
+
+```{r fig.width=10}
+#| label: hypoxemia-charges-sidebyside
+#| fig-alt: "Side by side bar charts showing occult hypoxemia rate and median charges by race"
+
+p_hyp <- bridge |>
+  mutate(race_eth = factor(race_eth, levels = race_order)) |>
+  ggplot(aes(x = race_eth, y = occult_hypoxemia_rate, fill = race_eth)) +
+  geom_col(alpha = 0.85, show.legend = FALSE) +
+  geom_text(aes(label = percent(occult_hypoxemia_rate, accuracy = 0.1)),
+            vjust = -0.4, size = 4) +
+  scale_y_continuous(labels = percent_format(),
+                     expand  = expansion(mult = c(0, 0.15))) +
+  scale_fill_brewer(palette = "Set1") +
+  labs(
+    title    = "Occult hypoxemia rate by race",
+    subtitle = "OpenOximetry — who gets misdiagnosed",
+    x = NULL, y = "Occult hypoxemia rate"
+  )
+
+p_charges <- bridge |>
+  mutate(race_eth = factor(race_eth, levels = race_order)) |>
+  ggplot(aes(x = race_eth, y = median_charges, fill = race_eth)) +
+  geom_col(alpha = 0.85, show.legend = FALSE) +
+  geom_text(aes(label = dollar(median_charges, accuracy = 1)),
+            vjust = -0.4, size = 4) +
+  scale_y_continuous(labels = dollar_format(),
+                     expand  = expansion(mult = c(0, 0.15))) +
+  scale_fill_brewer(palette = "Set1") +
+  labs(
+    title    = "Median hospital charges by race",
+    subtitle = "SPARCS — who pays more",
+    x = NULL, y = "Median total charges"
+  )
+
+p_hyp + p_charges +
+  plot_annotation(
+    title    = "The same racial ordering appears in both misdiagnosis rates and hospital charges",
+    subtitle = "Black patients: highest occult hypoxemia rate and highest median charges"
+  )
+```
+
+The bars above place the two datasets in direct conversation. The
+ordering on the left — White lowest, Hispanic/Latino moderate, Black
+highest — is the occult hypoxemia gradient from OpenOximetry. The
+ordering on the right is the median charge gradient from SPARCS. They
+are not identical, which is expected: these are different populations
+measured in different settings. But the direction is consistent, and
+that directional consistency is the ecological evidence the bridge is
+designed to test. The double burden plot below adds the insurance
+dimension to the same picture.
+
+### The Double Burden
+
+```{r}
+#| label: double-burden
+#| fig-alt: "Scatter of occult hypoxemia rate vs pct Medicaid or Self-Pay by race"
+
+bridge |>
+  ggplot(aes(x = occult_hypoxemia_rate, y = pct_unprotected,
+             size = median_charges, label = race_eth)) +
+  geom_point(alpha = 0.85, color = "#6a3d9a") +
+  geom_text_repel(size = 4, fontface = "bold") +
+  scale_x_continuous(labels = percent_format(accuracy = 0.1)) +
+  scale_y_continuous(labels = percent_format(accuracy = 1)) +
+  scale_size_continuous(labels = dollar_format(), range = c(4, 12)) +
+  labs(
+    title    = "The double burden: hidden hypoxemia risk and financial vulnerability",
+    subtitle = "Groups most likely to be misdiagnosed are also least insured",
+    x = "Occult hypoxemia rate (OpenOximetry)",
+    y = "% on Medicaid or Self-Pay (SPARCS)",
+    size = "Median charges"
+  )
+```
+
+The group-level bridge is suggestive but not conclusive for one
+important reason: White respiratory patients in SPARCS are substantially
+older than Black and Hispanic/Latino patients, and older patients tend
+to arrive sicker and stay longer regardless of any clinical bias. If age
+is driving the severity and cost differences, the apparent disparity
+could be mostly a demographic artifact. The age-stratified analysis
+below addresses this directly by comparing racial groups within the same
+age band, removing age as a confound.
+
+### Age-Stratified Analysis
+
+Age confounds the group-level comparison — White respiratory patients
+skew older and are predominantly on Medicare. Stratifying by age band
+enables a fair within-band comparison. The 103K-row SPARCS extract
+provides stable cell counts (3,000–26,000 per race × age band).
+
+```{r}
+#| label: sparcs-age-summary
+
+sparcs_age <- sparcs |>
+  filter(!is.na(race_eth), !is.na(age_group)) |>
+  group_by(race_eth, age_group) |>
+  summarise(
+    n_discharges   = n(),
+    median_charges = median(total_charges,  na.rm = TRUE),
+    median_costs   = median(total_costs,    na.rm = TRUE),
+    median_los     = median(length_of_stay, na.rm = TRUE),
+    mean_severity  = mean(severity_code,    na.rm = TRUE),
+    mortality_rate = mean(died,             na.rm = TRUE),
+    pct_medicaid   = mean(insurance == "Medicaid", na.rm = TRUE),
+    .groups = "drop"
+  )
+
+sparcs_age |>
+  mutate(
+    median_charges = dollar(median_charges),
+    median_los     = round(median_los, 1),
+    mean_severity  = round(mean_severity, 2),
+    mortality_rate = percent(mortality_rate, accuracy = 0.1),
+    pct_medicaid   = percent(pct_medicaid,   accuracy = 0.1)
+  ) |>
+  arrange(age_group, race_eth) |>
+  knitr::kable(
+    col.names = c("Race", "Age group", "N", "Median charges", "Median costs",
+                  "Median LOS", "Mean severity", "Mortality rate", "% Medicaid"),
+    caption = "**Table 4. Age-stratified outcomes by race — full SPARCS respiratory extract**"
+  )
+```
+
+Cell counts range from roughly 3,000 to 26,000 per race × age
+combination — large enough that all estimates below are stable. The
+18–49 band tests whether disparities exist before age-related
+comorbidities accumulate. The 50–69 band is the cleanest
+insurance-controlled comparison: old enough for respiratory conditions
+to carry real clinical weight, young enough that most patients are not
+yet on Medicare. The 70+ band is where both insurance and severity
+converge — making any residual gap the hardest to explain away and the
+most compelling evidence for a pre-admission clinical mechanism.
+
+```{r}
+#| label: charges-age-race
+#| fig-alt: "Line plot of median charges by age group and race"
+
+sparcs_age |>
+  ggplot(aes(x = age_group, y = median_charges,
+             color = race_eth, group = race_eth)) +
+  geom_line(linewidth = 1.1) +
+  geom_point(size = 3) +
+  geom_text_repel(aes(label = dollar(median_charges, accuracy = 1)),
+                  size = 3.2, show.legend = FALSE) +
+  scale_y_continuous(labels = dollar_format()) +
+  scale_color_brewer(palette = "Set1") +
+  labs(
+    title    = "Median charges by age group and race",
+    subtitle = "Black and Hispanic/Latino patients are billed more at every age band",
+    x = "Age group", y = "Median total charges", color = "Race / Ethnicity"
+  )
+```
+
+The charge gap is present at every age band and widens with age. At
+18–49 the difference is small — under \$1,500 between any two groups. By
+50–69 it has opened to roughly \$8K between Hispanic/Latino and White
+patients. By 70+ Black patients are billed \~\$16K more and
+Hispanic/Latino patients \~\$13K more than White patients at the same
+age. The bar chart below isolates the 50–69 band as the single cleanest
+age-controlled comparison, where insurance mix still differs across
+races but age no longer does.
+
+```{r fig.width=10}
+#| label: charges-severity-controlled
+#| fig-alt: "Bar chart showing median charges by race at 50-69, the age-controlled comparison"
+
+# 50–69 is the cleanest comparison: old enough to have respiratory comorbidities,
+# young enough that most are not yet on Medicare — insurance mix is most comparable
+sparcs_age |>
+  filter(age_group == "50–69") |>
+  mutate(race_eth = fct_reorder(race_eth, median_charges)) |>
+  ggplot(aes(x = race_eth, y = median_charges, fill = race_eth)) +
+  geom_col(alpha = 0.85, show.legend = FALSE) +
+  geom_text(aes(label = dollar(median_charges, accuracy = 1)),
+            vjust = -0.4, size = 4.5) +
+  scale_y_continuous(labels = dollar_format(),
+                     expand  = expansion(mult = c(0, 0.15))) +
+  scale_fill_brewer(palette = "Set1") +
+  labs(
+    title    = "Median charges by race — ages 50 to 69 only",
+    subtitle = "Age-controlled comparison: Black and Hispanic/Latino patients pay more at the same life stage",
+    x = NULL, y = "Median total charges"
+  )
+```
+
+Within the 50–69 band alone, Hispanic/Latino patients are billed \~\$8K
+more than White patients and Black patients \~\$5K more, after removing
+age as a variable. This is the most conservative framing of the
+disparity — and it still shows a consistent gap. The Medicaid line plot
+below adds the final piece by showing how financial vulnerability tracks
+the same racial gradient across all three age bands, and what happens to
+it at 70+ when Medicare takes over.
+
+```{r  fig.width=10}
+#| label: medicaid-age-race
+#| fig-alt: "Line plot of Medicaid share by age group and race"
+
+sparcs_age |>
+  ggplot(aes(x = age_group, y = pct_medicaid,
+             color = race_eth, group = race_eth)) +
+  geom_line(linewidth = 1.1) +
+  geom_point(size = 3) +
+  geom_text_repel(aes(label = percent(pct_medicaid, accuracy = 1)),
+                  size = 3.2, show.legend = FALSE) +
+  scale_y_continuous(labels = percent_format()) +
+  scale_color_brewer(palette = "Set1") +
+  labs(
+    title    = "Medicaid share by age group and race",
+    subtitle = "Financial vulnerability is highest at working age for Black and Hispanic/Latino patients",
+    x = "Age group", y = "% on Medicaid", color = "Race / Ethnicity"
+  )
+```
+
+**Key finding:** At 70+, two potential explanations for the charge gap
+simultaneously collapse. First, Medicaid coverage converges to near zero
+across all groups as patients shift to Medicare (Hispanic/Latino 10%,
+Black 4%, White 1%) — so insurance can no longer explain the difference.
+Second, severity scores converge tightly at 70+ (White 2.79, Black 2.78,
+Hispanic/Latino 2.69) — so illness severity at admission cannot explain
+it either. Yet Black patients are billed \~\$16K more than White
+patients and Hispanic/Latino patients \~\$13K more, at the same age,
+with the same insurance, at the same severity. The residual gap —
+unexplained by age, insurance, or recorded severity — is consistent with
+a clinical mechanism upstream of hospital admission, such as delayed
+treatment from undetected hypoxemia inflating the true disease burden
+beyond what severity scores capture at the point of care.
+
+------------------------------------------------------------------------
+
+## Summary of Key Findings
+
+| Finding | Evidence | Dataset |
+|------------------------|------------------------|------------------------|
+| **Darker skin → higher occult hypoxemia** | Black patients: \~10.5% occult hypoxemia rate vs. \~6% for White; a continuous positive gradient is confirmed by loess smoother across all six Fitzpatrick scores | OpenOximetry |
+| **Black and Hispanic/Latino patients pay more at every age** | Charge gap is present at 18–49 (\~\$1K) and widens substantially by 70+ (\~\$16K for Black, \~\$13K for Hispanic/Latino vs. White) | SPARCS |
+| **The gap survives controlling for both insurance and severity** | At 70+, Medicaid rates and severity scores nearly equalize across racial groups, yet the charge gap reaches its maximum — ruling out both as primary explanations | SPARCS |
+| **Financial vulnerability is greatest at working age** | 70% of Hispanic/Latino and 64% of Black respiratory patients aged 18–49 are on Medicaid vs. 39% of White patients — the highest-risk group is also the least protected | SPARCS |
+| **The double burden applies differently by group** | Black patients face both elevated hypoxemia risk (\~10.5%) and Medicaid exposure (\~45%); Hispanic/Latino patients face extreme financial vulnerability (\~55% Medicaid) with moderate hypoxemia risk (\~6.5%), suggesting additional drivers beyond device bias | Bridge |
+| **Severity and insurance are insufficient explanations** | The charge gap widens precisely when both converge, pointing to a pre-admission clinical mechanism consistent with undetected hypoxemia | Bridge |
+
+::: callout-limitations
+Because the two datasets are not linked at the patient level, all bridge
+findings are **ecological associations**, not causal estimates. The
+pattern is consistent with the pulse oximeter bias hypothesis but cannot
+confirm it.
+:::

@@ -1,0 +1,46 @@
+/* Dark mode overlay — extends darkly bootswatch */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Sora:wght@400;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap');
+
+:root {
+  --teal: #028090; --mint: #02C39A;
+  --red: #D94F3D;  --gold: #E8A838;
+  --gray: #94A3B8;
+}
+
+body { font-family: 'Inter', system-ui, sans-serif; }
+h1, h2, h3 { font-family: 'Sora', sans-serif; }
+h1 { border-bottom: 3px solid var(--teal); padding-bottom: 0.6rem; }
+h2 { color: var(--mint); padding-left: 0.9rem; position: relative; }
+h2::before {
+  content: ''; position: absolute; left: 0; top: 0.15em;
+  width: 3px; height: 1em;
+  background: linear-gradient(to bottom, var(--teal), var(--mint));
+  border-radius: 2px;
+}
+
+code { font-family: 'JetBrains Mono', monospace; color: var(--mint);
+       background: rgba(2,195,154,0.1); border: 1px solid rgba(2,195,154,0.15); }
+pre code { color: #e2e8f0; background: none; border: none; }
+
+a { color: var(--mint); }
+a:hover { color: white; }
+
+.navbar { border-bottom: 2px solid var(--teal); }
+.sidebar { border-right: none !important; box-shadow: 4px 0 24px rgba(0,0,0,0.3); }
+.sidebar .sidebar-title { color: var(--mint) !important; }
+
+.callout-important { border-left: 5px solid var(--red) !important; }
+.callout-note      { border-left: 5px solid var(--teal) !important; }
+.callout-warning   { border-left: 5px solid var(--gold) !important; }
+.callout-tip       { border-left: 5px solid var(--mint) !important; }
+
+.nav-footer { border-top: 2px solid var(--teal); }
+.nav-footer a { color: var(--mint) !important; }
+
+#quarto-back-to-top { background: var(--teal); border-radius: 50%; }
+
+hr { border: none; height: 1px; background: linear-gradient(to right, var(--teal), transparent); opacity: 0.3; }
+
+.hl-teal { color: var(--mint); font-weight: 700; }
+.hl-red  { color: var(--red);  font-weight: 700; }
+.hl-gold { color: var(--gold); font-weight: 700; }
